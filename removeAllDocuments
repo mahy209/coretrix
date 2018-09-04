@@ -1,0 +1,5 @@
+var names = db.getCollectionNames();
+for (i = 0; i < names.length; i++) {
+    db.getCollection(names[i]).remove({});
+}
+

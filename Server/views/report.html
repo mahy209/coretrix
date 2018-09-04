@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link type="text/css" rel="stylesheet" href="/assets/css/materialize.min.css"
+        media="all" />
+    <link media="all" type="text/css" rel="stylesheet" href="/assets/css/report-page.css">
+    <link type="text/css" rel="stylesheet" href="/assets/css/animate.min.css" />
+    <link type="text/css" rel="stylesheet" href="/assets/css/bootstrap-datepicker.standalone.min.css"
+    />
+    <link type="text/css" rel="stylesheet" href="/assets/css/font-awesome.min.css"
+    />
+    <script type="text/javascript" src="/assets/js/libs/js.cookie.js"></script>
+    <script type="text/javascript" src="/assets/js/libs/angular/angular.min.js"></script>
+
+    <script type="text/javascript" src="/assets/js/libs/library.js"></script>
+    <link media="all" type="text/css" rel="stylesheet" href="/assets/css/style.css">
+    <link type="text/css" rel="stylesheet" href="/assets/css/responsive-shit.css" />
+    <script type="text/javascript" src="/assets/js/scripts/helpers.js"></script>
+    <script type="text/javascript" src="/assets/js/scripts/liveorlocal.js"></script>
+    <script type="text/javascript" src="/assets/js/scripts/sdk.js"></script>
+    <script type="text/javascript" src="/assets/js/scripts/report.js"></script>
+</head>
+
+<body ng-app="coretrix" class="grey lighten-2" style="direction: rtl;">
+
+    <head>
+        <title>{{title}}</title>
+    </head>
+    <div class="container logs">
+        <div class="row" ng-controller="mainCtrl">
+            <div class="col s12" style="margin-top:5%;">
+                <div class="card-panel hideonprint animated slideInDown">
+                    <h4 class="center-align">إختيار الفتره الزمنية</h4>
+                    <div class="row">
+                        <div class="col s12" ng-show="viewer=='parent'">
+                            <label>المدرس</label>
+                            <select class="browser-default" ng-options="l as (l.teachers_data[0].displayname + ' مدرس ' + subjectsToString(l.teachers_data[0].subjects) +  ' - الصف ' + grades_names[l.grade]) for l in links"
+                                ng-model="selected_link">
+                                <option value="" disabled selected>اختر المدرس</option>
+                            </select>
+                        </div>
+                        <div class="col s12">
+                            <label>الفتره الزمنية</label>
+                            <select class="browser-default" ng-change="calcDates()" ng-options="i as {'lastweek': 'آخر اسبوع', 'lastmonth': 'آخر شهر', 'all': 'كل الوقت'}[i] for i in ['lastweek', 'lastmonth', 'all']"
+                                ng-model="selected_timeSelector">
+                                <option value="" disabled selected>اختر الفتره الزمنية</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col s12 m6 l6">
+                            <input id="end_date" type="text" class="datepicker" style="text-align: right; cursor:pointer" placeholder="تاريخ النهاية"
+                                readonly>
+                        </div>
+                        <div class="col s12 m6 l6">
+                            <input id="start_date" type="text" class="datepicker" style="text-align: right; cursor:pointer" placeholder="تاريخ البداية"
+                                readonly>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col s12">
+                            <button ng-click="printPage()" class="btn gradient2">إطبع</button>
+                            <button ng-click="reload()" style="margin-right:0.5%" class="btn gradient2">حمل البيانات</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col s12" ng-show="loaded">
+                <h4 style="margin-bottom:3%" ng-show="viewer=='parent'" class="center-align">{{name}}</h4>
+                <h4 ng-show="viewer=='teacher'" class="center-align">بيانات الطالب</h4>
+                <table>
+                    <tr ng-show="viewer=='teacher'">
+                        <td>الاسم
+                            <span>:</span>
+                        </td>
+                        <td>{{name}}</td>
+                    </tr>
+                    <tr ng-show="viewer=='teacher'">
+                        <td>المجموعه
+                            <span>:</span>
+                        </td>
+                        <td>{{group_name}}</td>
+                    </tr>
+                    <tr>
+                        <td>الصف
+                            <span>:</span>
+                        </td>
+                        <td>{{grades_names_long[grade]}}</td>
+                    </tr>
+                    <tr ng-repeat="p in items">
+                        <td>{{p.name}}
+                            <span>:</span>
+                        </td>
+                        <td>
+                            <p style="margin: inherit" ng-class="p.payClass">{{p.payText}}
+                                <i class="fa fa-info-circle" style="margin-right: 1%"></i>
+                            </p>
+                        </td>
+                    </tr>
+                </table>
+                <table>
+                    <h5 class="center-align">الامتحانات</h5>
+                    <tr>
+                        <th>
+                            الامتحان
+                        </th>
+                        <th>الحضور</th>
+                        <th>الدرجه</th>
+                    </tr>
+                    <tr ng-repeat="e in exams">
+                        <td>
+                            {{e.name}}
+                        </td>
+                        <td>{{e.log.attendant ? 'حضر' : 'لم يحضر'}}</td>
+                        <td>{{e.log.mark ? (e.log.mark + ' / ' + e.max_mark) : 'لم تسجل درجة للطالب'}}</td>
+                    </tr>
+                </table>
+                <table>
+                    <h5 class="center-align">الغياب</h5>
+                    <tr>
+                        <th>اليوم</th>
+                        <th>الحضور</th>
+                        <!--th>المجموعه</th-->
+                        <th>درجه التسميع</th>
+                        <th>الواجب</th>
+                    </tr>
+                    <tr ng-repeat="c in classes">
+                        <td>{{sd(c.date)}}</td>
+                        <td>{{c.log.attendant ? 'حضر' : 'لم يحضر'}}</td>
+                        <!--td>{{l.group_data[0].name}}</td-->
+                        <td>{{c.log.quiz ? (c.log.quiz.type == 'marks' ? c.log.quiz.mark + ' / ' + c.log.quiz.max : (c.log.quiz.option
+                            == 'absent' ? 'لم يسمّع' : 'سمّع')) : 'لم يسجل تسميع الطالب'}}</td>
+                        <td>{{c.log.homework ? (c.log.homework.type == 'marks' ? c.log.homework.mark + '/' + c.log.homework.max
+                            : (c.log.homework.option == 'incomplete' ? 'غير مكتمل' : 'كامل')) : 'لم يسجل واجب الطالب'}}</td>
+                    </tr>
+                </table>
+            </div>
+
+        </div>
+    </div>
+    <pre id="log"></pre>
+    <!--Import jQuery before materialize.js-->
+    <script type="text/javascript" src="/assets/js/libs/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="/assets/js/libs/bootstrap-datepicker.min.js"></script>
+    <script type="text/javascript" src="/assets/js/libs/materialize.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.datepicker').datepicker({
+                todayHighlight: true,
+                endDate: new Date(new Date().getTime() + (1000 * 60 * 60 * 24))
+            });
+        });
+    </script>
+</body>
+
+</html>

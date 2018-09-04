@@ -1,0 +1,506 @@
+/* name: the coretrix
+   made by : mohap akram , ziad al zarka .
+    version : 2.0.0 .
+*/
+::-webkit-scrollbar {
+    width: 12px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px #90a4ae;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    background: #90a4ae;
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
+}
+::-webkit-scrollbar-thumb:window-inactive {
+	background: #90a4ae;
+}
+/*leave it for later*/
+/*::-webkit-scrollbar {
+    display: none;
+}*/
+/*::-webkit-scrollbar
+{
+	width: 12px;
+	background-color: #F5F5F5;
+}
+::-webkit-scrollbar
+{
+	width: 12px;
+	background-color: #F5F5F5;
+}
+::-webkit-scrollbar-thumb
+{
+	border-radius: 10px;
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+	background-color: #607d8b;
+}*/
+
+/* printing shit  */
+
+@import url('Cairo.css');
+@media print {
+    .no-print {
+        visibility: hidden;
+    }
+    .print {
+        visibility: visible !important;
+    }
+}
+
+.only-print {
+    visibility: visible;
+    position: absolute;
+}
+
+.hidden {
+    visibility: hidden;
+}
+
+.not-hidden {
+    visibility: visible !important;
+}
+
+/* end of printing shit */
+
+/*   main rules */
+
+html {
+    font-family: 'Cairo', sans-serif;
+}
+
+body * {
+    font-family: 'Cairo', sans-serif;
+}
+
+
+.overlay {
+    position: fixed;
+    z-index: 1000;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    opacity: 0.5;
+    background-color: black;
+    color: white;
+}
+
+/* center the thumbs thing */
+
+.overlay i {
+    opacity: 1;
+    position: fixed;
+    width: 100%;
+    font-size: 30em;
+    text-align: center;
+    top: 5%;
+}
+
+.overlay p {
+    opacity: 1;
+    font-size: 10rem;
+    font-weight: bold;
+    position: fixed;
+    text-align: center;
+    width: 100%;
+    top: 35%;
+}
+
+.fa-thumbs-down {
+    color: red;
+}
+
+i {
+    font-style: normal;
+}
+
+input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 1000px white inset !important;
+    background-color: white !important;
+}
+
+.blue-grey-background {
+    background-color: #607D8B;
+}
+.green-background{
+    background-color: #81c784;
+}
+.pur-background{
+    background-color:#9575cd;
+}
+
+.gradient3 {
+    background-color: #2bbbad;
+}
+
+.gradient3:hover {
+    background-color: #2ac3b4 !important;
+}
+
+.btn-red-background {
+    background-color: #ff3c3c;
+}
+
+.btn-red-background:hover {
+    background-color: #f14d4d !important;
+}
+
+.btn:hover, .btn-large:hover {
+    background-color: #90a4ae;
+}
+.btn:focus, .btn-large:focus, .btn-floating:focus {
+    background-color: #90a4ae;
+}
+
+
+@keyframes simpleFadeIn {
+    from {
+        opacity: 0
+    }
+    to {
+        opacity: 1
+    }
+}
+
+.simpleFadeIn-anim {
+    animation: simpleFadeIn;
+    animation-duration: 0.25s;
+}
+
+.gradient-green {
+    overflow-x: hidden;
+    font-family: 'Cairo', sans-serif;
+    background: #546e7a;
+}
+
+.gradient-orange {
+    overflow-x: hidden;
+    font-family: 'Cairo', sans-serif;
+    background: #546e7a;
+}
+
+.gradient-red {
+    overflow-x: hidden;
+    font-family: 'Cairo', sans-serif;
+    background: #546e7a;
+}
+
+.padding-pad {
+    padding: 5%;
+}
+
+.gradient p {
+    font-size: 130%;
+}
+
+.round {
+    border-radius: 10%;
+}
+
+/* end of main rules */
+
+/* additions  aside panel */
+
+button a {
+    text-decoration: none;
+    color: white;
+}
+
+/*end aside panel */
+
+/* addStudent */
+
+#addStudent {
+    overflow: hidden;
+    height: 140px;
+}
+
+#addStudent #studentNameDiv {
+    width: 100%;
+}
+
+.autocomplete-content {
+    /* fix crazy padding problem */
+    -webkit-padding-start: 0px;
+    /* fix width problems after pushing the search input text 1% to the left */
+    width: 101%;
+}
+
+.autocomplete-content li {
+    /* align text to the right... inherit so that it could work for both languages */
+    text-align: inherit !important;
+}
+
+#addStudent #studentNameDiv div {
+    display: flex;
+}
+
+#addStudent #studentNameDiv input {
+    width: 100%;
+}
+
+#addStudent #studentNameDiv button {
+    margin-top: 10px;
+    margin-right: 20px;
+}
+
+/*
+#afterStudentName {
+    margin-top: 105px;
+}
+*/
+
+.full {
+    animation: openCard !important;
+    animation-duration: 1s !important;
+}
+
+/* end of addStudent */
+
+.img_top_cpanel {
+    margin: auto;
+}
+
+.collection a {
+    font-size: 1em;
+}
+
+.red-border {
+    border-left: 5px solid #d32f2f;
+}
+
+#hot i {
+    width: auto;
+}
+
+#hots .card-panel :hover {
+    cursor: pointer;
+    color: black;
+}
+
+/* aside cpanel again !! */
+
+#aside_cpanel {
+    position: fixed;
+    padding-bottom: 30%;
+    padding-right: 1%;
+    padding-left: 1%;
+}
+
+#aside_cpanel div {
+    display: block;
+    padding: 10%;
+    overflow: hidden;
+    margin-bottom: 20%;
+    cursor: pointer;
+}
+
+#aside_cpanel div :hover {
+    color: #546e7a;
+}
+
+#aside_cpanel div i {
+    display: block;
+    text-align: center;
+}
+
+#aside_cpanel div i span {
+    display: block;
+    text-align: center;
+    font-size: .5em;
+}
+
+#login_from {
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.margin_auto {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.student_data {
+    border-left: 5px solid #d32f2f;
+    margin-bottom: 0;
+}
+
+.padding {
+    padding-left: 20%;
+    padding-right: 20%;
+    border-radius: 10%;
+    border-left: 20px solid #e0e0e0;
+    border-bottom: 20px solid #e0e0e0;
+}
+
+.select {
+    border: 2px solid #d32f2f;
+}
+
+#log_out {
+    /*    margin-top: 300%;*/
+}
+
+.margin_top {
+    margin-top: 6%;
+}
+
+.margin_center {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.top {
+    position: fixed;
+}
+
+.students {
+    overflow: hidden;
+    height: 600px;
+    overflow-y: scroll;
+}
+
+.fixed-btn-edited {
+    /*right: 0px !important;*/
+}
+
+.no-padding {
+    padding-right: 0px !important;
+}
+
+.searchitem::placeholder {
+    color: #9d9d9f;
+    opacity: 1;
+}
+
+.searchbar {
+    width: 80%;
+    margin-right: 10% !important;
+}
+
+#log {
+    direction: ltr;
+    position: fixed;
+    left: 0.5%;
+    bottom: 0;
+    max-height: 37%;
+    overflow: hidden;
+}
+
+.search-filter {
+    border: 1px solid grey;
+    margin-top: 10px;
+}
+
+.range-field {
+    direction: ltr;
+}
+
+.field_wrong {
+    position: absolute;
+    right: 0;
+    font-size: large !important;
+    top: 22%;
+}
+
+.collapsible {
+    background: whitesmoke;
+    padding: 0;
+}
+
+.matselect ul {
+    padding: 0;
+}
+
+.matselect ul>li>span {
+    padding-right: 0.5%;
+}
+
+.matselect ul>li {
+    text-align: right;
+}
+
+.matselect ul>li.disabled {
+    display: none;
+}
+
+.matselect span.caret {
+    right: inherit;
+    left: 0;
+}
+
+.payment-card {
+    hight: 30%;
+}
+
+.margintop {
+    margin-top: 5%;
+}
+.margin-right_home_btn{
+    margin-right:1%;
+}
+/* hide the time picker circle */
+.clockpicker-canvas-bg {
+    visibility: hidden;
+}
+
+.picker__clear{
+    visibility: hidden;
+}
+
+#click-am.text-primary, #click-pm.text-primary {
+    text-shadow: 0 0 20px whitesmoke;
+}
+
+.trash {
+    position: absolute;
+    bottom: 0;
+    right: 25%;
+    width: 62%;
+    text-align: center;
+    height: 20%;
+    background: rgb(95, 92, 92);
+}
+
+.trash i {
+    height: 100%;
+    color: white;
+    width: 100%;
+    font-size: 17vh;
+    transition: all 0.1s;
+}
+
+.collection {
+    padding-right:0;
+}
+
+ul[dnd-list] .dndDraggingSource {
+    display: none;
+}
+
+ul[dnd-list] .dndPlaceholder {
+    background-color: #f6f6f6;
+    display: block;
+    min-height: 42px;
+}
+
+.trash ul[dnd-list] .dndPlaceholder {
+    display: none;
+}
+
+.collection-item {
+    cursor: move
+}
+.red-mark {
+    font-weight: bolder;
+    text-shadow: 0px 0px 20px;
+    color: #F44336 !important;
+}

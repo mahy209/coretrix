@@ -1,0 +1,1 @@
+{"options":{"flags":1},"indexes":[{"v":2,"key":{"_id":1},"name":"_id_","ns":"coretrix.phones"},{"v":2,"key":{"id":1},"name":"id_1","ns":"coretrix.phones","background":true},{"v":2,"key":{"userid":1},"name":"userid_1","ns":"coretrix.phones"}],"uuid":"b9f7a4130be84c42a4aa6353b8d33a4f"}

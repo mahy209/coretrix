@@ -1,0 +1,36 @@
+
+<body>
+
+    <div class="container">
+        <div class="row">
+            <div class="card-panel z-depth-5 animated jackInTheBox col l6 m6 s12 offset-l3 offset-m3 " style="margin-top:5%;">
+                <div class="container " ng-controller="loginCtrl">
+                    <div class="row ">
+                        <div class="margin_center">
+                            <div class="center-align">
+                                <i class="fa fa-sign-in fa-5x" aria-hidden="true" style="margin:10%;">
+
+                                </i>
+                                <h5>تسجيل الدخول</h5>
+                                <form>
+                                    <div class="input-field ">
+                                        <input style="padding-left:2%; padding-right:2%;" id="login" type="text" class="validate" ng-model="login">
+                                        <i id="login_alert" ng-show="login_wrong" class="red-text field_wrong fa fa-exclamation-circle" aria-hidden="true"></i>
+                                        <label for="login">اسم المستخدم</label>
+                                    </div>
+                                    <div class="input-field">
+                                        <input style="padding-left:2%; padding-right:2%;" class="validate" type="password" id="password" ng-model="password">
+                                        <i id="password_alert" ng-show="password_wrong" class="red-text field_wrong fa fa-exclamation-circle" aria-hidden="true"></i>
+                                        <label for="password">كلمة المرور</label>
+                                    </div>
+                                    <button ng-click="auth()" type="submit" class="btn hoverable  background_animation"> دخول</button>
+                                    <!--a ng-click="forgotpass()" style="margin-left: 1%;">Forgot Password ?</a-->
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>

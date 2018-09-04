@@ -1,0 +1,1 @@
+{"options":{},"indexes":[{"v":2,"key":{"_id":1},"name":"_id_","ns":"coretrix.payments"},{"v":2,"key":{"teacherid":1,"studentid":1,"itemid":1},"name":"teacherid_1_itemid_1","ns":"coretrix.payments","background":true},{"v":2,"key":{"studentid":1},"name":"studentid_1","ns":"coretrix.payments","background":true}],"uuid":"47b3d9a94494407c9c12078108393a88"}

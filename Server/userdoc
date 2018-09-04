@@ -1,0 +1,53 @@
+validators
+-----------
+ValidateGroup : username
+ValdiateByIds : username
+
+// delete by ids
+<username>
+RemovePhones
+RemoveAddresses
+// get referenced
+<username>
+GetPhones
+GetAddresses
+// secretary users managment
+<usertype>
+--> ListUsers
+    ResetPassword
+    RemoveUser
+
+isAlive: username, usertype
+ChangePassword: username, password
+Deauthorize: username
+GetTokens: username
+AddPhone: username
+EditPhone: username
+AddAddress: username, usertype
+PrepareUpload: username
+ContinueUpload: username
+Upload: username
+DeleteFiles: username
+// check permissions
+GetFilesInfo: username
+Download: username
+Bid: username ,usertype
+GetBids: username, usertype
+CheckTimetableCollision: usertype, grade
+GetBio: usertype, bio
+EditBio: username, usertype
+Post: username, usertype
+----
+EditPost: userDocUsernameUsertype,
+RemovePost: userDocUsernameUsertype,
+GetSuperTtDefaults: {
+    "userDoc.usertype": 1,
+    "userDoc.grades": 1,
+    "userDoc.defaults": 1
+},
+SetSuperTTDefaults: userDocUsernameUsertype,
+RegisterStudent: userDocUsernameUsertype,
+LinkStudent: userDocUsernameUsertype,
+AddExam: userDocUsernameUsertype,
+EditGrade: userDocUsernameUsertype,
+GetGrade: userDocUsernameUsertype

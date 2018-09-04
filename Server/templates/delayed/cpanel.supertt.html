@@ -1,0 +1,68 @@
+<div class="container" ng-controller="superttCtrl">
+    <!--script type="text/javascript" src="../assets/js/scripts/timetables.js"></script-->
+    <a class='dropdown-button btn' data-activates='orient_selector'>Generate!</a>
+
+    <!-- Dropdown Structure -->
+    <ul id='orient_selector' class='dropdown-content'>
+        <!-- stickfirst, sticklast, middleup, middledown, divide-->
+        <li><a ng-click="generate(null, 'stickfirst')">Beginning</a></li>
+        <li><a ng-click="generate(null, 'sticklast')">Ending</a></li>
+        <li class="divider"></li>
+        <li><a ng-click="generate(null, 'middleup')">Middle Up</a></li>
+        <li><a ng-click="generate(null, 'middledown')">Middle Down</a></li>
+        <li class="divider"></li>
+        <li><a ng-click="generate(null, 'distribute')">Distributed</a></li>
+        <li><a ng-click="generate(null, 'divide')">Divided</a></li>
+    </ul>
+    <table style="width: 100%">
+        <tbody>
+            <thead>
+                <th>Day</th>
+                <th ng-repeat="n in startTimes">{{convertTime(n)}}</th>
+            </thead>
+            <tr>
+                <th>Saturday</th>
+                <td ng-repeat="n in tt['1']">
+                    <div ng-hide="{{n.placeholder}}" ng-class="n.filled ? 'redback' : ''">From: {{convertTime(n.start)}} to {{convertTime(n.end-n.break)}} <br> Grade: {{language.grades[n.grade]}} <br> Group: {{n.group+1}} <br> Break: {{n.break}}</div>
+                </td>
+            </tr>
+            <tr>
+                <th>Sunday</th>
+                <td ng-repeat="n in tt['2']">
+                    <div ng-hide="{{n.placeholder}}" ng-class="n.filled ? 'redback' : ''">From: {{convertTime(n.start)}} to {{convertTime(n.end-n.break)}} <br> Grade: {{language.grades[n.grade]}} <br> Group: {{n.group+1}} <br> Break: {{n.break}}</div>
+                </td>
+            </tr>
+            <tr>
+                <th>Monday</th>
+                <td ng-repeat="n in tt['3']">
+                    <div ng-hide="{{n.placeholder}}" ng-class="n.filled ? 'redback' : ''">From: {{convertTime(n.start)}} to {{convertTime(n.end-n.break)}} <br> Grade: {{language.grades[n.grade]}} <br> Group: {{n.group+1}} <br> Break: {{n.break}}</div>
+                </td>
+            </tr>
+            <tr>
+                <th>Tuesday</th>
+                <td ng-repeat="n in tt['4']">
+                    <div ng-hide="{{n.placeholder}}" ng-class="n.filled ? 'redback' : ''">From: {{convertTime(n.start)}} to {{convertTime(n.end-n.break)}} <br> Grade: {{language.grades[n.grade]}} <br> Group: {{n.group+1}} <br> Break: {{n.break}}</div>
+                </td>
+            </tr>
+            <tr>
+                <th>Wednesday</th>
+                <td ng-repeat="n in tt['5']">
+                    <div ng-hide="{{n.placeholder}}" ng-class="n.filled ? 'redback' : ''">From: {{convertTime(n.start)}} to {{convertTime(n.end-n.break)}} <br> Grade: {{language.grades[n.grade]}} <br> Group: {{n.group+1}} <br> Break: {{n.break}}</div>
+                </td>
+            </tr>
+            <tr>
+                <th>Thursday</th>
+                <td ng-repeat="n in tt['6']">
+                    <div ng-hide="{{n.placeholder}}" ng-class="n.filled ? 'redback' : ''">From: {{convertTime(n.start)}} to {{convertTime(n.end-n.break)}} <br> Grade: {{language.grades[n.grade]}} <br> Group: {{n.group+1}} <br> Break: {{n.break}}</div>
+                </td>
+            </tr>
+            <tr>
+                <th>Friday</th>
+                <td ng-repeat="n in tt['7']">
+                    <div ng-hide="{{n.placeholder}}" ng-class="n.filled ? 'redback' : ''">From: {{convertTime(n.start)}} to {{convertTime(n.end-n.break)}} <br> Grade: {{language.grades[n.grade]}} <br> Group: {{n.group+1}} <br> Break: {{n.break}}</div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+</div>

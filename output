@@ -1,0 +1,134 @@
+[33m[nodemon] 1.11.0[39m
+[33m[nodemon] to restart at any time, enter `rs`[39m
+[33m[nodemon] watching: *.*[39m
+[32m[nodemon] starting `node Server/main.js`[39m
+Magic happens on port 8080. Have a great time with the magician ::
+classes_count:  2
+[ 1, 4 ]
+c_coll:  [ { start: 720, end: 1200 } ]
+duration:  60
+time period:  first
+{ '1': [ { start: 720, end: 1200 } ],
+  '2': [ { start: 720, end: 1200 } ],
+  '3': [ { start: 720, end: 1200 } ],
+  '4': [ { start: 720, end: 1200 } ],
+  '5': [ { start: 720, end: 1200 } ],
+  '6': [ { start: 720, end: 1200 } ] }
+{ start: 720, end: 780 }
+[ 2, 5 ]
+c_coll:  [ { start: 720, end: 1200 } ]
+duration:  60
+time period:  middlefirst
+{ '1': [ { start: 780, end: 1200 } ],
+  '2': [ { start: 720, end: 1200 } ],
+  '3': [ { start: 720, end: 1200 } ],
+  '4': [ { start: 780, end: 1200 } ],
+  '5': [ { start: 720, end: 1200 } ],
+  '6': [ { start: 720, end: 1200 } ] }
+{ start: 930, end: 990 }
+[ 3, 6 ]
+c_coll:  [ { start: 720, end: 1200 } ]
+duration:  60
+time period:  middlelast
+{ '1': [ { start: 780, end: 1200 } ],
+  '2': [ { start: 720, end: 930 }, { start: 990, end: 1200 } ],
+  '3': [ { start: 720, end: 1200 } ],
+  '4': [ { start: 780, end: 1200 } ],
+  '5': [ { start: 720, end: 930 }, { start: 990, end: 1200 } ],
+  '6': [ { start: 720, end: 1200 } ] }
+{ start: 930, end: 990 }
+result:  { '1': [ { start: 720, end: 780, group: 0, grade: 13 } ],
+  '2': [ { start: 930, end: 990, group: 1, grade: 13 } ],
+  '3': [ { start: 930, end: 990, group: 2, grade: 13 } ],
+  '4': [ { start: 720, end: 780, group: 0, grade: 13 } ],
+  '5': [ { start: 930, end: 990, group: 1, grade: 13 } ],
+  '6': [ { start: 930, end: 990, group: 2, grade: 13 } ] }
+classes_count:  2
+[ 1, 4 ]
+c_coll:  [ { start: 780, end: 1200 } ]
+duration:  60
+time period:  first
+{ '1': [ { start: 780, end: 1200 } ],
+  '2': [ { start: 720, end: 930 }, { start: 990, end: 1200 } ],
+  '3': [ { start: 720, end: 930 }, { start: 990, end: 1200 } ],
+  '4': [ { start: 780, end: 1200 } ],
+  '5': [ { start: 720, end: 930 }, { start: 990, end: 1200 } ],
+  '6': [ { start: 720, end: 930 }, { start: 990, end: 1200 } ] }
+{ start: 780, end: 840 }
+[ 2, 5 ]
+c_coll:  [ { start: 720, end: 930 }, { start: 990, end: 1200 } ]
+duration:  60
+time period:  middlefirst
+{ '1': [ { start: 840, end: 1200 } ],
+  '2': [ { start: 720, end: 930 }, { start: 990, end: 1200 } ],
+  '3': [ { start: 720, end: 930 }, { start: 990, end: 1200 } ],
+  '4': [ { start: 840, end: 1200 } ],
+  '5': [ { start: 720, end: 930 }, { start: 990, end: 1200 } ],
+  '6': [ { start: 720, end: 930 }, { start: 990, end: 1200 } ] }
+ranges:  [ { start: 720, end: 930 }, { start: 990, end: 1200 } ]
+option:  { start: 720, end: 930 }
+{ start: 870, end: 930 }
+[ 3, 6 ]
+c_coll:  [ { start: 720, end: 930 }, { start: 990, end: 1200 } ]
+duration:  60
+time period:  middlelast
+{ '1': [ { start: 840, end: 1200 } ],
+  '2': [ { start: 720, end: 870 }, { start: 990, end: 1200 } ],
+  '3': [ { start: 720, end: 930 }, { start: 990, end: 1200 } ],
+  '4': [ { start: 840, end: 1200 } ],
+  '5': [ { start: 720, end: 870 }, { start: 990, end: 1200 } ],
+  '6': [ { start: 720, end: 930 }, { start: 990, end: 1200 } ] }
+ranges:  [ { start: 720, end: 930 }, { start: 990, end: 1200 } ]
+option:  { start: 990, end: 1200 }
+{ start: 990, end: 1050 }
+result:  { '1': 
+   [ { start: 720, end: 780, group: 0, grade: 13 },
+     { start: 780, end: 840, group: 0, grade: 12 } ],
+  '2': 
+   [ { start: 870, end: 930, group: 1, grade: 12 },
+     { start: 930, end: 990, group: 1, grade: 13 } ],
+  '3': 
+   [ { start: 930, end: 990, group: 2, grade: 13 },
+     { start: 990, end: 1050, group: 2, grade: 12 } ],
+  '4': 
+   [ { start: 720, end: 780, group: 0, grade: 13 },
+     { start: 780, end: 840, group: 0, grade: 12 } ],
+  '5': 
+   [ { start: 870, end: 930, group: 1, grade: 12 },
+     { start: 930, end: 990, group: 1, grade: 13 } ],
+  '6': 
+   [ { start: 930, end: 990, group: 2, grade: 13 },
+     { start: 990, end: 1050, group: 2, grade: 12 } ] }
+classes_count:  3
+[ 1, 3, 5 ]
+c_coll:  [ { start: 840, end: 870 }, { start: 1050, end: 1200 } ]
+duration:  60
+time period:  first
+{ '1': [ { start: 840, end: 1200 } ],
+  '2': [ { start: 720, end: 870 }, { start: 990, end: 1200 } ],
+  '3': [ { start: 720, end: 930 }, { start: 1050, end: 1200 } ],
+  '4': [ { start: 840, end: 1200 } ],
+  '5': [ { start: 720, end: 870 }, { start: 990, end: 1200 } ],
+  '6': [ { start: 720, end: 930 }, { start: 1050, end: 1200 } ] }
+{ start: 1050, end: 1110 }
+result:  { '1': 
+   [ { start: 720, end: 780, group: 0, grade: 13 },
+     { start: 780, end: 840, group: 0, grade: 12 },
+     { start: 1050, end: 1110, group: 0, grade: 11 } ],
+  '2': 
+   [ { start: 870, end: 930, group: 1, grade: 12 },
+     { start: 930, end: 990, group: 1, grade: 13 } ],
+  '3': 
+   [ { start: 930, end: 990, group: 2, grade: 13 },
+     { start: 990, end: 1050, group: 2, grade: 12 },
+     { start: 1050, end: 1110, group: 0, grade: 11 } ],
+  '4': 
+   [ { start: 720, end: 780, group: 0, grade: 13 },
+     { start: 780, end: 840, group: 0, grade: 12 } ],
+  '5': 
+   [ { start: 870, end: 930, group: 1, grade: 12 },
+     { start: 930, end: 990, group: 1, grade: 13 },
+     { start: 1050, end: 1110, group: 0, grade: 11 } ],
+  '6': 
+   [ { start: 930, end: 990, group: 2, grade: 13 },
+     { start: 990, end: 1050, group: 2, grade: 12 } ] }

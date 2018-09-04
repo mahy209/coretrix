@@ -1,0 +1,51 @@
+<div ng-controller="registerCtrl" class="grey lighten-4 background_img container">
+    <div class="margin_top">
+        <div class="row">
+            <div class="col s7" style="margin-left:20%;">
+                <div id="registerform" class="card-panel z-depth-2 animated zoomInUp">
+                    <div class="overlap center scale-transition" ng-show="preloader_active" ng-class="preloader_active ? '' : 'scale-out'">
+                        <div class="center preloader-wrapper big active">
+                            <div class="spinner-layer spinner-blue-only">
+                                <div class="circle-clipper left">
+                                    <div class="circle"></div>
+                                </div>
+                                <div class="gap-patch">
+                                    <div class="circle"></div>
+                                </div>
+                                <div class="circle-clipper right">
+                                    <div class="circle"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="scale-transition" ng-class="form_scale ? 'scale-out' : ''">
+                        <h1 class="center">{{language.register}}</h1>
+                        <form>
+                            <div class="input-field">
+                                <input ng-class="username_wrong ? 'invalid' : ''" id="username" type="text" class="validate" ng-model="username">
+                                <i ng-show="username_wrong" id="username_alert" class="fa fa-exclamation-circle red-text alert" aria-hidden="true"></i>
+                                <label for="username">{{language.username}}</label>
+                            </div>
+                            <div class="input-field">
+                                <input ng-class="displayname_wrong ? 'invalid' : ''" id="displayname" type="text" class="validate" ng-model="displayname">
+                                <i ng-show="displayname_wrong" id="displayname_alert" class="fa fa-exclamation-circle red-text alert" aria-hidden="true"></i>
+                                <label for="displayname">{{language.displayname}}</label>
+                            </div>
+                            <div class="input-field">
+                                <input ng-class="email_wrong ? 'invalid' : ''" id="email" type="text" class="validate" ng-model="email">
+                                <i ng-show="email_wrong" id="email_alert" class="fa fa-exclamation-circle red-text alert" aria-hidden="true"></i>
+                                <label for="email">{{language.email}}</label>
+                            </div>
+                            <div class="input-field">
+                                <input ng-class="password_wrong ? 'invalid' : ''" id="password" class="validate" type="password" ng-model="password">
+                                <i ng-show="password_wrong" id="password_alert" class="fa fa-exclamation-circle red-text alert" aria-hidden="true"></i>
+                                <label for="password">{{language.password}}</label>
+                            </div>
+                            <button ng-click="register()" type="submit" class="btn hoverable red">{{language.register}}</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

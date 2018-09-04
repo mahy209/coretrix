@@ -1,0 +1,8 @@
+.git/
+App/
+function-zero/
+mds/
+Mongo/
+Mongo_backup/
+SqlServer/
+Server/errors/

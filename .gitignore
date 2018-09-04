@@ -1,0 +1,14 @@
+node_modules/
+Server/node_modules
+Mongo*/
+SqlServer/
+App/
+Server/errors
+Mongo_backup/
+FaceRecognizer/node_modules
+*.node
+*standalone*
+dist*/
+Server/xdg-open
+Server/bcrypt
+*.zip

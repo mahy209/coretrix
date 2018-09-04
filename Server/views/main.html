@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <link href="../assets/css/Cairo.css" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="/assets/css/materialize.min.css"
+        media="screen,projection" />
+    <link type="text/css" media="screen" rel="stylesheet" href="/assets/css/init.css">
+    <script type="text/javascript" src="/assets/js/libs/angular/angular.min.js"></script>
+    <script type="text/javascript" src="/assets/js/libs/detect.min.js"></script>
+    <script type="text/javascript" src="/assets/js/libs/js.cookie.js"></script>
+    <script type="text/javascript" src="/assets/js/scripts/helpers.js"></script>
+    <script type="text/javascript" src="/assets/js/libs/library.js"></script>
+    <script type="text/javascript" src="/assets/js/scripts/liveorlocal.js"></script>
+    <script type="text/javascript" src="/assets/js/scripts/sdk.js"></script>
+    <script type="text/javascript" src="/assets/js/scripts/languages.js"></script>
+    <script type="text/javascript" src="/assets/js/scripts/main.js"></script>
+    <link type="text/css" rel="stylesheet" href="/assets/css/animate.min.css" />
+    <link type="text/css" rel="stylesheet" href="/assets/css/font-awesome.min.css"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+
+<body ng-app="coretrix" class="no-print grey lighten-4 animated zoomIn gradiant">
+    <head>
+        <title>{{title}}</title>
+    </head>
+    <div class="container" ng-controller="loginCtrl">
+        <div class="row">
+            <div class="card-panel z-depth-5 animated jackInTheBox col l6 m6 s12 offset-l3 offset-m3 " style="margin-top:5%;">
+                <div class="container ">
+                    <div class="row ">
+                        <div class="margin_center">
+                            <div class="center-align">
+                                <i class="fa fa-sign-in fa-5x" aria-hidden="true" style="margin:10%;">
+                                </i>
+                                <h5>تسجيل الدخول</h5>
+                                <form>
+                                    <div class="input-field ">
+                                        <input style="padding-left:2%; padding-right:2%;" id="login" type="text" class="validate" ng-model="login">
+                                        <i id="login_alert" ng-show="login_wrong" class="red-text field_wrong fa fa-exclamation-circle" aria-hidden="true"></i>
+                                        <label for="login">اسم المستخدم</label>
+                                    </div>
+                                    <div class="input-field">
+                                        <input style="padding-left:2%; padding-right:2%;" class="validate" type="password" id="password" ng-model="password">
+                                        <i id="password_alert" ng-show="password_wrong" class="red-text field_wrong fa fa-exclamation-circle" aria-hidden="true"></i>
+                                        <label for="password">كلمة المرور</label>
+                                    </div>
+                                    <button ng-click="auth()" type="submit" class="btn hoverable  background_animation"> دخول</button>
+                                    <!--a ng-click="forgotpass()" style="margin-left: 1%;">Forgot Password ?</a-->
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--TODO qrious Load jQuery last -->
+    <script type="text/javascript" src="/assets/js/libs/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="/assets/js/libs/materialize.min.js"></script>
+</body>
+
+</html>

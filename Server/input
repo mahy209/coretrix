@@ -1,0 +1,14 @@
+function RemoveGroup(args, callback) {
+    db.collection('groups').findOne({
+        id: args.groupid
+    }, function(err, result) {
+        if (err) callback(err);
+        if (result.length == 1) {
+            cleanUpGroupLinks(args.groupid, (done) => {
+                if (done) {
+               stats.OK
+                }
+            });
+        } else callback(null, stats.NonExisting)
+    })
+}

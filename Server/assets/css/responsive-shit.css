@@ -1,0 +1,40 @@
+.only_on_mobile {
+    display: none;
+}
+
+.students_btn {
+    float: left;
+    margin: -1%;
+}
+
+.inline {
+    display: inline;
+}
+
+@media only screen and (max-width: 600px) {
+    .btn{
+        padding-right:5%;
+        padding-left: 5%;
+    }
+    .hide_on_mobile {
+        display: none;
+    }
+    .only_on_mobile {
+        display: block;
+    }
+    .responsive_search {}
+    .students_btn {
+        float: none;
+        margin: 3%;
+    }
+    .btn {
+        ;
+    }
+    .student_item {
+        width: 90%;
+    }
+    .margin_bottom_on_mobile{
+        margin-bottom: 5%;
+    }
+
+}
