@@ -365,6 +365,7 @@ registerApiCall("/teacher/posts/remove", ["token", "id"], userDocDefault, data.R
 
 //registerApiCall("/teacher/grades/edit", ["token", "grades"], true, data.EditGrades);
 registerApiCall("/teacher/grades/get", ["token", "targetuser"], userDocRestricts.GetGrades, data.GetGrades);
+registerApiCall("/teacher/grades/months", ["token", "grade"], userDocDefault, data.ListGradeMonths);
 
 registerApiCall("/teacher/defaults/supertt/set", ["token", "days", "duration", "whours", "break", "fbreak"], userDocDefault, data.SetSuperTTDefaults);
 registerApiCall("/teacher/defaults/supertt/get", ["token"], userDocRestricts.GetSuperTtDefaults, data.GetSuperTTDefaults);

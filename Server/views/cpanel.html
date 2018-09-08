@@ -766,47 +766,58 @@
 				<div class="simpleFadeIn-anim" ng-controller="smsCtrl" ng-show="tab=='sms'">
 					<div class="card-panel">
 						<div class="sms_filter">
+							<div>
+								<label>النوع</label>
+								<select class="browser-default" ng-model="selected_type">
+									<option value="" disabled selected>اختر نوع التقرير</option>
+									<option value="lesson">حصة</option>
+									<option value="exam">امتحان</option>
+									<option value="report">تقرير شهري</option>
+								</select>
+							</div>
+							<div>
+								<label>اختر السنة</label>
+								<select id="gradesSelector" class="browser-default" ng-options="i as grades_names[i] for i in grades" ng-model="selected_grade"
+								  ng-change="grade_changed()">
+									<option value="" disabled selected>السنه</option>
+								</select>
+							</div>
 
-							<div>
-								<label>select year</label>
-								<select class="browser-default">
-								<option value="" disabled selected>Choose your option</option>
-								<option value="1">Option 1</option>
-								<option value="2">Option 2</option>
-								<option value="3">Option 3</option>
+							<div ng-show="selected_type == 'lesson'">
+								<label>الحصة</label>
+								<select class="browser-default" ng-options="c as (c.date + (c.addedClass ? ' - حصة إضافية' : '') + (c.classnum != null ? ' - الحصة ' + NumericOrderStrings[c.classnum] : '') + (c.linksString ? ' - ' + c.linksString : '')) for c in classes"
+								  ng-model="selected_class">
+									<option value="" disabled selected>اختر الحصة</option>
 								</select>
 							</div>
-							<div>
-								<label>select group</label>
-								<select class="browser-default">
-								<option value="" disabled selected>Choose your option</option>
-								<option value="1">Option 1</option>
-								<option value="2">Option 2</option>
-								<option value="3">Option 3</option>
+
+							<div ng-show="selected_type == 'exam'">
+								<label>الامتحان</label>
+								<select class="browser-default" ng-options="e as e.name for e in exams" ng-model="selected_exam">
+									<option value="" disabled selected>اختر الامتحان</option>
 								</select>
 							</div>
-							<div>
-								<label>select lesson or exam</label>
-								<select class="browser-default">
-								<option value="" disabled selected>Choose your option</option>
-								<option value="1">Option 1</option>
-								<option value="2">Option 2</option>
-								<option value="3">Option 3</option>
-								</select>
-							</div>
+
+							<div ng-show="selected_type == 'report'">
+									<label>الامتحان</label>
+									<select class="browser-default" ng-options="m as m.name for m in months" ng-model="selected_month">
+										<option value="" disabled selected>اختر الشهر</option>
+									</select>
+								</div>
+
 						</div>
 
 						<div class="sms_setting">
 							<label>sms template</label>
 							<select class="browser-default">
-							<option value="" disabled selected>Choose your option</option>
-							<option value="1">exam score</option>
-							<option value="2">this lesson report</option>
-							<option value="3">monthly report</option>
+								<option value="" disabled selected>Choose your option</option>
+								<option value="1">exam score</option>
+								<option value="2">this lesson report</option>
+								<option value="3">monthly report</option>
 							</select>
 						</div>
 						<a class="waves-effect waves-light blue-grey btn" style="margin-left: 8.35%; margin-top:1rem;">أرسل</a>
-					
+
 					</div>
 				</div>
 				<div class="simpleFadeIn-anim" ng-controller="groupsCtrl" ng-show="tab=='times'">
