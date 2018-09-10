@@ -53,7 +53,7 @@
 				</div>
 				<div class="col s3">
 					<div ng-click="changeTab('students')" ng-class="tab == 'students' ? 'blue-grey-text  text-darken-1' : 'grey-text'"
-					  class="center-align">
+					 class="center-align">
 						<i class="fa fa-users fa-2x" aria-hidden="true">
 						</i>
 					</div>
@@ -79,7 +79,7 @@
 			<div class="row">
 				<div class="col s4">
 					<div ng-click="changeTab('payment')" ng-class="tab == 'payment' ? 'blue-grey-text text-darken-1' : 'grey-text'"
-					  class="center-align">
+					 class="center-align">
 						<i class="fa fa-credit-card-alt fa-2x" aria-hidden="true">
 						</i>
 					</div>
@@ -92,7 +92,7 @@
 				</div>
 				<div class="col s4">
 					<div ng-click="changeTab('settings')" ng-class="tab == 'settings' ? 'blue-grey-text text-darken-1' : 'grey-text'"
-					  class="center-align">
+					 class="center-align">
 						<i class="fa fa-cog fa-2x" aria-hidden="true">
 						</i>
 
@@ -127,16 +127,16 @@
 							</div>
 							<div class="card-panel center-align">
 								<button ng-click="toggleLog()" class="btn blue-grey-background btn tooltipped" data-position="top" data-delay="50"
-								  data-tooltip="تبديل غياب الطالب">
+								 data-tooltip="تبديل غياب الطالب">
 									<i class="fa" ng-class="cancelled ? 'fa-refresh' : 'fa-times-circle'" aria-hidden="true"></i>
 									</i>
 								</button>
 								<button class="btn blue-grey-background tooltipped" ng-click="open_profile()" data-position="top" data-delay="50"
-								  data-tooltip="ملف الطالب">
+								 data-tooltip="ملف الطالب">
 									<i class="fa fa-file-text" aria-hidden="true"></i>
 								</button>
 								<button onclick="window.open('/qrselector', '_blank', 'height=640,width=420')" class="btn blue-grey-background tooltipped"
-								  data-position="top" data-delay="50" data-tooltip="طباعه الاكواد">
+								 data-position="top" data-delay="50" data-tooltip="طباعه الاكواد">
 									<i class="fa fa-print" aria-hidden="true"></i>
 								</button>
 							</div>
@@ -168,7 +168,7 @@
 							<div class="card-panel  center-align" style="direction:ltr;">
 								<h6>الكاميرا</h6>
 								<select style="margin-bottom:2%" class="browser-default" ng-options="c as c.name for c in cameras" ng-change="camera_changed()"
-								  ng-model="selected_camera">
+								 ng-model="selected_camera">
 									<option value="" disabled selected>إختر الكاميرا</option>
 								</select>
 								<!-- Switch -->
@@ -250,7 +250,7 @@
 									<div class="col m3 l3 s12">
 										<h6 class="center-align flow-text">امتحان</h6>
 										<div ng-show="l" ng-class="(l.log[0].mark > l.redline && l.log[0].attendant) ? 'green-text' : ((l.log[0].mark || l.log[0].mark == 0) ? 'red' : '')"
-										  class="card-panel white-text blue-grey" ng-repeat="l in last_exams">
+										 class="card-panel white-text blue-grey" ng-repeat="l in last_exams">
 											{{l.log[0].attendant ? l.name + ': ' : ''}} {{l.log[0] ? (l.log[0].mark || l.log[0].mark == 0) ?
 											(l.log[0].mark + '/' + l.max_mark)
 											: 'لم تسجل درجة الطالب' : 'لم يحضر'}}
@@ -291,7 +291,7 @@
 							<ul class="tabs tabs-fixed-width" style="overflow:hidden;">
 								<li class="tab col s3">
 									<a class="black-text " ng-class="selectedLogger=='class' ? 'active' : ''" ng-click="selectedLogger='class'"
-									  href="#classSelector">غياب حصة</a>
+									 href="#classSelector">غياب حصة</a>
 								</li>
 								<li class="tab col s3">
 									<a class="black-text" ng-class="selectedLogger=='exam' ? 'active' : ''" ng-click="selectedLogger='exam'" href="#examSelector">غياب
@@ -303,12 +303,12 @@
 							<div class="card-panel animated fadeIn">
 								<label>السنه الدراسيه</label>
 								<select class="browser-default" ng-options="i as grades_names[i] for i in grades" ng-change="grade_changed(true, false, true, false)"
-								  ng-model="selected_grade">
+								 ng-model="selected_grade">
 									<option value="" disabled selected>السنه</option>
 								</select>
 								<label>الحصة</label>
 								<select class="browser-default" ng-options="c as (c.date + (c.addedClass ? ' - حصة إضافية' : '') + (c.classnum != null ? ' - الحصة ' + NumericOrderStrings[c.classnum] : '') + (c.linksString ? ' - ' + c.linksString : '')) for c in classes"
-								  ng-model="selected_class">
+								 ng-model="selected_class">
 									<option value="" disabled selected>اختر الحصة</option>
 								</select>
 								<label>المجموعة الحالية</label>
@@ -316,11 +316,11 @@
 									<option value="" disabled selected>المجموعة التى يتم تسجيل غياب الطلاب بها</option>
 								</select>
 								<button ng-click="prepareClassDel()" style="margin-top:3%;margin-left:1%" class="btn  red lighten-1 btn tooltipped"
-								  data-position="bottom" data-tooltip="امسح الحصه">
+								 data-position="bottom" data-tooltip="امسح الحصه">
 									<i class="fa fa-trash" aria-hidden="true"></i>
 								</button>
 								<button href="#addClass_modal" style="margin-top:3%;margin-left:1%" class="btn gradient3 modal-trigger btn tooltipped"
-								  data-position="bottom" data-tooltip="أضف حصة">
+								 data-position="bottom" data-tooltip="أضف حصة">
 									<i class="fa fa-plus-square" aria-hidden="true"></i>
 								</button>
 								<!--button ng-click="refreshClasses()" style="margin-top:3%" class="btn blue-grey-background btn tooltipped" data-position="bottom"
@@ -333,7 +333,7 @@
 							<div class="card-panel animated fadeIn">
 								<label>السنه الدراسيه</label>
 								<select class="browser-default" ng-options="i as grades_names[i] for i in grades" ng-change="grade_changed(false, true, false, false)"
-								  ng-model="selected_grade">
+								 ng-model="selected_grade">
 									<option value="" disabled selected>السنه</option>
 								</select>
 								<label>الامتحان</label>
@@ -342,14 +342,14 @@
 								</select>
 								<div class="row" style="margin-top:3%;">
 									<button ng-click="prepareExamDel()" class="btn red lighten-1 btn tooltipped margin-right_home_btn"
-									  data-position="bottom" data-tooltip="امسح الامتحان">
+									 data-position="bottom" data-tooltip="امسح الامتحان">
 										<i class="fa fa-trash" aria-hidden="true"></i>
 									</button>
 									<button ng-click="loadExam(e)" class="btn blue-grey-background margin-right_home_btn">
 										<i class="fa fa-pencil" aria-hidden="true"></i>
 									</button>
 									<button href="#addExam_modal_main" class="btn blue-grey-background modal-trigger btn tooltipped margin-right_home_btn"
-									  data-position="bottom" data-tooltip="أضف امتحان">
+									 data-position="bottom" data-tooltip="أضف امتحان">
 										<i class="fa fa-plus-square" aria-hidden="true"></i>
 									</button>
 								</div>
@@ -430,14 +430,14 @@
 							<div class="modal-content" style="margin-top:2%">
 								<h4 class="center-align">أضف حصة</h4>
 								<input id="class_date" type="text" class="datepicker" style="text-align: right; cursor:pointer" placeholder="تاريخ اول حصة"
-								  readonly>
+								 readonly>
 								<label>السنة</label>
 								<select class="browser-default" ng-options="i as grades_names[i] for i in grades" ng-model="selected_grade">
 									<option value="" disabled selected>السنه</option>
 								</select>
 								<label>الحصة</label>
 								<select class="browser-default" ng-options="i as (NumericOrderStrings[i.classnum] + ' - ' + i.linksString) for i in classesLinks"
-								  ng-model="selected_classnum">
+								 ng-model="selected_classnum">
 									<option value="" disabled selected>الحصة</option>
 								</select>
 								<div style="margin-top:2%; margin-right: 1%">
@@ -467,7 +467,7 @@
 								</div>
 								<div class="col l6 s12 responsive_search">
 									<input class="autocomplete searchitem" style="padding-right: 1%; /* for the text */" placeholder="ابحث عن طالب"
-									  id="searchStudents" ng-model="searchStudents_val" type="search" ng-keypress="performSearch($event)" required>
+									 id="searchStudents" ng-model="searchStudents_val" type="search" ng-keypress="performSearch($event)" required>
 								</div>
 							</div>
 						</div>
@@ -484,7 +484,7 @@
 									<div class="col s6">
 										<label>السنه الدراسيه</label>
 										<select class="browser-default inline" ng-change="load_optGroups(); saveOpts();" ng-options="i as grades_names[i] for i in grades"
-										  ng-model="opt_grade">
+										 ng-model="opt_grade">
 											<option value="" disabled selected>السنة</option>
 										</select>
 									</div>
@@ -548,7 +548,7 @@
 											<span>اسم الطالب</span>
 											<div>
 												<input ng-model="studentName" ng-change="nameChanged()" type="text" id="studentName_auto" class="autocomplete"
-												  ng-keypress="checkAndSearch($event)">
+												 ng-keypress="checkAndSearch($event)">
 											</div>
 										</div>
 										<div>
@@ -658,7 +658,7 @@
 							<label>المجموعه</label>
 							<label>السنه الدراسيه</label>
 							<select id="edit_s" class="browser-default" ng-options="i as grades_names[i] for i in allowedGrades" ng-change="loadGroups(true)"
-							  ng-model="edit_selected_grade">
+							 ng-model="edit_selected_grade">
 								<option value="" disabled selected>السنه</option>
 							</select>
 							<label>المجموعه</label>
@@ -696,7 +696,7 @@
 						<div class="col s8 offset-s2">
 							<div style="margin-top:0;margin-bottom:5%;">
 								<select class="browser-default animated slideInDown" ng-options="i as grades_names[i] for i in grades" ng-model="selected_grade"
-								  ng-change="grade_changed()" style="margin-top:1rem;">
+								 ng-change="grade_changed()" style="margin-top:1rem;">
 									<option value="" disabled selected>السنه</option>
 								</select>
 							</div>
@@ -705,15 +705,15 @@
 							<ul dnd-list="items">
 								<li class="col l3 m3 s12" style="float:right;">
 									<div style="width:100%;" ng-click="add_selected_grade = selected_grade" class="card-panel payment-card center-align hoverable waves-effect grey-text modal-trigger animated slideInUp"
-									  href="#addItem_modal" style="display: block important!">
+									 href="#addItem_modal" style="display: block important!">
 										<i class="fa fa-plus fa-3x " aria-hidden="true"></i>
 										<p>اضافه</p>
 									</div>
 								</li>
 								<li class="col m3 l3 s12" style="float:right;" ng-repeat="i in items" dnd-draggable="i" dnd-effect-allowed="move"
-								  dnd-moved="items.splice($index, 1);" dnd-dragstart="showbasket()" dnd-dragend="hidebasket()">
+								 dnd-moved="items.splice($index, 1);" dnd-dragstart="showbasket()" dnd-dragend="hidebasket()">
 									<a style="width: 100%;" ng-click="openLink('/payments/' + i.id)" class="card-panel payment-card center-align hoverable waves-effect blue-grey-text animated slideInUp"
-									  style="display: block important!">
+									 style="display: block important!">
 										<i class="fa fa-3x" ng-class="categoriesIcons[i.category]" aria-hidden="true"></i>
 										<p>{{i.name}}</p>
 									</a>
@@ -769,7 +769,7 @@
 							<div>
 								<label>اختر السنة</label>
 								<select id="gradesSelector" class="browser-default" ng-options="i as grades_names[i] for i in grades" ng-model="selected_grade"
-								  ng-change="grade_changed()">
+								 ng-change="grade_changed()">
 									<option value="" disabled selected>السنه</option>
 								</select>
 							</div>
@@ -799,7 +799,7 @@
 							<div ng-show="selected_type == 'lesson'">
 								<label>الحصة</label>
 								<select class="browser-default" ng-options="c as (c.date + (c.addedClass ? ' - حصة إضافية' : '') + (c.classnum != null ? ' - الحصة ' + NumericOrderStrings[c.classnum] : '') + (c.linksString ? ' - ' + c.linksString : '')) for c in classes"
-								  ng-model="selected_class">
+								 ng-model="selected_class">
 									<option value="" disabled selected>اختر الحصة</option>
 								</select>
 							</div>
@@ -812,7 +812,7 @@
 							</div>
 
 							<div ng-show="selected_type == 'report'">
-								<label>الامتحان</label>
+								<label>الشهر</label>
 								<select class="browser-default" ng-options="m as m.name for m in months" ng-model="selected_month">
 									<option value="" disabled selected>اختر الشهر</option>
 								</select>
@@ -820,7 +820,17 @@
 
 						</div>
 
-						<button class="waves-effect waves-light blue-grey btn" ng-click="send()" style="margin-left: 8.35%; margin-top:1rem;">أرسل</button>
+						<div style="display: flex; align-items: baseline;">
+							<div>
+								<button class="waves-effect waves-light blue-grey btn" ng-click="send()" style="margin-left: 8.35%; margin-top:1rem;">أرسل</button>
+							</div>
+							<div class="col" style="flex-grow: 1;" ng-show="sendingSMS">
+								<label>زياد الزرقا</label>
+								<div class="progress">
+									<div class="determinate" style="width: 70%"></div>
+								</div>
+							</div>
+						</div>
 
 					</div>
 				</div>
@@ -829,7 +839,7 @@
 						<div class="row">
 							<div class="col s10" style="margin-left: 8.35%; margin-top:1rem;">
 								<select id="gradesSelector" class="browser-default animated slideInDown" ng-options="i as grades_names[i] for i in grades"
-								  ng-model="selected_grade" ng-change="grade_changed()">
+								 ng-model="selected_grade" ng-change="grade_changed()">
 									<option value="" disabled selected>السنه</option>
 								</select>
 							</div>
@@ -860,7 +870,7 @@
 										<h5>حصص غير مربوطه</h5>
 									</li>
 									<li ng-repeat="link in freelinks" class="collection-item" dnd-draggable="link" dnd-effect-allowed="move"
-									  dnd-moved="freelinks.splice($index, 1);" dnd-dragstart="showbasket()" dnd-dragend="hidebasket()">{{groupsUniques[link.groupid]}}
+									 dnd-moved="freelinks.splice($index, 1);" dnd-dragstart="showbasket()" dnd-dragend="hidebasket()">{{groupsUniques[link.groupid]}}
 										- {{weekdays[link.day]}}</li>
 								</ul>
 							</div>
@@ -870,7 +880,7 @@
 										<h5>الحصة {{NumericOrderStrings[$index]}}</h5>
 									</li>
 									<li ng-repeat="link in i" class="collection-item" dnd-draggable="link" dnd-effect-allowed="move" dnd-moved="i.splice($index, 1);"
-									  dnd-dragstart="showbasket()" dnd-dragend="hidebasket()">{{groupsUniques[link.groupid]}} -
+									 dnd-dragstart="showbasket()" dnd-dragend="hidebasket()">{{groupsUniques[link.groupid]}} -
 										{{weekdays[link.day]}}</li>
 								</ul>
 							</div>
@@ -894,7 +904,7 @@
 									<div class="col s12">
 										<label>اختر السنه</label>
 										<select id="addGroup_gradesSelector" class="browser-default" ng-options="i as grades_names[i] for i in allowedGrades"
-										  ng-model="addGroup_selected_grade">
+										 ng-model="addGroup_selected_grade">
 											<option value="" disabled selected>السنه</option>
 										</select>
 									</div>
@@ -961,22 +971,18 @@
 					<div class="padding-pad animated zoomIn">
 						<div class="row">
 							<ul class="collapsible" data-collapsible="accordion">
-								<!--li>
-                                    <div class="collapsible-header active">تاريخ بداية الحصص</div>
-                                    <div class="collapsible-body">
-                                        <div class="row">
-                                            <div class="col s12" ng-repeat="gradedate in gradeStartDates">
-                                                <label>
-                                                    الصف {{grades_names[gradedate.grade]}}
-                                                </label>
-                                                <input id="gradeStartDate{{gradedate.grade}}" type="text" class="datepicker" style="text-align: right; cursor:pointer" placeholder="تاريخ البداية" readonly>
-                                            </div>
-                                            <div class="col s12">
-                                                <button ng-click="saveStartDates()" class="btn blue-grey-background">حفظ</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </li-->
+								<li class="active">
+									<div class="collapsible-header">بيانات المدرس</div>
+									<div class="collapsible-body">
+										<label>اسم المدرس</label>
+										<input type="text" class="validate" ng-model="teacherName">
+										<label>المادة</label>
+										<select class="browser-default" ng-model="selected_subject" ng-options="s as s for s in subjects">
+											<option value="" disabled selected>اختر المادة</option>
+										</select>
+										<button style="margin-top: 20px;" ng-click="updateNameAndSubject()" class="btn blue-grey-background">حفظ</button>
+									</div>
+								</li>
 								<li>
 									<div class="collapsible-header">الصفوف</div>
 									<div class="collapsible-body">
@@ -1017,7 +1023,7 @@
 						<div class="row">
 							<div class="col s10" style="margin-left: 8.35%; margin-top:1rem;">
 								<select id="gradesSelector" class="browser-default animated slideInDown" ng-options="i as grades_names[i] for i in grades"
-								  ng-model="selected_grade" ng-change="grade_changed()">
+								 ng-model="selected_grade" ng-change="grade_changed()">
 									<option value="" disabled selected>السنه</option>
 								</select>
 							</div>
@@ -1121,7 +1127,7 @@
 
 					</div>
 					<div ng-click="changeTab('students')" ng-class="tab == 'students' ? 'blue-grey-text  text-darken-1' : 'grey-text'"
-					  class="center-align">
+					 class="center-align">
 						<i class="fa fa-users fa-2x" aria-hidden="true">
 							<span>الطلاب</span>
 						</i>
@@ -1140,7 +1146,7 @@
 
 					</div>
 					<div ng-click="changeTab('payment')" ng-class="tab == 'payment' ? 'blue-grey-text text-darken-1' : 'grey-text'"
-					  class="center-align">
+					 class="center-align">
 						<i class="fa fa-credit-card-alt fa-2x" aria-hidden="true">
 							<span>الدفع</span>
 						</i>
@@ -1153,7 +1159,7 @@
 						</i>
 					</div>
 					<div ng-click="changeTab('settings')" ng-class="tab == 'settings' ? 'blue-grey-text text-darken-1' : 'grey-text'"
-					  class="center-align">
+					 class="center-align">
 						<i class="fa fa-cog fa-2x" aria-hidden="true">
 							<span>الإعدادات</span>
 						</i>

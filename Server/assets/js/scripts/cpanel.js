@@ -199,50 +199,51 @@ app.controller('examsCtrl', function ($rootScope, $scope, sdk) {
 })
 
 app.controller('smsCtrl', function ($rootScope, $scope, sdk) {
+	$scope.sendingSMS = false
 
 	var init = (refreshing, result) => {
-		$scope.grades = result;
-	};
+		$scope.grades = result
+	}
 
-	$rootScope.variableListeners.push(init);
+	$rootScope.variableListeners.push(init)
 
 	$scope.grade_changed = () => {
-		$scope.loadClasses();
+		$scope.loadClasses()
 	}
 
 	$scope.loadDevices = () => {
 		sdk.ADBListDevices((stat, devices) => {
 			switch (stat) {
 				case sdk.stats.OK:
-					$scope.devices = devices;
-					break;
+					$scope.devices = devices
+					break
 			}
-		});
+		})
 	}
 
-	$scope.loadDevices();
+	$scope.loadDevices()
 
 	$scope.loadClasses = () => {
 		sdk.GetGradeMonths(parseInt($scope.selected_grade), (stat, months) => {
 			switch (stat) {
 				case sdk.stats.OK:
 					months.map(grademonth => {
-						grademonth.name = gradeMonth(grademonth);
-						return grademonth;
-					});
-					$scope.months = months;
+						grademonth.name = gradeMonth(grademonth)
+						return grademonth
+					})
+					$scope.months = months
 					break
 				default:
 			}
-		});
+		})
 		sdk.ListExams(parseInt($scope.selected_grade), (stat, exams) => {
 			switch (stat) {
 				case sdk.stats.OK:
-					$scope.exams = exams;
+					$scope.exams = exams
 					break
 				default:
 			}
-		});
+		})
 		sdk.ListClasses(parseInt($scope.selected_grade), (stat, result) => {
 			switch (stat) {
 				case sdk.stats.OK:
@@ -254,24 +255,30 @@ app.controller('smsCtrl', function ($rootScope, $scope, sdk) {
 					break
 				default:
 			}
-		});
-	};
+		})
+	}
 
 	$scope.send = () => {
+		if (!$scope.selected_grade) return toast('برجاء اختيار السنه')
+		if (!$scope.selected_type) return toast('برجاء اختيار نوع التقرير')
+		if (!$scope.selected_device) return toast('برجاء اختيار الهاتف')
 		switch ($scope.selected_type) {
 			case 'lesson':
+				if (!$scope.selected_class) return toast('برجاء اختيار الحصة')
 				sdk.FetchClassLogs($scope.selected_class.id, $scope.selected_grade, (stat, result) => {
 					switch (stat) {
 						case sdk.stats.OK:
-							console.log(result);
-							break;
+							console.log(result)
+							break
 					}
-				});
-				break;
+				})
+				break
 			case 'exam':
-				break;
+				if (!$scope.selected_exam) return toast('برجاء اختيار الامتحان')
+				break
 			case 'report':
-				break;
+				if (!$scope.selected_month) return toast('برجاء اختيار الشهر')
+				break
 		}
 	}
 })
@@ -1633,7 +1640,8 @@ app.controller('settingsCtrl', function ($rootScope, $scope, sdk) {
 	$scope.grades_names = sdk.grades_names
 	// $rootScope.variableListeners.push()
 	$scope.all_grades = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
-	var gs
+	$scope.subjects = sdk.subjects;
+	var gs;
 	try {
 		gs = JSON.parse(Cookies.get('grades'))
 	} catch (e) {}
@@ -1729,5 +1737,26 @@ app.controller('settingsCtrl', function ($rootScope, $scope, sdk) {
 					toast('تعذر إعادة تعيين كلمة المرور!', gradients.error)
 			}
 		})
+	}
+
+	sdk.GetNameAndSubject((stat, result) => {
+		$scope.teacherName = result.name;
+		$scope.selected_subject = sdk.subjects[result.subjects[0]];
+	})
+
+	$scope.updateNameAndSubject = () => {
+		if ($scope.teacherName == null) return toast('برجاء ادخال اسم المدرس');
+		if ($scope.selected_subject == null) return toast('برجاء اختيار المادة');
+
+		sdk.UpdateNameAndSubject($scope.teacherName, Object.values(sdk.subjects).indexOf($scope.selected_subject) + 1, (stat) => {
+			switch (stat) {
+				case sdk.stats.OK:
+					toast('تم حفظ البيانات بنجاح');
+					break;
+					default:
+					toast('حدث خطأ أثناء حفظ البيانات');
+					break;
+			}
+		});
 	}
 })

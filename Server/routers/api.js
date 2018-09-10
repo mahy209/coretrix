@@ -272,6 +272,8 @@ var inputvalidators = {
 	serial: validators.ValidateString,
 	recipient: validators.ValidateString,
 	message: validators.ValidateString,
+	// update name and subjects
+	subjects: data.validators.ValidateSubjects
 }
 
 // REG CALLS
@@ -372,6 +374,10 @@ registerApiCall("/teacher/posts/remove", ["token", "id"], userDocDefault, data.R
 // adb
 registerApiCall("/adb/devices/list", ["token"], userDocDefault, data.ListDevices);
 registerApiCall("/adb/sms/send", ["token", "serial", "recipient", "message"], userDocDefault, data.ListDevices);
+
+// profile
+registerApiCall("/profile/updatens", ["token", "fullname", "subjects"], userDocDefault, data.UpdateNameAndSubjects);
+registerApiCall("/profile/get", ["token"], userDocDefault, data.GetNameAndSubjects);
 
 //registerApiCall("/teacher/grades/edit", ["token", "grades"], true, data.EditGrades);
 registerApiCall("/teacher/grades/get", ["token", "targetuser"], userDocRestricts.GetGrades, data.GetGrades);

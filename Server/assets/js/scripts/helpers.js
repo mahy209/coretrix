@@ -20,7 +20,6 @@ function changeLogger(elementName) {
 };
 
 function setCookie(name, value) {
-	console.log(name);
 	Cookies.set(name, value, {
 		path: '/'
 	}, {
@@ -295,7 +294,6 @@ function neutralizeName(name, neutralizeOnly) {
 		stat: 'lines'
 	};
 	if (countWords(name) < 4 && !neutralizeOnly) {
-		console.log(countWords(name));
 		return undefined;
 	}
 	for (var i = 0; i < regexes.length; i++) {
@@ -689,7 +687,6 @@ function generateTimetable(settings, grades, defaults, timePeriods) {
 			if (cls == undefined && p_i == (sets.groups_count - 1)) {
 				// final pattern and no collisions
 				// fill in without aligning
-				console.log('----------NO COLLISIONS----------');
 				for (var index = 0; index < sets.groups_count; index++) {
 					pattern = patterns[patternSelector()];
 					var violates = false;

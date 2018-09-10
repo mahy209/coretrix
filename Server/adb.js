@@ -20,9 +20,7 @@ function send (serial, recipient, message) {
     message
   ])
 
-  activity.on('close', () => {
-    console.log('sent')
-  })
+  activity.on('close', () => { })
 }
 
 send('4276e8e27d14', '01111111259', 'fewafwa4f4aw')

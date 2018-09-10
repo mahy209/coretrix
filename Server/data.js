@@ -10,7 +10,7 @@ const subjects = {
 	2: "لغة انجليزية",
 	3: "علوم",
 	4: "دراسات اجتماعية",
-	5: "علوم الحاسب الآلى",
+	5: "حاسب آلى",
 	6: "رياضيات",
 	7: "لغة ألمانية",
 	8: "لغة فرنسية",
@@ -27,10 +27,6 @@ const subjects = {
 	19: "فلسفة",
 	20: "تربية وطنية",
 	21: "علم نفس",
-	22: "تفاضل و تكامل",
-	23: "ديناميكا",
-	24: "ستاتيكا",
-	25: "هندسة فراغية"
 };
 
 const phonecodes = {
@@ -3688,6 +3684,35 @@ function sendSMS(args, callback) {
 	}
 }
 
+function getNameAndSubjects(args, callback) {
+	db.collection('users').findOne({
+		[identifier]: teacherRep(args.userDoc),
+	}, {
+		_id: 0,
+		fullname: 1,
+		subjects: 1,
+	}, (err, result) => {
+		if (err) callback(err);
+		else callback(null, stats.OK, {
+			name: result.fullname,
+			subjects: result.subjects
+		})
+	});
+}
+
+function updateNameAndSubjects(args, callback) {
+	db.collection('users').updateOne({
+		[identifier]: teacherRep(args.userDoc),
+	}, {
+		$set: {
+			fullname: `${args.fullname.first} ${args.fullname.father} ${args.fullname.grand} ${args.fullname.last}`.replace('  ', '').trim(),
+			subjects: args.subjects,
+		}
+	}, function (err, result) {
+		ErrorAndCount(callback, err, result, fields.matchedCount, stats.Error);
+	});
+}
+
 function listDevices(args, callback) {
 	client.listDevices()
 		.then(function (devices) {
@@ -3810,6 +3835,8 @@ module.exports = {
 	EditGrade: editGrade,
 	GetGrade: getGrade,
 	// PROFILES
+	UpdateNameAndSubjects: updateNameAndSubjects,
+	GetNameAndSubjects: getNameAndSubjects,
 
 	// VALIDATORS
 	validators: validators,

@@ -7,31 +7,27 @@ if (livenotlocal) url = live_url;
 else url = local_url;
 
 const subjects = {
-	1: "اللغة عربية",
-	2: "اللغة انجليزية",
-	3: "العلوم",
-	4: "الدراسات اجتماعية",
-	5: "الحاسب الآلى",
-	6: "الرياضيات",
-	7: "اللغة ألمانية",
-	8: "اللغة فرنسية",
-	9: "التربية الدينية الإسلامية",
-	10: "التربية الدينية المسيحية",
-	11: "الفيزياء",
-	12: "الكيمياء",
-	13: "الجيولوجيا",
-	14: "الأحياء",
-	15: "التربية الفنية",
-	16: "التاريخ",
-	17: "الجغرافيا",
-	18: "الاقتصاد",
-	19: "الفلسفة",
-	20: "التربية الوطنية",
-	21: "العلم النفس",
-	22: "التفاضل و التكامل",
-	23: "الديناميكا",
-	24: "الستاتيكا",
-	25: "الهندسة الفراغية"
+	1: "لغة عربية",
+	2: "لغة انجليزية",
+	3: "علوم",
+	4: "دراسات اجتماعية",
+	5: "حاسب آلى",
+	6: "رياضيات",
+	7: "لغة ألمانية",
+	8: "لغة فرنسية",
+	9: "تربية دينية إسلامية",
+	10: "تربية دينية مسيحية",
+	11: "فيزياء",
+	12: "كيمياء",
+	13: "جيولوجيا",
+	14: "أحياء",
+	15: "تربية فنية",
+	16: "تاريخ",
+	17: "جغرافيا",
+	18: "اقتصاد",
+	19: "فلسفة",
+	20: "تربية وطنية",
+	21: "علم نفس",
 };
 
 const grades_names_long = [
@@ -395,6 +391,22 @@ sdk.factory('sdk', ['$http', function ($http) {
 			serial: serial,
 			recipient: recipient,
 			message: message,
+			token: token,
+		}, callback);
+	}
+
+	function getNameAndSubject(callback) {
+		var token = Cookies.get('token');
+		post("api/profile/get", {
+			token: token,
+		}, callback);
+	}
+
+	function updateNameAndSubject(name, subject, callback) {
+		var token = Cookies.get('token');
+		post("api/profile/updatens", {
+			fullname: name,
+			subjects: [subject],
 			token: token,
 		}, callback);
 	}
@@ -903,7 +915,7 @@ sdk.factory('sdk', ['$http', function ($http) {
 		itemCategoryNames: itemCategoryNames,
 		grades_names: grades_names,
 		grades_names_long: grades_names_long,
-		subjects_names: subjects,
+		subjects: subjects,
 		isAlive: _isAlive,
 		validators: validators,
 		CheckToken: CheckToken,
@@ -962,6 +974,8 @@ sdk.factory('sdk', ['$http', function ($http) {
 		GetGradeMonths: GetGradeMonths,
 		ADBListDevices: ADBListDevices,
 		ADBSendSMS: ADBSendSMS,
+		GetNameAndSubject: getNameAndSubject,
+		UpdateNameAndSubject: updateNameAndSubject,
 		/* ----------------------- */
 		ListGroupClassesLinks: ListGroupClassesLinks,
 		LinkGroupClasses: LinkGroupClasses,
