@@ -210,11 +210,23 @@ app.controller('smsCtrl', function ($rootScope, $scope, sdk) {
 		$scope.loadClasses();
 	}
 
+	$scope.loadDevices = () => {
+		sdk.ADBListDevices((stat, devices) => {
+			switch (stat) {
+				case sdk.stats.OK:
+					$scope.devices = devices;
+					break;
+			}
+		});
+	}
+
+	$scope.loadDevices();
+
 	$scope.loadClasses = () => {
 		sdk.GetGradeMonths(parseInt($scope.selected_grade), (stat, months) => {
 			switch (stat) {
 				case sdk.stats.OK:
-					months.map(grademonth => { 
+					months.map(grademonth => {
 						grademonth.name = gradeMonth(grademonth);
 						return grademonth;
 					});
@@ -244,6 +256,24 @@ app.controller('smsCtrl', function ($rootScope, $scope, sdk) {
 			}
 		});
 	};
+
+	$scope.send = () => {
+		switch ($scope.selected_type) {
+			case 'lesson':
+				sdk.FetchClassLogs($scope.selected_class.id, $scope.selected_grade, (stat, result) => {
+					switch (stat) {
+						case sdk.stats.OK:
+							console.log(result);
+							break;
+					}
+				});
+				break;
+			case 'exam':
+				break;
+			case 'report':
+				break;
+		}
+	}
 })
 app.controller('paymentsCtrl', function ($rootScope, $scope, sdk) {
 	$scope.trash = []

@@ -144,7 +144,7 @@
 								<div class="row">
 									<div class="col l6 m6 s12">
 										<button ng-click="open_logs()" class="btn blue-grey-background margin_bottom_on_mobile" style="width:100%">
-											درجات التسميع
+											الغياب والتسميع
 										</button>
 									</div>
 									<div class="col l6 m6 s12">
@@ -767,19 +767,32 @@
 					<div class="card-panel">
 						<div class="sms_filter">
 							<div>
+								<label>اختر السنة</label>
+								<select id="gradesSelector" class="browser-default" ng-options="i as grades_names[i] for i in grades" ng-model="selected_grade"
+								  ng-change="grade_changed()">
+									<option value="" disabled selected>السنه</option>
+								</select>
+							</div>
+
+							<div>
+								<label>الهاتف</label>
+								<div style="display: flex; align-items: baseline;">
+									<select style="margin-left: 12px" class="browser-default" ng-options="d as d.name for d in devices" ng-model="selected_device">
+										<option value="" disabled selected>الهاتف</option>
+									</select>
+									<button ng-click="loadDevices()" class="waves-effect waves-light blue-grey btn">
+										<i class="fa fa-refresh"></i></i>
+									</button>
+								</div>
+							</div>
+
+							<div>
 								<label>النوع</label>
 								<select class="browser-default" ng-model="selected_type">
 									<option value="" disabled selected>اختر نوع التقرير</option>
 									<option value="lesson">حصة</option>
 									<option value="exam">امتحان</option>
 									<option value="report">تقرير شهري</option>
-								</select>
-							</div>
-							<div>
-								<label>اختر السنة</label>
-								<select id="gradesSelector" class="browser-default" ng-options="i as grades_names[i] for i in grades" ng-model="selected_grade"
-								  ng-change="grade_changed()">
-									<option value="" disabled selected>السنه</option>
 								</select>
 							</div>
 
@@ -799,24 +812,15 @@
 							</div>
 
 							<div ng-show="selected_type == 'report'">
-									<label>الامتحان</label>
-									<select class="browser-default" ng-options="m as m.name for m in months" ng-model="selected_month">
-										<option value="" disabled selected>اختر الشهر</option>
-									</select>
-								</div>
+								<label>الامتحان</label>
+								<select class="browser-default" ng-options="m as m.name for m in months" ng-model="selected_month">
+									<option value="" disabled selected>اختر الشهر</option>
+								</select>
+							</div>
 
 						</div>
 
-						<div class="sms_setting">
-							<label>sms template</label>
-							<select class="browser-default">
-								<option value="" disabled selected>Choose your option</option>
-								<option value="1">exam score</option>
-								<option value="2">this lesson report</option>
-								<option value="3">monthly report</option>
-							</select>
-						</div>
-						<a class="waves-effect waves-light blue-grey btn" style="margin-left: 8.35%; margin-top:1rem;">أرسل</a>
+						<button class="waves-effect waves-light blue-grey btn" ng-click="send()" style="margin-left: 8.35%; margin-top:1rem;">أرسل</button>
 
 					</div>
 				</div>

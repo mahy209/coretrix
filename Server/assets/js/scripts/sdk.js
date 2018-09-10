@@ -382,6 +382,23 @@ sdk.factory('sdk', ['$http', function ($http) {
 		}, callback);
 	}
 
+	function ADBListDevices(callback) {
+		var token = Cookies.get('token');
+		post("api/adb/devices/list", {
+			token: token,
+		}, callback);
+	}
+	
+	function ADBSendSMS(serial, recipient, message, callback) {
+		var token = Cookies.get('token');
+		post("api/adb/sms/send", {
+			serial: serial,
+			recipient: recipient,
+			message: message,
+			token: token,
+		}, callback);
+	}
+
 	function AddExam(name, grade, max, redline, callback) {
 		var token = Cookies.get('token');
 		post("api/teacher/exams/add", {
@@ -943,6 +960,8 @@ sdk.factory('sdk', ['$http', function ($http) {
 		GetInfoForParent: GetInfoForParent,
 		FetchLogsForParent: FetchLogsForParent,
 		GetGradeMonths: GetGradeMonths,
+		ADBListDevices: ADBListDevices,
+		ADBSendSMS: ADBSendSMS,
 		/* ----------------------- */
 		ListGroupClassesLinks: ListGroupClassesLinks,
 		LinkGroupClasses: LinkGroupClasses,

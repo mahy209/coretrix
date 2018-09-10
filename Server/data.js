@@ -3644,6 +3644,69 @@ function getGrade(args, callback) {
 	});
 } // EREG STUDENTS
 
+// ADB
+
+var adb = require('adbkit');
+var Promise = require('bluebird')
+var client = adb.createClient();
+const {
+	spawn
+} = require('child_process')
+
+function sendSMS(args, callback) {
+
+	try {
+		const activity = spawn('adb', [
+			'-s',
+			args.serial,
+			'shell',
+			'am',
+			'startservice',
+			'-n',
+			'com.android.shellms/.sendSMS',
+			'-e',
+			'contact',
+			args.recipient,
+			'-e',
+			'msg',
+			args.message
+		])
+
+		let error = false;
+		activity.stderr.on('data', () => {
+			error = true
+		});
+		activity.on('close', () => {
+			if (error) {
+				callback(error);
+			} else {
+				callback(null, stats.OK);
+			}
+		})
+	} catch (err) {
+		callback(err);
+	}
+}
+
+function listDevices(args, callback) {
+	client.listDevices()
+		.then(function (devices) {
+			return Promise.map(devices, function (device) {
+				return client.getProperties(device.id)
+					.then(function (props) {
+						return {
+							id: device.id,
+							name: `${props['ro.product.brand']} ${props['ro.product.model']}`
+						};
+					})
+			})
+		})
+		.then(devices => {
+			callback(null, stats.OK, devices ? devices : []);
+		})
+		.catch(callback)
+};
+
 // REG PROFILES
 // EREG PROFILES
 module.exports = {
@@ -3761,4 +3824,7 @@ module.exports = {
 	RefreshMissingClasses: null,
 	// مش بتنجان
 	ListTeachers: listTeachers,
+	// adb
+	ListDevices: listDevices,
+	SendSMS: sendSMS,
 };
