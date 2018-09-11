@@ -118,19 +118,13 @@
             </div>
         </div>
         <div class="col s7 offset-s3 animated slideInUp hideonprint">
-            <div class="col s2">
-                <div style="float: left;">
-                    <input type="checkbox" ng-model="blurTable" id="blurTable" ng-change="setBlurCookie()" />
-                    <label for="blurTable">تظليل</label>
-                </div>
-            </div>
-            <div class="col s10">
+            <div class="col">
                 <input ng-model="searchText" ng-keypress="logSearchedPayment($event)" ng-change="search()" class="autocomplete searchitem"
                     style="padding-right: 1%; /* for the text */" placeholder="ابحث عن طالب" id="searchStudents" type="search"
                     required>
             </div>
         </div>
-        <div class="logs" ng-class="blurTable ? '' : 'logs-noblur'">
+        <div class="logs logs-noblur">
             <table class="animated slideInUp">
                 <tr>
                     <th>

@@ -6,27 +6,28 @@
 //TODO don't make validate token return all the data
 
 const subjects = {
-	1: "لغة عربية",
-	2: "لغة انجليزية",
-	3: "علوم",
-	4: "دراسات اجتماعية",
-	5: "حاسب آلى",
-	6: "رياضيات",
-	7: "لغة ألمانية",
-	8: "لغة فرنسية",
-	9: "تربية دينية اسلامية",
-	10: "تربية دينية مسيحية",
-	11: "فيزياء",
-	12: "كيمياء",
-	13: "جيولوجيا",
-	14: "أحياء",
-	15: "تربية فنية",
-	16: "تاريخ",
-	17: "جغرافيا",
-	18: "اقتصاد",
-	19: "فلسفة",
-	20: "تربية وطنية",
-	21: "علم نفس",
+	1: "اللغة العربية",
+	2: "اللغة الانجليزية",
+	3: "العلوم",
+	4: "الدراسات الاجتماعية",
+	5: "الحاسب الآلى",
+	6: "الرياضيات",
+	7: "اللغة الألمانية",
+	8: "اللغة الفرنسية",
+	9: "التربية الدينية الإسلامية",
+	10: "التربية الدينية المسيحية",
+	11: "الفيزياء",
+	12: "الكيمياء",
+	13: "الجيولوجيا",
+	14: "الأحياء",
+	15: "التربية الفنية",
+	16: "التاريخ",
+	17: "الجغرافيا",
+	18: "الاقتصاد",
+	19: "الفلسفة",
+	20: "التربية وطنية",
+	21: "العلم نفس",
+	22: "الاحصاء",
 };
 
 const phonecodes = {
@@ -208,7 +209,8 @@ const stats = {
 	UnspecifiedGrades: 49,
 	NeedExtraTime: 50,
 	NeedExtraOptions: 51,
-	InvalidJSON: 52
+	InvalidJSON: 52,
+	Failed: 53,
 }
 //TODO development only
 /*for (var k in stats) {
@@ -3109,15 +3111,33 @@ function fetchPaymentLogs(args, callback) {
 }
 
 function fetchClassLogs(args, callback) {
+
 	/* mongo 3.4 */
-	db.collection("links").find({
-		[teacherForeignIdentifier]: teacherRep(args.userDoc),
-		grade: args.grade
+	let query = [{
+		$match: {
+			[teacherForeignIdentifier]: teacherRep(args.userDoc),
+			grade: args.grade
+		}
 	}, {
-		_id: 0,
-		id: 0,
-		[teacherForeignIdentifier]: 0
-	}).sort({
+		$project: {
+			_id: 0,
+			id: 0,
+			[teacherForeignIdentifier]: 0
+		}
+	}];
+
+	if (args.ig_getcontacts) {
+		query.push({
+			$lookup: {
+				from: 'phones',
+				localField: studentForeignIdentifier,
+				foreignField: foreignIdentifier,
+				as: 'contacts'
+			}
+		});
+	}
+
+	db.collection("links").aggregate(query).sort({
 		group: 1
 	}).toArray((err, links) => {
 		if (err) return callback(err);
@@ -3202,7 +3222,7 @@ function listClasses(args, callback) {
 		[teacherForeignIdentifier]: 0,
 		'links.groupid': 0
 	}).sort({
-		date: 1
+		date: -1
 	}).toArray((err, result) => {
 		if (err) callback(err);
 		else callback(null, stats.OK, result);
@@ -3665,22 +3685,23 @@ function sendSMS(args, callback) {
 			args.recipient,
 			'-e',
 			'msg',
-			args.message
+			'"' + args.message + '"'
 		])
 
 		let error = false;
+
 		activity.stderr.on('data', () => {
 			error = true
 		});
 		activity.on('close', () => {
 			if (error) {
-				callback(error);
+				callback(null, stats.Failed);
 			} else {
 				callback(null, stats.OK);
 			}
 		})
 	} catch (err) {
-		callback(err);
+		callback(null, stats.Failed);
 	}
 }
 

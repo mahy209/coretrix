@@ -820,14 +820,47 @@
 
 						</div>
 
+						<style>
+							#sms_options {
+								margin-top: 12px;
+							}
+							#sms_options div {
+								display: inline-block;
+								margin-left: 12px;
+							}
+							.progress.failed {
+								background: #efbae6;
+							}
+							.progress.failed .determinate {
+								background: crimson;
+							}
+						</style>
+
+						<div id="sms_options" ng-show="selected_type == 'lesson'">
+							<div>
+								<input type="checkbox" id="smsAttendant" ng-model="smsAttendant" />
+								<label for="smsAttendant">الحضور</label>
+							</div>
+
+							<div>
+								<input type="checkbox" id="smsQuiz" ng-model="smsQuiz" />
+								<label for="smsQuiz">التسميع</label>
+							</div>
+
+							<div>
+								<input type="checkbox" id="smsHomework" ng-model="smsHomework" />
+								<label for="smsHomework">الواجب</label>
+							</div>
+						</div>
+
 						<div style="display: flex; align-items: baseline;">
 							<div>
 								<button class="waves-effect waves-light blue-grey btn" ng-click="send()" style="margin-left: 8.35%; margin-top:1rem;">أرسل</button>
 							</div>
 							<div class="col" style="flex-grow: 1;" ng-show="sendingSMS">
-								<label>زياد الزرقا</label>
-								<div class="progress">
-									<div class="determinate" style="width: 70%"></div>
+								<label>{{smsStudent}}</label>
+								<div class="progress" ng-class="smsFailed ? 'failed' : ''">
+									<div class="determinate" style="width: {{smsProgress}}%"></div>
 								</div>
 							</div>
 						</div>

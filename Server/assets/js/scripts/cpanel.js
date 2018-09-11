@@ -258,20 +258,78 @@ app.controller('smsCtrl', function ($rootScope, $scope, sdk) {
 		})
 	}
 
+	sdk.GetNameAndSubject((stat, result) => {
+		$scope.profile = result
+	})
+
+	function formatClassDay(c) {
+		if (c.linksString) {
+			return (c.addedClass ? 'حصة إضافية ' : '') + (c.classnum != null ? 'الحصة ' + $scope.NumericOrderStrings[c.classnum] : '') + (c.linksString ? ' - ' + c.linksString : '')
+		} else {
+			return 'حصة يوم ' + c.date
+		}
+	}
+
+
 	$scope.send = () => {
 		if (!$scope.selected_grade) return toast('برجاء اختيار السنه')
 		if (!$scope.selected_type) return toast('برجاء اختيار نوع التقرير')
 		if (!$scope.selected_device) return toast('برجاء اختيار الهاتف')
+
+		$scope.smsStudent = '';
+		$scope.smsProgress = 0;
+		$scope.smsFailed = false;
+
+		let process = (stat, logs, format) => {
+			switch (stat) {
+				case sdk.stats.OK:
+					$scope.sendingSMS = true;
+
+					let send = (i) => {
+						if (i >= logs.length) return;
+
+						const log = logs[i];
+
+						let num = prioritizeNumber(log.contacts);
+
+						$scope.smsStudent = log.fullname;
+						$scope.smsProgress = ((i + 1) / logs.length) * 100
+
+						let smsMessage = format(log);
+
+						sdk.ADBSendSMS($scope.selected_device.id, num, smsMessage, (stat) => {
+							switch (stat) {
+								case sdk.stats.OK:
+									send(i + 1);
+									break;
+								default:
+									$scope.smsFailed = true;
+									$scope.smsStudent = 'حدث خطأ ما أثناء ارسال الرسائل';
+									break;
+							}
+						});
+					}
+					send(0)
+					break
+			}
+		};
+
+		const formatClass = (log) => {
+			return formatClassReport(
+				$scope.profile, log, {
+					attendant: $scope.smsAttendant,
+					quiz: $scope.smsQuiz,
+					homework: $scope.smsHomework
+				},
+				formatClassDay($scope.selected_class))
+		}
+
 		switch ($scope.selected_type) {
 			case 'lesson':
 				if (!$scope.selected_class) return toast('برجاء اختيار الحصة')
-				sdk.FetchClassLogs($scope.selected_class.id, $scope.selected_grade, (stat, result) => {
-					switch (stat) {
-						case sdk.stats.OK:
-							console.log(result)
-							break
-					}
-				})
+				sdk.FetchClassLogs($scope.selected_class.id, $scope.selected_grade, (stat, logs) => {
+					process(stat, logs, formatClass);
+				}, true);
 				break
 			case 'exam':
 				if (!$scope.selected_exam) return toast('برجاء اختيار الامتحان')
@@ -1430,7 +1488,7 @@ app.controller('mainCtrl', function ($rootScope, $scope, sdk) {
 		})
 	}
 	$scope.addClass = () => {
-		sdk.InitializeClass($scope.selected_grade, new Date($('#class_date').val()), $scope.selected_classnum, $scope.addedClass, (stat, newid) => {
+		sdk.InitializeClass($scope.selected_grade, new Date($('#class_date').val()), $scope.selected_classnum.classnum, $scope.addedClass, (stat, newid) => {
 			if (stat == sdk.stats.OK) {
 				$scope.grade_changed(false, false, true, false)
 				toast('تم إضافة الحصة بنجاح')
@@ -1640,8 +1698,8 @@ app.controller('settingsCtrl', function ($rootScope, $scope, sdk) {
 	$scope.grades_names = sdk.grades_names
 	// $rootScope.variableListeners.push()
 	$scope.all_grades = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
-	$scope.subjects = sdk.subjects;
-	var gs;
+	$scope.subjects = sdk.subjects
+	var gs
 	try {
 		gs = JSON.parse(Cookies.get('grades'))
 	} catch (e) {}
@@ -1740,23 +1798,23 @@ app.controller('settingsCtrl', function ($rootScope, $scope, sdk) {
 	}
 
 	sdk.GetNameAndSubject((stat, result) => {
-		$scope.teacherName = result.name;
-		$scope.selected_subject = sdk.subjects[result.subjects[0]];
+		$scope.teacherName = result.name
+		$scope.selected_subject = sdk.subjects[result.subjects[0]]
 	})
 
 	$scope.updateNameAndSubject = () => {
-		if ($scope.teacherName == null) return toast('برجاء ادخال اسم المدرس');
-		if ($scope.selected_subject == null) return toast('برجاء اختيار المادة');
+		if ($scope.teacherName == null) return toast('برجاء ادخال اسم المدرس')
+		if ($scope.selected_subject == null) return toast('برجاء اختيار المادة')
 
 		sdk.UpdateNameAndSubject($scope.teacherName, Object.values(sdk.subjects).indexOf($scope.selected_subject) + 1, (stat) => {
 			switch (stat) {
 				case sdk.stats.OK:
-					toast('تم حفظ البيانات بنجاح');
-					break;
-					default:
-					toast('حدث خطأ أثناء حفظ البيانات');
-					break;
+					toast('تم حفظ البيانات بنجاح')
+					break
+				default:
+					toast('حدث خطأ أثناء حفظ البيانات')
+					break
 			}
-		});
+		})
 	}
 })

@@ -7,27 +7,28 @@ if (livenotlocal) url = live_url;
 else url = local_url;
 
 const subjects = {
-	1: "لغة عربية",
-	2: "لغة انجليزية",
-	3: "علوم",
-	4: "دراسات اجتماعية",
-	5: "حاسب آلى",
-	6: "رياضيات",
-	7: "لغة ألمانية",
-	8: "لغة فرنسية",
-	9: "تربية دينية إسلامية",
-	10: "تربية دينية مسيحية",
-	11: "فيزياء",
-	12: "كيمياء",
-	13: "جيولوجيا",
-	14: "أحياء",
-	15: "تربية فنية",
-	16: "تاريخ",
-	17: "جغرافيا",
-	18: "اقتصاد",
-	19: "فلسفة",
-	20: "تربية وطنية",
-	21: "علم نفس",
+	1: "اللغة العربية",
+	2: "اللغة الانجليزية",
+	3: "العلوم",
+	4: "الدراسات الاجتماعية",
+	5: "الحاسب الآلى",
+	6: "الرياضيات",
+	7: "اللغة الألمانية",
+	8: "اللغة الفرنسية",
+	9: "التربية الدينية الإسلامية",
+	10: "التربية الدينية المسيحية",
+	11: "الفيزياء",
+	12: "الكيمياء",
+	13: "الجيولوجيا",
+	14: "الأحياء",
+	15: "التربية الفنية",
+	16: "التاريخ",
+	17: "الجغرافيا",
+	18: "الاقتصاد",
+	19: "الفلسفة",
+	20: "التربية وطنية",
+	21: "العلم نفس",
+	22: "الاحصاء",
 };
 
 const grades_names_long = [
@@ -702,13 +703,15 @@ sdk.factory('sdk', ['$http', function ($http) {
 		}, callback);
 	}
 
-	function FetchClassLogs(classid, grade, callback) {
+	function FetchClassLogs(classid, grade, callback, getcontacts) {
 		var token = Cookies.get('token');
-		post("api/teacher/classes/fetchlogs", {
+		var query = {
 			classid: parseInt(classid),
 			grade: grade,
 			token: token
-		}, callback);
+		};
+		if (getcontacts) query.ig_getcontacts = getcontacts;
+		post("api/teacher/classes/fetchlogs", query, callback);
 	}
 
 	function BriefLog(student, callback, /*current_classid, current_examid*/ ) {

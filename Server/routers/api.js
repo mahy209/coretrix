@@ -273,7 +273,9 @@ var inputvalidators = {
 	recipient: validators.ValidateString,
 	message: validators.ValidateString,
 	// update name and subjects
-	subjects: data.validators.ValidateSubjects
+	subjects: data.validators.ValidateSubjects,
+	// fetch contacts with classes, exams, logs
+	ig_getcontacts: validators.ValidateOrIgnoreBoolean,
 }
 
 // REG CALLS
@@ -373,7 +375,7 @@ registerApiCall("/teacher/posts/remove", ["token", "id"], userDocDefault, data.R
 
 // adb
 registerApiCall("/adb/devices/list", ["token"], userDocDefault, data.ListDevices);
-registerApiCall("/adb/sms/send", ["token", "serial", "recipient", "message"], userDocDefault, data.ListDevices);
+registerApiCall("/adb/sms/send", ["token", "serial", "recipient", "message"], userDocDefault, data.SendSMS);
 
 // profile
 registerApiCall("/profile/updatens", ["token", "fullname", "subjects"], userDocDefault, data.UpdateNameAndSubjects);
@@ -423,7 +425,7 @@ registerApiCall("/teacher/classes/init", ["token", "grade", "date", "ig_addedCla
 registerApiCall("/teacher/classes/list", ["token", "grade"], userDocDefault, data.ListClasses);
 registerApiCall("/teacher/classes/get", ["token", "classid"], userDocDefault, data.GetClass);
 registerApiCall("/teacher/classes/delete", ["token", "classid"], userDocDefault, data.DeleteClass);
-registerApiCall("/teacher/classes/fetchlogs", ["token", "classid", "grade"], userDocDefault, data.FetchClassLogs);
+registerApiCall("/teacher/classes/fetchlogs", ["token", "classid", "grade", "ig_getcontacts"], userDocDefault, data.FetchClassLogs);
 registerApiCall("/teacher/classes/log", ["token", "ig_groupid", "student", "classid", "ig_attendant", "homework", "quiz"], userDocDefault, data.AddClassLog);
 
 registerApiCall("/teacher/classes/groups/links", ["token", "grade"], userDocDefault, data.ListGroupClassesLinks);
