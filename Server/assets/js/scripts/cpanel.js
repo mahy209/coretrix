@@ -6,7 +6,7 @@ app.run(function ($rootScope, $window, $location, sdk) {
 		$('.modal').modal()
 		$('select').material_select()
 	})
-	changeLogger('log')
+	// changeLogger('log')
 	/*var lang = getLang()
 	var language = languages[lang]
 	$rootScope.language = language;*/
@@ -239,7 +239,7 @@ app.controller('smsCtrl', function ($rootScope, $scope, sdk) {
 		sdk.ListExams(parseInt($scope.selected_grade), (stat, exams) => {
 			switch (stat) {
 				case sdk.stats.OK:
-					$scope.exams = exams
+					$scope.exams = exams;
 					break
 				default:
 			}
@@ -344,6 +344,107 @@ app.controller('smsCtrl', function ($rootScope, $scope, sdk) {
 				break
 			case 'report':
 				if (!$scope.selected_month) return toast('برجاء اختيار الشهر');
+				sdk.ListStudents(0, 0, (stat, students) => {
+					switch (stat) {
+						case sdk.stats.OK:
+
+							const startDate = new Date($scope.selected_month.year, $scope.selected_month.month);
+							let endDate = date.addMonths(startDate, 1);
+							endDate = date.addDays(endDate, -1);
+
+							let i = 0;
+
+							const sendLogsSMS = (student) => {
+
+								if (students.length <= i) return;
+
+								$scope.sendingSMS = true;
+
+								sdk.FetchLogs(student.id, $scope.selected_grade, {
+									start: startDate,
+									end: endDate
+								}, (stat, logs) => {
+									switch (stat) {
+										case sdk.stats.OK:
+											const notifs = [];
+
+											let unattClasses = 0;
+											let unattExams = 0;
+
+											notifs.push(intro + ' ' + student.fullname);
+
+											const separator = '-----------';
+
+											notifs.push(separator);
+											notifs.push('الحصص');
+											notifs.push(separator);
+
+											logs.classes.forEach(classLog => {
+												if (!classLog.log || !classLog.log.attendant) unattClasses++;
+												classLog.fullname = student.fullname;
+												if (classLog.links) classLog.linksString = classesLinksToDayString(classLog.links);
+												classLog.date = simpleDate(classLog.date);
+												notifs.push(formatClassReport($scope.profile, classLog, {
+													attendant: true,
+													quiz: true,
+													homework: true
+												}, formatClassDay(classLog), true));
+											});
+
+											notifs.push(separator);
+											notifs.push('الامتحانات');
+											notifs.push(separator);
+
+											logs.exams.forEach(examLog => {
+												if (!examLog.log || !examLog.log.attendant) unattExams++;
+												examLog.fullname = student.fullname;
+												notifs.push(formatExamReport(
+													$scope.profile, examLog, examLog.max_mark, examLog.name, true));
+											});
+
+											notifs.push(separator);
+
+											notifs.push('مجموع الحصص التى لم يحضرها: ' + unattClasses);
+											notifs.push('مجموع الامتحانات التى لم يحضرها: ' + unattExams);
+
+											notifs.push(separator);
+											notifs.push(formatSignature($scope.profile));
+
+											let smsMessage = notifs.join('\n ');
+
+											let num = prioritizeNumber(student.contacts);
+
+											$scope.smsStudent = student.fullname;
+											$scope.smsProgress = ((i + 1) / students.length) * 100
+
+											sdk.ADBSendSMS($scope.selected_device.id, num, smsMessage, (stat) => {
+												switch (stat) {
+													case sdk.stats.OK:
+														sendLogsSMS(students[++i]);
+														break;
+													default:
+														$scope.smsFailed = true;
+														$scope.smsStudent = 'حدث خطأ ما أثناء ارسال الرسائل';
+														break;
+												}
+											});
+											break;
+
+										default:
+											break;
+									}
+								});
+
+							};
+
+							sendLogsSMS(students[0]);
+
+							break;
+
+						default:
+							break;
+					}
+				}, $scope.selected_grade, undefined, true);
 				break
 		}
 	}
@@ -898,7 +999,7 @@ app.controller('studentsCtrl', function ($rootScope, $scope, sdk) {
 		sdk.ListStudents($scope.startnum, $scope.limit, (stat, result) => {
 			switch (stat) {
 				case sdk.stats.OK:
-					$scope.students = result
+					$scope.students = result;
 					break
 				default:
 			}

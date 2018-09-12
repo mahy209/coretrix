@@ -1808,7 +1808,10 @@ function listGradeMonths(args, callback) {
 			$group: {
 				_id: {
 					month: {
-						$month: "$date"
+						$sum: [{
+							$month: "$date"
+						}, -1]
+
 					},
 					year: {
 						$year: "$date"
@@ -2056,21 +2059,40 @@ function qrListStudents(args, callback) {
 
 function listStudents(args, callback) {
 	if (!isTeacherRep(args.userDoc)) return callback(null, stats.IncapableUserType);
-	var query = {
+	var match_query = {
 		[teacherForeignIdentifier]: teacherRep(args.userDoc)
 	};
-	if (args.ig_groups) query.group = {
+	if (args.ig_groups) match_query.group = {
 		$in: args.ig_groups
 	};
-	if (args.ig_grades) query.grade = {
+	if (args.ig_grades) match_query.grade = {
 		$in: args.ig_grades
 	};
-	db.collection("links").find(query, {
-		_id: 0,
-		[teacherForeignIdentifier]: 0
-	}).skip(args.startid).limit(args.limit).sort({
-		fullname: 1
-	}).toArray(function (err, result) {
+
+	let query = [{
+		$match: match_query
+	}, {
+		$skip: args.startid
+	}, {
+		$limit: args.limit
+	}, {
+		$sort: {
+			fullname: 1
+		}
+	}];
+
+	if (args.ig_getcontacts) {
+		query.push({
+			$lookup: {
+				from: 'phones',
+				localField: studentForeignIdentifier,
+				foreignField: foreignIdentifier,
+				as: 'contacts'
+			}
+		});
+	}
+
+	db.collection("links").aggregate(query, (err, result) => {
 		if (err) callback(err);
 		callback(null, stats.OK, result);
 	});

@@ -332,7 +332,7 @@ sdk.factory('sdk', ['$http', function ($http) {
 		}, callback);
 	}
 
-	function ListStudents(startid, limit, callback, grade, group, fulllist) {
+	function ListStudents(startid, limit, callback, grade, group, getcontacts) {
 		var token = Cookies.get('token');
 		var query = {
 			students_limit: limit,
@@ -341,7 +341,7 @@ sdk.factory('sdk', ['$http', function ($http) {
 		};
 		if (!(isNaN(grade) || grade == null)) query.ig_grades = [grade];
 		if (!(isNaN(group) || group == null)) query.ig_groups = [group];
-		if (fulllist) query.fulllist = fulllist;
+		if (getcontacts) query.ig_getcontacts = getcontacts;
 		post("api/teacher/students/list", query, callback);
 	}
 

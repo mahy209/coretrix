@@ -17,24 +17,22 @@ function formatSignature(profile) {
 
 const intro = 'نعلم سيادتكم بان الطالب';
 
-function formatExamReport(profile, log, max_mark, examName) {
+function formatExamReport(profile, log, max_mark, examName, nointro) {
+	if (!log.log) log.log = {};
 	const student = log.fullname;
-	const {
-		attendant,
-		mark
-	} = log.log;
+	const attendant = log.log.attendant;
+	const mark = log.log.mark;
 	const option_attendant = attendant ? 'حضر' : 'لم يحضر';
 	const option_mark = mark ? ('حصل على ' + mark + ' من ' + max_mark) : 'لم تسجل درجة للطالب';
-	return `${intro} ${student}${option_attendant} و${option_mark} امتحان ${examName} - ${formatSignature(profile)}`;
+	return (nointro ? '' : `${intro} ${student}`) + `${option_attendant} و${option_mark} امتحان ${examName}` + (nointro ? '' : ` - ${formatSignature(profile)}`);
 }
 
-function formatClassReport(profile, log, options, classDay) {
+function formatClassReport(profile, log, options, classDay, nointro) {
+	if (!log.log) log.log = {};
 	const student = log.fullname;
-	const {
-		homework,
-		quiz,
-		attendant
-	} = log.log
+	const homework = log.log.homework;
+	const quiz = log.log.quiz;
+	const attendant = log.log.attendant;
 	let option_attendant = attendant ? 'حضر' : 'لم يحضر';
 	let option_homework = 'الواجب ' + (homework ? (homework.type == 'marks' ? 'حصل فيه على ' + homework.mark + ' من ' + homework.max :
 		(homework.option == 'incomplete' ? 'غير مكتمل' : 'كامل')) : 'لم يسجل');
@@ -45,7 +43,7 @@ function formatClassReport(profile, log, options, classDay) {
 		(options.attendant ? option_attendant : '') +
 		(options.homework ? ' و' + option_homework : '') +
 		(options.quiz ? ' و' + option_quiz : '');
-	return `${intro} ${student}${options_string} ${classDay} - ${formatSignature(profile)}`.replace('  ', ' ').trim();
+	return ((nointro ? '' : `${intro} ${student}`) + `${options_string} ${classDay}` + (nointro ? '' : ` - ${formatSignature(profile)}`)).replace('  ', ' ').trim();
 }
 
 function changeLogger(elementName) {
