@@ -243,7 +243,7 @@ app.controller('smsCtrl', function ($rootScope, $scope, sdk) {
 					break
 				default:
 			}
-		})
+		}, true);
 		sdk.ListClasses(parseInt($scope.selected_grade), (stat, result) => {
 			switch (stat) {
 				case sdk.stats.OK:
@@ -321,21 +321,29 @@ app.controller('smsCtrl', function ($rootScope, $scope, sdk) {
 					quiz: $scope.smsQuiz,
 					homework: $scope.smsHomework
 				},
-				formatClassDay($scope.selected_class))
+				formatClassDay($scope.selected_class));
+		}
+
+		const formatExam = (log) => {
+			return formatExamReport(
+				$scope.profile, log, $scope.selected_exam.max_mark, $scope.selected_exam.name);
 		}
 
 		switch ($scope.selected_type) {
 			case 'lesson':
-				if (!$scope.selected_class) return toast('برجاء اختيار الحصة')
+				if (!$scope.selected_class) return toast('برجاء اختيار الحصة');
 				sdk.FetchClassLogs($scope.selected_class.id, $scope.selected_grade, (stat, logs) => {
 					process(stat, logs, formatClass);
 				}, true);
 				break
 			case 'exam':
-				if (!$scope.selected_exam) return toast('برجاء اختيار الامتحان')
+				if (!$scope.selected_exam) return toast('برجاء اختيار الامتحان');
+				sdk.FetchExamLogs($scope.selected_exam.id, $scope.selected_grade, (stat, logs) => {
+					process(stat, logs, formatExam);
+				}, true);
 				break
 			case 'report':
-				if (!$scope.selected_month) return toast('برجاء اختيار الشهر')
+				if (!$scope.selected_month) return toast('برجاء اختيار الشهر');
 				break
 		}
 	}

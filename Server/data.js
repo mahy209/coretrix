@@ -2474,6 +2474,7 @@ function getExams(args, callback) {
 	if (args.getdata) {
 		restrictions.max_mark = 1;
 		restrictions.redline = 1;
+		restrictions.date = 1;
 	}
 	db.collection("exams").find({
 		[foreignIdentifier]: teacherRep(args.userDoc),
@@ -3175,15 +3176,32 @@ function fetchClassLogs(args, callback) {
 }
 
 function fetchExamLogs(args, callback) {
-	/* mongo 3.4 */
-	db.collection("links").find({
-		[teacherForeignIdentifier]: teacherRep(args.userDoc),
-		grade: args.grade
+
+	let query = [{
+		$match: {
+			[teacherForeignIdentifier]: teacherRep(args.userDoc),
+			grade: args.grade
+		}
 	}, {
-		_id: 0,
-		id: 0,
-		[teacherForeignIdentifier]: 0
-	}).toArray((err, links) => {
+		$project: {
+			_id: 0,
+			id: 0,
+			[teacherForeignIdentifier]: 0
+		}
+	}]
+
+	if (args.ig_getcontacts) {
+		query.push({
+			$lookup: {
+				from: 'phones',
+				localField: studentForeignIdentifier,
+				foreignField: foreignIdentifier,
+				as: 'contacts'
+			}
+		});
+	}
+	/* mongo 3.4 */
+	db.collection("links").aggregate(query, (err, links) => {
 		if (err) return callback(err);
 		else if (links) {
 			var ids = {};

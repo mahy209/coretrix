@@ -694,13 +694,15 @@ sdk.factory('sdk', ['$http', function ($http) {
 		post("api/parent/fetchlogs", query, callback);
 	}
 
-	function FetchExamLogs(classid, grade, callback) {
+	function FetchExamLogs(classid, grade, callback, getcontacts) {
 		var token = Cookies.get('token');
-		post("api/teacher/exams/fetchlogs", {
+		let query = {
 			id: parseInt(classid),
 			grade: grade,
 			token: token
-		}, callback);
+		}
+		if (getcontacts) query.ig_getcontacts = getcontacts;
+		post("api/teacher/exams/fetchlogs", query, callback);
 	}
 
 	function FetchClassLogs(classid, grade, callback, getcontacts) {

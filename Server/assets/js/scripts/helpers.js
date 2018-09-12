@@ -9,30 +9,43 @@ function prioritizeNumber(contacts) {
 	return indexes.parent1 ? indexes.parent1 : indexes.parent2;
 }
 
-function formatExamReport(profile, log) {
+function formatSignature(profile) {
+	const teacher = profile.name;
+	const subject = subjects[profile.subjects[0]];
+	return `استاذ ${teacher} مدرس ${subject}`;
+}
 
+const intro = 'نعلم سيادتكم بان الطالب';
+
+function formatExamReport(profile, log, max_mark, examName) {
+	const student = log.fullname;
+	const {
+		attendant,
+		mark
+	} = log.log;
+	const option_attendant = log.attendant ? 'حضر' : 'لم يحضر';
+	const option_mark = log.mark ? ('وحصل على ' + log.mark + ' من ' + max_mark) : 'لم تسجل درجة للطالب';
+	return `${intro} ${student}${option_attendant} و${option_mark} امتحان ${examName} - ${formatSignature(profile)}`;
 }
 
 function formatClassReport(profile, log, options, classDay) {
-	const teacher = profile.name
-	const subject = subjects[profile.subjects[0]]
-	const student = log.fullname
+	const student = log.fullname;
 	const {
 		homework,
 		quiz,
 		attendant
 	} = log.log
-	let option_attendant = attendant ? 'حضر' : 'لم يحضر'
+	let option_attendant = attendant ? 'حضر' : 'لم يحضر';
 	let option_homework = 'الواجب ' + (homework ? (homework.type == 'marks' ? 'حصل فيه على ' + homework.mark + ' من ' + homework.max :
-		(homework.option == 'incomplete' ? 'غير مكتمل' : 'كامل')) : 'لم يسجل')
+		(homework.option == 'incomplete' ? 'غير مكتمل' : 'كامل')) : 'لم يسجل');
 	let option_quiz = 'التسميع ' + (quiz ? (quiz.type == 'marks' ? 'حصل فيه على ' + quiz.mark + ' من ' + quiz.max : (quiz.option ==
-		'absent' ? 'لم يسمّعه' : 'سمّعه')) : 'لم يسجل')
-	let options_string = ''
+		'absent' ? 'لم يسمّعه' : 'سمّعه')) : 'لم يسجل');
+	let options_string = '';
 	options_string =
 		(options.attendant ? option_attendant : '') +
 		(options.homework ? ' و' + option_homework : '') +
-		(options.quiz ? ' و' + option_quiz : '')
-	return `نعلم سيادتكم بان الطالب ${student}${options_string} ${classDay} - استاذ ${teacher} مدرس ${subject}`.replace('  ', ' ').trim()
+		(options.quiz ? ' و' + option_quiz : '');
+	return `${intro} ${student}${options_string} ${classDay} - ${formatSignature(profile)}`.replace('  ', ' ').trim();
 }
 
 function changeLogger(elementName) {

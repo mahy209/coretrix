@@ -366,7 +366,7 @@ registerApiCall("/teacher/exams/get", ["token", /*"startid", "limit", "ig_ids"*/
 registerApiCall("/teacher/exams/getone", ["token", "id"], userDocDefault, data.GetExam);
 registerApiCall("/teacher/exams/edit", ["token", "id", "ig_name", "ig_redline", "ig_max"], userDocDefault, data.EditExam);
 registerApiCall("/teacher/exams/remove", ["token", "id"], userDocDefault, data.RemoveExam);
-registerApiCall("/teacher/exams/fetchlogs", ["token", "id", "grade"], userDocDefault, data.FetchExamLogs);
+registerApiCall("/teacher/exams/fetchlogs", ["token", "id", "grade", "ig_getcontacts"], userDocDefault, data.FetchExamLogs);
 registerApiCall("/teacher/exams/log", ["token", "id", "student", "ig_attendant", "ig_mark"], userDocDefault, data.LogExam);
 
 registerApiCall("/teacher/posts/post", ["token", "text", "media_ids"], userDocDefault, data.Post);
