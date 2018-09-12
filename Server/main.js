@@ -87,13 +87,6 @@ app.use(function (err, req, res, next) {
     });
 });
 
-/*var httpsServer = https.createServer(app);
-var sserver = httpsServer.listen(8443, () => {
-    var host = sserver.address().address;
-    var port = sserver.address().port;
-    console.log('running');
-});*/
-
 var httpServer = http.createServer(app);
 var server = httpServer.listen({
     host: ip,

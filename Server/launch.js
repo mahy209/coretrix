@@ -20,7 +20,7 @@ const {
 	spawn
 } = require('child_process');
 const opn = require('opn');
-const snapshot_path = path.dirname(process.pkg.entrypoint);
+const snapshot_path = __dirname;
 
 function backendUp() {
 	// launch browser instance
@@ -29,17 +29,12 @@ function backendUp() {
 
 function databaseUp() {
 
-	const node = spawn('node', [path.join(snapshot_path, 'main.js')]);
-
-	node.stdout.on('data', (data) => {
-		data = data.toString();
-		if (data.indexOf('magician') > -1) {
-			backendUp();
-		} else if (data.indexOf('EADDRINUSE') > -1) {
-			node.kill();
-			backendUp();
-		}
-	});
+	try {
+		require(path.join(__dirname, 'main.js'));
+		backendUp();
+	} catch (e) {
+		process.exit();
+	}
 
 }
 

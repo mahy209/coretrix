@@ -1,0 +1,32 @@
+{
+	"name": "coretrix",
+	"version": "1.0.0",
+	"main": "launch.js",
+	"bin": "launch.js",
+	"pkg": {
+		"assets": "./**"
+	},
+	"scripts": {
+		"compile": "pkg . --targets node8"
+	},
+	"license": "MIT",
+	"dependencies": {
+		"adbkit": "^2.11.0",
+		"bcrypt": "^3.0.0",
+		"bluebird": "^3.5.2",
+		"body-parser": "^1.18.3",
+		"cors": "^2.8.4",
+		"cron": "^1.4.1",
+		"ejs": "^2.6.1",
+		"express": "^4.16.3",
+		"express-force-https": "^1.0.0",
+		"generate-password": "^1.4.0",
+		"md5-file": "^4.0.0",
+		"mongodb": "2.2.33",
+		"object.values": "^1.0.4",
+		"opn": "^5.3.0",
+		"performance-now": "^2.1.0",
+		"regedit": "^3.0.0",
+		"stream-res": "^1.0.1"
+	}
+}
