@@ -23,8 +23,8 @@ function formatExamReport(profile, log, max_mark, examName) {
 		attendant,
 		mark
 	} = log.log;
-	const option_attendant = log.attendant ? 'حضر' : 'لم يحضر';
-	const option_mark = log.mark ? ('وحصل على ' + log.mark + ' من ' + max_mark) : 'لم تسجل درجة للطالب';
+	const option_attendant = attendant ? 'حضر' : 'لم يحضر';
+	const option_mark = mark ? ('حصل على ' + mark + ' من ' + max_mark) : 'لم تسجل درجة للطالب';
 	return `${intro} ${student}${option_attendant} و${option_mark} امتحان ${examName} - ${formatSignature(profile)}`;
 }
 

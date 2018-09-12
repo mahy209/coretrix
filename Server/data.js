@@ -2474,7 +2474,6 @@ function getExams(args, callback) {
 	if (args.getdata) {
 		restrictions.max_mark = 1;
 		restrictions.redline = 1;
-		restrictions.date = 1;
 	}
 	db.collection("exams").find({
 		[foreignIdentifier]: teacherRep(args.userDoc),

@@ -7,7 +7,9 @@
 		"assets": "./**"
 	},
 	"scripts": {
-		"compile": "pkg . --targets node8"
+		"compile": "pkg . --targets node8",
+		"rebuild-x32": "node-gyp clean configure build --verbose --arch=ia32",
+		"compile-x32": "pkg . --targets node8-win-x86"
 	},
 	"license": "MIT",
 	"dependencies": {
@@ -28,5 +30,6 @@
 		"performance-now": "^2.1.0",
 		"regedit": "^3.0.0",
 		"stream-res": "^1.0.1"
-	}
+	},
+	"devDependencies": {}
 }

@@ -1,6 +1,0 @@
-#!/bin/bash
-rm -rf Mongo standalone
-pkg . --targets node8-win-x86 -o standalone
-mkdir Mongo
-mongod --dbpath Mongo --storageEngine=mmapv1 | mongorestore.exe ../snapshot
-./standalone

@@ -1,6 +1,0 @@
-#!/bin/bash
-sudo rm -rf Mongo standalone
-pkg . --targets node8-linux-x64 -o standalone
-mkdir Mongo
-sudo mongod --dbpath Mongo | mongorestore ../snapshot
-./standalone
