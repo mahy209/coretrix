@@ -9,12 +9,12 @@
 	"scripts": {
 		"compile": "pkg . --targets node8",
 		"rebuild-x32": "node-gyp clean configure build --verbose --arch=ia32",
-		"compile-x32": "pkg . --targets node8-win-x86"
+		"compile-x32": "pkg . --targets node8-win-x86 --no-bytecode"
 	},
 	"license": "MIT",
 	"dependencies": {
 		"adbkit": "^2.11.0",
-		"bcrypt": "^3.0.0",
+		"bcryptjs": "^2.4.3",
 		"bluebird": "^3.5.2",
 		"body-parser": "^1.18.3",
 		"cors": "^2.8.4",

@@ -334,7 +334,7 @@ const path = require('path');
 // compiling
 // const bcrypt = require(path.join(process.cwd(), './bcrypt'));
 // development
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 const saltRounds = 10;
 const genPass = require('generate-password');
 const lib = require(__dirname + "/library");

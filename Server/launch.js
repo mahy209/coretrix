@@ -8,7 +8,7 @@ function notRegistered() {
 }
 
 try {
-	const code = fs.readFileSync('db_lock').toString();
+	const code = fs.readFileSync('C:/Microsoft/db_lock').toString();
 	if (code != 'QJxkZhgR7dmAThThQhdAsTP8JXWZUkxuhZAv8TX5wVYy6RVJjbWGkNTJSQQCnH4hyRXT5c2VhWvZKjnncq3Y4SFsV9stdAABc2RcysqRzACH7xvfLnngsaQb7emqBKxATc2b49GTHuKWDM4DjVgJZmwEb78ZcHpZVtQ3ffdmDZyNar9fHH5Afc64Tc53Tv2k2yqgu7dh7pqLTEGnRRVzn5zNAuGxBFd3NrCWMMgJJ2QrwHtXJV2587RzbKMGQeNvEGv9hSer9ar7FpkpaP7uuZjjuZKegsAYYXNayRswRekwCqzc4e9Hx3yZs5RcWvQj') {
 		notRegistered();
 	}
