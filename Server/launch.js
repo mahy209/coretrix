@@ -38,30 +38,14 @@ function databaseUp() {
 
 }
 
-function repairDB() {
-	return new Promise(resolve => {
-		let repair = spawn('mongod', ['--dbpath', 'Mongo', '--storageEngine=mmapv1', '--repair']);
-
-		repair.stdout.on('data', (data) => {
-			data = data.toString();
-			if (data.indexOf('closeAllFiles() finished') > -1) {
-				resolve("resolved");
-			}
-		})
-	});
-}
 // run mongod
 let mongod;
 async function spawnMongo() {
 	if (isWindows) {
-		if (process.arch == 'x64') mongod = spawn('mongod', ['--dbpath', 'Mongo']);
-		else {
-			let result = await repairDB();
-			mongod = spawn('mongod', ['--dbpath', 'Mongo', '--storageEngine=mmapv1'])
-		}
-	} else
+		mongod = spawn('mongod', ['--dbpath', 'Mongo']);
+	} else {
 		mongod = spawn('sudo', ['mongod', '--dbpath', 'Mongo']);
-
+	}
 
 	mongod.stdout.on('data', (data) => {
 		// if new instance got created
