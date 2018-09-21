@@ -200,23 +200,33 @@ app.controller('examsCtrl', function ($rootScope, $scope, sdk) {
 
 app.controller('smsCtrl', function ($rootScope, $scope, $location, sdk) {
 	$scope.sendingSMS = false
+	$scope.select_all = true;
 
-	let params = parseQS($location.hash());
-	if (params.tab == 'sms') $rootScope.tab = 'sms';
+	let params = parseQS($location.hash())
+	if (params.tab == 'sms') $rootScope.tab = 'sms'
 
 	var init = (refreshing, result) => {
 		$scope.grades = result
 		if (params.grade) {
-			$scope.selected_grade = parseInt(params.grade);
-			$scope.grade_changed();
+			$scope.selected_grade = parseInt(params.grade)
+			$scope.grade_changed()
 		}
-		if (params.type) $scope.selected_type = params.type;
+		if (params.type) $scope.selected_type = params.type
 	}
 
 	$rootScope.variableListeners.push(init)
 
 	$scope.grade_changed = () => {
 		$scope.loadClasses()
+		sdk.ListStudents(0, 0, (stat, students) => {
+			switch (stat) {
+				case sdk.stats.OK:
+					$scope.students = students
+					break
+				default:
+					break
+			}
+		}, $scope.selected_grade, undefined, true)
 	}
 
 	$scope.loadDevices = () => {
@@ -236,11 +246,11 @@ app.controller('smsCtrl', function ($rootScope, $scope, $location, sdk) {
 			switch (stat) {
 				case sdk.stats.OK:
 					months.map(grademonth => {
-						grademonth.name = gradeMonth(grademonth);
-						return grademonth;
-					});
-					$scope.months = months;
-					if (params.month && params.year) $scope.selected_month = months.find(m => m.month == params.month && m.year == params.year);
+						grademonth.name = gradeMonth(grademonth)
+						return grademonth
+					})
+					$scope.months = months
+					if (params.month && params.year) $scope.selected_month = months.find(m => m.month == params.month && m.year == params.year)
 					break
 				default:
 			}
@@ -248,21 +258,23 @@ app.controller('smsCtrl', function ($rootScope, $scope, $location, sdk) {
 		sdk.ListExams(parseInt($scope.selected_grade), (stat, exams) => {
 			switch (stat) {
 				case sdk.stats.OK:
-					$scope.exams = exams;
-					if (params.exam) $scope.selected_exam = exams.find(e => e.id == params.exam);
+					$scope.exams = exams
+					if (params.exam) $scope.selected_exam = exams.find(e => e.id == params.exam)
+					$scope.examChanged();
 					break
 				default:
 			}
-		}, true);
+		}, true)
 		sdk.ListClasses(parseInt($scope.selected_grade), (stat, result) => {
 			switch (stat) {
 				case sdk.stats.OK:
 					for (var i = 0; i < result.length; i++) {
-						result[i].date = simpleDate(new Date(result[i].date));
-						if (result[i].links) result[i].linksString = classesLinksToDayString(result[i].links);
+						result[i].date = simpleDate(new Date(result[i].date))
+						if (result[i].links) result[i].linksString = classesLinksToDayString(result[i].links)
 					}
-					$scope.classes = result;
-					if (params.class) $scope.selected_class = result.find(c => c.id == params.class);
+					$scope.classes = result
+					if (params.class) $scope.selected_class = result.find(c => c.id == params.class)
+					$scope.classChanged();
 					break
 				default:
 			}
@@ -281,49 +293,96 @@ app.controller('smsCtrl', function ($rootScope, $scope, $location, sdk) {
 		}
 	}
 
+	$scope.assertSelectAll = () => {
+		switch ($scope.selected_type) {
+			case 'lesson':
+				for (let i = 0; i < $scope.class_logs.length; i++) {
+					$scope.class_logs[i].selected = $scope.select_all;
+				}
+				break;
+			case 'exam':
+				for (let i = 0; i < $scope.exam_logs.length; i++) {
+					$scope.exam_logs[i].selected = $scope.select_all;
+				}
+			case 'message':
+				for (let i = 0; i < $scope.message_students.length; i++) {
+					$scope.message_students[i].selected = $scope.select_all;
+				}
+			default:
+				break;
+		}
+	}
+
+	$scope.classChanged = () => {
+		sdk.FetchClassLogs($scope.selected_class.id, $scope.selected_grade, (stat, logs) => {
+			if (stat == sdk.stats.OK) {
+				$scope.class_logs = logs;
+			} else {
+				$scope.class_logs = [];
+			}
+			$scope.assertSelectAll();
+		}, true);
+	}
+
+	$scope.examChanged = () => {
+		sdk.FetchExamLogs($scope.selected_exam.id, $scope.selected_grade, (stat, logs) => {
+			if (stat == sdk.stats.OK) {
+				$scope.exam_logs = logs;
+			} else {
+				$scope.exam_logs = [];
+			}
+			$scope.assertSelectAll();
+		}, true)
+	}
+
+	$scope.typeChanged = () => {
+		sdk.ListStudents(0, 0, (stat, students) => {
+			if (stat == sdk.stats.OK) {
+				$scope.message_students = students;
+			} else {
+				$scope.message_students = [];
+			}
+		}, $scope.selected_grade, undefined, true);
+	}
 
 	$scope.send = () => {
 		if (!$scope.selected_grade) return toast('برجاء اختيار السنه')
 		if (!$scope.selected_type) return toast('برجاء اختيار نوع التقرير')
 		if (!$scope.selected_device) return toast('برجاء اختيار الهاتف')
 
-		$scope.smsStudent = '';
-		$scope.smsProgress = 0;
-		$scope.smsFailed = false;
+		$scope.smsStudent = ''
+		$scope.smsProgress = 0
+		$scope.smsFailed = false
 
-		let process = (stat, logs, format) => {
-			switch (stat) {
-				case sdk.stats.OK:
-					$scope.sendingSMS = true;
+		let process = (logs, format) => {
+			$scope.sendingSMS = true
 
-					let send = (i) => {
-						if (i >= logs.length) return;
+			let send = (i) => {
+				if (i >= logs.length) return
 
-						const log = logs[i];
+				const log = logs[i]
 
-						let num = prioritizeNumber(log.contacts);
+				let num = prioritizeNumber(log.contacts)
 
-						$scope.smsStudent = log.fullname;
-						$scope.smsProgress = ((i + 1) / logs.length) * 100
+				$scope.smsStudent = log.fullname
+				$scope.smsProgress = ((i + 1) / logs.length) * 100
 
-						let smsMessage = format(log);
+				let smsMessage = format(log)
 
-						sdk.ADBSendSMS($scope.selected_device.id, num, smsMessage, (stat) => {
-							switch (stat) {
-								case sdk.stats.OK:
-									send(i + 1);
-									break;
-								default:
-									$scope.smsFailed = true;
-									$scope.smsStudent = 'حدث خطأ ما أثناء ارسال الرسائل';
-									break;
-							}
-						});
+				sdk.ADBSendSMS($scope.selected_device.id, num, smsMessage, (stat) => {
+					switch (stat) {
+						case sdk.stats.OK:
+							send(i + 1)
+							break
+						default:
+							$scope.smsFailed = true
+							$scope.smsStudent = 'حدث خطأ ما أثناء ارسال الرسائل'
+							break
 					}
-					send(0)
-					break
+				})
 			}
-		};
+			send(0);
+		}
 
 		const formatClass = (log) => {
 			return formatClassReport(
@@ -332,132 +391,125 @@ app.controller('smsCtrl', function ($rootScope, $scope, $location, sdk) {
 					quiz: $scope.smsQuiz,
 					homework: $scope.smsHomework
 				},
-				formatClassDay($scope.selected_class));
+				formatClassDay($scope.selected_class))
 		}
 
 		const formatExam = (log) => {
 			return formatExamReport(
-				$scope.profile, log, $scope.selected_exam.max_mark, $scope.selected_exam.name);
+				$scope.profile, log, $scope.selected_exam.max_mark, $scope.selected_exam.name)
+		}
+
+		const formatMessage = () => {
+			return $scope.message + ($scope.addSignature ? ` - ${formatSignature($scope.profile)}` : '');
 		}
 
 		switch ($scope.selected_type) {
 			case 'lesson':
-				if (!$scope.selected_class) return toast('برجاء اختيار الحصة');
-				sdk.FetchClassLogs($scope.selected_class.id, $scope.selected_grade, (stat, logs) => {
-					process(stat, logs, formatClass);
-				}, true);
-				break;
+				if (!$scope.selected_class) return toast('برجاء اختيار الحصة')
+				process($scope.class_logs.filter(log => log.selected), formatClass);
+				break
 			case 'exam':
-				if (!$scope.selected_exam) return toast('برجاء اختيار الامتحان');
-				sdk.FetchExamLogs($scope.selected_exam.id, $scope.selected_grade, (stat, logs) => {
-					process(stat, logs, formatExam);
-				}, true);
-				break;
+				if (!$scope.selected_exam) return toast('برجاء اختيار الامتحان')
+				process($scope.exam_logs.filter(log => log.selected), formatExam);
+				break
 			case 'message':
-				break;
+				if (!$scope.message) return toast('برجاء كتابة رسالة')
+				process($scope.message_students.filter(log => log.selected), formatMessage);
+				break
 			case 'report':
-				if (!$scope.selected_month) return toast('برجاء اختيار الشهر');
-				sdk.ListStudents(0, 0, (stat, students) => {
-					switch (stat) {
-						case sdk.stats.OK:
+				if (!$scope.selected_month) return toast('برجاء اختيار الشهر')
 
-							const startDate = new Date($scope.selected_month.year, $scope.selected_month.month);
-							let endDate = date.addMonths(startDate, 1);
-							endDate = date.addDays(endDate, -1);
+				let students = $scope.students
 
-							let i = 0;
+				const startDate = new Date($scope.selected_month.year, $scope.selected_month.month)
+				let endDate = date.addMonths(startDate, 1)
+				endDate = date.addDays(endDate, -1)
 
-							const sendLogsSMS = (student) => {
+				let i = 0
 
-								if (students.length <= i) return;
+				const sendLogsSMS = (student) => {
 
-								$scope.sendingSMS = true;
+					if (students.length <= i) return
 
-								sdk.FetchLogs(student.id, $scope.selected_grade, {
-									start: startDate,
-									end: endDate
-								}, (stat, logs) => {
+					$scope.sendingSMS = true
+
+					sdk.FetchLogs(student.id, $scope.selected_grade, {
+						start: startDate,
+						end: endDate
+					}, (stat, logs) => {
+						switch (stat) {
+							case sdk.stats.OK:
+								const notifs = []
+
+								let unattClasses = 0
+								let unattExams = 0
+
+								notifs.push(intro + ' ' + student.fullname)
+
+								const separator = '-----------'
+
+								notifs.push(separator)
+								notifs.push('الحصص')
+								notifs.push(separator)
+
+								logs.classes.forEach(classLog => {
+									if (!classLog.log || !classLog.log.attendant) unattClasses++
+									classLog.fullname = student.fullname
+									if (classLog.links) classLog.linksString = classesLinksToDayString(classLog.links)
+									classLog.date = simpleDate(classLog.date)
+									notifs.push(formatClassReport($scope.profile, classLog, {
+										attendant: true,
+										quiz: true,
+										homework: true
+									}, formatClassDay(classLog), true))
+								})
+
+								notifs.push(separator)
+								notifs.push('الامتحانات')
+								notifs.push(separator)
+
+								logs.exams.forEach(examLog => {
+									if (!examLog.log || !examLog.log.attendant) unattExams++
+									examLog.fullname = student.fullname
+									notifs.push(formatExamReport(
+										$scope.profile, examLog, examLog.max_mark, examLog.name, true))
+								})
+
+								notifs.push(separator)
+
+								notifs.push('مجموع الحصص التى لم يحضرها: ' + unattClasses)
+								notifs.push('مجموع الامتحانات التى لم يحضرها: ' + unattExams)
+
+								notifs.push(separator)
+								notifs.push(formatSignature($scope.profile))
+
+								let smsMessage = notifs.join('\n ')
+
+								let num = prioritizeNumber(student.contacts)
+
+								$scope.smsStudent = student.fullname
+								$scope.smsProgress = ((i + 1) / students.length) * 100
+
+								sdk.ADBSendSMS($scope.selected_device.id, num, smsMessage, (stat) => {
 									switch (stat) {
 										case sdk.stats.OK:
-											const notifs = [];
-
-											let unattClasses = 0;
-											let unattExams = 0;
-
-											notifs.push(intro + ' ' + student.fullname);
-
-											const separator = '-----------';
-
-											notifs.push(separator);
-											notifs.push('الحصص');
-											notifs.push(separator);
-
-											logs.classes.forEach(classLog => {
-												if (!classLog.log || !classLog.log.attendant) unattClasses++;
-												classLog.fullname = student.fullname;
-												if (classLog.links) classLog.linksString = classesLinksToDayString(classLog.links);
-												classLog.date = simpleDate(classLog.date);
-												notifs.push(formatClassReport($scope.profile, classLog, {
-													attendant: true,
-													quiz: true,
-													homework: true
-												}, formatClassDay(classLog), true));
-											});
-
-											notifs.push(separator);
-											notifs.push('الامتحانات');
-											notifs.push(separator);
-
-											logs.exams.forEach(examLog => {
-												if (!examLog.log || !examLog.log.attendant) unattExams++;
-												examLog.fullname = student.fullname;
-												notifs.push(formatExamReport(
-													$scope.profile, examLog, examLog.max_mark, examLog.name, true));
-											});
-
-											notifs.push(separator);
-
-											notifs.push('مجموع الحصص التى لم يحضرها: ' + unattClasses);
-											notifs.push('مجموع الامتحانات التى لم يحضرها: ' + unattExams);
-
-											notifs.push(separator);
-											notifs.push(formatSignature($scope.profile));
-
-											let smsMessage = notifs.join('\n ');
-
-											let num = prioritizeNumber(student.contacts);
-
-											$scope.smsStudent = student.fullname;
-											$scope.smsProgress = ((i + 1) / students.length) * 100
-
-											sdk.ADBSendSMS($scope.selected_device.id, num, smsMessage, (stat) => {
-												switch (stat) {
-													case sdk.stats.OK:
-														sendLogsSMS(students[++i]);
-														break;
-													default:
-														$scope.smsFailed = true;
-														$scope.smsStudent = 'حدث خطأ ما أثناء ارسال الرسائل';
-														break;
-												}
-											});
-											break;
-
+											sendLogsSMS(students[++i])
+											break
 										default:
-											break;
+											$scope.smsFailed = true
+											$scope.smsStudent = 'حدث خطأ ما أثناء ارسال الرسائل'
+											break
 									}
-								});
+								})
+								break
 
-							};
+							default:
+								break
+						}
+					})
+				}
 
-							sendLogsSMS(students[0]);
-
-							break;
-
-						default:
-							break;
-					}
-				}, $scope.selected_grade, undefined, true);
+				sendLogsSMS(students[0])
 				break
 		}
 	}
@@ -1012,7 +1064,7 @@ app.controller('studentsCtrl', function ($rootScope, $scope, sdk) {
 		sdk.ListStudents($scope.startnum, $scope.limit, (stat, result) => {
 			switch (stat) {
 				case sdk.stats.OK:
-					$scope.students = result;
+					$scope.students = result
 					break
 				default:
 			}

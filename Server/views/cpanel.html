@@ -4,6 +4,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<link media="all" type="text/css" rel="stylesheet" href="/assets/css/report-page.css">
 	<link type="text/css" rel="stylesheet" href="/assets/css/materialize.min.css" media="screen,projection" />
 	<link type="text/css" rel="stylesheet" href="/assets/css/style.css">
 	<link type="text/css" rel="stylesheet" href="/assets/css/animate.min.css" />
@@ -789,18 +790,18 @@
 
 							<div>
 								<label>النوع</label>
-								<select class="browser-default" ng-model="selected_type">
+								<select class="browser-default" ng-model="selected_type" ng-change="typeChanged()">
 									<option value="" disabled selected>اختر نوع التقرير</option>
 									<option value="lesson">حصة</option>
 									<option value="exam">امتحان</option>
-									<option value="report">تقرير شهري</option>
+									<!-- <option value="report">تقرير شهري</option> -->
 									<option value="message">رسالة</option>
 								</select>
 							</div>
 
 							<div ng-show="selected_type == 'lesson'">
 								<label>الحصة</label>
-								<select class="browser-default" ng-options="c as (c.date + (c.addedClass ? ' - حصة إضافية' : '') + (c.classnum != null ? ' - الحصة ' + NumericOrderStrings[c.classnum] : '') + (c.linksString ? ' - ' + c.linksString : '')) for c in classes"
+								<select class="browser-default" ng-change="classChanged()" ng-options="c as (c.date + (c.addedClass ? ' - حصة إضافية' : '') + (c.classnum != null ? ' - الحصة ' + NumericOrderStrings[c.classnum] : '') + (c.linksString ? ' - ' + c.linksString : '')) for c in classes"
 								 ng-model="selected_class">
 									<option value="" disabled selected>اختر الحصة</option>
 								</select>
@@ -808,7 +809,7 @@
 
 							<div ng-show="selected_type == 'exam'">
 								<label>الامتحان</label>
-								<select class="browser-default" ng-options="e as e.name for e in exams" ng-model="selected_exam">
+								<select class="browser-default" ng-change="examChanged()" ng-options="e as e.name for e in exams" ng-model="selected_exam">
 									<option value="" disabled selected>اختر الامتحان</option>
 								</select>
 							</div>
@@ -828,10 +829,10 @@
 						</div>
 
 						<style>
-							#sms_options {
+							.sms_options {
 								margin-top: 12px;
 							}
-							#sms_options div {
+							.sms_options div {
 								display: inline-block;
 								margin-left: 12px;
 							}
@@ -843,7 +844,7 @@
 							}
 						</style>
 
-						<div id="sms_options" ng-show="selected_type == 'lesson'">
+						<div class="sms_options" ng-show="selected_type == 'lesson'">
 							<div>
 								<input type="checkbox" id="smsAttendant" ng-model="smsAttendant" />
 								<label for="smsAttendant">الحضور</label>
@@ -860,6 +861,13 @@
 							</div>
 						</div>
 
+						<div class="sms_options" ng-show="selected_type == 'message'">
+								<div>
+									<input type="checkbox" id="addSignature" ng-model="addSignature" />
+									<label for="addSignature">اضف اسم المدرس والمادة</label>
+								</div>
+							</div>
+
 						<div style="display: flex; align-items: baseline;">
 							<div>
 								<button class="waves-effect waves-light blue-grey btn" ng-click="send()" style="margin-left: 8.35%; margin-top:1rem;">أرسل</button>
@@ -871,7 +879,83 @@
 								</div>
 							</div>
 						</div>
+					</div>
 
+					<input type="checkbox" ng-model="select_all" ng-change="assertSelectAll()" id="toggleSelect" class="checkbox" />
+					<label for="toggleSelect">تحديد الكل</label>
+
+					<div>
+						<div class="logs containers" ng-show="selected_type == 'lesson'">
+							<table>
+								<tr>
+									<th>
+										اسم الطالب
+									</th>
+									<th>
+										درجة التسميع
+									</th>
+									<th>
+										درجة الواجب
+									</th>
+								</tr>
+								<tr ng-repeat="n in class_logs">
+									<td>
+										<!-- TODO: fix css -->
+										<input type="checkbox" ng-model="n.selected" id="cid{{n.studentid}}" class="checkbox" />
+										<label for="cid{{n.studentid}}">f</label>
+										<span class="green-text" ng-show="n.log.attendant">حضر</span>
+										<span class="red-text" ng-show="!n.log.attendant">لم يحضر</span>
+										- {{n.fullname}}
+									</td>
+									<td>{{n.log.quiz ? (n.log.quiz.type == 'marks' ? n.log.quiz.mark + ' / ' + n.log.quiz.max : (n.log.quiz.option
+										== 'absent' ? 'لم يسمّع' : 'سمّع')) : 'لم يسجل تسميع الطالب'}}</td>
+									<td>{{n.log.homework ? (n.log.homework.type == 'marks' ? n.log.homework.mark + '/' + n.log.homework.max
+										: (n.log.homework.option == 'incomplete' ? 'غير مكتمل' : 'كامل')) : 'لم يسجل واجب الطالب'}}</td>
+								</tr>
+							</table>
+						</div>
+
+						<div class="logs containers" ng-show="selected_type == 'exam'">
+							<table>
+								<tr>
+									<th>
+										اسم الطالب
+									</th>
+									<th>
+										الدرجة
+									</th>
+								</tr>
+								<tr ng-repeat="n in exam_logs">
+									<td>
+										<!-- TODO: fix css -->
+										<input type="checkbox" ng-model="n.selected" id="cid{{n.studentid}}" class="checkbox" />
+										<label for="cid{{n.studentid}}">f</label>
+										<span class="green-text" ng-show="n.log.attendant">حضر</span>
+										<span class="red-text" ng-show="!n.log.attendant">لم يحضر</span>
+										- {{n.fullname}}
+									</td>
+									<td>{{n.log.mark ? (n.log.mark + ' / ' + selected_exam.max_mark) : 'لم تسجل درجة للطالب'}}</td>
+								</tr>
+							</table>
+						</div>
+
+						<div class="logs containers" ng-show="selected_type == 'message'">
+								<table>
+									<tr>
+										<th>
+											اسم الطالب
+										</th>
+									</tr>
+									<tr ng-repeat="n in message_students">
+										<td>
+											<!-- TODO: fix css -->
+											<input type="checkbox" ng-model="n.selected" id="cid{{n.studentid}}" class="checkbox" />
+											<label for="cid{{n.studentid}}">f</label>
+											{{n.fullname}}
+										</td>
+									</tr>
+								</table>
+							</div>
 					</div>
 				</div>
 				<div class="simpleFadeIn-anim" ng-controller="groupsCtrl" ng-show="tab=='times'">

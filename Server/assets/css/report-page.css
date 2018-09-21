@@ -162,29 +162,6 @@ em {
 
 /* 9e9e9e */
 
-.logs-noblur tbody:hover td, .logs-noblur tbody:hover td select, .logs-noblur tbody:hover td input, .logs-noblur tbody:hover td label {
-    color: #444 !important;
-    text-shadow: unset !important;
-}
-
-.logs-noblur tbody:hover td label {
-    color: #aaa !important;
-}
-
-.logs tbody:hover td, .logs tbody:hover td select, .logs tbody:hover td input, .logs tbody:hover td label {
-    color: transparent;
-    text-shadow: 0 0 2px #aaa;
-}
-
-.logs tr:hover td, .logs tr:hover td select, .logs tr:hover td input, .logs tr:hover td label {
-    color: #444;
-    text-shadow: unset;
-}
-
-.logs tr:hover td label {
-    color: #aaa;
-}
-
 #log {
     direction: ltr;
     position: fixed;
