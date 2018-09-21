@@ -28,7 +28,6 @@
 		"object.values": "^1.0.4",
 		"opn": "^5.3.0",
 		"performance-now": "^2.1.0",
-		"regedit": "^3.0.0",
 		"stream-res": "^1.0.1"
 	},
 	"devDependencies": {}
