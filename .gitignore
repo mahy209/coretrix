@@ -7,7 +7,7 @@ Server/errors
 Mongo_backup/
 FaceRecognizer/node_modules
 *.node
-*standalone*
+standalone.exe
 dist*/
 Server/xdg-open
 Server/bcrypt
