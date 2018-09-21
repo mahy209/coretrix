@@ -3,6 +3,42 @@ body, body * {
     font-family: 'Cairo', sans-serif;
 }
 
+ @media print {
+            table{
+                    width: 100%;
+                   margin: none;
+                   border: none;
+                   padding: none;
+            }
+             .logs td {
+                padding: 0;
+                border: none;
+            }
+             .logs th {
+                padding: 0;
+                border: none;
+                padding: 0;
+                margin: 0;
+                font-style: italic;
+                color: black;
+                box-shadow: none;
+                text-shadow: none;
+            }
+             .logs{
+                text-align: center;
+                font-size: smaller;
+                border: none;
+             }
+             .logs th:first-child{
+                box-shadow: none;
+                border: none;
+             }
+             .logs th:last-child{
+                box-shadow: none;
+                border: none;
+             }
+        }        
+
 @media print {
     td, td>select, td>input, td>div>input {
         color: #444;
