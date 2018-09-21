@@ -56,7 +56,11 @@ app.controller("mainCtrl", function ($rootScope, $scope, sdk) {
     } else {
         $("#selector_2").slideDown();
         loadStuff();
-    }
+		}
+		
+		$scope.sendSMS = () => {
+			window.open(`/cpanel#tab=sms&type=lesson&grade=${$scope.selected_grade}&class=${$scope.selected_class.id}` , '_blank');
+		}
 
     function loadStuff(grade) {
         sdk.GetGrades((stat, result) => {

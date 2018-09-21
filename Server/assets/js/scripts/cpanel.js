@@ -198,11 +198,19 @@ app.controller('examsCtrl', function ($rootScope, $scope, sdk) {
 	}
 })
 
-app.controller('smsCtrl', function ($rootScope, $scope, sdk) {
+app.controller('smsCtrl', function ($rootScope, $scope, $location, sdk) {
 	$scope.sendingSMS = false
+
+	let params = parseQS($location.hash());
+	if (params.tab == 'sms') $rootScope.tab = 'sms';
 
 	var init = (refreshing, result) => {
 		$scope.grades = result
+		if (params.grade) {
+			$scope.selected_grade = parseInt(params.grade);
+			$scope.grade_changed();
+		}
+		if (params.type) $scope.selected_type = params.type;
 	}
 
 	$rootScope.variableListeners.push(init)
@@ -228,10 +236,11 @@ app.controller('smsCtrl', function ($rootScope, $scope, sdk) {
 			switch (stat) {
 				case sdk.stats.OK:
 					months.map(grademonth => {
-						grademonth.name = gradeMonth(grademonth)
-						return grademonth
-					})
-					$scope.months = months
+						grademonth.name = gradeMonth(grademonth);
+						return grademonth;
+					});
+					$scope.months = months;
+					if (params.month && params.year) $scope.selected_month = months.find(m => m.month == params.month && m.year == params.year);
 					break
 				default:
 			}
@@ -240,6 +249,7 @@ app.controller('smsCtrl', function ($rootScope, $scope, sdk) {
 			switch (stat) {
 				case sdk.stats.OK:
 					$scope.exams = exams;
+					if (params.exam) $scope.selected_exam = exams.find(e => e.id == params.exam);
 					break
 				default:
 			}
@@ -248,10 +258,11 @@ app.controller('smsCtrl', function ($rootScope, $scope, sdk) {
 			switch (stat) {
 				case sdk.stats.OK:
 					for (var i = 0; i < result.length; i++) {
-						result[i].date = simpleDate(new Date(result[i].date))
-						if (result[i].links) result[i].linksString = classesLinksToDayString(result[i].links)
+						result[i].date = simpleDate(new Date(result[i].date));
+						if (result[i].links) result[i].linksString = classesLinksToDayString(result[i].links);
 					}
-					$scope.classes = result
+					$scope.classes = result;
+					if (params.class) $scope.selected_class = result.find(c => c.id == params.class);
 					break
 				default:
 			}
@@ -335,13 +346,15 @@ app.controller('smsCtrl', function ($rootScope, $scope, sdk) {
 				sdk.FetchClassLogs($scope.selected_class.id, $scope.selected_grade, (stat, logs) => {
 					process(stat, logs, formatClass);
 				}, true);
-				break
+				break;
 			case 'exam':
 				if (!$scope.selected_exam) return toast('برجاء اختيار الامتحان');
 				sdk.FetchExamLogs($scope.selected_exam.id, $scope.selected_grade, (stat, logs) => {
 					process(stat, logs, formatExam);
 				}, true);
-				break
+				break;
+			case 'message':
+				break;
 			case 'report':
 				if (!$scope.selected_month) return toast('برجاء اختيار الشهر');
 				sdk.ListStudents(0, 0, (stat, students) => {

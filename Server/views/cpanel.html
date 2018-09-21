@@ -794,6 +794,7 @@
 									<option value="lesson">حصة</option>
 									<option value="exam">امتحان</option>
 									<option value="report">تقرير شهري</option>
+									<option value="message">رسالة</option>
 								</select>
 							</div>
 
@@ -817,6 +818,11 @@
 								<select class="browser-default" ng-options="m as m.name for m in months" ng-model="selected_month">
 									<option value="" disabled selected>اختر الشهر</option>
 								</select>
+							</div>
+
+							<div ng-show="selected_type == 'message'">
+								<label for="msg_txt">الرسالة</label>
+								<textarea id="msg_txt" style="margin-bottom: unset;" ng-model="message" class="materialize-textarea"></textarea>
 							</div>
 
 						</div>

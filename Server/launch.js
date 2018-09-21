@@ -55,7 +55,7 @@ const snapshot_path = __dirname;
 
 function backendUp() {
 	// launch browser instance
-	opn('http://localhost:8080');
+	opn('http://127.0.0.1:8080');
 }
 
 function databaseUp() {
