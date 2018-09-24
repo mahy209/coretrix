@@ -769,11 +769,10 @@ sdk.factory('sdk', ['$http', function ($http) {
     var query = {
       itemid: parseInt(itemid),
       student: parseInt(studentid),
-      ig_payedAmount: parseInt(payedAmount),
+      payedAmount: parseInt(payedAmount),
+      discount: discount,
       token: token
     };
-    // don't use typeof .. 'number' because if it was 0 then it's not even needed
-    if (discount) query.ig_discount = discount;
     post("api/teacher/payments/set", query, callback);
   }
 

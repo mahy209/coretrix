@@ -247,9 +247,8 @@ var inputvalidators = {
   itemCategory: validators.ValidateItemCategory,
   // set payment
   itemid: validators.ValidateNumber,
-  ig_discount: validators.ValidateOrIgnoreNumber,
+  discount: validators.ValidateOrIgnoreNumber,
   ig_price: validators.ValidateOrIgnoreNumber,
-  ig_payedAmount: validators.ValidateOrIgnoreNumber,
   ig_addedClass: validators.ValidateOrIgnoreBoolean,
   // request parent token
   code: validators.ValidateString,
@@ -415,7 +414,7 @@ registerApiCall("/teacher/items/list", ["token", "grade"], userDocDefault, data.
 registerApiCall("/teacher/items/listcategories", ["token", "grade"], userDocDefault, data.ListCategories);
 registerApiCall("/teacher/items/applyprice", ["token", "itemid", "price"], userDocDefault, data.ApplyPriceChange);
 
-registerApiCall("/teacher/payments/set", ["token", "student", "itemid", "ig_discount", "ig_payedAmount"], userDocDefault, data.SetPayment);
+registerApiCall("/teacher/payments/set", ["token", "student", "itemid", "discount", "payedAmount"], userDocDefault, data.SetPayment);
 registerApiCall("/teacher/payments/list", ["token", "date"], userDocDefault, data.ListPayments);
 registerApiCall("/teacher/paylogs/add", ["token", "name", "payedAmount", "date"], userDocDefault, data.AddPayLog);
 registerApiCall("/teacher/paylogs/set", ["token", "_id", "payedAmount"], userDocDefault, data.SetPayLog);

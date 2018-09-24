@@ -130,7 +130,7 @@ app.controller("mainCtrl", function ($rootScope, $scope, sdk) {
         var logIndex = $scope.logs.indexOf(n);
         try {
             if (!n.log.payed) n.log.payed = 0;
-            sdk.SetPaymentLog($scope.selected_item.id, n.studentid, n.log.payed, null, (stat, newlog) => {
+            sdk.SetPaymentLog($scope.selected_item.id, n.studentid, n.log.payed, n.log.discount, (stat, newlog) => {
                 switch (stat) {
                     case sdk.stats.OK:
                         let set = true;
@@ -175,7 +175,7 @@ app.controller("mainCtrl", function ($rootScope, $scope, sdk) {
     $scope.discountChanged = (n) => {
         var logIndex = $scope.logs.indexOf(n);
         try {
-            sdk.SetPaymentLog($scope.selected_item.id, n.studentid, null, n.log.discount, (stat, newlog) => {
+            sdk.SetPaymentLog($scope.selected_item.id, n.studentid, n.log.payed, n.log.discount, (stat, newlog) => {
                 switch (stat) {
                     case sdk.stats.OK:
                         if (!$scope.logs[logIndex].log.payed) {

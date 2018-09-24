@@ -30,6 +30,15 @@ const subjects = {
   22: "الاحصاء",
 };
 
+const itemCategoryNames = {
+  paper: 'ورق',
+  book: 'ملازم',
+  revision: 'مراجعات',
+  addedClasses: 'حصص إضافية',
+  course: 'كورسات',
+  subscription: 'الشهر'
+}
+
 const phonecodes = {
   "": {
     "english": "Hotline",
@@ -2341,7 +2350,7 @@ function registerStudent(args, callback) {
         db.collection("users").insertOne({
           id: newid,
           displayname: `${args.fullname.first} ${args.fullname.last}`,
-          fullname: `${args.fullname.first} ${args.fullname.father} ${args.fullname.grand} ${args.fullname.last}`,
+          fullname: `${args.fullname.first} ${args.fullname.father} ${args.fullname.grand} ${args.fullname.last}`.trim(),
           firstname: args.fullname.first,
           fathername: args.fullname.father,
           grandname: args.fullname.grand,
@@ -3066,21 +3075,20 @@ function getItem(args, callback) {
 
 function listPayments(args, callback) {
   db.collection("paylogs").aggregate([{
-      $match: {
-        $and: [{
-            date: {
-              $gte: lib.stripDate(args.date)
-            }
-          },
-          {
-            date: {
-              $lte: lib.stripDate(args.date, true)
-            }
-          },
-        ]
-      }
-    },
-  ], (err, paylogs) => {
+    $match: {
+      $and: [{
+          date: {
+            $gte: lib.stripDate(args.date)
+          }
+        },
+        {
+          date: {
+            $lte: lib.stripDate(args.date, true)
+          }
+        },
+      ]
+    }
+  }, ], (err, paylogs) => {
     if (err) callback(err);
     callback(null, stats.OK, paylogs);
   })
@@ -3121,28 +3129,96 @@ function setPayment(args, callback) {
     [studentForeignIdentifier]: args.student,
     "itemid": args.itemid
   };
-  var updateQuery = {};
-  if (typeof args.ig_payedAmount == 'number') {
-    if (args.ig_payedAmount == 0) {
-      db.collection("payments").deleteOne(query, (err, result) => {
-        if (err) return callback(err);
-        else callback(null, stats.OK);
-      })
-      return;
-    }
-    updateQuery.payed = args.ig_payedAmount;
+
+  const recordPayLog = (payed) => {
+    db.collection("payments").aggregate([{
+        $match: query
+      },
+      {
+        $lookup: {
+          from: 'users',
+          localField: studentForeignIdentifier,
+          foreignField: identifier,
+          as: 'student',
+        }
+      },
+      {
+        $lookup: {
+          from: 'items',
+          localField: 'itemid',
+          foreignField: 'id',
+          as: 'item',
+        }
+      }
+    ], (err, payment) => {
+      if (err) return;
+
+      payment = payment[0];
+
+      payment.student = payment.student[0];
+      payment.item = payment.item[0];
+
+      const paylogAmount = args.payedAmount - payed;
+      console.log(args.payedAmount);
+      console.log(payed);
+      const added = args.payedAmount > payed;
+
+      let message = [];
+
+      message.push(added ? 'دفع' : 'سحب');
+      message.push(payment.student.fullname.trim());
+      message.push('فلوس');
+      message.push(itemCategoryNames[payment.item.category]);
+      message.push(payment.item.name);
+
+      addPayLog({
+        userDoc: args.userDoc,
+        name: message.join(' '),
+        payedAmount: paylogAmount,
+        date: new Date()
+      }, () => {});
+    });
+  };
+
+  // delete payment
+  if (args.payedAmount == 0) {
+    db.collection("payments").deleteOne(query, (err, result) => {
+      if (err) {
+        return callback(err);
+      } else {
+        callback(null, stats.OK);
+        recordPayLog();
+      }
+    })
+    return;
   }
-  if (typeof args.ig_discount == 'number') updateQuery.discount = args.ig_discount;
-  if (Object.keys(updateQuery).length <= 0) return callback(null, stats.OK);
-  updateQuery.date = new Date();
-  db.collection("payments").updateOne(query, {
-    $set: updateQuery
-  }, {
-    upsert: true
-  }, (err, result) => {
-    if (err) callback(err);
-    else callback(null, stats.OK, lib.OverlayArray(query, updateQuery));
+
+  var updateQuery = {
+    payed: args.payedAmount,
+    discount: args.discount,
+    date: new Date()
+  };
+
+  db.collection("payments").findOne(query, {
+    payed: 1
+  }, (err, payment) => {
+    if (err) {
+      return callback(err);
+    }
+    db.collection("payments").updateOne(query, {
+      $set: updateQuery
+    }, {
+      upsert: true
+    }, (err, result) => {
+      if (err) {
+        callback(err);
+      } else {
+        callback(null, stats.OK, lib.OverlayArray(query, updateQuery));
+        recordPayLog(payment.payed);
+      }
+    });
   });
+
 }
 
 function fetchPaymentLogs(args, callback) {
