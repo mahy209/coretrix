@@ -736,17 +736,20 @@ sdk.factory('sdk', ['$http', function ($http) {
     }, callback);
   }
 
-  function AddExpense(payed, callback) {
+  function AddPayLog(name, payed, date, callback) {
     var token = Cookies.get('token');
-    post("api/teacher/expenses/add", {
+    let query = {
       payedAmount: payed,
+      name: name,
+      date: date,
       token: token
-    }, callback);
+    };
+    post("api/teacher/paylogs/add", query, callback);
   }
 
-  function SetExpense(_id, payed, callback) {
+  function SetPayLog(_id, payed, callback) {
     var token = Cookies.get('token');
-    post("api/teacher/expenses/set", {
+    post("api/teacher/paylogs/set", {
       _id: _id,
       payedAmount: payed,
       token: token
@@ -998,6 +1001,9 @@ sdk.factory('sdk', ['$http', function ($http) {
     DeleteItem: DeleteItem,
     FetchPaymentLogs: FetchPaymentLogs,
     SetPaymentLog: SetPaymentLog,
+    AddPayLog: AddPayLog,
+    SetPayLog: SetPayLog,
+    ListPayments: ListPayments,
     RequestParentToken: RequestParentToken,
     GetInfoForParent: GetInfoForParent,
     FetchLogsForParent: FetchLogsForParent,

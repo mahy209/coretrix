@@ -3065,7 +3065,7 @@ function getItem(args, callback) {
 
 
 function listPayments(args, callback) {
-  db.collection("payments").aggregate([{
+  db.collection("paylogs").aggregate([{
       $match: {
         $and: [{
             date: {
@@ -3080,55 +3080,32 @@ function listPayments(args, callback) {
         ]
       }
     },
-    {
-      $lookup: {
-        from: 'items',
-        localField: 'itemid',
-        foreignField: identifier,
-        as: 'item'
-      }
-    },
-    {
-      $lookup: {
-        from: 'users',
-        localField: studentForeignIdentifier,
-        foreignField: identifier,
-        as: 'student'
-      }
-    },
-    {
-      $project: {
-        'item._id': 0,
-        'student._id': 0,
-        'teacherid': 0,
-        'studentid': 0
-      }
-    }
-  ], (err, payments) => {
+  ], (err, paylogs) => {
     if (err) callback(err);
-    callback(null, stats.OK, payments);
+    callback(null, stats.OK, paylogs);
   })
 }
 
-function addExpensePayment(args, callback) {
-  db.collection("payments").insertOne({
+function addPayLog(args, callback) {
+  db.collection("paylogs").insertOne({
     [teacherForeignIdentifier]: teacherRep(args.userDoc),
     payed: args.payedAmount,
-    date: new Date(),
+    name: args.name,
+    date: new Date(args.date),
   }, (err, result) => {
     ErrorAndCount(callback, err, result, fields.insertedCount, stats.Error);
   });
 }
 
-function setExpensePayment(args, callback) {
+function setPayLog(args, callback) {
   if (args.payedAmount == 0) {
-    db.collection("payments").deleteOne({
+    db.collection("paylogs").deleteOne({
       _id: args._id
     }, (err, result) => {
       ErrorAndCount(callback, err, result, fields.deletedCount, stats.Error);
     });
   } else {
-    db.collection("payments").updateOne({
+    db.collection("paylogs").updateOne({
       _id: args._id
     }, {
       payed: args.payedAmount
@@ -3958,8 +3935,8 @@ module.exports = {
   AddItem: addItem,
   ListItems: listItems,
   SetPayment: setPayment,
-  AddExpensePayment: addExpensePayment,
-  SetExpensePayment: setExpensePayment,
+  AddPayLog: addPayLog,
+  SetPayLog: setPayLog,
   ListPayments: listPayments,
   ListCategories: listCategories,
   QRListStudents: qrListStudents,

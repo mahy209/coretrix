@@ -198,8 +198,59 @@ app.controller('examsCtrl', function ($rootScope, $scope, sdk) {
   }
 })
 
-app.controller('paylogsCtrl', function() {
+app.controller('paylogsCtrl', function ($scope, sdk) {
+  $scope.refreshLogs = () => {
+    sdk.ListPayments(new Date($('#paylogs_date').val()), (stat, paylogs) => {
+      switch (stat) {
+        case sdk.stats.OK:
+          let totalAmount = 0;
+          for (let i = 0; i < paylogs.length; i++) {
+            totalAmount += paylogs[i].payed;
+          }
+          $scope.totalAmount = totalAmount;
+          $scope.paylogs = paylogs;
+          break;
+        default:
+          break;
+      }
+    });
+  };
 
+  $('#paylogs_date').val(date.format(new Date(), 'MM/DD/YYYY'));
+  $scope.refreshLogs();
+
+  let addPayLog = (payed) => {
+
+    if (!$scope.paylog_name) return toast('برجاء ادخال تعليق');
+    if (!$scope.paylog_amount) return toast('برجاء ادخال المبلغ');
+
+    let picked_date = new Date($('#paylogs_date').val());
+    let current_date = new Date();
+
+    if (stripDate(current_date).getTime() == picked_date.getTime()) {
+      picked_date = current_date;
+    } else {
+      picked_date = stripDate(picked_date, true);
+    }
+
+    sdk.AddPayLog(
+      $scope.paylog_name,
+      payed,
+      picked_date, (stat) => {
+        if (stat == sdk.stats.OK) {
+          $scope.refreshLogs();
+        }
+      });
+
+  }
+
+  $scope.addExpense = () => {
+    addPayLog(0 - $scope.paylog_amount);
+  };
+
+  $scope.addIncome = () => {
+    addPayLog($scope.paylog_amount);
+  };
 });
 
 app.controller('smsCtrl', function ($rootScope, $scope, $location, sdk) {
@@ -293,7 +344,7 @@ app.controller('smsCtrl', function ($rootScope, $scope, $location, sdk) {
     $scope.profile = result
   })
 
-  function formatClassDay (c) {
+  function formatClassDay(c) {
     if (c.linksString) {
       return (c.addedClass ? 'حصة إضافية ' : '') + (c.classnum != null ? 'الحصة ' + $scope.NumericOrderStrings[c.classnum] : '') + (c.linksString ? ' - ' + c.linksString : '')
     } else {
@@ -697,7 +748,7 @@ app.controller('groupsCtrl', function ($rootScope, $scope, sdk) {
     }
   }
   $scope.linkGroupClass = (link, classnum) => {
-    function failed () {
+    function failed() {
       toast('تعذر ربط الحصه!', gradients.error)
     }
     try {
@@ -737,10 +788,10 @@ app.controller('groupsCtrl', function ($rootScope, $scope, sdk) {
   }
 
   var selected_days_template = [{
-    id: 0,
-    name: 'السبت',
-    selected: false
-  },
+      id: 0,
+      name: 'السبت',
+      selected: false
+    },
     {
       id: 1,
       name: 'الاحد',
@@ -775,7 +826,7 @@ app.controller('groupsCtrl', function ($rootScope, $scope, sdk) {
   $scope.selected_days = selected_days_template
   $scope.edit_selected_days = selected_days_template
 
-  function getTimeFromPicker (time_val) {
+  function getTimeFromPicker(time_val) {
     var timeregex = /([0-9]+):([0-9]+)([APM]+)/
     let start_time = timeregex.exec(time_val)
     let raw_time = (parseInt(start_time[1]) * 60) + parseInt(start_time[2])
@@ -783,7 +834,7 @@ app.controller('groupsCtrl', function ($rootScope, $scope, sdk) {
     else return start_time[3] == 'AM' ? raw_time : 720 + raw_time
   }
 
-  function getDaysFromModel (model) {
+  function getDaysFromModel(model) {
     let days = []
     for (let i = 0; i < model.length; i++) {
       const element = model[i]
@@ -907,7 +958,7 @@ app.controller('studentsCtrl', function ($rootScope, $scope, sdk) {
                 $scope.performSearch({
                   keyCode: 13
                 })
-              // window.open("/profile/" + result[Object.keys(cmpdata).indexOf(val)].id, "_blank")
+                // window.open("/profile/" + result[Object.keys(cmpdata).indexOf(val)].id, "_blank")
               },
               minLength: 1
             })
@@ -933,8 +984,7 @@ app.controller('studentsCtrl', function ($rootScope, $scope, sdk) {
       }
     }
   }
-  $scope.$watch('selectedPage_num', (n) => {
-  })
+  $scope.$watch('selectedPage_num', (n) => {})
   $scope.changePage = (num) => {
     if (typeof num != 'number' || num < 1) num = 1
     if ($scope.pages.length > 0) {
@@ -958,7 +1008,7 @@ app.controller('studentsCtrl', function ($rootScope, $scope, sdk) {
     }, $scope.limit, $scope.startnum)
   }
 
-  function createPagination (count, unset) {
+  function createPagination(count, unset) {
     // $scope.startnum = 0
     $scope.pages = []
     var c = Math.ceil(count / $scope.limit)
@@ -985,59 +1035,59 @@ app.controller('studentsCtrl', function ($rootScope, $scope, sdk) {
     if (event.keyCode == 32) {
       var newname = $scope.studentName
       if (newname) sdk.SearchStudents(neutralizeName(newname, true), function (stat, search_result) {
-          switch (stat) {
-            case sdk.stats.OK:
-              var result = search_result.result
-              if (result.length > 0) {
-                var data = {}
-                var cmpdata = {}
-                for (var i = 0; i < result.length; i++) {
-                  data[result[i].fullname] = result[i].id
-                  result[i] = result[i].fullname
-                  cmpdata[result[i]] = null
-                }
-                $scope.registered = data
-                $('#studentName_auto').autocomplete({
-                  data: cmpdata,
-                  limit: 20,
-                  onAutocomplete: function (val) {
-                    $scope.studentName = val
-                    sdk.ListPhones((stat, data) => {
-                      switch (stat) {
-                        case sdk.stats.OK:
-                          for (var i = 0; i < data.length; i++) {
-                            if (!data[i].phonecode) continue
-                            switch (data[i].type) {
-                              case 'parent1':
-                                $scope.studentParentPhone1 = `${data[i].phonecode}${data[i].number}`
-                                break
-                              case 'parent2':
-                                $scope.studentParentPhone2 = `${data[i].phonecode}${data[i].number}`
-                                break
-                              case 'home':
-                                $scope.studentHomePhone = `${data[i].phonecode}${data[i].number}`
-                                break
-                              case 'mobile':
-                                $scope.studentPhone = `${data[i].phonecode}${data[i].number}`
-                                break
-                              default:
-                            }
-                          }
-                          break
-                        default:
-
-                      }
-                    }, data[val])
-                  },
-                  minLength: 1
-                })
+        switch (stat) {
+          case sdk.stats.OK:
+            var result = search_result.result
+            if (result.length > 0) {
+              var data = {}
+              var cmpdata = {}
+              for (var i = 0; i < result.length; i++) {
+                data[result[i].fullname] = result[i].id
+                result[i] = result[i].fullname
+                cmpdata[result[i]] = null
               }
-              cmpdata = {}
-              break
-            default:
+              $scope.registered = data
+              $('#studentName_auto').autocomplete({
+                data: cmpdata,
+                limit: 20,
+                onAutocomplete: function (val) {
+                  $scope.studentName = val
+                  sdk.ListPhones((stat, data) => {
+                    switch (stat) {
+                      case sdk.stats.OK:
+                        for (var i = 0; i < data.length; i++) {
+                          if (!data[i].phonecode) continue
+                          switch (data[i].type) {
+                            case 'parent1':
+                              $scope.studentParentPhone1 = `${data[i].phonecode}${data[i].number}`
+                              break
+                            case 'parent2':
+                              $scope.studentParentPhone2 = `${data[i].phonecode}${data[i].number}`
+                              break
+                            case 'home':
+                              $scope.studentHomePhone = `${data[i].phonecode}${data[i].number}`
+                              break
+                            case 'mobile':
+                              $scope.studentPhone = `${data[i].phonecode}${data[i].number}`
+                              break
+                            default:
+                          }
+                        }
+                        break
+                      default:
 
-          }
-        })
+                    }
+                  }, data[val])
+                },
+                minLength: 1
+              })
+            }
+            cmpdata = {}
+            break
+          default:
+
+        }
+      })
     }
   }
   $scope.load_optGroups = () => {
@@ -1088,13 +1138,13 @@ app.controller('studentsCtrl', function ($rootScope, $scope, sdk) {
     $scope.globalcheck = $scope.selectall
   }
 
-  function prepareAddStudent () {
+  function prepareAddStudent() {
     $scope.studentName = null
     $scope.studentParentPhone1 = null
     $scope.studentParentPhone2 = null
     $scope.studentHomePhone = null
     $scope.studentPhone = null
-  // $('#addStudent_modal')[0].M_Modal.open()
+    // $('#addStudent_modal')[0].M_Modal.open()
   }
   $scope.addStudent = () => {
     var n = neutralizeName($scope.studentName)
@@ -1110,7 +1160,7 @@ app.controller('studentsCtrl', function ($rootScope, $scope, sdk) {
     if ($scope.studentHomePhone && (!homephone || !homephone.phonecode)) return toast('تأكد من إدخال رقم المنزل صحيحاً!')
     if ($scope.studentPhone && (!studentphone || !studentphone.phonecode)) return toast('تأكد من إدخال رقم الطالب صحيحاً!')
 
-    function finishShit (id) {
+    function finishShit(id) {
       sdk.LinkStudent($scope.selected_grade, $scope.selected_group, id, function (stat, result) {
         switch (stat) {
           case sdk.stats.OK:
@@ -1127,21 +1177,21 @@ app.controller('studentsCtrl', function ($rootScope, $scope, sdk) {
             toast('تم اضافه الطالب!')
             var phones = []
             if (parent1phone.phonecode) phones.push({
-                'num': $scope.studentParentPhone1,
-                'type': 'parent1'
-              })
+              'num': $scope.studentParentPhone1,
+              'type': 'parent1'
+            })
             if (parent2phone.phonecode) phones.push({
-                'num': $scope.studentParentPhone2,
-                'type': 'parent2'
-              })
+              'num': $scope.studentParentPhone2,
+              'type': 'parent2'
+            })
             if (homephone.phonecode) phones.push({
-                'num': $scope.studentHomePhone,
-                'type': 'home'
-              })
+              'num': $scope.studentHomePhone,
+              'type': 'home'
+            })
             if (studentphone.phonecode) phones.push({
-                'num': $scope.studentPhone,
-                'type': 'mobile'
-              })
+              'num': $scope.studentPhone,
+              'type': 'mobile'
+            })
             var i = -1
             var addphone = () => {
               i++
@@ -1352,7 +1402,7 @@ app.controller('studentsCtrl', function ($rootScope, $scope, sdk) {
   }
   $scope.saveStudent = () => {
 
-    function changeName (callback) {
+    function changeName(callback) {
       var n = neutralizeName($scope.edit_studentName)
       if (!n) {
         callback(false)
@@ -1370,7 +1420,7 @@ app.controller('studentsCtrl', function ($rootScope, $scope, sdk) {
       })
     }
 
-    function editLink (callback) {
+    function editLink(callback) {
       if (typeof $scope.edit_selected_grade != 'number') {
         return callback(false)
       }
@@ -1389,7 +1439,7 @@ app.controller('studentsCtrl', function ($rootScope, $scope, sdk) {
       })
     }
 
-    function changePhones (callback) {
+    function changePhones(callback) {
       var number = parsePhoneNumber($scope.edit_studentParentPhone1)
       if (!number) return toast('تأكد من إدخال رقم ولى الأمر 1 صحيحاً!')
       sdk.SetPhone(number.number, number.phonecode, 'parent1', (stat, result) => {
@@ -1455,7 +1505,7 @@ app.controller('studentsCtrl', function ($rootScope, $scope, sdk) {
       } else finish()
     })
 
-    function finish (success) {
+    function finish(success) {
       $scope.loadedStudent = null
       if (success) toast('تم حفظ بيانات الطالب بنجاح!')
       else toast('تعذر حفظ بيانات الطالب!', gradients.error)
@@ -1541,16 +1591,15 @@ app.controller('studentsCtrl', function ($rootScope, $scope, sdk) {
     }
 });*/
 
-function confirm (rootscope, sdk, name) {
-  function def () {
+function confirm(rootscope, sdk, name) {
+  function def() {
     rootscope.navigate()
   }
 
-  function students () {
+  function students() {
     rootscope.navigate('app')
   }
-  sdk.CheckToken(students, () => {
-  }, def)
+  sdk.CheckToken(students, () => {}, def)
 }
 
 app.controller('mainCtrl', function ($rootScope, $scope, sdk) {
@@ -1658,7 +1707,7 @@ app.controller('mainCtrl', function ($rootScope, $scope, sdk) {
   $scope.refreshClasses = () => {
     var now = Date.now()
     var dif = Math.floor((now - lastrefresh) / 1000)
-    if (lastrefresh != null && dif < 5 /* 5 seconds threshold */) return toast('برجاء الانتظار ' + dif + ' ثوانى قبل الضغظ مرة اخرى', gradients.error)
+    if (lastrefresh != null && dif < 5 /* 5 seconds threshold */ ) return toast('برجاء الانتظار ' + dif + ' ثوانى قبل الضغظ مرة اخرى', gradients.error)
     sdk.RefreshClaases((stat) => {
       switch (stat) {
         case stats.OK:
@@ -1695,46 +1744,46 @@ app.controller('mainCtrl', function ($rootScope, $scope, sdk) {
   $scope.grade_changed = (groups, exams, classes, grouplinks) => {
     if ($scope.selected_grade) {
       if (exams) sdk.ListExams(parseInt($scope.selected_grade), (stat, exams) => {
-          switch (stat) {
-            case sdk.stats.OK:
-              $scope.exams = exams
-              break
-            default:
-          }
-        })
+        switch (stat) {
+          case sdk.stats.OK:
+            $scope.exams = exams
+            break
+          default:
+        }
+      })
       if (groups) sdk.ListGroups(parseInt($scope.selected_grade), (stat, groups) => {
-          switch (stat) {
-            case sdk.stats.OK:
-              $scope.groups = groups
-              break
-            default:
-          }
-        })
+        switch (stat) {
+          case sdk.stats.OK:
+            $scope.groups = groups
+            break
+          default:
+        }
+      })
       if (classes) sdk.ListClasses(parseInt($scope.selected_grade), (stat, result) => {
-          switch (stat) {
-            case sdk.stats.OK:
-              for (var i = 0; i < result.length; i++) {
-                result[i].date = simpleDate(new Date(result[i].date))
-                if (result[i].links) result[i].linksString = classesLinksToDayString(result[i].links)
-              }
-              $scope.classes = result
-              break
-            default:
-          }
-        })
+        switch (stat) {
+          case sdk.stats.OK:
+            for (var i = 0; i < result.length; i++) {
+              result[i].date = simpleDate(new Date(result[i].date))
+              if (result[i].links) result[i].linksString = classesLinksToDayString(result[i].links)
+            }
+            $scope.classes = result
+            break
+          default:
+        }
+      })
       if (grouplinks) sdk.ListGroupClassesLinks(parseInt($scope.selected_grade), (stat, result) => {
-          switch (stat) {
-            case sdk.stats.OK:
-              $scope.classesLinks = []
-              for (let i = 0; i < result.links.length; i++) {
-                if (result.links[i].links) result.links[i].linksString = classesLinksToDayString(result.links[i].links)
-                $scope.classesLinks.push(result.links[i])
-              }
-              break
-            default:
-              break
-          }
-        })
+        switch (stat) {
+          case sdk.stats.OK:
+            $scope.classesLinks = []
+            for (let i = 0; i < result.links.length; i++) {
+              if (result.links[i].links) result.links[i].linksString = classesLinksToDayString(result.links[i].links)
+              $scope.classesLinks.push(result.links[i])
+            }
+            break
+          default:
+            break
+        }
+      })
     }
   }
   $rootScope.reloadClassesLinks = () => {

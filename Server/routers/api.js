@@ -417,8 +417,8 @@ registerApiCall("/teacher/items/applyprice", ["token", "itemid", "price"], userD
 
 registerApiCall("/teacher/payments/set", ["token", "student", "itemid", "ig_discount", "ig_payedAmount"], userDocDefault, data.SetPayment);
 registerApiCall("/teacher/payments/list", ["token", "date"], userDocDefault, data.ListPayments);
-registerApiCall("/teacher/expenses/add", ["token", "payedAmount"], userDocDefault, data.ListPayments);
-registerApiCall("/teacher/expenses/set", ["token", "_id", "payedAmount"], userDocDefault, data.ListPayments);
+registerApiCall("/teacher/paylogs/add", ["token", "name", "payedAmount", "date"], userDocDefault, data.AddPayLog);
+registerApiCall("/teacher/paylogs/set", ["token", "_id", "payedAmount"], userDocDefault, data.SetPayLog);
 registerApiCall("/teacher/payments/fetchlogs", ["token", "itemid", "grade"], userDocDefault, data.FetchPaymentLogs);
 
 registerApiCall("/teacher/groups/create", ["token", "name", "grade", /*"subjects", "addressid", "gender"*/ "schedule"], userDocDefault, data.CreateGroup);
