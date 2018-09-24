@@ -198,6 +198,10 @@ app.controller('examsCtrl', function ($rootScope, $scope, sdk) {
   }
 })
 
+app.controller('paylogsCtrl', function() {
+
+});
+
 app.controller('smsCtrl', function ($rootScope, $scope, $location, sdk) {
   $scope.sendingSMS = false
   $scope.select_all = true

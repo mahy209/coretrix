@@ -79,20 +79,26 @@
 		<div class="only_on_mobile card-panel">
 			<!-- mobile navigation -->
 			<div class="row">
-				<div class="col s4">
+				<div class="col s3">
 					<div ng-click="changeTab('payment')" ng-class="tab == 'payment' ? 'blue-grey-text text-darken-1' : 'grey-text'"
 					 class="center-align">
 						<i class="fa fa-credit-card-alt fa-2x" aria-hidden="true">
 						</i>
 					</div>
 				</div>
-				<div class="col s4">
+				<div class="col s3">
 					<div ng-click="changeTab('sms')" ng-class="tab == 'sms' ? 'blue-grey-text text-darken-1' : 'grey-text'" class="center-align">
 						<i class="fa fa-comment fa-2x" aria-hidden="true">
 						</i>
 					</div>
-				</div>
-				<div class="col s4">
+        </div>
+        <div class="col s3">
+          <div ng-click="changeTab('paylogsCtrl')" ng-class="tab == 'paylogsCtrl' ? 'blue-grey-text text-darken-1' : 'grey-text'" class="center-align">
+            <i class="fa fa-dollar fa-2x" aria-hidden="true">
+            </i>
+          </div>
+        </div>
+				<div class="col s3">
 					<div ng-click="changeTab('settings')" ng-class="tab == 'settings' ? 'blue-grey-text text-darken-1' : 'grey-text'"
 					 class="center-align">
 						<i class="fa fa-cog fa-2x" aria-hidden="true">
@@ -764,7 +770,10 @@
 							</div>
 						</div>
 					</div>
-				</div>
+        </div>
+        <div class="simpleFadeIn-anim" ng-controller="paylogsCtrl" ng-show="tab=='paylogs'">
+
+        </div>
 				<div class="simpleFadeIn-anim" ng-controller="smsCtrl" ng-show="tab=='sms'">
 					<div class="card-panel">
 						<div class="sms_filter">
@@ -1281,7 +1290,14 @@
 						<i class="fa fa-comment fa-2x" aria-hidden="true">
 							<span>الرسائل</span>
 						</i>
-					</div>
+          </div>
+          
+					<div ng-click="changeTab('paylogsCtrl')" ng-class="tab == 'paylogsCtrl' ? 'blue-grey-text text-darken-1' : 'grey-text'" class="center-align">
+						<i class="fa fa-dollar fa-2x" aria-hidden="true">
+							<span>الحسابات</span>
+						</i>
+          </div>
+          
 					<div ng-click="changeTab('settings')" ng-class="tab == 'settings' ? 'blue-grey-text text-darken-1' : 'grey-text'"
 					 class="center-align">
 						<i class="fa fa-cog fa-2x" aria-hidden="true">
