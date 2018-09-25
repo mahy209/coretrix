@@ -242,6 +242,25 @@ app.controller('paylogsCtrl', function ($scope, sdk) {
         }
       });
 
+  };
+
+  let delete_id = null;
+
+  $scope.openRemoveModal = (_id) => {
+    delete_id = _id;
+    $('#paylog_delete_modal')[0].M_Modal.open();
+  }
+
+  $scope.removePayLog = () => {
+    sdk.SetPayLog(delete_id, 0, (stat) => {
+      if (stat == sdk.stats.OK) {
+        toast('تم الحذف بنجاح');
+        $scope.refreshLogs();
+      } else {
+        toast('تعذر حذف العنصر');
+      }
+    });
+    $('#paylog_delete_modal')[0].M_Modal.close();
   }
 
   $scope.addExpense = () => {

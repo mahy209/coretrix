@@ -830,6 +830,9 @@
                   <th>
                     المبلغ
                   </th>
+                  <th>
+                    اجراءات
+                  </th>
                 </tr>
               </thead>
               <tbody>
@@ -840,10 +843,24 @@
                   <td width="50%" ng-class="log.payed > 0 ? 'income' : 'expense'">
                     {{log.payed}}
                   </td>
+                  <td>
+                    <button class="float-left btn blue-grey" ng-click="openRemoveModal(log._id)">حذف</button>
+                  </td>
                 </tr>
               </tbody>
             </table>
           </div>
+
+          <div id="paylog_delete_modal" class="modal">
+              <div class="modal-content gradient">
+                <h4>هل أنت متاكد من هذه الخطوة؟</h4>
+                <p>عند خذف التسجيل لا يمكن استرجاع البيانات مره اخرى</p>
+              </div>
+              <div class="modal-footer blue-grey-background">
+                <a ng-click="removePayLog()" class="modal-action modal-close waves-effect waves-green btn-flat">اوافق</a>
+                <a class="modal-action modal-close waves-effect waves-red btn-flat">لا</a>
+              </div>
+            </div>
         </div>
         <div class="simpleFadeIn-anim" ng-controller="smsCtrl" ng-show="tab=='sms'">
           <div class="card-panel">

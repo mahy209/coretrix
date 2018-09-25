@@ -3108,8 +3108,9 @@ function addPayLog(args, callback) {
 function setPayLog(args, callback) {
   if (args.payedAmount == 0) {
     db.collection("paylogs").deleteOne({
-      _id: args._id
+      _id: new mongodb.ObjectID(args._id)
     }, (err, result) => {
+      console.log(args, err, result);
       ErrorAndCount(callback, err, result, fields.deletedCount, stats.Error);
     });
   } else {
