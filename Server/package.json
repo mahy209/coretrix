@@ -14,6 +14,7 @@
 	"license": "MIT",
 	"dependencies": {
 		"adbkit": "^2.11.0",
+		"await-spawn": "^2.1.1",
 		"bcryptjs": "^2.4.3",
 		"bluebird": "^3.5.2",
 		"body-parser": "^1.18.3",

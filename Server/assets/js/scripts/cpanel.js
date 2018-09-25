@@ -256,6 +256,7 @@ app.controller('paylogsCtrl', function ($scope, sdk) {
 app.controller('smsCtrl', function ($rootScope, $scope, $location, sdk) {
   $scope.sendingSMS = false
   $scope.select_all = true
+  $scope.selected_protocol = 'legacy';
 
   let params = parseQS($location.hash())
   if (params.tab == 'sms') $rootScope.tab = 'sms'
@@ -428,7 +429,7 @@ app.controller('smsCtrl', function ($rootScope, $scope, $location, sdk) {
 
         let smsMessage = format(log)
 
-        sdk.ADBSendSMS($scope.selected_device.id, num, smsMessage, (stat) => {
+        sdk.ADBSendSMS($scope.selected_device.id, num, smsMessage, $scope.selected_protocol, (stat) => {
           switch (stat) {
             case sdk.stats.OK:
               send(i + 1)

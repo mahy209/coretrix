@@ -348,6 +348,15 @@ function initialize() {
     ValidateDay.min = 0;
     ValidateDay.max = 6;
 
+    function ValidateSMSProtocol(type) {
+      const types = [
+        'shellms',
+        'legacy'
+      ];
+      if (types.indexOf(type) > -1) return true;
+      return false;
+    }
+
     var ValidateDays = lib.validators.ValidateArray.clone();
     ValidateDays.val = ValidateDay;
 
@@ -512,6 +521,7 @@ function initialize() {
         ValidateParentToken: ValidateParentToken,
         ValidateOrIgnoreDatePeriod: ValidateOrIgnoreDatePeriod,
         ValidateOrIgnoreSchedule: ValidateOrIgnoreSchedule,
-        ValidateDay: ValidateDay
+        ValidateDay: ValidateDay,
+        ValidateSMSProtocol: ValidateSMSProtocol
     };
 }

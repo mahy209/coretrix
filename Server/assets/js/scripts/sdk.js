@@ -386,12 +386,14 @@ sdk.factory('sdk', ['$http', function ($http) {
     }, callback);
   }
 
-  function ADBSendSMS(serial, recipient, message, callback) {
+  function ADBSendSMS(serial, recipient, message, protocol, callback) {
     var token = Cookies.get('token');
     post("api/adb/sms/send", {
       serial: serial,
       recipient: recipient,
       message: message,
+      adb_protocol: protocol,
+      threshold: 30,
       token: token,
     }, callback);
   }

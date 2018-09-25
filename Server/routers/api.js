@@ -271,6 +271,8 @@ var inputvalidators = {
   serial: validators.ValidateString,
   recipient: validators.ValidateString,
   message: validators.ValidateString,
+  adb_protocol: validators.ValidateSMSProtocol,
+  threshold: validators.ValidateNumber,
   // update name and subjects
   subjects: data.validators.ValidateSubjects,
   // fetch contacts with classes, exams, logs
@@ -378,7 +380,7 @@ registerApiCall("/teacher/posts/remove", ["token", "id"], userDocDefault, data.R
 
 // adb
 registerApiCall("/adb/devices/list", ["token"], userDocDefault, data.ListDevices);
-registerApiCall("/adb/sms/send", ["token", "serial", "recipient", "message"], userDocDefault, data.SendSMS);
+registerApiCall("/adb/sms/send", ["token", "serial", "recipient", "message", "adb_protocol", "threshold"], userDocDefault, data.SendSMS);
 
 // profile
 registerApiCall("/profile/updatens", ["token", "fullname", "subjects"], userDocDefault, data.UpdateNameAndSubjects);

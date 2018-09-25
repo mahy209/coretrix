@@ -3833,41 +3833,68 @@ function getGrade(args, callback) {
 var adb = require('adbkit');
 var Promise = require('bluebird')
 var client = adb.createClient();
-const {
-  spawn
-} = require('child_process')
+const spawn = require('await-spawn')
 
-function sendSMS(args, callback) {
-
+async function sendSMS(args, callback) {
+  args.message += "\nSent by Coretrix";
   try {
-    const activity = spawn('adb', [
-      '-s',
-      args.serial,
-      'shell',
-      'am',
-      'startservice',
-      '-n',
-      'com.android.shellms/.sendSMS',
-      '-e',
-      'contact',
-      args.recipient,
-      '-e',
-      'msg',
-      '"' + args.message + '"'
-    ])
-
-    let error = false;
-
-    activity.stderr.on('data', () => {
-      error = true
-    });
-    activity.on('close', () => {
-      if (error) {
-        callback(null, stats.Failed);
-      } else {
-        callback(null, stats.OK);
-      }
-    })
+    switch (args.adb_protocol) {
+      case 'shellms':
+        await spawn('adb', [
+          '-s',
+          args.serial,
+          'shell',
+          'am',
+          'startservice',
+          '-n',
+          'com.android.shellms/.sendSMS',
+          '-e',
+          'contact',
+          args.recipient,
+          '-e',
+          'msg',
+          '"' + args.message + '"'
+        ])
+        break;
+      case 'legacy':
+        await spawn('adb', [
+          '-s',
+          args.serial,
+          'shell',
+          'am',
+          'start',
+          '-a',
+          'android.intent.action.SENDTO',
+          '-d',
+          'sms:' + args.recipient,
+          '--es',
+          'sms_body',
+          '"' + args.message + '"',
+          '--ez',
+          'exit_on_sent',
+          'true',
+        ]);
+        await setTimeout(() => {}, args.threshold);
+        await spawn('adb', [
+          '-s',
+          args.serial,
+          'shell',
+          'input',
+          'keyevent',
+          '22'
+        ]);
+        await setTimeout(() => {}, args.threshold);
+        await spawn('adb', [
+          '-s',
+          args.serial,
+          'shell',
+          'input',
+          'keyevent',
+          '66'
+        ]);
+        break;
+    }
+    callback(null, stats.OK);
   } catch (err) {
     callback(null, stats.Failed);
   }

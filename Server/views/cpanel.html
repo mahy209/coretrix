@@ -870,6 +870,19 @@
               </div>
 
               <div>
+                <label>البروتوكول</label>
+                <select class="browser-default" ng-model="selected_protocol">
+                  <option value="legacy">Legacy</option>
+                  <option value="shellms">ShellMS</option>
+                </select>
+              </div>
+
+              <!-- <div>
+                <label>انتظار - يتم تعديله ليناسب الهاتف</label>
+                <input type="number" min="0" max="4000" ng-model="threshold">
+              </div> -->
+
+              <div>
                 <label>النوع</label>
                 <select class="browser-default" ng-model="selected_type" ng-change="typeChanged()">
                   <option value="" disabled selected>اختر نوع التقرير</option>
@@ -879,6 +892,7 @@
                   <option value="message">رسالة</option>
                 </select>
               </div>
+
 
               <div ng-show="selected_type == 'lesson'">
                 <label>الحصة</label>
