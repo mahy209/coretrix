@@ -3214,7 +3214,7 @@ function setPayment(args, callback) {
         callback(err);
       } else {
         callback(null, stats.OK, lib.OverlayArray(query, updateQuery));
-        recordPayLog(payment.payed);
+        recordPayLog(payment ? payment.payed : 0);
       }
     });
   });
