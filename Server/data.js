@@ -3110,7 +3110,6 @@ function setPayLog(args, callback) {
     db.collection("paylogs").deleteOne({
       _id: new mongodb.ObjectID(args._id)
     }, (err, result) => {
-      console.log(args, err, result);
       ErrorAndCount(callback, err, result, fields.deletedCount, stats.Error);
     });
   } else {
