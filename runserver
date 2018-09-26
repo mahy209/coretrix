@@ -1,2 +1,2 @@
 #!/bin/bash
-nodemon Server/main.js --ignore liveorlocal.js
+nodemon -V Server/main.js --ignore Server/liveorlocal.js Server/assets Server/views

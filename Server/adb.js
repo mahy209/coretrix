@@ -23,5 +23,5 @@ function send (serial, recipient, message) {
   activity.on('close', () => { })
 }
 
-send('4276e8e27d14', '01111111259', 'fewafwa4f4aw')
+send('92010f74b01eb453', '01111111259', 'haha')
 // send('3004135e96608100', '01111111259', 'fewafwa4f4aw')

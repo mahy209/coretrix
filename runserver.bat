@@ -1,1 +1,1 @@
-nodemon Server/main.js --ignore liveorlocal.js
+nodemon -V Server/main.js --ignore liveorlocal.js
