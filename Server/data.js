@@ -3269,12 +3269,6 @@ function fetchClassLogs(args, callback) {
       [teacherForeignIdentifier]: teacherRep(args.userDoc),
       grade: args.grade
     }
-  }, {
-    $project: {
-      _id: 0,
-      id: 0,
-      [teacherForeignIdentifier]: 0
-    }
   }];
 
   if (args.ig_getcontacts) {
@@ -3331,12 +3325,6 @@ function fetchExamLogs(args, callback) {
     $match: {
       [teacherForeignIdentifier]: teacherRep(args.userDoc),
       grade: args.grade
-    }
-  }, {
-    $project: {
-      _id: 0,
-      id: 0,
-      [teacherForeignIdentifier]: 0
     }
   }]
 
