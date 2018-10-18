@@ -216,6 +216,10 @@ app.controller('paylogsCtrl', function ($scope, sdk) {
     });
   };
 
+  $scope.print = () => {
+    window.print();
+  }
+
   $('#paylogs_date').val(date.format(new Date(), 'MM/DD/YYYY'));
   $scope.refreshLogs();
 
