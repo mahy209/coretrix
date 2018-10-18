@@ -936,7 +936,8 @@
 
               <div ng-show="selected_type == 'message'">
                 <label for="msg_txt">الرسالة</label>
-                <textarea id="msg_txt" style="margin-bottom: unset;" ng-model="message" class="materialize-textarea"></textarea>
+                <textarea id="msg_txt" style="margin-bottom: unset;" ng-model="message" maxlength="70" class="materialize-textarea"></textarea>
+                <label ng-class="message.length >= 70 ? 'red-text' : ''">{{ message.length || 0 }}</label>
               </div>
 
             </div>

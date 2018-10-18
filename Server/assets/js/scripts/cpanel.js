@@ -289,7 +289,13 @@ app.controller('smsCtrl', function ($rootScope, $scope, $location, sdk) {
     if (params.type) $scope.selected_type = params.type
   }
 
-  $rootScope.variableListeners.push(init)
+  $rootScope.variableListeners.push(init);
+
+  $scope.checkMessageLength = (event) => {
+    if ($scope.message.length > 70) {
+      event.preventDefault();
+    }
+  };
 
   $scope.grade_changed = () => {
     $scope.loadClasses()
