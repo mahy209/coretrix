@@ -3153,14 +3153,18 @@ function setPayment(args, callback) {
     ], (err, payment) => {
       if (err) return;
 
+
       payment = payment[0];
 
       payment.student = payment.student[0];
       payment.item = payment.item[0];
 
+      if (payed == undefined) {
+        payed = payment.payed;
+      }
+
       const paylogAmount = args.payedAmount - payed;
 
-      if (paylogAmount <= 0) return;
       const added = args.payedAmount > payed;
 
       let message = [];
@@ -3182,12 +3186,12 @@ function setPayment(args, callback) {
 
   // delete payment
   if (args.payedAmount == 0) {
+    recordPayLog();
     db.collection("payments").deleteOne(query, (err, result) => {
       if (err) {
         return callback(err);
       } else {
         callback(null, stats.OK);
-        recordPayLog();
       }
     })
     return;
