@@ -515,12 +515,26 @@ app.controller('smsCtrl', function ($rootScope, $scope, $location, sdk) {
 
     switch ($scope.selected_type) {
       case 'lesson':
+        var logs = $scope.class_logs.filter(log => log.selected);
+        if ($scope.filterAttendance) {
+          console.log({
+            logs
+          });
+          logs = logs.filter(item => !item.log || !item.log.attendant);
+          console.log({
+            logs
+          });
+        }
         if (!$scope.selected_class) return toast('برجاء اختيار الحصة')
-        process($scope.class_logs.filter(log => log.selected), formatClass)
+        process(logs, formatClass)
         break
       case 'exam':
+        var logs = $scope.exam_logs.filter(log => log.selected);
+        if ($scope.filterAttendance) {
+          logs = logs.filter(item => !item.log || !item.log.attendant);
+        }
         if (!$scope.selected_exam) return toast('برجاء اختيار الامتحان')
-        process($scope.exam_logs.filter(log => log.selected), formatExam)
+        process(logs, formatExam)
         break
       case 'message':
         if (!$scope.message) return toast('برجاء كتابة رسالة')

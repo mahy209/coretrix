@@ -1433,6 +1433,14 @@
             class="checkbox" />
           <label for="toggleSelect">تحديد الكل</label>
 
+          <div ng-show="selected_type != 'message'">
+            <input type="checkbox"
+              ng-model="filterAttendance"
+              id="filterAttendance"
+              class="checkbox" />
+            <label for="filterAttendance">لم يحضر</label>
+          </div>
+
           <div>
             <div class="logs containers"
               ng-show="selected_type == 'lesson'">
@@ -1449,7 +1457,7 @@
                   </th>
                 </tr>
                 <tr ng-repeat="n in class_logs"
-                  ng-show="!selected_group || n.group == selected_group.id">
+                  ng-show="(!selected_group || n.group == selected_group.id) && (!filterAttendance || !n.log.attendant)">
                   <td>
                     <!-- TODO: fix css -->
                     <input type="checkbox"
@@ -1485,7 +1493,7 @@
                   </th>
                 </tr>
                 <tr ng-repeat="n in exam_logs"
-                  ng-show="!selected_group || n.group == selected_group.id">
+                ng-show="(!selected_group || n.group == selected_group.id) && (!filterAttendance || !n.log.attendant)">
                   <td>
                     <!-- TODO: fix css -->
                     <input type="checkbox"
