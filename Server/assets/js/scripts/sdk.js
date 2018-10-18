@@ -545,14 +545,16 @@ sdk.factory('sdk', ['$http', function ($http) {
     }, callback);
   }
 
-  function SearchStudents(name, callback, search_limit, startid) {
+  function SearchStudents(name, callback, grades, search_limit, startid) {
     var token = Cookies.get('token');
-    post("api/search/students", {
+    var query = {
       name: name,
       search_limit: search_limit ? search_limit : 5,
       startid: startid ? startid : 0,
       token: token
-    }, callback);
+    };
+    if (grades) query.ig_grades = grades;
+    post("api/search/students", query, callback);
   }
 
   function RegisterStudent(fullname, callback) {

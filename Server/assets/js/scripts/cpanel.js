@@ -301,8 +301,14 @@ app.controller('smsCtrl', function ($rootScope, $scope, $location, sdk) {
     }
   };
 
+  $scope.allStudentsChange = () => {
+    $scope.selected_type = "message";
+    $scope.selected_grade = null;
+    $scope.grade_changed();
+  }
+
   $scope.grade_changed = () => {
-    $scope.loadClasses()
+    if ($scope.selected_grade) $scope.loadClasses();
     sdk.ListStudents(0, 0, (stat, students) => {
       switch (stat) {
         case sdk.stats.OK:
@@ -313,7 +319,7 @@ app.controller('smsCtrl', function ($rootScope, $scope, $location, sdk) {
       }
     }, $scope.selected_grade, undefined, true);
 
-    sdk.ListGroups(parseInt($scope.selected_grade), (stat, groups) => {
+    if ($scope.selected_grade) sdk.ListGroups(parseInt($scope.selected_grade), (stat, groups) => {
       switch (stat) {
         case sdk.stats.OK:
           $scope.groups = groups
@@ -444,7 +450,7 @@ app.controller('smsCtrl', function ($rootScope, $scope, $location, sdk) {
   }
 
   $scope.send = () => {
-    if (!$scope.selected_grade) return toast('برجاء اختيار السنه')
+    if (!$scope.selected_grade && !$scope.allStudents) return toast('برجاء اختيار السنه')
     if (!$scope.selected_type) return toast('برجاء اختيار نوع التقرير')
     if (!$scope.selected_device) return toast('برجاء اختيار الهاتف')
 

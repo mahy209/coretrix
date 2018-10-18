@@ -1222,7 +1222,16 @@
           ng-show="tab=='sms'">
           <div class="card-panel">
             <div class="sms_filter">
+
               <div>
+                <input type="checkbox"
+                  id="allStudents"
+                  ng-model="allStudents"
+                  ng-change="allStudentsChange()" />
+                <label for="allStudents">كل الطلاب</label>
+              </div>
+
+              <div ng-hide="allStudents">
                 <label>اختر السنة</label>
                 <select id="gradesSelector"
                   class="browser-default"
@@ -1235,7 +1244,7 @@
                 </select>
               </div>
 
-              <div>
+              <div ng-hide="allStudents">
                 <label>المجموعة</label>
                 <div style="display: flex; align-items: baseline;">
                   <select style="margin-left: 12px"
@@ -1293,8 +1302,8 @@
                   <option value=""
                     disabled
                     selected>اختر نوع التقرير</option>
-                  <option value="lesson">حصة</option>
-                  <option value="exam">امتحان</option>
+                  <option ng-hide="allStudents" value="lesson">حصة</option>
+                  <option ng-hide="allStudents" value="exam">امتحان</option>
                   <!-- <option value="report">تقرير شهري</option> -->
                   <option value="message">رسالة</option>
                 </select>
