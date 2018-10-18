@@ -2403,7 +2403,8 @@ function linkStudent(args, callback) {
     if (linkExists) return callback(null, stats.Exists);
     validators.ValidateUser(args.student, {
       refered: 1,
-      fullname: 1
+      fullname: 1,
+      firstname: 1,
     }, (result) => {
       if (!result) return callback(null, stats.NonExisting);
       mongoh.GetNextSequence(db, "links", {}, 'id', lib.IntIncrementer, (newid) => {
@@ -2413,6 +2414,7 @@ function linkStudent(args, callback) {
           [teacherForeignIdentifier]: teacherRep(args.userDoc),
           [studentForeignIdentifier]: args.student,
           fullname: result.fullname,
+          firstname: result.firstname,
           grade: args.grade,
           group: args.group
         }, function (err, result) {
