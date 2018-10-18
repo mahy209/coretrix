@@ -1283,24 +1283,12 @@ function SearchStudents(args, callback) {
     $text: {
       $search: args.name
     },
-    usertype: 'student'
   };
   if (args.ig_grades) query.grade = {
     '$in': args.ig_grades
   };
-  var a = db.collection("users").find({
-    $text: {
-      $search: args.name
-    },
-    usertype: 'student'
-  }, {
+  var a = db.collection("links").find(query, {
     _id: 0,
-    firstname: 1,
-    fathername: 1,
-    grandname: 1,
-    lastname: 1,
-    username: 1,
-    [identifier]: 1
   });
   a.count((err, count) => {
     if (err) return callback(err);
@@ -1315,7 +1303,7 @@ function SearchStudents(args, callback) {
           returner.result.push({
             username: arr[i].username,
             [identifier]: arr[i][identifier],
-            fullname: `${arr[i].firstname} ${arr[i].fathername} ${arr[i].grandname} ${arr[i].lastname}`
+            fullname: arr[i].fullname,
           });
         }
       }

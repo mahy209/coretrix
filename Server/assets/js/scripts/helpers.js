@@ -1,4 +1,4 @@
-function prioritizeNumber(contacts) {
+function prioritizeNumber(contacts, goFor="parent") {
   let indexes = {}
   for (let i = 0; i < contacts.length; i++) {
     const contact = contacts[i]
@@ -6,7 +6,12 @@ function prioritizeNumber(contacts) {
       indexes[contact.type] = contact.phonecode + contact.number;
     }
   }
-  return indexes.parent1 ? indexes.parent1 : indexes.parent2;
+  if (goFor == "parent") {
+    return indexes.parent1 ? indexes.parent1 : indexes.parent2;
+  }
+  if (goFor == "student") {
+    return indexes.mobile;
+  }
 }
 
 function formatSignature(profile) {

@@ -311,7 +311,16 @@ app.controller('smsCtrl', function ($rootScope, $scope, $location, sdk) {
         default:
           break
       }
-    }, $scope.selected_grade, undefined, true)
+    }, $scope.selected_grade, undefined, true);
+
+    sdk.ListGroups(parseInt($scope.selected_grade), (stat, groups) => {
+      switch (stat) {
+        case sdk.stats.OK:
+          $scope.groups = groups
+          break
+        default:
+      }
+    });
   }
 
   $scope.loadDevices = () => {
@@ -444,17 +453,23 @@ app.controller('smsCtrl', function ($rootScope, $scope, $location, sdk) {
     $scope.smsFailed = false
 
     let process = (logs, format) => {
+      if ($scope.selected_group) {
+        logs = logs.filter(log => log.group == $scope.selected_group.id);
+      }
       $scope.sendingSMS = true
 
       let send = (i) => {
-        if (i >= logs.length) return
+        if (i >= logs.length) return;
 
         const log = logs[i]
 
-        let num = prioritizeNumber(log.contacts)
-
+        // Log progress
         $scope.smsStudent = log.fullname
         $scope.smsProgress = ((i + 1) / logs.length) * 100
+
+        let num = prioritizeNumber(log.contacts)
+
+        if (!num) return send(i + 1);
 
         let smsMessage = format(log)
 
@@ -470,7 +485,7 @@ app.controller('smsCtrl', function ($rootScope, $scope, $location, sdk) {
           }
         })
       }
-      send(0)
+      send(0);
     }
 
     const formatClass = (log) => {

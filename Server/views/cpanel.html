@@ -1236,6 +1236,24 @@
               </div>
 
               <div>
+                <label>المجموعة</label>
+                <div style="display: flex; align-items: baseline;">
+                  <select style="margin-left: 12px"
+                    class="browser-default"
+                    ng-options="i as i.name for i in groups"
+                    ng-model="selected_group">
+                    <option value=""
+                      disabled
+                      selected>المجموعة</option>
+                  </select>
+                  <button ng-click="selected_group = null"
+                    class="waves-effect waves-light blue-grey btn">
+                    <i class="fa fa-trash"></i></i>
+                  </button>
+                </div>
+              </div>
+
+              <div>
                 <label>الهاتف</label>
                 <div style="display: flex; align-items: baseline;">
                   <select style="margin-left: 12px"
@@ -1421,7 +1439,8 @@
                     درجة الواجب
                   </th>
                 </tr>
-                <tr ng-repeat="n in class_logs">
+                <tr ng-repeat="n in class_logs"
+                  ng-show="!selected_group || n.group == selected_group.id">
                   <td>
                     <!-- TODO: fix css -->
                     <input type="checkbox"
@@ -1456,7 +1475,8 @@
                     الدرجة
                   </th>
                 </tr>
-                <tr ng-repeat="n in exam_logs">
+                <tr ng-repeat="n in exam_logs"
+                  ng-show="!selected_group || n.group == selected_group.id">
                   <td>
                     <!-- TODO: fix css -->
                     <input type="checkbox"
@@ -1483,7 +1503,8 @@
                     اسم الطالب
                   </th>
                 </tr>
-                <tr ng-repeat="n in message_students">
+                <tr ng-repeat="n in message_students"
+                  ng-show="!selected_group || n.group == selected_group.id">
                   <td>
                     <!-- TODO: fix css -->
                     <input type="checkbox"
