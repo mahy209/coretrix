@@ -1302,8 +1302,10 @@
                   <option value=""
                     disabled
                     selected>اختر نوع التقرير</option>
-                  <option ng-hide="allStudents" value="lesson">حصة</option>
-                  <option ng-hide="allStudents" value="exam">امتحان</option>
+                  <option ng-hide="allStudents"
+                    value="lesson">حصة</option>
+                  <option ng-hide="allStudents"
+                    value="exam">امتحان</option>
                   <!-- <option value="report">تقرير شهري</option> -->
                   <option value="message">رسالة</option>
                 </select>
@@ -1493,7 +1495,7 @@
                   </th>
                 </tr>
                 <tr ng-repeat="n in exam_logs"
-                ng-show="(!selected_group || n.group == selected_group.id) && (!filterAttendance || !n.log.attendant)">
+                  ng-show="(!selected_group || n.group == selected_group.id) && (!filterAttendance || !n.log.attendant)">
                   <td>
                     <!-- TODO: fix css -->
                     <input type="checkbox"
@@ -1735,14 +1737,10 @@
                     <input type="text"
                       class="validate"
                       ng-model="teacherName">
-                    <label>المادة</label>
-                    <select class="browser-default"
-                      ng-model="selected_subject"
-                      ng-options="s as s for s in subjects">
-                      <option value=""
-                        disabled
-                        selected>اختر المادة</option>
-                    </select>
+                    <label>المواد</label>
+                    <input type="text"
+                      class="validate"
+                      ng-model="subjects">
                     <button style="margin-top: 20px;"
                       ng-click="updateNameAndSubject()"
                       class="btn blue-grey-background">حفظ</button>

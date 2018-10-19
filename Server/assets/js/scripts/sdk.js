@@ -405,11 +405,11 @@ sdk.factory('sdk', ['$http', function ($http) {
     }, callback);
   }
 
-  function updateNameAndSubject(name, subject, callback) {
+  function updateNameAndSubject(name, subjects, callback) {
     var token = Cookies.get('token');
     post("api/profile/updatens", {
       fullname: name,
-      subjects: [subject],
+      subjects: subjects,
       token: token,
     }, callback);
   }

@@ -16,8 +16,8 @@ function prioritizeNumber(contacts, goFor="parent") {
 
 function formatSignature(profile) {
   const teacher = profile.name;
-  const subject = subjects[profile.subjects[0]];
-  return `استاذ ${teacher} مدرس ${subject}`;
+  const subjects = profile.subjects;
+  return `استاذ ${teacher} مدرس ${subjects}`;
 }
 
 function formatPayClass(payment, price) {

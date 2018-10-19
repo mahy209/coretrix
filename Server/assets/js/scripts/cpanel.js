@@ -517,13 +517,7 @@ app.controller('smsCtrl', function ($rootScope, $scope, $location, sdk) {
       case 'lesson':
         var logs = $scope.class_logs.filter(log => log.selected);
         if ($scope.filterAttendance) {
-          console.log({
-            logs
-          });
           logs = logs.filter(item => !item.log || !item.log.attendant);
-          console.log({
-            logs
-          });
         }
         if (!$scope.selected_class) return toast('برجاء اختيار الحصة')
         process(logs, formatClass)
@@ -1996,7 +1990,6 @@ app.controller('settingsCtrl', function ($rootScope, $scope, sdk) {
   $scope.grades_names = sdk.grades_names
   // $rootScope.variableListeners.push()
   $scope.all_grades = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
-  $scope.subjects = sdk.subjects
   var gs
   try {
     gs = JSON.parse(Cookies.get('grades'))
@@ -2078,6 +2071,7 @@ app.controller('settingsCtrl', function ($rootScope, $scope, sdk) {
     if (wanna_return) return
     $('#confirmChangePassword_modal')[0].M_Modal.open()
   }
+
   $scope.changePass = () => {
     sdk.ChangePassword($scope.password, $scope.oldpassword, (stat, result) => {
       switch (stat) {
@@ -2097,14 +2091,14 @@ app.controller('settingsCtrl', function ($rootScope, $scope, sdk) {
 
   sdk.GetNameAndSubject((stat, result) => {
     $scope.teacherName = result.name
-    $scope.selected_subject = sdk.subjects[result.subjects[0]]
+    $scope.subjects = result.subjects;
   })
 
   $scope.updateNameAndSubject = () => {
     if ($scope.teacherName == null) return toast('برجاء ادخال اسم المدرس')
-    if ($scope.selected_subject == null) return toast('برجاء اختيار المادة')
+    if ($scope.subjects == null) return toast('برجاء كتابة اسم المواد')
 
-    sdk.UpdateNameAndSubject($scope.teacherName, Object.values(sdk.subjects).indexOf($scope.selected_subject) + 1, (stat) => {
+    sdk.UpdateNameAndSubject($scope.teacherName, $scope.subjects, (stat) => {
       switch (stat) {
         case sdk.stats.OK:
           toast('تم حفظ البيانات بنجاح')
