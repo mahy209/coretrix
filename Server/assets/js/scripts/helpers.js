@@ -1,4 +1,4 @@
-function prioritizeNumber(contacts) {
+function prioritizeNumber(contacts, goFor="parent") {
   let indexes = {}
   for (let i = 0; i < contacts.length; i++) {
     const contact = contacts[i]
@@ -6,13 +6,18 @@ function prioritizeNumber(contacts) {
       indexes[contact.type] = contact.phonecode + contact.number;
     }
   }
-  return indexes.parent1 ? indexes.parent1 : indexes.parent2;
+  if (goFor == "parent") {
+    return indexes.parent1 ? indexes.parent1 : indexes.parent2;
+  }
+  if (goFor == "student") {
+    return indexes.mobile;
+  }
 }
 
 function formatSignature(profile) {
   const teacher = profile.name;
-  const subject = subjects[profile.subjects[0]];
-  return `استاذ ${teacher} مدرس ${subject}`;
+  const subjects = profile.subjects;
+  return `استاذ ${teacher} مدرس ${subjects}`;
 }
 
 function formatPayClass(payment, price) {
@@ -39,17 +44,17 @@ const intro = 'نعلم سيادتكم بان الطالب';
 
 function formatExamReport(profile, log, max_mark, examName, nointro) {
   if (!log.log) log.log = {};
-  const student = log.fullname;
+  const student = log.firstname;
   const attendant = log.log.attendant;
   const mark = log.log.mark;
   const option_attendant = attendant ? 'حضر' : 'لم يحضر';
   const option_mark = mark ? ('حصل على ' + mark + ' من ' + max_mark) : 'لم تسجل درجة للطالب';
-  return (nointro ? '' : `${intro} ${student}`) + `${option_attendant} و${option_mark} امتحان ${examName}` + (nointro ? '' : ` - ${formatSignature(profile)}`);
+  return (nointro ? '' : `${intro} ${student} `) + `${option_attendant} و${option_mark} امتحان ${examName}` + (nointro ? '' : ` - ${formatSignature(profile)}`);
 }
 
 function formatClassReport(profile, log, options, classDay, nointro) {
   if (!log.log) log.log = {};
-  const student = log.fullname;
+  const student = log.firstname;
   const homework = log.log.homework;
   const quiz = log.log.quiz;
   const attendant = log.log.attendant;
@@ -63,7 +68,7 @@ function formatClassReport(profile, log, options, classDay, nointro) {
     (options.attendant ? option_attendant : '') +
     (options.homework ? ' و' + option_homework : '') +
     (options.quiz ? ' و' + option_quiz : '');
-  return ((nointro ? '' : `${intro} ${student}`) + `${options_string} ${classDay}` + (nointro ? '' : ` - ${formatSignature(profile)}`)).replace('  ', ' ').trim();
+  return ((nointro ? '' : `${intro} ${student} `) + `${options_string}` + (nointro ? '' : ` - ${formatSignature(profile)}`)).replace('  ', ' ').trim();
 }
 
 function changeLogger(elementName) {

@@ -1283,24 +1283,12 @@ function SearchStudents(args, callback) {
     $text: {
       $search: args.name
     },
-    usertype: 'student'
   };
   if (args.ig_grades) query.grade = {
     '$in': args.ig_grades
   };
-  var a = db.collection("users").find({
-    $text: {
-      $search: args.name
-    },
-    usertype: 'student'
-  }, {
+  var a = db.collection("links").find(query, {
     _id: 0,
-    firstname: 1,
-    fathername: 1,
-    grandname: 1,
-    lastname: 1,
-    username: 1,
-    [identifier]: 1
   });
   a.count((err, count) => {
     if (err) return callback(err);
@@ -1315,7 +1303,7 @@ function SearchStudents(args, callback) {
           returner.result.push({
             username: arr[i].username,
             [identifier]: arr[i][identifier],
-            fullname: `${arr[i].firstname} ${arr[i].fathername} ${arr[i].grandname} ${arr[i].lastname}`
+            fullname: arr[i].fullname,
           });
         }
       }
@@ -2403,7 +2391,8 @@ function linkStudent(args, callback) {
     if (linkExists) return callback(null, stats.Exists);
     validators.ValidateUser(args.student, {
       refered: 1,
-      fullname: 1
+      fullname: 1,
+      firstname: 1,
     }, (result) => {
       if (!result) return callback(null, stats.NonExisting);
       mongoh.GetNextSequence(db, "links", {}, 'id', lib.IntIncrementer, (newid) => {
@@ -2413,6 +2402,7 @@ function linkStudent(args, callback) {
           [teacherForeignIdentifier]: teacherRep(args.userDoc),
           [studentForeignIdentifier]: args.student,
           fullname: result.fullname,
+          firstname: result.firstname,
           grade: args.grade,
           group: args.group
         }, function (err, result) {
@@ -3153,14 +3143,18 @@ function setPayment(args, callback) {
     ], (err, payment) => {
       if (err) return;
 
+
       payment = payment[0];
 
       payment.student = payment.student[0];
       payment.item = payment.item[0];
 
+      if (payed == undefined) {
+        payed = payment.payed;
+      }
+
       const paylogAmount = args.payedAmount - payed;
 
-      if (paylogAmount <= 0) return;
       const added = args.payedAmount > payed;
 
       let message = [];
@@ -3182,12 +3176,12 @@ function setPayment(args, callback) {
 
   // delete payment
   if (args.payedAmount == 0) {
+    recordPayLog();
     db.collection("payments").deleteOne(query, (err, result) => {
       if (err) {
         return callback(err);
       } else {
         callback(null, stats.OK);
-        recordPayLog();
       }
     })
     return;
@@ -3269,12 +3263,6 @@ function fetchClassLogs(args, callback) {
       [teacherForeignIdentifier]: teacherRep(args.userDoc),
       grade: args.grade
     }
-  }, {
-    $project: {
-      _id: 0,
-      id: 0,
-      [teacherForeignIdentifier]: 0
-    }
   }];
 
   if (args.ig_getcontacts) {
@@ -3331,12 +3319,6 @@ function fetchExamLogs(args, callback) {
     $match: {
       [teacherForeignIdentifier]: teacherRep(args.userDoc),
       grade: args.grade
-    }
-  }, {
-    $project: {
-      _id: 0,
-      id: 0,
-      [teacherForeignIdentifier]: 0
     }
   }]
 

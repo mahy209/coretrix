@@ -52,7 +52,7 @@ body, body * {
         color: #444 !important;
         text-shadow: unset !important;
     }
-    .hideonprint {
+    .hideonprint, .material-tooltip, .modal {
         display: none !important;
     }
     .showonprint {

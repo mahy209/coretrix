@@ -157,7 +157,6 @@ var inputvalidators = {
   "bidtype": data.validators.ValidateBidType,
   "addresses": validators.ValidateAddresses,
   "gender": validators.ValidateGender,
-  "subjects": data.validators.ValidateSubjects,
   "timetables": validators.ValidateTimetables,
   // timetable collision
   "ttcoll_usernames": validators.ValidateOrIgnoreStringArray,
@@ -274,7 +273,7 @@ var inputvalidators = {
   adb_protocol: validators.ValidateSMSProtocol,
   threshold: validators.ValidateNumber,
   // update name and subjects
-  subjects: data.validators.ValidateSubjects,
+  subjects: validators.ValidateString,
   // fetch contacts with classes, exams, logs
   ig_getcontacts: validators.ValidateOrIgnoreBoolean,
   // add expense

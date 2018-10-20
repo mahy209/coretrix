@@ -216,6 +216,10 @@ app.controller('paylogsCtrl', function ($scope, sdk) {
     });
   };
 
+  $scope.print = () => {
+    window.print();
+  }
+
   $('#paylogs_date').val(date.format(new Date(), 'MM/DD/YYYY'));
   $scope.refreshLogs();
 
@@ -289,10 +293,22 @@ app.controller('smsCtrl', function ($rootScope, $scope, $location, sdk) {
     if (params.type) $scope.selected_type = params.type
   }
 
-  $rootScope.variableListeners.push(init)
+  $rootScope.variableListeners.push(init);
+
+  $scope.checkMessageLength = (event) => {
+    if ($scope.message.length > 70) {
+      event.preventDefault();
+    }
+  };
+
+  $scope.allStudentsChange = () => {
+    $scope.selected_type = "message";
+    $scope.selected_grade = null;
+    $scope.grade_changed();
+  }
 
   $scope.grade_changed = () => {
-    $scope.loadClasses()
+    if ($scope.selected_grade) $scope.loadClasses();
     sdk.ListStudents(0, 0, (stat, students) => {
       switch (stat) {
         case sdk.stats.OK:
@@ -301,7 +317,16 @@ app.controller('smsCtrl', function ($rootScope, $scope, $location, sdk) {
         default:
           break
       }
-    }, $scope.selected_grade, undefined, true)
+    }, $scope.selected_grade, undefined, true);
+
+    if ($scope.selected_grade) sdk.ListGroups(parseInt($scope.selected_grade), (stat, groups) => {
+      switch (stat) {
+        case sdk.stats.OK:
+          $scope.groups = groups
+          break
+        default:
+      }
+    });
   }
 
   $scope.loadDevices = () => {
@@ -424,27 +449,37 @@ app.controller('smsCtrl', function ($rootScope, $scope, $location, sdk) {
     }, $scope.selected_grade, undefined, true)
   }
 
+  $scope.selected_recipient = 'parent';
   $scope.send = () => {
-    if (!$scope.selected_grade) return toast('برجاء اختيار السنه')
+    if (!$scope.selected_grade && !$scope.allStudents) return toast('برجاء اختيار السنه')
     if (!$scope.selected_type) return toast('برجاء اختيار نوع التقرير')
     if (!$scope.selected_device) return toast('برجاء اختيار الهاتف')
+    if (!$scope.selected_recipient) return toast('برجاء اختيار مستلم الرسالة')
 
     $scope.smsStudent = ''
     $scope.smsProgress = 0
     $scope.smsFailed = false
 
     let process = (logs, format) => {
+      if ($scope.selected_group) {
+        logs = logs.filter(log => log.group == $scope.selected_group.id);
+      }
       $scope.sendingSMS = true
 
       let send = (i) => {
-        if (i >= logs.length) return
+        if (i >= logs.length) return;
 
         const log = logs[i]
 
-        let num = prioritizeNumber(log.contacts)
-
+        // Log progress
         $scope.smsStudent = log.fullname
         $scope.smsProgress = ((i + 1) / logs.length) * 100
+
+        let num = prioritizeNumber(log.contacts, $scope.selected_recipient);
+
+        console.log({log, num});
+
+        if (!num) return send(i + 1);
 
         let smsMessage = format(log)
 
@@ -460,7 +495,7 @@ app.controller('smsCtrl', function ($rootScope, $scope, $location, sdk) {
           }
         })
       }
-      send(0)
+      send(0);
     }
 
     const formatClass = (log) => {
@@ -484,12 +519,20 @@ app.controller('smsCtrl', function ($rootScope, $scope, $location, sdk) {
 
     switch ($scope.selected_type) {
       case 'lesson':
+        var logs = $scope.class_logs.filter(log => log.selected);
+        if ($scope.filterAttendance) {
+          logs = logs.filter(item => !item.log || !item.log.attendant);
+        }
         if (!$scope.selected_class) return toast('برجاء اختيار الحصة')
-        process($scope.class_logs.filter(log => log.selected), formatClass)
+        process(logs, formatClass)
         break
       case 'exam':
+        var logs = $scope.exam_logs.filter(log => log.selected);
+        if ($scope.filterAttendance) {
+          logs = logs.filter(item => !item.log || !item.log.attendant);
+        }
         if (!$scope.selected_exam) return toast('برجاء اختيار الامتحان')
-        process($scope.exam_logs.filter(log => log.selected), formatExam)
+        process(logs, formatExam)
         break
       case 'message':
         if (!$scope.message) return toast('برجاء كتابة رسالة')
@@ -1951,7 +1994,6 @@ app.controller('settingsCtrl', function ($rootScope, $scope, sdk) {
   $scope.grades_names = sdk.grades_names
   // $rootScope.variableListeners.push()
   $scope.all_grades = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
-  $scope.subjects = sdk.subjects
   var gs
   try {
     gs = JSON.parse(Cookies.get('grades'))
@@ -2033,6 +2075,7 @@ app.controller('settingsCtrl', function ($rootScope, $scope, sdk) {
     if (wanna_return) return
     $('#confirmChangePassword_modal')[0].M_Modal.open()
   }
+
   $scope.changePass = () => {
     sdk.ChangePassword($scope.password, $scope.oldpassword, (stat, result) => {
       switch (stat) {
@@ -2052,14 +2095,14 @@ app.controller('settingsCtrl', function ($rootScope, $scope, sdk) {
 
   sdk.GetNameAndSubject((stat, result) => {
     $scope.teacherName = result.name
-    $scope.selected_subject = sdk.subjects[result.subjects[0]]
+    $scope.subjects = result.subjects;
   })
 
   $scope.updateNameAndSubject = () => {
     if ($scope.teacherName == null) return toast('برجاء ادخال اسم المدرس')
-    if ($scope.selected_subject == null) return toast('برجاء اختيار المادة')
+    if ($scope.subjects == null) return toast('برجاء كتابة اسم المواد')
 
-    sdk.UpdateNameAndSubject($scope.teacherName, Object.values(sdk.subjects).indexOf($scope.selected_subject) + 1, (stat) => {
+    sdk.UpdateNameAndSubject($scope.teacherName, $scope.subjects, (stat) => {
       switch (stat) {
         case sdk.stats.OK:
           toast('تم حفظ البيانات بنجاح')
