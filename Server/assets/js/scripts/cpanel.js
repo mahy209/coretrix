@@ -449,10 +449,12 @@ app.controller('smsCtrl', function ($rootScope, $scope, $location, sdk) {
     }, $scope.selected_grade, undefined, true)
   }
 
+  $scope.selected_recipient = 'parent';
   $scope.send = () => {
     if (!$scope.selected_grade && !$scope.allStudents) return toast('برجاء اختيار السنه')
     if (!$scope.selected_type) return toast('برجاء اختيار نوع التقرير')
     if (!$scope.selected_device) return toast('برجاء اختيار الهاتف')
+    if (!$scope.selected_recipient) return toast('برجاء اختيار مستلم الرسالة')
 
     $scope.smsStudent = ''
     $scope.smsProgress = 0
@@ -473,7 +475,9 @@ app.controller('smsCtrl', function ($rootScope, $scope, $location, sdk) {
         $scope.smsStudent = log.fullname
         $scope.smsProgress = ((i + 1) / logs.length) * 100
 
-        let num = prioritizeNumber(log.contacts)
+        let num = prioritizeNumber(log.contacts, $scope.selected_recipient);
+
+        console.log({log, num});
 
         if (!num) return send(i + 1);
 

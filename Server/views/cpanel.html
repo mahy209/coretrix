@@ -1311,6 +1311,16 @@
                 </select>
               </div>
 
+              <div>
+                <select class="browser-default"
+                  ng-options="i as {'parent': 'ولى الامر', 'student': 'الطالب'}[i] for i in ['parent', 'student']"
+                  ng-model="selected_recipient">
+                  <option value=""
+                    disabled
+                    selected>إختر</option>
+                </select>
+              </div>
+
 
               <div ng-show="selected_type == 'lesson'">
                 <label>الحصة</label>
