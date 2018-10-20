@@ -147,6 +147,18 @@
             </td>
             <td>{{grades_names_long[grade]}}</td>
           </tr>
+          <tr>
+            <td>عدد الحصص التى لم يحضرها
+              <span>:</span>
+            </td>
+            <td>{{unattendedClassesCount || 0}}</td>
+          </tr>
+          <tr>
+            <td>عدد الامتحانات التى لم يحضرها
+              <span>:</span>
+            </td>
+            <td>{{unattendedExamsCount || 0}}</td>
+          </tr>
           <tr ng-repeat="p in items">
             <td>{{p.name}}
               <span>:</span>

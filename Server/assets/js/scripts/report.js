@@ -74,8 +74,22 @@ app.controller("mainCtrl", function ($rootScope, $scope, sdk) {
       sdk.FetchLogs(parsed, $scope.grade, datePeriod, (stat, result) => {
         if (stat == sdk.stats.OK) {
           $scope.loaded = true;
+          
           $scope.exams = result.exams;
+          $scope.unattendedExamsCount = 0;
+          $scope.exams.forEach(examLog => {
+            if (!examLog.log.attendant) {
+              $scope.unattendedExamsCount++;
+            }
+          });
+
           $scope.classes = result.classes;
+          $scope.unattendedClassesCount = 0;
+          $scope.classes.forEach(classLog => {
+            if (!classLog.log.attendant) {
+              $scope.unattendedClassesCount++;
+            }
+          });
           for (let i = 0; i < result.items.length; i++) {
             const item = result.items[i];
             const payment = item.log || {};
