@@ -66,6 +66,13 @@ app.controller("mainCtrl", function ($rootScope, $scope, sdk) {
         $("#exam_selector").slideDown("slow");
         loadStuff();
 		}
+
+    $scope.setGlobalAttendance = () => {
+      for (let i = 0; i < $scope.logs.length; i++) {
+        $scope.logs[i].log.attendant = $scope.globalAttendanceCheck;
+        $scope.attendanceChanged($scope.logs[i]);
+      }
+    }
 		
 		$scope.sendSMS = () => {
 			window.open(`/cpanel#tab=sms&type=exam&grade=${$scope.selected_grade}&exam=${$scope.selected_exam.id}` , '_blank');
@@ -201,8 +208,10 @@ app.controller("mainCtrl", function ($rootScope, $scope, sdk) {
     $scope.markChanged = (n) => {
         try {
             sdk.LogExam(n.studentid, $scope.selected_exam.id, null, n.log.mark, (stat, result) => {
-                if (stat != sdk.stats.OK) {
-                    toast('تعذر تعديل حضور الطالب!', gradients.error);
+                if (stat == sdk.stats.OK) {
+                    toast('تم حفظ الدرجة');
+                } else {
+                  toast('تعذر تعديل حضور الطالب!', gradients.error);
                 }
             });
         } catch (e) {
@@ -218,8 +227,10 @@ app.controller("mainCtrl", function ($rootScope, $scope, sdk) {
     $scope.attendanceChanged = (n) => {
         try {
             sdk.LogExam(n.studentid, $scope.selected_exam.id, n.log.attendant, null, (stat, result) => {
-                if (stat != sdk.stats.OK) {
-                    toast('تعذر تعديل حضور الطالب!', gradients.error);
+                if (stat == sdk.stats.OK) {
+                    toast('تم حفظ الحضور');
+                } else {
+                  toast('تعذر تعديل حضور الطالب!', gradients.error);
                 }
             });
         } catch (e) {
