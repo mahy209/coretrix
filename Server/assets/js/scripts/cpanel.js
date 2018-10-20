@@ -204,9 +204,23 @@ app.controller('paylogsCtrl', function ($scope, sdk) {
       switch (stat) {
         case sdk.stats.OK:
           let totalAmount = 0;
+          let totalIncome = 0;
+          let totalOutcome = 0;
           for (let i = 0; i < paylogs.length; i++) {
-            totalAmount += paylogs[i].payed;
+            const payed = paylogs[i].payed;
+            console.log({
+              payed
+            });
+            if (payed > 0) {
+              totalIncome += payed;
+            }
+            if (payed < 0) {
+              totalOutcome += Math.abs(payed);
+            }
+            totalAmount += payed;
           }
+          $scope.totalIncome = totalIncome;
+          $scope.totalOutcome = totalOutcome;
           $scope.totalAmount = totalAmount;
           $scope.paylogs = paylogs;
           break;
@@ -215,6 +229,10 @@ app.controller('paylogsCtrl', function ($scope, sdk) {
       }
     });
   };
+
+  setInterval(() => {
+    $scope.refreshLogs();
+  }, 5000);
 
   $scope.print = () => {
     window.print();
@@ -2127,7 +2145,7 @@ app.controller('settingsCtrl', function ($rootScope, $scope, sdk) {
 
   $scope.updateGradings = () => {
     sdk.UpdateGradings(JSON.parse(angular.toJson($scope.gradings)), (stat) => {
-      if (stat == sdk.stats.OK ) {
+      if (stat == sdk.stats.OK) {
         toast('تم الحفظ بنجاح');
       } else {
         toast('حدث خطأ ما اثناء حفظ البيانات');

@@ -1166,8 +1166,32 @@
           </div>
 
           <div class="card-panel hideonprint">
-            <span>المجموع:</span>
-            <span>{{totalAmount}}</span>
+            <table>
+              <thead>
+                <th>
+                  <span>اجمالى الايرادات</span>
+                </th>
+                <th>
+                  <span>اجمالى المصروفات</span>
+                </th>
+                <th>
+                  <span>المجموع</span>
+                </th>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="text-align: right;">
+                    <span>{{totalIncome}}</span>
+                  </td>
+                  <td style="text-align: right;">
+                    <span>{{totalOutcome}}</span>
+                  </td>
+                  <td style="text-align: right;">
+                    <span>{{totalAmount}}</span>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
           </div>
 
           <div class="logs">
