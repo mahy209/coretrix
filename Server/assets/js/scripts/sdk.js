@@ -414,6 +414,21 @@ sdk.factory('sdk', ['$http', function ($http) {
     }, callback);
   }
 
+  function getGradings(callback) {
+    var token = Cookies.get('token');
+    post("api/profile/gradings/get", {
+      token,
+    }, callback);
+  }
+
+  function updateGradings(gradings, callback) {
+    var token = Cookies.get('token');
+    post("api/profile/gradings/update", {
+      gradings,
+      token,
+    }, callback);
+  }
+
   function AddExam(name, grade, max, redline, callback) {
     var token = Cookies.get('token');
     post("api/teacher/exams/add", {
@@ -1015,6 +1030,8 @@ sdk.factory('sdk', ['$http', function ($http) {
     ADBSendSMS: ADBSendSMS,
     GetNameAndSubject: getNameAndSubject,
     UpdateNameAndSubject: updateNameAndSubject,
+    GetGradings: getGradings,
+    UpdateGradings: updateGradings,
     /* ----------------------- */
     ListGroupClassesLinks: ListGroupClassesLinks,
     LinkGroupClasses: LinkGroupClasses,

@@ -3911,6 +3911,32 @@ function updateNameAndSubjects(args, callback) {
   });
 }
 
+function getGradings(args, callback) {
+  db.collection('users').findOne({
+    [identifier]: teacherRep(args.userDoc),
+  }, {
+    _id: 0,
+    gradings: 1,
+  }, (err, result) => {
+    if (err) callback(err);
+    else callback(null, stats.OK, {
+      gradings: result.gradings
+    })
+  });
+}
+
+function updateGradings(args, callback) {
+  db.collection('users').updateOne({
+    [identifier]: teacherRep(args.userDoc),
+  }, {
+    $set: {
+      gradings: args.gradings,
+    }
+  }, function (err, result) {
+    ErrorAndCount(callback, err, result, fields.matchedCount, stats.Error);
+  });
+}
+
 function listDevices(args, callback) {
   client.listDevices()
     .then(function (devices) {
@@ -4038,6 +4064,8 @@ module.exports = {
   // PROFILES
   UpdateNameAndSubjects: updateNameAndSubjects,
   GetNameAndSubjects: getNameAndSubjects,
+  UpdateGradings: updateGradings,
+  GetGradings: getGradings,
 
   // VALIDATORS
   validators: validators,

@@ -280,6 +280,8 @@ var inputvalidators = {
   payedAmount: validators.ValidateNumber,
   // set expense
   _id: validators.ValidateString,
+  // gradings
+  gradings: validators.ValidateGradings,
 }
 
 // REG CALLS
@@ -384,6 +386,8 @@ registerApiCall("/adb/sms/send", ["token", "serial", "recipient", "message", "ad
 // profile
 registerApiCall("/profile/updatens", ["token", "fullname", "subjects"], userDocDefault, data.UpdateNameAndSubjects);
 registerApiCall("/profile/get", ["token"], userDocDefault, data.GetNameAndSubjects);
+registerApiCall("/profile/gradings/update", ["token", "gradings"], userDocDefault, data.UpdateGradings);
+registerApiCall("/profile/gradings/get", ["token"], userDocDefault, data.GetGradings);
 
 //registerApiCall("/teacher/grades/edit", ["token", "grades"], true, data.EditGrades);
 registerApiCall("/teacher/grades/get", ["token", "targetuser"], userDocRestricts.GetGrades, data.GetGrades);

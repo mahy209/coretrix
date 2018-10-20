@@ -1757,6 +1757,48 @@
                   </div>
                 </li>
                 <li>
+                  <div class="collapsible-header">نسب التقدير</div>
+                  <div class="collapsible-body">
+
+                    <button ng-click="addGrading()"
+                      class="btn blue-grey-background">اضف تقدير</button>
+                    <button ng-click="updateGradings()"
+                      style="margin-right: 6px"
+                      class="btn blue-grey-background">حفظ</button>
+
+                    <div class="logs">
+                      <table>
+                        <thead>
+                          <th>اسم التقدير</th>
+                          <th>نسبة التقدير</th>
+                          <th>اجراءات</th>
+                        </thead>
+
+                        <tbody>
+                          <tr ng-repeat="grading in gradings">
+                            <td>
+                              <input type="text"
+                                class="validate"
+                                ng-model="grading.name">
+                            </td>
+                            <td>
+                              <input type="number"
+                                class="validate"
+                                min="0"
+                                max="100"
+                                ng-model="grading.percentage">
+                            </td>
+                            <td>
+                              <button ng-click="removeGrading($index)"
+                                class="btn blue-grey-background">حذف</button>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </li>
+                <li>
                   <div class="collapsible-header">الصفوف</div>
                   <div class="collapsible-body">
                     <p ng-repeat="n in all_grades">

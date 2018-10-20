@@ -477,7 +477,10 @@ app.controller('smsCtrl', function ($rootScope, $scope, $location, sdk) {
 
         let num = prioritizeNumber(log.contacts, $scope.selected_recipient);
 
-        console.log({log, num});
+        console.log({
+          log,
+          num
+        });
 
         if (!num) return send(i + 1);
 
@@ -2092,6 +2095,51 @@ app.controller('settingsCtrl', function ($rootScope, $scope, sdk) {
       }
     })
   }
+
+  $scope.addGrading = () => {
+    const length = $scope.gradings.length;
+    let obj;
+
+    if (length > 0) {
+      const lastGrading = $scope.gradings[length - 1];
+      let newGrading = lastGrading.percentage - 10;
+
+      if (newGrading < 0) {
+        newGrading = 0;
+      }
+
+      obj = {
+        name: 'تقدير جديد',
+        percentage: newGrading,
+      };
+    } else {
+      obj = {
+        name: 'ممتاز',
+        percentage: 90,
+      };
+    }
+    $scope.gradings.push(obj);
+  }
+
+  $scope.removeGrading = (index) => {
+    $scope.gradings.splice(index, 1);
+  }
+
+  $scope.updateGradings = () => {
+    sdk.UpdateGradings(JSON.parse(angular.toJson($scope.gradings)), (stat) => {
+      if (stat == sdk.stats.OK ) {
+        toast('تم الحفظ بنجاح');
+      } else {
+        toast('حدث خطأ ما اثناء حفظ البيانات');
+      }
+    });
+  }
+
+  sdk.GetGradings((stat, result) => {
+    if (stat == sdk.stats.OK) {
+      $scope.gradings = result.gradings;
+    }
+  })
 
   sdk.GetNameAndSubject((stat, result) => {
     $scope.teacherName = result.name
