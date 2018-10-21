@@ -1161,6 +1161,10 @@
                   readonly>
               </div>
               <div style="padding: 10px">
+                <button ng-click="refreshLogs(true)"
+                  class="waves-effect waves-light blue-grey btn">
+                  صفى
+                </button>
                 <button ng-click="refreshLogs()"
                   class="waves-effect waves-light blue-grey btn">
                   تحميل
@@ -1201,6 +1205,9 @@
             <table>
               <thead>
                 <th>
+                  <span>تاريخ اليوم</span>
+                </th>
+                <th>
                   <span>اجمالى الايرادات</span>
                 </th>
                 <th>
@@ -1213,6 +1220,9 @@
               <tbody>
                 <tr>
                   <td style="text-align: right;">
+                    <span>{{currentDay}}</span>
+                  </td>
+                  <td style="text-align: right;">
                     <span>{{totalIncome}}</span>
                   </td>
                   <td style="text-align: right;">
@@ -1220,6 +1230,39 @@
                   </td>
                   <td style="text-align: right;">
                     <span>{{totalAmount}}</span>
+                  </td>
+                </tr>
+                <tr ng-show="comparingDay">
+                  <td style="text-align: right;">
+                    <span>{{comparingDay}}</span>
+                  </td>
+                  <td style="text-align: right;">
+                    <span>{{comparingTotalIncome}}</span>
+                  </td>
+                  <td style="text-align: right;">
+                    <span>{{comparingTotalOutcome}}</span>
+                  </td>
+                  <td style="text-align: right;">
+                    <span>{{comparingTotalAmount}}</span>
+                  </td>
+                </tr>
+                <tr ng-show="comparingDay">
+                  <td colspan="4">
+                    <hr>
+                  </td>
+                </tr>
+                <tr ng-show="comparingDay">
+                  <td style="text-align: right;">
+                    <span>---</span>
+                  </td>
+                  <td style="text-align: right;">
+                    <span>{{abs(comparingTotalIncome - totalIncome)}}</span>
+                  </td>
+                  <td style="text-align: right;">
+                    <span>{{abs(comparingTotalOutcome - totalOutcome)}}</span>
+                  </td>
+                  <td style="text-align: right;">
+                    <span>{{abs(comparingTotalAmount - totalAmount)}}</span>
                   </td>
                 </tr>
               </tbody>

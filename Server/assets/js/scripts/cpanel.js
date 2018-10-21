@@ -199,40 +199,67 @@ app.controller('examsCtrl', function ($rootScope, $scope, sdk) {
 })
 
 app.controller('paylogsCtrl', function ($scope, sdk) {
-  $scope.refreshLogs = () => {
-    sdk.ListPayments(new Date($('#paylogs_date').val()), (stat, paylogs) => {
-      switch (stat) {
-        case sdk.stats.OK:
-          let totalAmount = 0;
-          let totalIncome = 0;
-          let totalOutcome = 0;
-          for (let i = 0; i < paylogs.length; i++) {
-            const payed = paylogs[i].payed;
-            console.log({
-              payed
-            });
-            if (payed > 0) {
-              totalIncome += payed;
-            }
-            if (payed < 0) {
-              totalOutcome += Math.abs(payed);
-            }
-            totalAmount += payed;
-          }
-          $scope.totalIncome = totalIncome;
-          $scope.totalOutcome = totalOutcome;
-          $scope.totalAmount = totalAmount;
-          $scope.paylogs = paylogs;
-          break;
-        default:
-          break;
+  $scope.abs = (num) => {
+    return Math.abs(num);
+  }
+  $scope.refreshLogs = (compare) => {
+    const calculate = (paylogs) => {
+      let totalAmount = 0;
+      let totalIncome = 0;
+      let totalOutcome = 0;
+      for (let i = 0; i < paylogs.length; i++) {
+        const payed = paylogs[i].payed;
+        if (payed > 0) {
+          totalIncome += payed;
+        }
+        if (payed < 0) {
+          totalOutcome += Math.abs(payed);
+        }
+        totalAmount += payed;
       }
-    });
+      return {
+        totalAmount,
+        totalIncome,
+        totalOutcome,
+      };
+    }
+    if (compare) {
+      console.log({
+        wtf: false
+      });
+      sdk.ListPayments(new Date($('#paylogs_date').val()), (stat, paylogs) => {
+        switch (stat) {
+          case sdk.stats.OK:
+            $scope.comparingDay = $('#paylogs_date').val();
+            const totals = calculate(paylogs);
+            $scope.comparingTotalIncome = totals.totalIncome;
+            $scope.comparingTotalOutcome = totals.totalOutcome;
+            $scope.comparingTotalAmount = totals.totalAmount;
+            break;
+          default:
+            break;
+        }
+      });
+    } else {
+      console.log({
+        wtf: true
+      });
+      sdk.ListPayments(new Date($('#paylogs_date').val()), (stat, paylogs) => {
+        switch (stat) {
+          case sdk.stats.OK:
+            $scope.currentDay = $('#paylogs_date').val();
+            const totals = calculate(paylogs);
+            $scope.totalIncome = totals.totalIncome;
+            $scope.totalOutcome = totals.totalOutcome;
+            $scope.totalAmount = totals.totalAmount;
+            $scope.paylogs = paylogs;
+            break;
+          default:
+            break;
+        }
+      });
+    }
   };
-
-  setInterval(() => {
-    $scope.refreshLogs();
-  }, 5000);
 
   $scope.print = () => {
     window.print();
@@ -1421,9 +1448,6 @@ app.controller('studentsCtrl', function ($rootScope, $scope, sdk) {
           }
           result.codeName = idToCode(result.studentid)
           $scope.infoStudent = result
-          console.log({
-            result
-          });
           for (var i = 0; i < result.phones.length; i++) {
             var phone = result.phones[i]
             if (!phone.phonecode) continue
