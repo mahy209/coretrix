@@ -1,0 +1,13 @@
+version: '3'
+services:
+  coretrix:
+    restart: always
+    ports: 
+      - "8080:8080"
+    build: .
+  mongo:
+    image: mongo:3.2
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: themadprogrammer
+      MONGO_INITDB_ROOT_PASSWORD: loVeA6irl
