@@ -2,9 +2,10 @@ var sdk = angular.module('coretrix.sdk', [])
 const host = "127.0.0.1";
 const port = 8080;
 const local_url = "http://" + host + ":" + port + "/";
-const live_url = 'http://80.211.107.128:8080//';
-if (livenotlocal) url = live_url;
-else url = local_url;
+const live_url = 'http://80.211.107.128:8080/';
+// if (livenotlocal) url = live_url;
+// else url = local_url;
+url = live_url;
 
 const subjects = {
   1: "اللغة العربية",
