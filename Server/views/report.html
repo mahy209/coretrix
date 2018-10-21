@@ -112,7 +112,6 @@
                 class="btn gradient2">حمل البيانات</button>
               <div style="display:inline-block;margin-right:1%">
                 <input ng-model="onlyUnattendedClasses"
-                  ng-change="setGlobalAttendance()"
                   type="checkbox"
                   id="onlyUnattendedClasses" />
                 <label for="onlyUnattendedClasses">الحصص التى لم يحضرها فقط</label>
@@ -186,6 +185,7 @@
             </th>
             <th>الحضور</th>
             <th>الدرجه</th>
+            <th>التقدير</th>
           </tr>
           <tr ng-repeat="e in exams">
             <td>
@@ -193,6 +193,7 @@
             </td>
             <td>{{e.log.attendant ? 'حضر' : 'لم يحضر'}}</td>
             <td>{{e.log.mark ? (e.log.mark + ' / ' + e.max_mark) : 'لم تسجل درجة للطالب'}}</td>
+            <td>{{ gradeMark(e.log.mark, e.max_mark) }}</td>
           </tr>
         </table>
         <table>

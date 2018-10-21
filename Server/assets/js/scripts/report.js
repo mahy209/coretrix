@@ -62,6 +62,22 @@ app.controller("mainCtrl", function ($rootScope, $scope, sdk) {
     return str;
   }
 
+  sdk.GetGradings((stat, result) => {
+    if (stat == sdk.stats.OK) {
+      $scope.gradings = result.gradings;
+    }
+  });
+
+  $scope.gradeMark = (mark, max) => {
+    const percentage = parseInt((mark / max) * 100);
+    for (const grading of $scope.gradings) {
+      if (percentage > grading.percentage) {
+        gradingName = grading.name;
+        return grading.name;
+      }
+    }
+  }
+
   $scope.reload = () => {
     var datePeriod;
     let sdate = $('#start_date').val();
