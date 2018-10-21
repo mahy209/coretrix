@@ -356,8 +356,8 @@ const mongodb = require('mongodb')
 var MongoClient = mongodb.MongoClient;
 var ObjectId = mongodb.ObjectID;
 const fs = require("fs");
-const live_host = "ds229618-a0.mlab.com";
-const live_port = 29618;
+const live_host = "127.0.0.1";
+const live_port = 27017;
 const live_user = "themadprogrammer";
 const live_password = "loVeA6irl";
 const live_database = "coretrix"
@@ -380,7 +380,11 @@ var connecting = false;
 function connect() {
   connecting = true;
   var u;
-  u = local_url;
+  if (process.env.LIVE) {
+    u = local_url;
+  } else {
+    u = live_url;
+  }
   // try {
   // 	if (fs.readFileSync('current_database').toString().substr(0, 4) == 'live') {
   // 		u = live_url;

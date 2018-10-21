@@ -4,6 +4,8 @@ services:
     restart: always
     ports: 
       - "8080:8080"
+    environment:
+      - LIVE=true
     build: .
   mongo:
     image: mongo:3.2
