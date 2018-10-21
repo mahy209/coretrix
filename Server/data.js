@@ -381,9 +381,9 @@ function connect() {
   connecting = true;
   var u;
   if (process.env.LIVE) {
-    u = local_url;
-  } else {
     u = live_url;
+  } else {
+    u = local_url;
   }
   // try {
   // 	if (fs.readFileSync('current_database').toString().substr(0, 4) == 'live') {
