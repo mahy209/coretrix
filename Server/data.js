@@ -1976,7 +1976,9 @@ function getStudent(args, callback) {
       fullname: 1,
       grade: 1,
       group: 1,
-      "code": "$user_data.code",
+      notes: "$user_data.notes",
+      discount: "$user_data.discount",
+      code: "$user_data.code",
       'phones.number': 1,
       'phones.phonecode': 1,
       'phones.type': 1,
@@ -2010,6 +2012,9 @@ function getStudent(args, callback) {
             }
           }
           result.payments = items;
+          result.code = result.code[0];
+          result.discount = result.discount[0];
+          result.notes = result.notes[0];
           callback(null, stats.OK, result);
         });
       } else callback(null, stats.UserNonExisting);
@@ -3882,6 +3887,22 @@ async function sendSMS(args, callback) {
   }
 }
 
+function updateStudentNotesAndDiscount(args, callback) {
+  console.log({
+    args
+  });
+  db.collection('users').updateOne({
+    [identifier]: args.id,
+  }, {
+    $set: {
+      notes: args.notes,
+      discount: args.studentDiscount,
+    }
+  }, function (err, result) {
+    ErrorAndCount(callback, err, result, fields.matchedCount, stats.Error);
+  });
+}
+
 function getNameAndSubjects(args, callback) {
   db.collection('users').findOne({
     [identifier]: teacherRep(args.userDoc),
@@ -4066,6 +4087,7 @@ module.exports = {
   GetNameAndSubjects: getNameAndSubjects,
   UpdateGradings: updateGradings,
   GetGradings: getGradings,
+  UpdateStudentNotesAndDiscount: updateStudentNotesAndDiscount,
 
   // VALIDATORS
   validators: validators,

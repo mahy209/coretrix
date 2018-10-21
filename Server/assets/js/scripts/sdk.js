@@ -414,6 +414,17 @@ sdk.factory('sdk', ['$http', function ($http) {
     }, callback);
   }
 
+  function UpdateNotesAndDiscount(id, notes, studentDiscount, callback) {
+    var token = Cookies.get('token');
+    post("api/teacher/students/extra", {
+      id: id,
+      notes: notes,
+      studentDiscount: studentDiscount,
+      token: token,
+    }, callback);
+  }
+
+
   function getGradings(callback) {
     var token = Cookies.get('token');
     post("api/profile/gradings/get", {
@@ -1032,6 +1043,7 @@ sdk.factory('sdk', ['$http', function ($http) {
     UpdateNameAndSubject: updateNameAndSubject,
     GetGradings: getGradings,
     UpdateGradings: updateGradings,
+    UpdateNotesAndDiscount: UpdateNotesAndDiscount,
     /* ----------------------- */
     ListGroupClassesLinks: ListGroupClassesLinks,
     LinkGroupClasses: LinkGroupClasses,

@@ -1223,11 +1223,13 @@ app.controller('studentsCtrl', function ($rootScope, $scope, sdk) {
   }
 
   function prepareAddStudent() {
-    $scope.studentName = null
-    $scope.studentParentPhone1 = null
-    $scope.studentParentPhone2 = null
-    $scope.studentHomePhone = null
-    $scope.studentPhone = null
+    $scope.studentName = null;
+    $scope.studentParentPhone1 = null;
+    $scope.studentParentPhone2 = null;
+    $scope.studentHomePhone = null;
+    $scope.studentPhone = null;
+    $scope.studentNotes = null;
+    $scope.studentDiscount = null;
     // $('#addStudent_modal')[0].M_Modal.open()
   }
   $scope.addStudent = () => {
@@ -1276,19 +1278,21 @@ app.controller('studentsCtrl', function ($rootScope, $scope, sdk) {
               'num': $scope.studentPhone,
               'type': 'mobile'
             })
-            var i = -1
-            var addphone = () => {
-              i++
-              if (i < phones.length) {
-                var number = parsePhoneNumber(phones[i].num)
-                sdk.SetPhone(number.number, number.phonecode, phones[i].type, (stat) => {
-                  addphone()
-                }, id)
-              } else {
-                prepareAddStudent()
+            sdk.UpdateNotesAndDiscount(id, $scope.studentNotes, $scope.studentDiscount, (stat) => {
+              var i = -1
+              var addphone = () => {
+                i++
+                if (i < phones.length) {
+                  var number = parsePhoneNumber(phones[i].num)
+                  sdk.SetPhone(number.number, number.phonecode, phones[i].type, (stat) => {
+                    addphone()
+                  }, id)
+                } else {
+                  prepareAddStudent()
+                }
               }
-            }
-            addphone()
+              addphone();
+            });
             break
           case sdk.stats.Exists:
             toast('الطالب مضاف بالفعل!')
@@ -1417,6 +1421,9 @@ app.controller('studentsCtrl', function ($rootScope, $scope, sdk) {
           }
           result.codeName = idToCode(result.studentid)
           $scope.infoStudent = result
+          console.log({
+            result
+          });
           for (var i = 0; i < result.phones.length; i++) {
             var phone = result.phones[i]
             if (!phone.phonecode) continue
@@ -1454,6 +1461,8 @@ app.controller('studentsCtrl', function ($rootScope, $scope, sdk) {
           $scope.loadedStudent.listIndex = $scope.students.indexOf(s)
           $scope.edit_studentName = result.fullname
           $scope.edit_selected_grade = result.grade
+          $scope.edit_studentDiscount = result.discount;
+          $scope.edit_studentNotes = result.notes;
           edit_groups_loaded = (indexes) => {
             $scope.edit_selected_group = result.group
           }
@@ -1567,6 +1576,14 @@ app.controller('studentsCtrl', function ($rootScope, $scope, sdk) {
       }, $scope.loadedStudent.studentid, !$scope.edit_studentParentPhone1Changed)
     }
 
+    function updateExtra(callback) {
+      sdk.UpdateNotesAndDiscount($scope.loadedStudent.studentid, $scope.edit_studentNotes, $scope.edit_studentDiscount, (stat) => {
+        if (stat == sdk.stats.OK) {
+          callback(true);
+        }
+      });
+    }
+
     changePhones((successP) => {
       if (successP) {
         if ($scope.edit_studentName != $scope.loadedStudent.fullname) {
@@ -1590,10 +1607,12 @@ app.controller('studentsCtrl', function ($rootScope, $scope, sdk) {
     })
 
     function finish(success) {
-      $scope.loadedStudent = null
-      if (success) toast('تم حفظ بيانات الطالب بنجاح!')
-      else toast('تعذر حفظ بيانات الطالب!', gradients.error)
-      $('#edit_modal')[0].M_Modal.close()
+      updateExtra(successE => {
+        $scope.loadedStudent = null;
+        if (success) toast('تم حفظ بيانات الطالب بنجاح!')
+        else toast('تعذر حفظ بيانات الطالب!', gradients.error)
+        $('#edit_modal')[0].M_Modal.close()
+      });
     }
   }
 })

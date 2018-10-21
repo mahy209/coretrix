@@ -194,7 +194,6 @@ var inputvalidators = {
   "group": validators.ValidateGroup,
   // add exam
   "times": validators.ValidateTimes,
-  "notes": validators.ValidateOrIgnoreString,
   "curriculum": validators.ValidateString,
   // exam can be attended anytime other than specified or not
   "strict": validators.ValidateBoolean,
@@ -282,6 +281,9 @@ var inputvalidators = {
   _id: validators.ValidateString,
   // gradings
   gradings: validators.ValidateGradings,
+  // student notes, discount
+  studentDiscount: validators.ValidateNumber,
+  notes: validators.ValidateString,
 }
 
 // REG CALLS
@@ -403,6 +405,7 @@ registerApiCall("/teacher/students/register", ["token", "fullname" /*, "username
 registerApiCall("/teacher/students/rename", ["token", "fullname", 'targetuser'], userDocDefault, data.RenameStudent);
 registerApiCall("/teacher/students/link", ["token", "student", "grade", "group"], userDocDefault, data.LinkStudent);
 registerApiCall("/teacher/students/edit", ["token", "id", "grade", "group"], userDocDefault, data.EditLink);
+registerApiCall("/teacher/students/extra", ["token", "id", "notes", "studentDiscount"], userDocDefault, data.UpdateStudentNotesAndDiscount);
 registerApiCall("/teacher/students/unlink", ["token", "linkid"], userDocDefault, data.UnlinkStudent);
 registerApiCall("/teacher/students/list", ["token", "fulllist", "ig_grades", "ig_groups", "startid", "students_limit", "ig_getcontacts"], userDocDefault, data.ListStudents);
 registerApiCall("/teacher/students/qrlist", ["token", "ig_grades", "ig_groups"], userDocDefault, data.QRListStudents);

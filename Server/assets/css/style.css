@@ -531,3 +531,7 @@ ul[dnd-list] .dndPlaceholder {
   font-size: larger;
   color: #444;
 }
+
+#info_student>div {
+  float: right;
+}
