@@ -130,7 +130,7 @@
           class="center-align">بيانات الطالب</h4>
         <table>
           <tr ng-show="viewer=='teacher'">
-            <td>الاسم
+            <td width="50%">الاسم
               <span>:</span>
             </td>
             <td>{{name}}</td>
@@ -146,6 +146,12 @@
               <span>:</span>
             </td>
             <td>{{grades_names_long[grade]}}</td>
+          </tr>
+          <tr ng-show="notes">
+            <td>ملاحظات
+              <span>:</span>
+            </td>
+            <td>{{notes}}</td>
           </tr>
           <tr>
             <td>عدد الحصص التى لم يحضرها
@@ -198,7 +204,8 @@
             <th>درجه التسميع</th>
             <th>الواجب</th>
           </tr>
-          <tr ng-repeat="c in classes" ng-show="!onlyUnattendedClasses || !c.log.attendant">
+          <tr ng-repeat="c in classes"
+            ng-show="!onlyUnattendedClasses || !c.log.attendant">
             <td>{{sd(c.date)}}</td>
             <td>{{c.log.attendant ? 'حضر' : 'لم يحضر'}}</td>
             <!--td>{{l.group_data[0].name}}</td-->
@@ -210,7 +217,6 @@
           </tr>
         </table>
       </div>
-
     </div>
   </div>
   <pre id="log"></pre>

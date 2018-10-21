@@ -3561,6 +3561,9 @@ function fetchLogs(args, callback) {
     }).sort({
       date: -1
     }).toArray((err, classes) => {
+      console.log({
+        classes
+      });
       if (err) return callback(err);
       db.collection("logs").find({
         [teacherForeignIdentifier]: teacherRep(args.userDoc),
@@ -3584,6 +3587,9 @@ function fetchLogs(args, callback) {
             classes[i].log = clog;
           }
         }
+        console.log({
+          classes
+        });
         for (var i = 0; i < exams.length; i++) {
           var elog = examsLogs[exams[i].id];
           if (elog) {
