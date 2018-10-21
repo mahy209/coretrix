@@ -7,7 +7,7 @@ WORKDIR /usr/src/app
 COPY Server .
 
 # Install depenedencies
-RUN npm install
+RUN npm install --production
 
 # Expose and run
 EXPOSE 8080
