@@ -212,7 +212,6 @@ app.controller("mainCtrl", function ($rootScope, $scope, sdk) {
         for (var i = 0; i < logs.length; i++) {
           logs[i].codeName = idToCode(logs[i].studentid);
           if (logs[i].log) {
-            console.log(logs[i].log.payed);
             //TODO don't use typeof because if it was 0 then.. wtf ?
             if (!logs[i].log.discount) logs[i].log.discount = 0;
             if (!logs[i].log.date) logs[i].log.date = 'لم يدفع';
@@ -222,6 +221,12 @@ app.controller("mainCtrl", function ($rootScope, $scope, sdk) {
             discount: 0,
             payed: 0,
             date: 'لم يدفع'
+          }
+          // Set discount
+          const monthlyDiscount = logs[i].user_data.discount;
+          const logDiscount = logs[i].log.discount;
+          if (monthlyDiscount && !logDiscount) {
+            logs[i].log.discount = monthlyDiscount;
           }
           var payment = logs[i].log;
           if (!payment.payed) {

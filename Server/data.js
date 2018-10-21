@@ -3222,16 +3222,23 @@ function setPayment(args, callback) {
 
 function fetchPaymentLogs(args, callback) {
   /* mongo 3.4 */
-  db.collection("links").find({
-    [teacherForeignIdentifier]: teacherRep(args.userDoc),
-    grade: args.grade
+  db.collection("links").aggregate([{
+    $match: {
+      [teacherForeignIdentifier]: teacherRep(args.userDoc),
+      grade: args.grade
+    }
   }, {
-    _id: 0,
-    id: 0,
-    [teacherForeignIdentifier]: 0
-  }).sort({
-    group: 1
-  }).toArray((err, links) => {
+    $sort: {
+      group: 1
+    }
+  }, {
+    $lookup: {
+      from: 'users',
+      localField: studentForeignIdentifier,
+      foreignField: identifier,
+      as: 'user_data'
+    }
+  }], (err, links) => {
     if (err) return callback(err);
     else if (links) {
       db.collection("payments").find({
@@ -3253,6 +3260,12 @@ function fetchPaymentLogs(args, callback) {
               links[i].log = payments[index];
             }
           }
+          links = links.map(link => {
+            return {
+              ...link,
+              user_data: link.user_data[0],
+            }
+          })
           callback(null, stats.OK, links);
         }
       });
