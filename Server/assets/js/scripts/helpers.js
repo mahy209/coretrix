@@ -1,4 +1,4 @@
-function prioritizeNumber(contacts, goFor="parent") {
+function prioritizeNumber(contacts, goFor = "parent") {
   let indexes = {}
   for (let i = 0; i < contacts.length; i++) {
     const contact = contacts[i]
@@ -230,6 +230,7 @@ const phonecodes = {
 const error = () => {
   Materialize.toast('حدث خطا ما فى النظام برجاء اعاده تحميل الموقع و المحاوله مره اخرى', 4000, 'gradient')
 }
+
 // 11 phone: (011)-5100-2051
 // 7/10: line: (045)-3305-779
 // 8/10: line: (02)-3567-0500

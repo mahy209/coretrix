@@ -241,9 +241,6 @@ app.controller('paylogsCtrl', function ($scope, sdk) {
         }
       });
     } else {
-      console.log({
-        wtf: true
-      });
       sdk.ListPayments(new Date($('#paylogs_date').val()), (stat, paylogs) => {
         switch (stat) {
           case sdk.stats.OK:
@@ -1257,7 +1254,7 @@ app.controller('studentsCtrl', function ($rootScope, $scope, sdk) {
     $scope.studentPhone = null;
     $scope.studentNotes = null;
     $scope.studentDiscount = null;
-    // $('#addStudent_modal')[0].M_Modal.open()
+    resetModals();
   }
   $scope.addStudent = () => {
     var n = neutralizeName($scope.studentName)
