@@ -1523,6 +1523,85 @@ function removeSubjects(args, callback) {
     });
 }*/
 
+/**
+ * Create a global grade
+ * 
+ * @typedef {Object} CreateGradePayload
+ * @property {string} name
+ * 
+ * @param  {CreateGradePayload} args
+ * @param  {Function} callback
+ */
+function createGrade(args, callback) {
+  db.collection('grades')
+    .insertOne({
+      name: args.name,
+    }, (error, result) => {
+      ErrorAndCount(callback, error, result, fields.insertedCount, stats.Error);
+    });
+}
+/**
+ * List global grades
+ * 
+ * @param  {Object} args
+ * @param  {Function} callback
+ */
+function listGrades(args, callback) {
+  db.collection('grades').find((error, result) => {
+    if (error) {
+      return callback(error, stats.Error);
+    }
+    callback(error, stats.OK, result);
+  });
+}
+
+/**
+ * Update a global grade
+ * 
+ * @typedef {Object} UpdateGradePayload
+ * @property {string} _id
+ * @property {string} name
+ * 
+ * @param  {UpdateGradePayload} args
+ * @param  {Function} callback
+ */
+function updateGrade(args, callback) {
+  const {
+    _id,
+    name
+  } = args;
+
+  db.collection('grades')
+    .updateOne({
+      _id
+    }, {
+      $set: {
+        name
+      }
+    }, (error, result) => {
+      ErrorAndCount(callback, error, result, fields.matchedCount, stats.NonExisting);
+    })
+}
+
+/**
+ * Delete a global grade
+ * 
+ * @typedef {Object} DeleteGradePayload
+ * @property {string} _id
+ * 
+ * @param  {DeleteGradePayload} args
+ * @param  {Function} callback
+ */
+function deleteGrade(args, callback) {
+  const _id = new ObjectID(args._id);
+  db.collection('grades')
+    .deleteOne({
+      _id
+    }, (error, result) => {
+      ErrorAndCount(callback, error, result, fields.deletedCount, stats.NonExisting);
+    });
+}
+
 function updateTeacherGradesAndSubjects(userid, callback) {
   db.collection("groups").aggregate([{
       $match: {
@@ -4112,6 +4191,12 @@ module.exports = {
   GetGradings: getGradings,
   UpdateStudentNotesAndDiscount: updateStudentNotesAndDiscount,
 
+  // GRADES
+  CreateGrade: createGrade,
+  ListGrades: listGrades,
+  UpdateGrade: updateGrade,
+  DeleteGrade: deleteGrade,
+  
   // VALIDATORS
   validators: validators,
 

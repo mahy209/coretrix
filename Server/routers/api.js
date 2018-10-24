@@ -358,6 +358,11 @@ registerApiCall("/files/download", ["token", "id", "abs_bytes_range"], userDocDe
 registerApiCall("/files/delete", ["token", "ids"], userDocDefault, data.DeleteFiles);
 registerApiCall("/files/getinfo", ["token", "ids"], userDocDefault, data.GetFilesInfo);
 
+registerApiCall("/grades/create", ["token", "name"], userDocDefault, data.CreateGrade);
+registerApiCall("/grades/list", ["token"], userDocDefault, data.ListGrades);
+registerApiCall("/grades/update", ["token", "_id", "name"], userDocDefault, data.UpdateGrade);
+registerApiCall("/grades/delete", ["token", "_id"], userDocDefault, data.DeleteGrade);
+
 registerApiCall("/parent/request", ["code"], null, data.RequestParentToken);
 registerApiCall("/parent/info", ["parenttoken"], null, data.GetInfoForParent);
 registerApiCall("/parent/fetchlogs", ["parenttoken", "grade", "datePeriod", "teacher"], null, data.FetchLogsForParent);
