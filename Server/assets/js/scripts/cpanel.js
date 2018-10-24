@@ -2198,7 +2198,7 @@ app.controller('settingsCtrl', function ($rootScope, $scope, sdk) {
 
   sdk.GetGradings((stat, result) => {
     if (stat == sdk.stats.OK) {
-      $scope.gradings = result.gradings;
+      $scope.gradings = result.gradings || [];
     }
   })
 
