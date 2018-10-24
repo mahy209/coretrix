@@ -244,7 +244,7 @@ app.controller('paylogsCtrl', function ($scope, sdk) {
             $scope.totalOutcome = totals.totalOutcome;
             $scope.totalAmount = totals.totalAmount;
             $scope.paylogs = paylogs;
-            moveLogsScrollForVirtualRepeat();
+            $scope.paylogs = [];
             break;
           default:
             break;
@@ -260,7 +260,6 @@ app.controller('paylogsCtrl', function ($scope, sdk) {
             $scope.totalOutcome = totals.totalOutcome;
             $scope.totalAmount = totals.totalAmount;
             $scope.paylogs = paylogs;
-            moveLogsScrollForVirtualRepeat();
             break;
           default:
             break;

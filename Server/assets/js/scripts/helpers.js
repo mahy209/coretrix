@@ -26,14 +26,6 @@ function resetModals() {
   }
 }
 
-function moveLogsScrollForVirtualRepeat() {
-  setTimeout(() => {
-    for (const logs of $('.logs')) {
-      logs.scroll(0, 1);
-    }         
-  }, 500);
-}
-
 function formatPayClass(payment, price) {
   if (!payment.payed) {
     payment.payClass = 'red-text darken-1';
