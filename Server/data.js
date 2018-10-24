@@ -381,22 +381,22 @@ function connect() {
   connecting = true;
   var u;
   try {
-  	if (process.env.LIVE) {
-  		u = live_url;
-  		try {
-  			fs.writeFileSync(path.join(path.dirname(__filename), 'assets/js/scripts/liveorlocal.js'), "var livenotlocal = true;")
-  		} catch (e) {}
-  	} else {
-  		u = local_url
-  		try {
-  			fs.writeFileSync(path.join(path.dirname(__filename), 'assets/js/scripts/liveorlocal.js'), "var livenotlocal = false;")
-  		} catch (e) {}
-  	}
+    if (process.env.LIVE) {
+      u = live_url;
+      try {
+        fs.writeFileSync(path.join(path.dirname(__filename), 'assets/js/scripts/liveorlocal.js'), "var livenotlocal = true;")
+      } catch (e) {}
+    } else {
+      u = local_url
+      try {
+        fs.writeFileSync(path.join(path.dirname(__filename), 'assets/js/scripts/liveorlocal.js'), "var livenotlocal = false;")
+      } catch (e) {}
+    }
   } catch (e) {
-  	u = local_url;
-  	try {
-  		fs.writeFileSync(path.join(path.dirname(__filename), 'assets/js/scripts/liveorlocal.js'), "var livenotlocal = false;")
-  	} catch (e) {}
+    u = local_url;
+    try {
+      fs.writeFileSync(path.join(path.dirname(__filename), 'assets/js/scripts/liveorlocal.js'), "var livenotlocal = false;")
+    } catch (e) {}
   }
   if (u == local_url) {
     console.log("Running on local database...");
@@ -3906,16 +3906,17 @@ async function sendSMS(args, callback) {
 }
 
 function updateStudentNotesAndDiscount(args, callback) {
-  console.log({
-    args
-  });
+  let payload = {};
+
+  if (args.studentDiscount) payload.discount = args.studentDiscount;
+  if (args.notes) payload.notes = args.notes;
+
+  if (!Object.keys(payload).length > 0) return;
+
   db.collection('users').updateOne({
     [identifier]: args.id,
   }, {
-    $set: {
-      notes: args.notes,
-      discount: args.studentDiscount,
-    }
+    $set: payload
   }, function (err, result) {
     ErrorAndCount(callback, err, result, fields.matchedCount, stats.Error);
   });

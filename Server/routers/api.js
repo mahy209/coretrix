@@ -282,8 +282,8 @@ var inputvalidators = {
   // gradings
   gradings: validators.ValidateGradings,
   // student notes, discount
-  studentDiscount: validators.ValidateNumber,
-  notes: validators.ValidateString,
+  studentDiscount: validators.ValidateOrIgnoreNumber,
+  notes: validators.ValidateOrIgnoreString,
 }
 
 // REG CALLS
