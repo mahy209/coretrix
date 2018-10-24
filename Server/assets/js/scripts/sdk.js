@@ -786,10 +786,11 @@ sdk.factory('sdk', ['$http', function ($http) {
     }, callback);
   }
 
-  function ListPayments(date, callback) {
+  function ListPayments(date, comparingDate, callback) {
     var token = Cookies.get('token');
     post("api/teacher/payments/list", {
       date: date,
+      comparingDate: comparingDate,
       token: token
     }, callback);
   }

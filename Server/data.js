@@ -3151,7 +3151,7 @@ function listPayments(args, callback) {
     $match: {
       $and: [{
           date: {
-            $gte: lib.stripDate(args.date)
+            $gte: lib.stripDate(args.comparingDate)
           }
         },
         {
@@ -3161,7 +3161,11 @@ function listPayments(args, callback) {
         },
       ]
     }
-  }, ], (err, paylogs) => {
+  }, {
+    $sort: {
+      date: 1
+    }
+  }], (err, paylogs) => {
     if (err) callback(err);
     callback(null, stats.OK, paylogs);
   })

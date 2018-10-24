@@ -33,6 +33,8 @@
   <script type="text/javascript"
     src="/assets/js/libs/angular/angular.min.js"></script>
   <script type="text/javascript"
+    src="/assets/js/libs/angular-vs-repeat.min.js"></script>
+  <script type="text/javascript"
     src="/assets/js/libs/angular-drag-and-drop-lists.min.js"></script>
   <script type="text/javascript"
     src="/assets/js/libs/instascan.min.js"></script>
@@ -1150,21 +1152,28 @@
           ng-show="tab=='paylogs'">
           <div class="card-panel hideonprint">
 
-            <span>التاريخ</span>
             <div style="display: flex">
-              <div style="flex-grow: 1">
-                <input id="paylogs_date"
-                  type="text"
-                  class="datepicker"
-                  style="text-align: right; cursor:pointer"
-                  placeholder="التاريخ"
-                  readonly>
+              <div style="flex-grow: 1; display: flex;">
+                <div style="flex-grow: 1">
+                  <span>تاريخ البداية</span>
+                  <input id="comparing_paylogs_date"
+                    type="text"
+                    class="datepicker"
+                    style="text-align: right; cursor:pointer; margin-bottom: 0;"
+                    placeholder="التاريخ"
+                    readonly>
+                </div>
+                <div style="flex-grow: 1">
+                  <span>تاريخ النهاية</span>
+                  <input id="paylogs_date"
+                    type="text"
+                    class="datepicker"
+                    style="text-align: right; cursor:pointer; margin-bottom: 0;"
+                    placeholder="التاريخ"
+                    readonly>
+                </div>
               </div>
-              <div style="padding: 10px">
-                <button ng-click="refreshLogs(true)"
-                  class="waves-effect waves-light blue-grey btn">
-                  صفى
-                </button>
+              <div style="padding-right: 10px; align-self: flex-end">
                 <button ng-click="refreshLogs()"
                   class="waves-effect waves-light blue-grey btn">
                   تحميل
@@ -1286,7 +1295,17 @@
                 </tr>
               </thead>
               <tbody>
-                <tr ng-repeat="log in paylogs">
+                <style>
+                  .vs-item {
+                    height: 56px !important;
+                  }
+                  .logs {
+                    max-height: 600px;
+                    overflow: scroll;
+                  }
+                </style>
+                <tr class="vs-item"
+                  sf-virtual-repeat="log in paylogs">
                   <td width="50%">
                     {{log.name}}
                   </td>

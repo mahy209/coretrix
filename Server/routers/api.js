@@ -214,9 +214,9 @@ var inputvalidators = {
   // unlink student
   "linkid": validators.ValidateNumber,
   // search
-  "search_limit": validators.ValidateOrGiveLimit5,
+  search_limit: validators.ValidateOrGiveLimit5,
   // initialize class
-  "date": validators.ValidateDate,
+  date: validators.ValidateDate,
   // log class
   ig_attendant: validators.ValidateOrIgnoreBoolean,
   homework: validators.ValidateOrIgnoreHomework,
@@ -284,6 +284,8 @@ var inputvalidators = {
   // student notes, discount
   studentDiscount: validators.ValidateOrIgnoreNumber,
   notes: validators.ValidateOrIgnoreString,
+  // list payments
+  comparingDate: validators.ValidateDate,
 }
 
 // REG CALLS
@@ -428,7 +430,7 @@ registerApiCall("/teacher/items/listcategories", ["token", "grade"], userDocDefa
 registerApiCall("/teacher/items/applyprice", ["token", "itemid", "price"], userDocDefault, data.ApplyPriceChange);
 
 registerApiCall("/teacher/payments/set", ["token", "student", "itemid", "discount", "payedAmount"], userDocDefault, data.SetPayment);
-registerApiCall("/teacher/payments/list", ["token", "date"], userDocDefault, data.ListPayments);
+registerApiCall("/teacher/payments/list", ["token", "date", "comparingDate"], userDocDefault, data.ListPayments);
 registerApiCall("/teacher/paylogs/add", ["token", "name", "payedAmount", "date"], userDocDefault, data.AddPayLog);
 registerApiCall("/teacher/paylogs/set", ["token", "_id", "payedAmount"], userDocDefault, data.SetPayLog);
 registerApiCall("/teacher/payments/fetchlogs", ["token", "itemid", "grade"], userDocDefault, data.FetchPaymentLogs);

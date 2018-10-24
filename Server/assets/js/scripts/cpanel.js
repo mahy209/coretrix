@@ -1,5 +1,5 @@
 // var app = angular.module("coretrix", ['coretrix.sdk', 'coretrix.languages', 'ngRoute'])
-var app = angular.module('coretrix', ['coretrix.sdk', 'dndLists'])
+var app = angular.module('coretrix', ['coretrix.sdk', 'dndLists', 'sf.virtualScroll'])
 
 app.run(function ($rootScope, $window, $location, sdk) {
   angular.element(document).ready(function () {
@@ -202,7 +202,15 @@ app.controller('paylogsCtrl', function ($scope, sdk) {
   $scope.abs = (num) => {
     return Math.abs(num);
   }
-  $scope.refreshLogs = (compare) => {
+
+  $scope.paylogs = [];
+
+  $scope.initMessage = (item) => {
+    console.log({
+      item
+    });
+  }
+  $scope.refreshLogs = () => {
     const calculate = (paylogs) => {
       let totalAmount = 0;
       let totalIncome = 0;
@@ -223,33 +231,36 @@ app.controller('paylogsCtrl', function ($scope, sdk) {
         totalOutcome,
       };
     }
+    const date = new Date($('#paylogs_date').val());
+    const comparingDate = new Date($('#comparing_paylogs_date').val());
+    const compare = date.getDate() != comparingDate.getDate();
     if (compare) {
-      console.log({
-        wtf: false
-      });
-      sdk.ListPayments(new Date($('#paylogs_date').val()), (stat, paylogs) => {
+      sdk.ListPayments(date, comparingDate, (stat, paylogs) => {
         switch (stat) {
           case sdk.stats.OK:
-            $scope.comparingDay = $('#paylogs_date').val();
+            $scope.currentDay = `${simpleDate(comparingDate)} => ${simpleDate(date)}`;
             const totals = calculate(paylogs);
-            $scope.comparingTotalIncome = totals.totalIncome;
-            $scope.comparingTotalOutcome = totals.totalOutcome;
-            $scope.comparingTotalAmount = totals.totalAmount;
+            $scope.totalIncome = totals.totalIncome;
+            $scope.totalOutcome = totals.totalOutcome;
+            $scope.totalAmount = totals.totalAmount;
+            $scope.paylogs = paylogs;
+            moveLogsScrollForVirtualRepeat();
             break;
           default:
             break;
         }
       });
     } else {
-      sdk.ListPayments(new Date($('#paylogs_date').val()), (stat, paylogs) => {
+      sdk.ListPayments(date, date, (stat, paylogs) => {
         switch (stat) {
           case sdk.stats.OK:
-            $scope.currentDay = $('#paylogs_date').val();
+            $scope.currentDay = simpleDate(date);
             const totals = calculate(paylogs);
             $scope.totalIncome = totals.totalIncome;
             $scope.totalOutcome = totals.totalOutcome;
             $scope.totalAmount = totals.totalAmount;
             $scope.paylogs = paylogs;
+            moveLogsScrollForVirtualRepeat();
             break;
           default:
             break;
@@ -261,8 +272,9 @@ app.controller('paylogsCtrl', function ($scope, sdk) {
   $scope.print = () => {
     window.print();
   }
-
-  $('#paylogs_date').val(date.format(new Date(), 'MM/DD/YYYY'));
+  const today = date.format(new Date(), 'MM/DD/YYYY');
+  $('#paylogs_date').val(today);
+  $('#comparing_paylogs_date').val(today);
   $scope.refreshLogs();
 
   let addPayLog = (payed) => {
