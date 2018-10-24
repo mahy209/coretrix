@@ -3159,6 +3159,10 @@ function setPayment(args, callback) {
 
       const paylogAmount = args.payedAmount - payed;
 
+      if (paylogAmount == 0) {
+        return;
+      }
+
       const added = args.payedAmount > payed;
 
       let message = [];
