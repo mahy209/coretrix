@@ -69,7 +69,7 @@ select {
 }
 
 body {
-    background: #fafafa url(https://jackrugile.com/images/misc/noise-diagonal.png);
+    background: #fafafa;
     color: #444;
     font: 100%/30px 'Helvetica Neue', helvetica, arial, sans-serif;
     text-shadow: 0 1px 0 #fff;
@@ -144,12 +144,8 @@ em {
     box-shadow: inset -1px 0 0 #fff;
 }
 
-.logs tr {
-    background: url(https://jackrugile.com/images/misc/noise-diagonal.png);
-}
-
 .logs tr:nth-child(odd) td {
-    background: #f1f1f1 url(https://jackrugile.com/images/misc/noise-diagonal.png);
+    background: #f1f1f1;
 }
 
 .logs tr:last-of-type td {
