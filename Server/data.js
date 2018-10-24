@@ -380,29 +380,24 @@ var connecting = false;
 function connect() {
   connecting = true;
   var u;
-  if (process.env.LIVE) {
-    u = live_url;
-  } else {
-    u = local_url;
+  try {
+  	if (process.env.LIVE) {
+  		u = live_url;
+  		try {
+  			fs.writeFileSync(path.join(path.dirname(__filename), 'assets/js/scripts/liveorlocal.js'), "var livenotlocal = true;")
+  		} catch (e) {}
+  	} else {
+  		u = local_url
+  		try {
+  			fs.writeFileSync(path.join(path.dirname(__filename), 'assets/js/scripts/liveorlocal.js'), "var livenotlocal = false;")
+  		} catch (e) {}
+  	}
+  } catch (e) {
+  	u = local_url;
+  	try {
+  		fs.writeFileSync(path.join(path.dirname(__filename), 'assets/js/scripts/liveorlocal.js'), "var livenotlocal = false;")
+  	} catch (e) {}
   }
-  // try {
-  // 	if (fs.readFileSync('current_database').toString().substr(0, 4) == 'live') {
-  // 		u = live_url;
-  // 		try {
-  // 			fs.writeFileSync(path.join(path.dirname(__filename), 'assets/js/scripts/liveorlocal.js'), "var livenotlocal = true;")
-  // 		} catch (e) {}
-  // 	} else {
-  // 		u = local_url
-  // 		try {
-  // 			fs.writeFileSync(path.join(path.dirname(__filename), 'assets/js/scripts/liveorlocal.js'), "var livenotlocal = false;")
-  // 		} catch (e) {}
-  // 	}
-  // } catch (e) {
-  // 	u = local_url;
-  // 	try {
-  // 		fs.writeFileSync(path.join(path.dirname(__filename), 'assets/js/scripts/liveorlocal.js'), "var livenotlocal = false;")
-  // 	} catch (e) {}
-  // }
   if (u == local_url) {
     console.log("Running on local database...");
   } else console.log("Running on live database...");
