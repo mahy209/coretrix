@@ -1533,12 +1533,15 @@ function removeSubjects(args, callback) {
  * @param  {Function} callback
  */
 function createGrade(args, callback) {
-  db.collection('grades')
-    .insertOne({
-      name: args.name,
-    }, (error, result) => {
-      ErrorAndCount(callback, error, result, fields.insertedCount, stats.Error);
-    });
+  mongoh.GetNextSequence(db, 'grades', {}, 'id', lib.IntIncrementer, (newid) => {
+    db.collection('grades')
+      .insertOne({
+        id: newid,
+        name: args.name,
+      }, (error, result) => {
+        ErrorAndCount(callback, error, result, fields.insertedCount, stats.Error);
+      });
+  });
 }
 /**
  * List global grades
@@ -1547,7 +1550,7 @@ function createGrade(args, callback) {
  * @param  {Function} callback
  */
 function listGrades(args, callback) {
-  db.collection('grades').find((error, result) => {
+  db.collection('grades').find().toArray((error, result) => {
     if (error) {
       return callback(error, stats.Error);
     }
@@ -1559,7 +1562,7 @@ function listGrades(args, callback) {
  * Update a global grade
  * 
  * @typedef {Object} UpdateGradePayload
- * @property {string} _id
+ * @property {number} id
  * @property {string} name
  * 
  * @param  {UpdateGradePayload} args
@@ -1567,13 +1570,13 @@ function listGrades(args, callback) {
  */
 function updateGrade(args, callback) {
   const {
-    _id,
+    id,
     name
   } = args;
 
   db.collection('grades')
     .updateOne({
-      _id
+      id
     }, {
       $set: {
         name
@@ -1587,16 +1590,15 @@ function updateGrade(args, callback) {
  * Delete a global grade
  * 
  * @typedef {Object} DeleteGradePayload
- * @property {string} _id
+ * @property {number} id
  * 
  * @param  {DeleteGradePayload} args
  * @param  {Function} callback
  */
 function deleteGrade(args, callback) {
-  const _id = new ObjectID(args._id);
   db.collection('grades')
     .deleteOne({
-      _id
+      id: args.id
     }, (error, result) => {
       ErrorAndCount(callback, error, result, fields.deletedCount, stats.NonExisting);
     });
@@ -4200,7 +4202,7 @@ module.exports = {
   ListGrades: listGrades,
   UpdateGrade: updateGrade,
   DeleteGrade: deleteGrade,
-  
+
   // VALIDATORS
   validators: validators,
 

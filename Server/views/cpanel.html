@@ -974,7 +974,7 @@
               <label>السنه الدراسيه</label>
               <select id="edit_s"
                 class="browser-default"
-                ng-options="i as grades_names[i] for i in allowedGrades"
+                ng-options="i as grades_names[i] for i in grades"
                 ng-change="loadGroups(true)"
                 ng-model="edit_selected_grade">
                 <option value=""
@@ -1761,7 +1761,7 @@
                     <label>اختر السنه</label>
                     <select id="addGroup_gradesSelector"
                       class="browser-default"
-                      ng-options="i as grades_names[i] for i in allowedGrades"
+                      ng-options="i as grades_names[i] for i in grades"
                       ng-model="addGroup_selected_grade">
                       <option value=""
                         disabled
@@ -1910,13 +1910,7 @@
                 <li>
                   <div class="collapsible-header">الصفوف</div>
                   <div class="collapsible-body">
-                    <p ng-repeat="n in all_grades">
-                      <input type="checkbox"
-                        id="id{{n}}"
-                        ng-model="selected_grades['g' + n]"
-                        ng-change="toggledGrade(n)" />
-                      <label for="id{{n}}">{{grades_names[n]}}</label>
-                    </p>
+
                   </div>
                 </li>
                 <!-- not needed -->

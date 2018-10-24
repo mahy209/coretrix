@@ -31,27 +31,6 @@ app.run(function ($rootScope, $window, $location, sdk) {
     'السادسة',
     'السابعة'
   ]
-  $rootScope.all_grades = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
-  $rootScope.allowedGradesChanged = (n) => {
-    var gs = Cookies.get('grades')
-    if (!gs) {
-      $rootScope.allowedGrades = [11, 12, 13]
-    } else {
-      try {
-        gs = JSON.parse(gs)
-        var returner = []
-        for (var i = 0; i < Object.keys(gs).length; i++) {
-          if (gs['g' + i]) {
-            returner.push(i)
-          }
-        }
-        $rootScope.allowedGrades = returner
-      } catch (e) {
-        $rootScope.allowedGrades = [11, 12, 13]
-      }
-    }
-  }
-  $rootScope.allowedGradesChanged('msg')
   $rootScope.variableListeners = []
   $rootScope.grades_names = sdk.grades_names
   $rootScope.title = 'Coretrix'
@@ -112,7 +91,7 @@ app.run(function ($rootScope, $window, $location, sdk) {
 })
 
 app.controller('examsCtrl', function ($rootScope, $scope, sdk) {
-  $scope.grades_names = sdk.grades_names
+  
   $scope.newExam_redline = 25
   $scope.newExam_max = 30
   $scope.openExamLogs = (e) => {
@@ -778,7 +757,7 @@ app.controller('paymentsCtrl', function ($rootScope, $scope, sdk) {
 })
 
 app.controller('groupsCtrl', function ($rootScope, $scope, sdk) {
-  $scope.grades_names = sdk.grades_names
+  
   $scope.trash = []
   $scope.groupsUniques = {}
   $scope.currentLinker = 0
@@ -1741,7 +1720,7 @@ app.controller('mainCtrl', function ($rootScope, $scope, sdk) {
   $scope.tolog_name = 'اسم الطالب'
   $scope.toLogGroup = 'مجموعة الطالب'
   confirm($rootScope, sdk)
-  $scope.grades_names = sdk.grades_names_long
+  
   let first = true
   var init = (refreshing, result, type) => {
     var c = $scope.selected_grade
@@ -2063,58 +2042,6 @@ app.controller('mainCtrl', function ($rootScope, $scope, sdk) {
 })
 
 app.controller('settingsCtrl', function ($rootScope, $scope, sdk) {
-  $scope.grades_names = sdk.grades_names
-  // $rootScope.variableListeners.push()
-  $scope.all_grades = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
-  var gs
-  try {
-    gs = JSON.parse(Cookies.get('grades'))
-  } catch (e) {}
-  if (!gs) {
-    gs = {
-      'g0': false,
-      'g1': false,
-      'g2': false,
-      'g3': false,
-      'g4': false,
-      'g5': false,
-      'g6': false,
-      'g7': false,
-      'g8': false,
-      'g9': false,
-      'g10': false,
-      'g11': true,
-      'g12': true,
-      'g13': true
-    }
-    Cookies.set('grades', gs, {
-      path: '/'
-    }, {
-      expires: 9999
-    })
-    $scope.selected_grades = gs
-  } else $scope.selected_grades = gs
-  $scope.toggledGrade = () => {
-    Cookies.set('grades', $scope.selected_grades, {
-      path: '/'
-    }, {
-      expires: 9999
-    })
-    $rootScope.allowedGradesChanged()
-  }
-  /* library.js */
-  var ValidateString = function (str, limit) {
-    if (!str || typeof str != 'string') return false
-    if (limit) {
-      if (str.length <= limit) return true
-      else return false
-    }
-    if (arguments.callee.limit) {
-      if (str.length <= arguments.callee.limit) return true
-      else return false
-    }
-    return true
-  }
   var ValidatePassword = function (obj) {
     if (!validators.ValidateString(obj)) {
       return false

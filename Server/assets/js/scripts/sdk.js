@@ -807,6 +807,38 @@ sdk.factory('sdk', ['$http', function ($http) {
     post("api/teacher/payments/set", query, callback);
   }
 
+  function CreateGrade(name, callback) {
+    const token = Cookies.get('token');
+    post("api/grades/create", {
+      name,
+      token,
+    }, callback);
+  }
+
+  function ListGrades(callback) {
+    const token = Cookies.get('token');
+    post("api/grades/list", {
+      token,
+    }, callback);
+  }
+
+  function UpdateGrade(id, name, callback) {
+    const token = Cookies.get('token');
+    post("api/grades/update", {
+      id,
+      name,
+      token,
+    }, callback);
+  }
+
+  function DeleteGrade(id, callback) {
+    const token = Cookies.get('token');
+    post("api/grades/delete", {
+      id,
+      token,
+    }, callback);
+  }
+
   function AddItem(name, grade, price, itemCategory, callback) {
     var token = Cookies.get('token');
     post("api/teacher/items/add", {
@@ -1045,6 +1077,10 @@ sdk.factory('sdk', ['$http', function ($http) {
     GetGradings: getGradings,
     UpdateGradings: updateGradings,
     UpdateNotesAndDiscount: UpdateNotesAndDiscount,
+    CreateGrade: CreateGrade,
+    ListGrades: ListGrades,
+    UpdateGrade: UpdateGrade,
+    DeleteGrade: DeleteGrade,
     /* ----------------------- */
     ListGroupClassesLinks: ListGroupClassesLinks,
     LinkGroupClasses: LinkGroupClasses,
