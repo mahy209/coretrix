@@ -32,7 +32,7 @@ app.run(function ($rootScope, $window, $location, sdk) {
     'السابعة'
   ]
   $rootScope.variableListeners = []
-  $rootScope.grades_names = sdk.grades_names
+  $rootScope.grades_names = {};
   $rootScope.title = 'Coretrix'
   $rootScope.navigate = (link) => {
     if (!link) link = ''
@@ -57,11 +57,16 @@ app.run(function ($rootScope, $window, $location, sdk) {
   }
   var last_cam_state
   $rootScope.reloadVariables = (type) => {
-    sdk.GetGrades((stat, result) => {
+    sdk.ListGrades((stat, result) => {
       switch (stat) {
         case sdk.stats.OK:
+          $rootScope.sdkGrades = result;
+          const grades = result.map(grade => grade.id);
+          result.forEach(grade => {
+            $rootScope.grades_names[grade.id] = grade.name;
+          });
           for (var i = 0; i < $rootScope.variableListeners.length; i++) {
-            $rootScope.variableListeners[i](true, result, type)
+            $rootScope.variableListeners[i](true, grades, type)
           }
           break
         default:
@@ -91,7 +96,7 @@ app.run(function ($rootScope, $window, $location, sdk) {
 })
 
 app.controller('examsCtrl', function ($rootScope, $scope, sdk) {
-  
+
   $scope.newExam_redline = 25
   $scope.newExam_max = 30
   $scope.openExamLogs = (e) => {
@@ -757,7 +762,7 @@ app.controller('paymentsCtrl', function ($rootScope, $scope, sdk) {
 })
 
 app.controller('groupsCtrl', function ($rootScope, $scope, sdk) {
-  
+
   $scope.trash = []
   $scope.groupsUniques = {}
   $scope.currentLinker = 0
@@ -1720,7 +1725,7 @@ app.controller('mainCtrl', function ($rootScope, $scope, sdk) {
   $scope.tolog_name = 'اسم الطالب'
   $scope.toLogGroup = 'مجموعة الطالب'
   confirm($rootScope, sdk)
-  
+
   let first = true
   var init = (refreshing, result, type) => {
     var c = $scope.selected_grade
@@ -2156,5 +2161,67 @@ app.controller('settingsCtrl', function ($rootScope, $scope, sdk) {
           break
       }
     })
+  }
+
+  $scope.localSdkGrades = [];
+
+  var init = (_, grades) => {
+    console.log('reloading');
+    $scope.localSdkGrades = angular.copy($rootScope.sdkGrades);
+  }
+
+  $rootScope.variableListeners.push(init);
+
+  $scope.addGrade = () => {
+    $scope.localSdkGrades.push({
+      id: undefined,
+      name: 'سنة جديدة'
+    });
+  }
+
+  $scope.updateGrades = async () => {
+    // update or create
+    for (const newGrade of $scope.localSdkGrades) {
+      const oldGrade = $rootScope.sdkGrades.find(grade => grade.id === newGrade.id);
+      // existed before
+      if (oldGrade) {
+        if (oldGrade.name != newGrade.name) {
+          const updateTask = new Promise(resolve => {
+            sdk.UpdateGrade(newGrade.id, newGrade.name, () => {
+              resolve();
+            });
+          });
+          await updateTask;
+        }
+        continue;
+      }
+
+      const createTask = new Promise(resolve => {
+        sdk.CreateGrade(newGrade.name, () => {
+          resolve();
+        });
+      });
+      await createTask;
+    }
+
+    // delete
+    for (const oldGrade of $rootScope.sdkGrades) {
+      const newGrade = $scope.localSdkGrades.find(grade => grade.id == oldGrade.id);
+      if (!newGrade) {
+        const deleteTask = new Promise(resolve => {
+          sdk.DeleteGrade(oldGrade.id, () => {
+            resolve();
+          });
+        });
+        await deleteTask;
+      }
+    }
+
+    $rootScope.reloadVariables();
+    toast('تم حفظ البيانات');
+  }
+
+  $scope.removeGrade = (index) => {
+    $scope.localSdkGrades.splice(index, 1);
   }
 })

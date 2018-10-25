@@ -1550,7 +1550,11 @@ function createGrade(args, callback) {
  * @param  {Function} callback
  */
 function listGrades(args, callback) {
-  db.collection('grades').find().toArray((error, result) => {
+  db.collection('grades').find({
+    deleted: {
+      $ne: true
+    }
+  }).toArray((error, result) => {
     if (error) {
       return callback(error, stats.Error);
     }
@@ -1596,9 +1600,16 @@ function updateGrade(args, callback) {
  * @param  {Function} callback
  */
 function deleteGrade(args, callback) {
+  // if a user deleted the last grade
+  // next id will be that of the last
+  // it will cause a lot of problems
   db.collection('grades')
-    .deleteOne({
+    .updateOne({
       id: args.id
+    }, {
+      $set: {
+        deleted: true
+      }
     }, (error, result) => {
       ErrorAndCount(callback, error, result, fields.deletedCount, stats.NonExisting);
     });

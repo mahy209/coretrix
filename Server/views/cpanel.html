@@ -1911,6 +1911,34 @@
                   <div class="collapsible-header">الصفوف</div>
                   <div class="collapsible-body">
 
+                    <button ng-click="addGrade()"
+                      class="btn blue-grey-background">اضف سنة</button>
+                    <button ng-click="updateGrades()"
+                      style="margin-right: 6px"
+                      class="btn blue-grey-background">حفظ</button>
+
+                    <div class="logs">
+                      <table>
+                        <thead>
+                          <th>اسم السنة</th>
+                          <th>اجراءات</th>
+                        </thead>
+
+                        <tbody>
+                          <tr ng-repeat="grade in localSdkGrades">
+                            <td>
+                              <input type="text"
+                                class="validate"
+                                ng-model="grade.name">
+                            </td>
+                            <td>
+                              <button ng-click="removeGrade($index)"
+                                class="btn blue-grey-background">حذف</button>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
                   </div>
                 </li>
                 <!-- not needed -->
