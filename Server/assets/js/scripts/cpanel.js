@@ -1056,7 +1056,7 @@ app.controller('studentsCtrl', function ($rootScope, $scope, sdk) {
             break
           default:
         }
-      }, $scope.selected_grade ? [$scope.selected_grade] : undefined)
+      }, $scope.selected_grade ? [parseInt($scope.selected_grade)] : undefined)
     }
   }
   $scope.$watch('selectedPage_num', (n) => {})
@@ -1080,7 +1080,7 @@ app.controller('studentsCtrl', function ($rootScope, $scope, sdk) {
           break
         default:
       }
-    }, $scope.selected_grade ? [$scope.selected_grade] : undefined, $scope.limit, $scope.startnum)
+    }, $scope.selected_grade ? [parseInt($scope.selected_grade)] : undefined, $scope.limit, $scope.startnum)
   }
 
   function createPagination(count, unset) {
@@ -1118,7 +1118,7 @@ app.controller('studentsCtrl', function ($rootScope, $scope, sdk) {
             var data = {}
             var cmpdata = {}
             for (var i = 0; i < result.length; i++) {
-              data[result[i].fullname] = result[i].id
+              data[result[i].fullname] = result[i].studentid
               result[i] = result[i].fullname
               cmpdata[result[i]] = null
             }
@@ -1128,7 +1128,7 @@ app.controller('studentsCtrl', function ($rootScope, $scope, sdk) {
               limit: 10,
               onAutocomplete: function (val) {
                 $scope.studentName = val
-                const id = data[val] + 1;
+                const id = data[val];
                 sdk.GetNotesAndDiscount(id, (stat, data) => {
                   console.log(stat == sdk.stats.OK);
                   if (stat === sdk.stats.OK) {
@@ -1303,7 +1303,7 @@ app.controller('studentsCtrl', function ($rootScope, $scope, sdk) {
         error()
       })
     }
-    var reg = $scope.registered[n] + 1;
+    var reg = $scope.registered[n];
     if (reg) {
       finishShit(reg)
     } else {

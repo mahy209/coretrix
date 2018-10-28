@@ -740,6 +740,7 @@
                 <li ng-repeat="s in students"
                   class="card-panel hoverable student_item animated fadeInUp">
                   <span> {{s.fullname}}</span>
+                  <span ng-hide="opt_grade && opt_grade !== 0 "> - {{grades_names[s.grade]}}</span>
                   <div class="students_btn ">
                     <button ng-click="loadInfo(s)"
                       class="btn blue-grey-background">

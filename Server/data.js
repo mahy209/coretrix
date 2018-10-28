@@ -1292,7 +1292,9 @@ function SearchStudents(args, callback) {
   });
   a.count((err, count) => {
     if (err) return callback(err);
-    a.skip(args.startid).limit(args.limit).toArray(function (err, arr) {
+    a.skip(args.startid).limit(args.limit).sort({
+      fullname: -1
+    }).toArray(function (err, arr) {
       if (err) return callback(err);
       var returner = {};
       returner.result = [];
@@ -1302,7 +1304,9 @@ function SearchStudents(args, callback) {
         if (arr.hasOwnProperty(i)) {
           returner.result.push({
             username: arr[i].username,
+            grade: arr[i].grade,
             [identifier]: arr[i][identifier],
+            [studentForeignIdentifier]: arr[i][studentForeignIdentifier],
             fullname: arr[i].fullname,
           });
         }
@@ -2483,9 +2487,10 @@ function linkStudent(args, callback) {
   if (!isTeacherRep(args.userDoc)) return callback(null, stats.IncapableUserType);
   mongoh.Exists(db, 'links', {
     [teacherForeignIdentifier]: teacherRep(args.userDoc),
-    [studentForeignIdentifier]: args.student
+    [studentForeignIdentifier]: args.student,
+    grade: args.grade,
   }, function (linkExists) {
-    // if (linkExists) return callback(null, stats.Exists);
+    if (linkExists) return callback(null, stats.Exists);
     validators.ValidateUser(args.student, {
       refered: 1,
       fullname: 1,
@@ -3539,6 +3544,44 @@ function requestParentToken(args, callback) {
   });
 }
 
+function getLinks(args, callback) {
+  db.collection("links").aggregate([{
+      $match: {
+        [studentForeignIdentifier]: args.targetuser
+      }
+    },
+    {
+      $lookup: {
+        from: 'users',
+        localField: 'teacherid',
+        foreignField: 'id',
+        as: 'teachers_data'
+      }
+    },
+    {
+      $lookup: {
+        from: 'groups',
+        localField: 'group',
+        foreignField: 'id',
+        as: 'group_data'
+      }
+    },
+    {
+      $project: {
+        _id: 0,
+        teacherid: 1,
+        grade: 1,
+        'teachers_data.displayname': 1,
+        'teachers_data.subjects': 1,
+        'group_data.name': 1
+      }
+    }
+  ], (err, links) => {
+    if (err) callback(err);
+    else callback(null, stats.OK, links);
+  })
+}
+
 function getInfoForParent(args, callback) {
   db.collection("parentTokens").findOne({
     token: args.parenttoken
@@ -4221,6 +4264,7 @@ module.exports = {
   GetGradings: getGradings,
   UpdateStudentNotesAndDiscount: updateStudentNotesAndDiscount,
   GetStudentNotesAndDiscount: getStudentNotesAndDiscount,
+  GetLinks: getLinks,
 
   // GRADES
   CreateGrade: createGrade,

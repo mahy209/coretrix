@@ -365,6 +365,8 @@ registerApiCall("/grades/list", ["token"], userDocDefault, data.ListGrades);
 registerApiCall("/grades/update", ["token", "id", "name"], userDocDefault, data.UpdateGrade);
 registerApiCall("/grades/delete", ["token", "id"], userDocDefault, data.DeleteGrade);
 
+registerApiCall("/report/links/get", ["token", "targetuser"], null, data.GetLinks);
+
 registerApiCall("/parent/request", ["code"], null, data.RequestParentToken);
 registerApiCall("/parent/info", ["parenttoken"], null, data.GetInfoForParent);
 registerApiCall("/parent/fetchlogs", ["parenttoken", "grade", "datePeriod", "teacher"], null, data.FetchLogsForParent);

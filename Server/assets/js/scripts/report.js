@@ -88,7 +88,7 @@ app.controller("mainCtrl", function ($rootScope, $scope, sdk) {
     }
   }
 
-  $scope.reload = () => {
+  $scope.refetchLogs = () => {
     var datePeriod;
     let sdate = $('#start_date').val();
     let edate = $('#end_date').val();
@@ -97,7 +97,7 @@ app.controller("mainCtrl", function ($rootScope, $scope, sdk) {
       end: edate
     };
     if ($scope.viewer == 'teacher') {
-      sdk.FetchLogs(parsed, $scope.grade, datePeriod, (stat, result) => {
+      sdk.FetchLogs(parsed, $scope.selected_link.grade, datePeriod, (stat, result) => {
         if (stat == sdk.stats.OK) {
           $scope.loaded = true;
 
@@ -143,7 +143,7 @@ app.controller("mainCtrl", function ($rootScope, $scope, sdk) {
       if (!$scope.selected_link) return toast('برجاء اختيار المدرس!', gradients.error);
       sdk.FetchLogsForParent(token, $scope.selected_link.teacherid, $scope.selected_link.grade, datePeriod, (stat, result) => {
         if (stat == sdk.stats.OK) {
-          $scope.grade = $scope.selected_link.grade;
+          $scope.seleced_grade = $scope.selected_link.grade;
           $scope.group_name = $scope.selected_link.group_data[0] ? $scope.selected_link.group_data[0].name : 'لا ينتمى الطالب الى مجموعه';
           $scope.exams = result.exams;
           $scope.classes = result.classes;
@@ -174,6 +174,40 @@ app.controller("mainCtrl", function ($rootScope, $scope, sdk) {
     }
   }
 
+  $scope.reload = () => {
+    sdk.GetStudent(parsed, async (stat, data) => {
+      switch (stat) {
+        case sdk.stats.OK:
+          $scope.name = data.fullname;
+          $scope.notes = data.notes;
+          await new Promise(resolve => {
+            sdk.GetLinks(parsed, (stat, result) => {
+              if (stat == sdk.stats.OK) {
+                if (!$scope.links) {
+                  $scope.links = result;
+                }
+                if (!$scope.selected_link) {
+                  $scope.selected_link = result[0];
+                }
+                resolve();
+              }
+            });
+          })
+          sdk.GetGroup(data.group, (stat, result) => {
+            if (stat == sdk.stats.OK) {
+              $scope.refetchLogs();
+              if (result) $scope.group_name = result.name;
+              else $scope.group_name = 'لا ينتمى الطالب الى مجموعه';
+            }
+          });
+          break;
+        case sdk.stats.UserNonExisting:
+        default:
+          toast('ﻻ يوجد طالب بهذا الكود!', gradients.error);
+      }
+    }, true);
+  }
+
   var id = splits[splits.length - 1];
   if (splits[splits.length - 2] == 'parent') {
     $scope.viewer = 'parent';
@@ -201,25 +235,7 @@ app.controller("mainCtrl", function ($rootScope, $scope, sdk) {
     if (isNaN(parsed)) {
       toast('انت بتلعب ؟', gradients.error);
     } else {
-      sdk.GetStudent(parsed, (stat, data) => {
-        switch (stat) {
-          case sdk.stats.OK:
-            $scope.name = data.fullname;
-            $scope.grade = data.grade;
-            $scope.notes = data.notes;
-            sdk.GetGroup(data.group, (stat, result) => {
-              if (stat == sdk.stats.OK) {
-                $scope.reload();
-                if (result) $scope.group_name = result.name;
-                else $scope.group_name = 'لا ينتمى الطالب الى مجموعه';
-              }
-            });
-            break;
-          case sdk.stats.UserNonExisting:
-          default:
-            toast('ﻻ يوجد طالب بهذا الكود!', gradients.error);
-        }
-      }, true);
+      $scope.reload();
     }
   }
 });

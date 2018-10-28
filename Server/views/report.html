@@ -60,18 +60,16 @@
       <div class="col s12"
         style="margin-top:5%;">
         <div class="card-panel hideonprint animated slideInDown">
-          <h4 class="center-align">إختيار الفتره الزمنية</h4>
+          <h4 class="center-align">إختيار الفتره الزمنية والسنة</h4>
           <div class="row">
-            <div class="col s12"
-              ng-show="viewer=='parent'">
-              <label>المدرس</label>
+            <div class="col s12">
+              <label>السنه الدراسيه</label>
               <select class="browser-default"
-                ng-options="l as (l.teachers_data[0].displayname + ' مدرس ' + subjectsToString(l.teachers_data[0].subjects) +  ' - الصف ' + grades_names[l.grade]) for l in links"
+                ng-options="l as grades_names[l.grade] for l in links"
                 ng-model="selected_link">
                 <option value=""
                   disabled
-                  selected>اختر المدرس</option>
-              </select>
+                  selected>السنة الدراسية</option>
             </div>
             <div class="col s12">
               <label>الفتره الزمنية</label>
@@ -138,13 +136,14 @@
             <td>المجموعه
               <span>:</span>
             </td>
-            <td>{{group_name}}</td>
+            <td>
+              {{ selected_link.group_data[0].name }}</td>
           </tr>
           <tr>
             <td>الصف
               <span>:</span>
             </td>
-            <td>{{grades_names[grade]}}</td>
+            <td>{{grades_names[selected_link.grade]}}</td>
           </tr>
           <tr ng-show="notes">
             <td>ملاحظات

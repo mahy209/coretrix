@@ -885,6 +885,14 @@ sdk.factory('sdk', ['$http', function ($http) {
     }, callback);
   }
 
+  function GetLinks(targetuser, callback) {
+    var token = Cookies.get('token');
+    post("api/report/links/get", {
+      targetuser: targetuser,
+      token: token
+    }, callback);
+  }
+
   function SetStartDate(grade, date, allback) {
     var token = Cookies.get('token');
     post("api/teacher/defaults/startdates/set", {
@@ -1071,6 +1079,7 @@ sdk.factory('sdk', ['$http', function ($http) {
     ListGrades: ListGrades,
     UpdateGrade: UpdateGrade,
     DeleteGrade: DeleteGrade,
+    GetLinks: GetLinks,
     /* ----------------------- */
     ListGroupClassesLinks: ListGroupClassesLinks,
     LinkGroupClasses: LinkGroupClasses,
