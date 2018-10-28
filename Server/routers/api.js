@@ -413,6 +413,7 @@ registerApiCall("/teacher/students/rename", ["token", "fullname", 'targetuser'],
 registerApiCall("/teacher/students/link", ["token", "student", "grade", "group"], userDocDefault, data.LinkStudent);
 registerApiCall("/teacher/students/edit", ["token", "id", "grade", "group"], userDocDefault, data.EditLink);
 registerApiCall("/teacher/students/extra", ["token", "id", "notes", "studentDiscount"], userDocDefault, data.UpdateStudentNotesAndDiscount);
+registerApiCall("/students/extra", ["token", "id"], userDocDefault, data.GetStudentNotesAndDiscount);
 registerApiCall("/teacher/students/unlink", ["token", "linkid"], userDocDefault, data.UnlinkStudent);
 registerApiCall("/teacher/students/list", ["token", "fulllist", "ig_grades", "ig_groups", "startid", "students_limit", "ig_getcontacts"], userDocDefault, data.ListStudents);
 registerApiCall("/teacher/students/qrlist", ["token", "ig_grades", "ig_groups"], userDocDefault, data.QRListStudents);

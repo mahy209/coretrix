@@ -1043,48 +1043,20 @@ app.controller('studentsCtrl', function ($rootScope, $scope, sdk) {
     initLoadMode()
   }
   $scope.performSearch = (e) => {
-    /* 13 for enter and 32 for space */
-    if (e.keyCode == 32) {
-      sdk.SearchStudents(neutralizeName($scope.searchStudents_val, true), function (stat, search_result) {
+    if ($scope.searchStudents_val == undefined) {
+      $scope.reload()
+    } else {
+      $scope.searching_name = neutralizeName($scope.searchStudents_val, true)
+      sdk.SearchStudents($scope.searching_name, function (stat, result) {
         switch (stat) {
           case sdk.stats.OK:
-            var result = search_result.result
-            var cmpdata = {}
-            for (var key in result) {
-              var item = result[key]
-              cmpdata[item.fullname] = null
-            }
-            $('#searchStudents').autocomplete({
-              data: cmpdata,
-              limit: 20,
-              onAutocomplete: function (val) {
-                $scope.performSearch({
-                  keyCode: 13
-                })
-                // window.open("/profile/" + result[Object.keys(cmpdata).indexOf(val)].id, "_blank")
-              },
-              minLength: 1
-            })
+            $scope.mode = 'search'
+            createPagination(result.count)
+            $scope.changePage(1)
             break
           default:
         }
-      })
-    } else if (e.keyCode == 13) {
-      if ($scope.searchStudents_val == undefined) {
-        $scope.reload()
-      } else {
-        $scope.searching_name = neutralizeName($scope.searchStudents_val, true)
-        sdk.SearchStudents($scope.searching_name, function (stat, result) {
-          switch (stat) {
-            case sdk.stats.OK:
-              $scope.mode = 'search'
-              createPagination(result.count)
-              $scope.changePage(1)
-              break
-            default:
-          }
-        }, 1)
-      }
+      }, $scope.selected_grade ? [$scope.selected_grade] : undefined)
     }
   }
   $scope.$watch('selectedPage_num', (n) => {})
@@ -1108,7 +1080,7 @@ app.controller('studentsCtrl', function ($rootScope, $scope, sdk) {
           break
         default:
       }
-    }, $scope.limit, $scope.startnum)
+    }, $scope.selected_grade ? [$scope.selected_grade] : undefined, $scope.limit, $scope.startnum)
   }
 
   function createPagination(count, unset) {
@@ -1134,64 +1106,71 @@ app.controller('studentsCtrl', function ($rootScope, $scope, sdk) {
       $scope.loadedStudent = null
     }
   })
-  $scope.checkAndSearch = (event) => {
-    if (event.keyCode == 32) {
-      var newname = $scope.studentName
-      if (newname) sdk.SearchStudents(neutralizeName(newname, true), function (stat, search_result) {
-        switch (stat) {
-          case sdk.stats.OK:
-            var result = search_result.result
-            if (result.length > 0) {
-              var data = {}
-              var cmpdata = {}
-              for (var i = 0; i < result.length; i++) {
-                data[result[i].fullname] = result[i].id
-                result[i] = result[i].fullname
-                cmpdata[result[i]] = null
-              }
-              $scope.registered = data
-              $('#studentName_auto').autocomplete({
-                data: cmpdata,
-                limit: 20,
-                onAutocomplete: function (val) {
-                  $scope.studentName = val
-                  sdk.ListPhones((stat, data) => {
-                    switch (stat) {
-                      case sdk.stats.OK:
-                        for (var i = 0; i < data.length; i++) {
-                          if (!data[i].phonecode) continue
-                          switch (data[i].type) {
-                            case 'parent1':
-                              $scope.studentParentPhone1 = `${data[i].phonecode}${data[i].number}`
-                              break
-                            case 'parent2':
-                              $scope.studentParentPhone2 = `${data[i].phonecode}${data[i].number}`
-                              break
-                            case 'home':
-                              $scope.studentHomePhone = `${data[i].phonecode}${data[i].number}`
-                              break
-                            case 'mobile':
-                              $scope.studentPhone = `${data[i].phonecode}${data[i].number}`
-                              break
-                            default:
-                          }
-                        }
-                        break
-                      default:
-
-                    }
-                  }, data[val])
-                },
-                minLength: 1
-              })
+  $scope.initializeSearch = () => {
+    sdk.ListStudents(0, 0, function (stat, response) {
+      switch (stat) {
+        case sdk.stats.OK:
+          console.log({
+            response
+          });
+          var result = response;
+          if (result.length > 0) {
+            var data = {}
+            var cmpdata = {}
+            for (var i = 0; i < result.length; i++) {
+              data[result[i].fullname] = result[i].id
+              result[i] = result[i].fullname
+              cmpdata[result[i]] = null
             }
-            cmpdata = {}
-            break
-          default:
+            $scope.registered = data
+            $('#studentName_auto').autocomplete({
+              data: cmpdata,
+              limit: 10,
+              onAutocomplete: function (val) {
+                $scope.studentName = val
+                const id = data[val] + 1;
+                sdk.GetNotesAndDiscount(id, (stat, data) => {
+                  console.log(stat == sdk.stats.OK);
+                  if (stat === sdk.stats.OK) {
+                    $scope.studentNotes = data.notes;
+                    $scope.studentDiscount = data.discount;
+                  }
+                });
+                sdk.ListPhones((stat, data) => {
+                  switch (stat) {
+                    case sdk.stats.OK:
+                      for (var i = 0; i < data.length; i++) {
+                        if (!data[i].phonecode) continue
+                        switch (data[i].type) {
+                          case 'parent1':
+                            $scope.studentParentPhone1 = `${data[i].phonecode}${data[i].number}`
+                            break
+                          case 'parent2':
+                            $scope.studentParentPhone2 = `${data[i].phonecode}${data[i].number}`
+                            break
+                          case 'home':
+                            $scope.studentHomePhone = `${data[i].phonecode}${data[i].number}`
+                            break
+                          case 'mobile':
+                            $scope.studentPhone = `${data[i].phonecode}${data[i].number}`
+                            break
+                          default:
+                        }
+                      }
+                      break
+                    default:
 
-        }
-      })
-    }
+                  }
+                }, id)
+              },
+              minLength: 1
+            })
+          }
+          cmpdata = {}
+          break
+        default:
+      }
+    });
   }
   $scope.load_optGroups = () => {
     if (isNaN($scope.opt_grade)) return
@@ -1324,7 +1303,7 @@ app.controller('studentsCtrl', function ($rootScope, $scope, sdk) {
         error()
       })
     }
-    var reg = $scope.registered[n]
+    var reg = $scope.registered[n] + 1;
     if (reg) {
       finishShit(reg)
     } else {

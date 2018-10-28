@@ -682,7 +682,7 @@
                     id="searchStudents"
                     ng-model="searchStudents_val"
                     type="search"
-                    ng-keypress="performSearch($event)"
+                    ng-change="performSearch($event)"
                     required>
                 </div>
               </div>
@@ -799,7 +799,7 @@
                           type="text"
                           id="studentName_auto"
                           class="autocomplete"
-                          ng-keypress="checkAndSearch($event)">
+                          ng-init="initializeSearch()">
                       </div>
                     </div>
                     <div>

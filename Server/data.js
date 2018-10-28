@@ -377,26 +377,27 @@ var defParam = lib.defParam;
 var now = lib.PerformanceLog;
 var connecting = false;
 
+function setLiveOrLocal(live, sdkLive = live) {
+  let u = live ? live_url : local_url;
+  try {
+    fs.writeFileSync(path.join(path.dirname(__filename), 'assets/js/scripts/liveorlocal.js'), `var livenotlocal = ${sdkLive};`)
+  } catch (e) {}
+  return u;
+}
+
 function connect() {
   connecting = true;
   var u;
   try {
-    if (process.env.LIVE) {
-      u = live_url;
-      try {
-        fs.writeFileSync(path.join(path.dirname(__filename), 'assets/js/scripts/liveorlocal.js'), "var livenotlocal = true;")
-      } catch (e) {}
+    if (process.env.DEV) {
+      u = setLiveOrLocal(true, false);
+    } else if (process.env.LIVE) {
+      u = setLiveOrLocal(true);
     } else {
-      u = local_url
-      try {
-        fs.writeFileSync(path.join(path.dirname(__filename), 'assets/js/scripts/liveorlocal.js'), "var livenotlocal = false;")
-      } catch (e) {}
+      u = setLiveOrLocal(false);
     }
   } catch (e) {
-    u = local_url;
-    try {
-      fs.writeFileSync(path.join(path.dirname(__filename), 'assets/js/scripts/liveorlocal.js'), "var livenotlocal = false;")
-    } catch (e) {}
+    u = setLiveOrLocal(false);
   }
   if (u == local_url) {
     console.log("Running on local database...");
@@ -2484,7 +2485,7 @@ function linkStudent(args, callback) {
     [teacherForeignIdentifier]: teacherRep(args.userDoc),
     [studentForeignIdentifier]: args.student
   }, function (linkExists) {
-    if (linkExists) return callback(null, stats.Exists);
+    // if (linkExists) return callback(null, stats.Exists);
     validators.ValidateUser(args.student, {
       refered: 1,
       fullname: 1,
@@ -4005,6 +4006,18 @@ async function sendSMS(args, callback) {
   }
 }
 
+function getStudentNotesAndDiscount(args, callback) {
+  db.collection('users').findOne({
+    id: args.id
+  }, {}, (err, result) => {
+    if (err) {
+      callback(err);
+      return;
+    }
+    callback(null, stats.OK, result)
+  })
+}
+
 function updateStudentNotesAndDiscount(args, callback) {
   let payload = {};
 
@@ -4207,6 +4220,7 @@ module.exports = {
   UpdateGradings: updateGradings,
   GetGradings: getGradings,
   UpdateStudentNotesAndDiscount: updateStudentNotesAndDiscount,
+  GetStudentNotesAndDiscount: getStudentNotesAndDiscount,
 
   // GRADES
   CreateGrade: createGrade,
