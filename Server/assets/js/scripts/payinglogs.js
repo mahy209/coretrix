@@ -1,12 +1,24 @@
 var app = angular.module("coretrix", ['coretrix.sdk'])
 
 app.run(function ($rootScope, $window, $location, sdk) {
-  $rootScope.grades_names = sdk.grades_names;
   $rootScope.title = "Coretrix";
   $rootScope.navigate = (link) => {
     if (!link) link = '';
     $window.location.href = '/' + link;
   };
+  $rootScope.grades_names = {};
+  sdk.ListGrades((stat, result) => {
+    switch (stat) {
+      case sdk.stats.OK:
+        $rootScope.sdkGrades = result;
+        const grades = result.map(grade => grade.id);
+        result.forEach(grade => {
+          $rootScope.grades_names[grade.id] = grade.name;
+        });
+        break
+      default:
+    }
+  })
   confirm($rootScope, sdk);
 });
 
@@ -251,7 +263,6 @@ app.controller("mainCtrl", function ($rootScope, $scope, sdk) {
       }
     });
   };
-  $scope.grades_names = sdk.grades_names_long;
   $scope.prepareItemDel = () => {
     if ($scope.selected_item) $('#deleteItem_modal')[0].M_Modal.open()
     else toast('لم تختار أى وحدات!', gradients.error);

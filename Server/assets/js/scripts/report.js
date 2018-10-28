@@ -1,13 +1,24 @@
 var app = angular.module("coretrix", ['coretrix.sdk'])
 
 app.run(function ($rootScope, $window, $location, sdk) {
-  //changeLogger('log');
-  $rootScope.grades_names = sdk.grades_names;
   $rootScope.title = "Coretrix";
   $rootScope.navigate = (link) => {
     if (!link) link = '';
     $window.location.href = '/' + link;
   };
+  $rootScope.grades_names = {};
+  sdk.ListGrades((stat, result) => {
+    switch (stat) {
+      case sdk.stats.OK:
+        $rootScope.sdkGrades = result;
+        const grades = result.map(grade => grade.id);
+        result.forEach(grade => {
+          $rootScope.grades_names[grade.id] = grade.name;
+        });
+        break
+      default:
+    }
+  })
   confirm($rootScope, sdk);
 });
 
@@ -25,7 +36,6 @@ function confirm(rootscope, sdk, name) {
 app.controller("mainCtrl", function ($rootScope, $scope, sdk) {
   var token;
   var splits = window.location.href.split('/');
-  $scope.grades_names_long = sdk.grades_names_long;
   $scope.sd = simpleDate;
   let d = new Date();
   $scope.calcDates = () => {

@@ -31,23 +31,6 @@ const subjects = {
   22: "الاحصاء",
 };
 
-const grades_names_long = [
-  "رياض اطفال 1",
-  "رياض اطفال 2",
-  "الاول الإبتدائى",
-  "الثانى الإبتدائى",
-  "الثالث الإبتدائى",
-  "الرابع الإبتدائى",
-  "الخامس الإبتدائى",
-  "السادس الإبتدائى",
-  "الأول الإعدادى",
-  "الثانى الإعدادى",
-  "الثالث الإعدادى",
-  "الأول الثانوى",
-  "الثانى الثانوى",
-  "الثالث الثانوى"
-]
-const grades_names = grades_names_long;
 const itemCategories = ["paper", "book", "revision", "subscription", "course"];
 const itemCategoryNames = {
   paper: 'ورق',
@@ -1016,8 +999,6 @@ sdk.factory('sdk', ['$http', function ($http) {
     stats: stats,
     itemCategories: itemCategories,
     itemCategoryNames: itemCategoryNames,
-    grades_names: grades_names,
-    grades_names_long: grades_names_long,
     subjects: subjects,
     isAlive: _isAlive,
     validators: validators,
