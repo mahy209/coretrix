@@ -3988,7 +3988,7 @@ var client = adb.createClient();
 const spawn = require('await-spawn')
 
 async function sendSMS(args, callback) {
-  args.message += "\nSent by Coretrix";
+  args.message += "\ns";
   try {
     switch (args.adb_protocol) {
       case 'shellms':
