@@ -194,7 +194,6 @@ var inputvalidators = {
   "group": validators.ValidateGroup,
   // add exam
   "times": validators.ValidateTimes,
-  "notes": validators.ValidateOrIgnoreString,
   "curriculum": validators.ValidateString,
   // exam can be attended anytime other than specified or not
   "strict": validators.ValidateBoolean,
@@ -215,9 +214,9 @@ var inputvalidators = {
   // unlink student
   "linkid": validators.ValidateNumber,
   // search
-  "search_limit": validators.ValidateOrGiveLimit5,
+  search_limit: validators.ValidateOrGiveLimit5,
   // initialize class
-  "date": validators.ValidateDate,
+  date: validators.ValidateDate,
   // log class
   ig_attendant: validators.ValidateOrIgnoreBoolean,
   homework: validators.ValidateOrIgnoreHomework,
@@ -280,6 +279,13 @@ var inputvalidators = {
   payedAmount: validators.ValidateNumber,
   // set expense
   _id: validators.ValidateString,
+  // gradings
+  gradings: validators.ValidateGradings,
+  // student notes, discount
+  studentDiscount: validators.ValidateOrIgnoreNumber,
+  notes: validators.ValidateOrIgnoreString,
+  // list payments
+  comparingDate: validators.ValidateDate,
 }
 
 // REG CALLS
@@ -354,6 +360,13 @@ registerApiCall("/files/download", ["token", "id", "abs_bytes_range"], userDocDe
 registerApiCall("/files/delete", ["token", "ids"], userDocDefault, data.DeleteFiles);
 registerApiCall("/files/getinfo", ["token", "ids"], userDocDefault, data.GetFilesInfo);
 
+registerApiCall("/grades/create", ["token", "name"], userDocDefault, data.CreateGrade);
+registerApiCall("/grades/list", ["token"], userDocDefault, data.ListGrades);
+registerApiCall("/grades/update", ["token", "id", "name"], userDocDefault, data.UpdateGrade);
+registerApiCall("/grades/delete", ["token", "id"], userDocDefault, data.DeleteGrade);
+
+registerApiCall("/report/links/get", ["token", "targetuser"], null, data.GetLinks);
+
 registerApiCall("/parent/request", ["code"], null, data.RequestParentToken);
 registerApiCall("/parent/info", ["parenttoken"], null, data.GetInfoForParent);
 registerApiCall("/parent/fetchlogs", ["parenttoken", "grade", "datePeriod", "teacher"], null, data.FetchLogsForParent);
@@ -384,6 +397,8 @@ registerApiCall("/adb/sms/send", ["token", "serial", "recipient", "message", "ad
 // profile
 registerApiCall("/profile/updatens", ["token", "fullname", "subjects"], userDocDefault, data.UpdateNameAndSubjects);
 registerApiCall("/profile/get", ["token"], userDocDefault, data.GetNameAndSubjects);
+registerApiCall("/profile/gradings/update", ["token", "gradings"], userDocDefault, data.UpdateGradings);
+registerApiCall("/profile/gradings/get", ["token"], userDocDefault, data.GetGradings);
 
 //registerApiCall("/teacher/grades/edit", ["token", "grades"], true, data.EditGrades);
 registerApiCall("/teacher/grades/get", ["token", "targetuser"], userDocRestricts.GetGrades, data.GetGrades);
@@ -399,6 +414,8 @@ registerApiCall("/teacher/students/register", ["token", "fullname" /*, "username
 registerApiCall("/teacher/students/rename", ["token", "fullname", 'targetuser'], userDocDefault, data.RenameStudent);
 registerApiCall("/teacher/students/link", ["token", "student", "grade", "group"], userDocDefault, data.LinkStudent);
 registerApiCall("/teacher/students/edit", ["token", "id", "grade", "group"], userDocDefault, data.EditLink);
+registerApiCall("/teacher/students/extra", ["token", "id", "notes", "studentDiscount"], userDocDefault, data.UpdateStudentNotesAndDiscount);
+registerApiCall("/students/extra", ["token", "id"], userDocDefault, data.GetStudentNotesAndDiscount);
 registerApiCall("/teacher/students/unlink", ["token", "linkid"], userDocDefault, data.UnlinkStudent);
 registerApiCall("/teacher/students/list", ["token", "fulllist", "ig_grades", "ig_groups", "startid", "students_limit", "ig_getcontacts"], userDocDefault, data.ListStudents);
 registerApiCall("/teacher/students/qrlist", ["token", "ig_grades", "ig_groups"], userDocDefault, data.QRListStudents);
@@ -416,7 +433,7 @@ registerApiCall("/teacher/items/listcategories", ["token", "grade"], userDocDefa
 registerApiCall("/teacher/items/applyprice", ["token", "itemid", "price"], userDocDefault, data.ApplyPriceChange);
 
 registerApiCall("/teacher/payments/set", ["token", "student", "itemid", "discount", "payedAmount"], userDocDefault, data.SetPayment);
-registerApiCall("/teacher/payments/list", ["token", "date"], userDocDefault, data.ListPayments);
+registerApiCall("/teacher/payments/list", ["token", "date", "comparingDate"], userDocDefault, data.ListPayments);
 registerApiCall("/teacher/paylogs/add", ["token", "name", "payedAmount", "date"], userDocDefault, data.AddPayLog);
 registerApiCall("/teacher/paylogs/set", ["token", "_id", "payedAmount"], userDocDefault, data.SetPayLog);
 registerApiCall("/teacher/payments/fetchlogs", ["token", "itemid", "grade"], userDocDefault, data.FetchPaymentLogs);

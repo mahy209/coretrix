@@ -1,12 +1,24 @@
 var app = angular.module("coretrix", ['coretrix.sdk'])
 
 app.run(function ($rootScope, $window, $location, sdk) {
-  $rootScope.grades_names = sdk.grades_names;
   $rootScope.title = "Coretrix";
   $rootScope.navigate = (link) => {
     if (!link) link = '';
     $window.location.href = '/' + link;
   };
+  $rootScope.grades_names = {};
+  sdk.ListGrades((stat, result) => {
+    switch (stat) {
+      case sdk.stats.OK:
+        $rootScope.sdkGrades = result;
+        const grades = result.map(grade => grade.id);
+        result.forEach(grade => {
+          $rootScope.grades_names[grade.id] = grade.name;
+        });
+        break
+      default:
+    }
+  })
   confirm($rootScope, sdk);
 });
 
@@ -212,7 +224,6 @@ app.controller("mainCtrl", function ($rootScope, $scope, sdk) {
         for (var i = 0; i < logs.length; i++) {
           logs[i].codeName = idToCode(logs[i].studentid);
           if (logs[i].log) {
-            console.log(logs[i].log.payed);
             //TODO don't use typeof because if it was 0 then.. wtf ?
             if (!logs[i].log.discount) logs[i].log.discount = 0;
             if (!logs[i].log.date) logs[i].log.date = 'لم يدفع';
@@ -222,6 +233,12 @@ app.controller("mainCtrl", function ($rootScope, $scope, sdk) {
             discount: 0,
             payed: 0,
             date: 'لم يدفع'
+          }
+          // Set discount
+          const monthlyDiscount = logs[i].user_data.discount;
+          const logDiscount = logs[i].log.discount;
+          if (monthlyDiscount && !logDiscount) {
+            logs[i].log.discount = monthlyDiscount;
           }
           var payment = logs[i].log;
           if (!payment.payed) {
@@ -246,7 +263,6 @@ app.controller("mainCtrl", function ($rootScope, $scope, sdk) {
       }
     });
   };
-  $scope.grades_names = sdk.grades_names_long;
   $scope.prepareItemDel = () => {
     if ($scope.selected_item) $('#deleteItem_modal')[0].M_Modal.open()
     else toast('لم تختار أى وحدات!', gradients.error);

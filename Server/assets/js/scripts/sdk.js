@@ -2,7 +2,7 @@ var sdk = angular.module('coretrix.sdk', [])
 const host = "127.0.0.1";
 const port = 8080;
 const local_url = "http://" + host + ":" + port + "/";
-const live_url = 'https://my-project-1489238489496.appspot.com/';
+const live_url = 'http://80.211.107.128:8080/';
 if (livenotlocal) url = live_url;
 else url = local_url;
 
@@ -31,23 +31,6 @@ const subjects = {
   22: "الاحصاء",
 };
 
-const grades_names_long = [
-  "رياض اطفال 1",
-  "رياض اطفال 2",
-  "الاول الإبتدائى",
-  "الثانى الإبتدائى",
-  "الثالث الإبتدائى",
-  "الرابع الإبتدائى",
-  "الخامس الإبتدائى",
-  "السادس الإبتدائى",
-  "الأول الإعدادى",
-  "الثانى الإعدادى",
-  "الثالث الإعدادى",
-  "الأول الثانوى",
-  "الثانى الثانوى",
-  "الثالث الثانوى"
-]
-const grades_names = grades_names_long;
 const itemCategories = ["paper", "book", "revision", "subscription", "course"];
 const itemCategoryNames = {
   paper: 'ورق',
@@ -414,6 +397,40 @@ sdk.factory('sdk', ['$http', function ($http) {
     }, callback);
   }
 
+  function GetNotesAndDiscount(id, callback) {
+    var token = Cookies.get('token');
+    post("api/students/extra", {
+      id: id,
+      token: token,
+    }, callback);
+  }
+
+  function UpdateNotesAndDiscount(id, notes, studentDiscount, callback) {
+    var token = Cookies.get('token');
+    post("api/teacher/students/extra", {
+      id: id,
+      notes: notes,
+      studentDiscount: studentDiscount,
+      token: token,
+    }, callback);
+  }
+
+
+  function getGradings(callback) {
+    var token = Cookies.get('token');
+    post("api/profile/gradings/get", {
+      token,
+    }, callback);
+  }
+
+  function updateGradings(gradings, callback) {
+    var token = Cookies.get('token');
+    post("api/profile/gradings/update", {
+      gradings,
+      token,
+    }, callback);
+  }
+
   function AddExam(name, grade, max, redline, callback) {
     var token = Cookies.get('token');
     post("api/teacher/exams/add", {
@@ -760,10 +777,11 @@ sdk.factory('sdk', ['$http', function ($http) {
     }, callback);
   }
 
-  function ListPayments(date, callback) {
+  function ListPayments(date, comparingDate, callback) {
     var token = Cookies.get('token');
     post("api/teacher/payments/list", {
       date: date,
+      comparingDate: comparingDate,
       token: token
     }, callback);
   }
@@ -778,6 +796,38 @@ sdk.factory('sdk', ['$http', function ($http) {
       token: token
     };
     post("api/teacher/payments/set", query, callback);
+  }
+
+  function CreateGrade(name, callback) {
+    const token = Cookies.get('token');
+    post("api/grades/create", {
+      name,
+      token,
+    }, callback);
+  }
+
+  function ListGrades(callback) {
+    const token = Cookies.get('token');
+    post("api/grades/list", {
+      token,
+    }, callback);
+  }
+
+  function UpdateGrade(id, name, callback) {
+    const token = Cookies.get('token');
+    post("api/grades/update", {
+      id,
+      name,
+      token,
+    }, callback);
+  }
+
+  function DeleteGrade(id, callback) {
+    const token = Cookies.get('token');
+    post("api/grades/delete", {
+      id,
+      token,
+    }, callback);
   }
 
   function AddItem(name, grade, price, itemCategory, callback) {
@@ -832,6 +882,14 @@ sdk.factory('sdk', ['$http', function ($http) {
   function GetInfoForParent(token, callback) {
     post("api/parent/info", {
       parenttoken: token
+    }, callback);
+  }
+
+  function GetLinks(targetuser, callback) {
+    var token = Cookies.get('token');
+    post("api/report/links/get", {
+      targetuser: targetuser,
+      token: token
     }, callback);
   }
 
@@ -949,8 +1007,6 @@ sdk.factory('sdk', ['$http', function ($http) {
     stats: stats,
     itemCategories: itemCategories,
     itemCategoryNames: itemCategoryNames,
-    grades_names: grades_names,
-    grades_names_long: grades_names_long,
     subjects: subjects,
     isAlive: _isAlive,
     validators: validators,
@@ -1015,6 +1071,15 @@ sdk.factory('sdk', ['$http', function ($http) {
     ADBSendSMS: ADBSendSMS,
     GetNameAndSubject: getNameAndSubject,
     UpdateNameAndSubject: updateNameAndSubject,
+    GetGradings: getGradings,
+    UpdateGradings: updateGradings,
+    UpdateNotesAndDiscount: UpdateNotesAndDiscount,
+    GetNotesAndDiscount: GetNotesAndDiscount,
+    CreateGrade: CreateGrade,
+    ListGrades: ListGrades,
+    UpdateGrade: UpdateGrade,
+    DeleteGrade: DeleteGrade,
+    GetLinks: GetLinks,
     /* ----------------------- */
     ListGroupClassesLinks: ListGroupClassesLinks,
     LinkGroupClasses: LinkGroupClasses,

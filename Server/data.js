@@ -356,8 +356,8 @@ const mongodb = require('mongodb')
 var MongoClient = mongodb.MongoClient;
 var ObjectId = mongodb.ObjectID;
 const fs = require("fs");
-const live_host = "ds229618-a0.mlab.com";
-const live_port = 29618;
+const live_host = "80.211.107.128";
+const live_port = 27017;
 const live_user = "themadprogrammer";
 const live_password = "loVeA6irl";
 const live_database = "coretrix"
@@ -377,28 +377,28 @@ var defParam = lib.defParam;
 var now = lib.PerformanceLog;
 var connecting = false;
 
+function setLiveOrLocal(live, sdkLive = live) {
+  let u = live ? live_url : local_url;
+  try {
+    fs.writeFileSync(path.join(path.dirname(__filename), 'assets/js/scripts/liveorlocal.js'), `var livenotlocal = ${sdkLive};`)
+  } catch (e) {}
+  return u;
+}
+
 function connect() {
   connecting = true;
   var u;
-  u = local_url;
-  // try {
-  // 	if (fs.readFileSync('current_database').toString().substr(0, 4) == 'live') {
-  // 		u = live_url;
-  // 		try {
-  // 			fs.writeFileSync(path.join(path.dirname(__filename), 'assets/js/scripts/liveorlocal.js'), "var livenotlocal = true;")
-  // 		} catch (e) {}
-  // 	} else {
-  // 		u = local_url
-  // 		try {
-  // 			fs.writeFileSync(path.join(path.dirname(__filename), 'assets/js/scripts/liveorlocal.js'), "var livenotlocal = false;")
-  // 		} catch (e) {}
-  // 	}
-  // } catch (e) {
-  // 	u = local_url;
-  // 	try {
-  // 		fs.writeFileSync(path.join(path.dirname(__filename), 'assets/js/scripts/liveorlocal.js'), "var livenotlocal = false;")
-  // 	} catch (e) {}
-  // }
+  try {
+    if (process.env.DEV) {
+      u = setLiveOrLocal(true, false);
+    } else if (process.env.LIVE) {
+      u = setLiveOrLocal(true);
+    } else {
+      u = setLiveOrLocal(false);
+    }
+  } catch (e) {
+    u = setLiveOrLocal(false);
+  }
   if (u == local_url) {
     console.log("Running on local database...");
   } else console.log("Running on live database...");
@@ -1292,7 +1292,9 @@ function SearchStudents(args, callback) {
   });
   a.count((err, count) => {
     if (err) return callback(err);
-    a.skip(args.startid).limit(args.limit).toArray(function (err, arr) {
+    a.skip(args.startid).limit(args.limit).sort({
+      fullname: -1
+    }).toArray(function (err, arr) {
       if (err) return callback(err);
       var returner = {};
       returner.result = [];
@@ -1302,7 +1304,9 @@ function SearchStudents(args, callback) {
         if (arr.hasOwnProperty(i)) {
           returner.result.push({
             username: arr[i].username,
+            grade: arr[i].grade,
             [identifier]: arr[i][identifier],
+            [studentForeignIdentifier]: arr[i][studentForeignIdentifier],
             fullname: arr[i].fullname,
           });
         }
@@ -1523,6 +1527,98 @@ function removeSubjects(args, callback) {
         ErrorAndCount(callback, err, result, fields.matchedCount, stats.NothingHappened);
     });
 }*/
+
+/**
+ * Create a global grade
+ * 
+ * @typedef {Object} CreateGradePayload
+ * @property {string} name
+ * 
+ * @param  {CreateGradePayload} args
+ * @param  {Function} callback
+ */
+function createGrade(args, callback) {
+  mongoh.GetNextSequence(db, 'grades', {}, 'id', lib.IntIncrementer, (newid) => {
+    db.collection('grades')
+      .insertOne({
+        id: newid,
+        name: args.name,
+      }, (error, result) => {
+        ErrorAndCount(callback, error, result, fields.insertedCount, stats.Error);
+      });
+  });
+}
+/**
+ * List global grades
+ * 
+ * @param  {Object} args
+ * @param  {Function} callback
+ */
+function listGrades(args, callback) {
+  db.collection('grades').find({
+    deleted: {
+      $ne: true
+    }
+  }).toArray((error, result) => {
+    if (error) {
+      return callback(error, stats.Error);
+    }
+    callback(error, stats.OK, result);
+  });
+}
+
+/**
+ * Update a global grade
+ * 
+ * @typedef {Object} UpdateGradePayload
+ * @property {number} id
+ * @property {string} name
+ * 
+ * @param  {UpdateGradePayload} args
+ * @param  {Function} callback
+ */
+function updateGrade(args, callback) {
+  const {
+    id,
+    name
+  } = args;
+
+  db.collection('grades')
+    .updateOne({
+      id
+    }, {
+      $set: {
+        name
+      }
+    }, (error, result) => {
+      ErrorAndCount(callback, error, result, fields.matchedCount, stats.NonExisting);
+    })
+}
+
+/**
+ * Delete a global grade
+ * 
+ * @typedef {Object} DeleteGradePayload
+ * @property {number} id
+ * 
+ * @param  {DeleteGradePayload} args
+ * @param  {Function} callback
+ */
+function deleteGrade(args, callback) {
+  // if a user deleted the last grade
+  // next id will be that of the last
+  // it will cause a lot of problems
+  db.collection('grades')
+    .updateOne({
+      id: args.id
+    }, {
+      $set: {
+        deleted: true
+      }
+    }, (error, result) => {
+      ErrorAndCount(callback, error, result, fields.deletedCount, stats.NonExisting);
+    });
+}
 
 function updateTeacherGradesAndSubjects(userid, callback) {
   db.collection("groups").aggregate([{
@@ -1976,7 +2072,9 @@ function getStudent(args, callback) {
       fullname: 1,
       grade: 1,
       group: 1,
-      "code": "$user_data.code",
+      notes: "$user_data.notes",
+      discount: "$user_data.discount",
+      code: "$user_data.code",
       'phones.number': 1,
       'phones.phonecode': 1,
       'phones.type': 1,
@@ -2010,6 +2108,9 @@ function getStudent(args, callback) {
             }
           }
           result.payments = items;
+          result.code = result.code[0];
+          result.discount = result.discount[0];
+          result.notes = result.notes[0];
           callback(null, stats.OK, result);
         });
       } else callback(null, stats.UserNonExisting);
@@ -2386,7 +2487,8 @@ function linkStudent(args, callback) {
   if (!isTeacherRep(args.userDoc)) return callback(null, stats.IncapableUserType);
   mongoh.Exists(db, 'links', {
     [teacherForeignIdentifier]: teacherRep(args.userDoc),
-    [studentForeignIdentifier]: args.student
+    [studentForeignIdentifier]: args.student,
+    grade: args.grade,
   }, function (linkExists) {
     if (linkExists) return callback(null, stats.Exists);
     validators.ValidateUser(args.student, {
@@ -3068,7 +3170,7 @@ function listPayments(args, callback) {
     $match: {
       $and: [{
           date: {
-            $gte: lib.stripDate(args.date)
+            $gte: lib.stripDate(args.comparingDate)
           }
         },
         {
@@ -3078,7 +3180,11 @@ function listPayments(args, callback) {
         },
       ]
     }
-  }, ], (err, paylogs) => {
+  }, {
+    $sort: {
+      date: 1
+    }
+  }], (err, paylogs) => {
     if (err) callback(err);
     callback(null, stats.OK, paylogs);
   })
@@ -3155,6 +3261,10 @@ function setPayment(args, callback) {
 
       const paylogAmount = args.payedAmount - payed;
 
+      if (paylogAmount == 0) {
+        return;
+      }
+
       const added = args.payedAmount > payed;
 
       let message = [];
@@ -3217,16 +3327,23 @@ function setPayment(args, callback) {
 
 function fetchPaymentLogs(args, callback) {
   /* mongo 3.4 */
-  db.collection("links").find({
-    [teacherForeignIdentifier]: teacherRep(args.userDoc),
-    grade: args.grade
+  db.collection("links").aggregate([{
+    $match: {
+      [teacherForeignIdentifier]: teacherRep(args.userDoc),
+      grade: args.grade
+    }
   }, {
-    _id: 0,
-    id: 0,
-    [teacherForeignIdentifier]: 0
-  }).sort({
-    group: 1
-  }).toArray((err, links) => {
+    $sort: {
+      group: 1
+    }
+  }, {
+    $lookup: {
+      from: 'users',
+      localField: studentForeignIdentifier,
+      foreignField: identifier,
+      as: 'user_data'
+    }
+  }], (err, links) => {
     if (err) return callback(err);
     else if (links) {
       db.collection("payments").find({
@@ -3248,6 +3365,12 @@ function fetchPaymentLogs(args, callback) {
               links[i].log = payments[index];
             }
           }
+          links = links.map(link => {
+            return {
+              ...link,
+              user_data: link.user_data[0],
+            }
+          })
           callback(null, stats.OK, links);
         }
       });
@@ -3421,6 +3544,44 @@ function requestParentToken(args, callback) {
   });
 }
 
+function getLinks(args, callback) {
+  db.collection("links").aggregate([{
+      $match: {
+        [studentForeignIdentifier]: args.targetuser
+      }
+    },
+    {
+      $lookup: {
+        from: 'users',
+        localField: 'teacherid',
+        foreignField: 'id',
+        as: 'teachers_data'
+      }
+    },
+    {
+      $lookup: {
+        from: 'groups',
+        localField: 'group',
+        foreignField: 'id',
+        as: 'group_data'
+      }
+    },
+    {
+      $project: {
+        _id: 0,
+        teacherid: 1,
+        grade: 1,
+        'teachers_data.displayname': 1,
+        'teachers_data.subjects': 1,
+        'group_data.name': 1
+      }
+    }
+  ], (err, links) => {
+    if (err) callback(err);
+    else callback(null, stats.OK, links);
+  })
+}
+
 function getInfoForParent(args, callback) {
   db.collection("parentTokens").findOne({
     token: args.parenttoken
@@ -3543,6 +3704,9 @@ function fetchLogs(args, callback) {
     }).sort({
       date: -1
     }).toArray((err, classes) => {
+      console.log({
+        classes
+      });
       if (err) return callback(err);
       db.collection("logs").find({
         [teacherForeignIdentifier]: teacherRep(args.userDoc),
@@ -3566,6 +3730,9 @@ function fetchLogs(args, callback) {
             classes[i].log = clog;
           }
         }
+        console.log({
+          classes
+        });
         for (var i = 0; i < exams.length; i++) {
           var elog = examsLogs[exams[i].id];
           if (elog) {
@@ -3882,6 +4049,35 @@ async function sendSMS(args, callback) {
   }
 }
 
+function getStudentNotesAndDiscount(args, callback) {
+  db.collection('users').findOne({
+    id: args.id
+  }, {}, (err, result) => {
+    if (err) {
+      callback(err);
+      return;
+    }
+    callback(null, stats.OK, result)
+  })
+}
+
+function updateStudentNotesAndDiscount(args, callback) {
+  let payload = {};
+
+  if (args.studentDiscount) payload.discount = args.studentDiscount;
+  if (args.notes) payload.notes = args.notes;
+
+  if (!Object.keys(payload).length > 0) return;
+
+  db.collection('users').updateOne({
+    [identifier]: args.id,
+  }, {
+    $set: payload
+  }, function (err, result) {
+    ErrorAndCount(callback, err, result, fields.matchedCount, stats.Error);
+  });
+}
+
 function getNameAndSubjects(args, callback) {
   db.collection('users').findOne({
     [identifier]: teacherRep(args.userDoc),
@@ -3905,6 +4101,32 @@ function updateNameAndSubjects(args, callback) {
     $set: {
       fullname: `${args.fullname.first} ${args.fullname.father} ${args.fullname.grand} ${args.fullname.last}`.replace('  ', '').trim(),
       subjects: args.subjects,
+    }
+  }, function (err, result) {
+    ErrorAndCount(callback, err, result, fields.matchedCount, stats.Error);
+  });
+}
+
+function getGradings(args, callback) {
+  db.collection('users').findOne({
+    [identifier]: teacherRep(args.userDoc),
+  }, {
+    _id: 0,
+    gradings: 1,
+  }, (err, result) => {
+    if (err) callback(err);
+    else callback(null, stats.OK, {
+      gradings: result.gradings
+    })
+  });
+}
+
+function updateGradings(args, callback) {
+  db.collection('users').updateOne({
+    [identifier]: teacherRep(args.userDoc),
+  }, {
+    $set: {
+      gradings: args.gradings,
     }
   }, function (err, result) {
     ErrorAndCount(callback, err, result, fields.matchedCount, stats.Error);
@@ -4038,6 +4260,17 @@ module.exports = {
   // PROFILES
   UpdateNameAndSubjects: updateNameAndSubjects,
   GetNameAndSubjects: getNameAndSubjects,
+  UpdateGradings: updateGradings,
+  GetGradings: getGradings,
+  UpdateStudentNotesAndDiscount: updateStudentNotesAndDiscount,
+  GetStudentNotesAndDiscount: getStudentNotesAndDiscount,
+  GetLinks: getLinks,
+
+  // GRADES
+  CreateGrade: createGrade,
+  ListGrades: listGrades,
+  UpdateGrade: updateGrade,
+  DeleteGrade: deleteGrade,
 
   // VALIDATORS
   validators: validators,

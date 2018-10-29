@@ -1,7 +1,6 @@
 var app = angular.module("coretrix", ['coretrix.sdk'])
 
 app.run(function ($rootScope, $window, $location, sdk) {
-  $rootScope.grades_names = sdk.grades_names;
   $rootScope.title = "Coretrix";
   $rootScope.weekdays = [
     'السبت',
@@ -25,6 +24,19 @@ app.run(function ($rootScope, $window, $location, sdk) {
     if (!link) link = '';
     $window.location.href = '/' + link;
   };
+  $rootScope.grades_names = {};
+  sdk.ListGrades((stat, result) => {
+    switch (stat) {
+      case sdk.stats.OK:
+        $rootScope.sdkGrades = result;
+        const grades = result.map(grade => grade.id);
+        result.forEach(grade => {
+          $rootScope.grades_names[grade.id] = grade.name;
+        });
+        break
+      default:
+    }
+  })
   confirm($rootScope, sdk);
 });
 
@@ -205,8 +217,12 @@ app.controller("mainCtrl", function ($rootScope, $scope, sdk) {
       if ($scope.globalAttendanceCheck != 'none') {
         console.log($scope.globalAttendanceCheck);
         switch ($scope.globalAttendanceCheck) {
-          case 'setTrue': $scope.logs[i].log.attendant = true; break;
-          case 'setFalse': $scope.logs[i].log.attendant = false; break;
+          case 'setTrue':
+            $scope.logs[i].log.attendant = true;
+            break;
+          case 'setFalse':
+            $scope.logs[i].log.attendant = false;
+            break;
         }
         $scope.studentAttendanceChanged($scope.logs[i]);
       }
@@ -287,7 +303,6 @@ app.controller("mainCtrl", function ($rootScope, $scope, sdk) {
       toast('تعذر تغيير مجموعة الطالب!', gradients.error);
     }
   };
-  $scope.grades_names = sdk.grades_names_long;
   $('.datepicker').datepicker({
     todayHighlight: true
   });
