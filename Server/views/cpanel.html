@@ -66,15 +66,15 @@
     class="fixed-action-btn">
     <a class="btn-floating btn-large blue-grey">
       <i ng-show="tab=='students'"
-        id="addStudentBtn" 
+        id="addStudentBtn"
         class="modal-trigger fa fa-plus"
         href="#addStudent_modal"></i>
       <i ng-show="tab=='times'"
-        id="addGroup_btn" 
+        id="addGroup_btn"
         class="fa fa-plus modal-trigger "
         href="#addGroup_modal"></i>
       <i ng-show="tab=='exams'"
-        id="addExam_btn" 
+        id="addExam_btn"
         class="fa fa-plus modal-trigger"
         href="#addExam_modal"></i>
     </a>
@@ -788,7 +788,9 @@
             </div>
           </div>
 
-          <div id="addStudent_modal" class="modal bottom-sheet" style="max-height:100%;">
+          <div id="addStudent_modal"
+            class="modal bottom-sheet"
+            style="max-height:100%;">
             <div class="modal-content">
               <div>
                 <div>
@@ -801,16 +803,15 @@
                           ng-change="nameChanged()"
                           type="text"
                           id="studentName_auto"
-                          class="autocomplete"    
+                          class="autocomplete"
                           ng-init="initializeSearch()"
-                          tabindex="1" 
-                        >
+                          tabindex="1">
                       </div>
                     </div>
                     <div>
                       <label>السنه الدراسيه</label>
                       <select class="browser-default"
-                        tabindex="2" 
+                        tabindex="2"
                         ng-change="loadGroups()"
                         ng-model="selected_grade">
                         <option value=""
@@ -821,7 +822,7 @@
                       </select>
                       <label>المجموعه</label>
                       <select class="browser-default"
-                        tabindex="3" 
+                        tabindex="3"
                         ng-model="selected_group">
                         <option value=""
                           disabled
@@ -831,45 +832,42 @@
                       </select>
                       <label>ملاحظات</label>
                       <textarea style="margin-bottom: unset;"
-                        tabindex="4" 
+                        tabindex="4"
                         ng-model="studentNotes"
                         class="materialize-textarea"></textarea>
                       <label>خصم شهرى</label>
                       <input ng-model="studentDiscount"
-                        tabindex="5" 
+                        tabindex="5"
                         type="number"
                         min="0">
-                       <div class="input-field col l6 s12">
-                          <span>رقم هاتف الطالب</span>
-                          <input ng-model="studentPhone"
-                            tabindex="7" 
-                            type="tel"
-                            class="validate">
-                        </div>
+                      <div class="input-field col l6 s12">
+                        <span>رقم هاتف ولى الأمر 2</span>
+                        <input ng-model="studentParentPhone2"
+                          type="tel"
+                          class="validate"
+                          tabindex="7">
+                      </div>
                       <div class="row">
-                        <div class="input-field col l6 s12">
-                          <span>رقم هاتف ولى الأمر 2</span>
-                          <input ng-model="studentParentPhone2"
-                            type="tel"
-                            class="validate"
-                            tabindex="6" 
-                            >
-                        </div>
                         <div class="input-field col l6 s12">
                           <span>رقم هاتف ولى الأمر 1</span>
                           <input ng-model="studentParentPhone1"
                             type="tel"
                             class="validate"
-                            tabindex="9" 
-                            >
+                            tabindex="6">
                         </div>
                         <div class="input-field col l6 s12">
                           <span>رقم هاتف المنزل</span>
                           <input ng-model="studentHomePhone"
                             type="tel"
                             class="validate"
-                            tabindex="8" 
-                            >
+                            tabindex="9">
+                        </div>
+                        <div class="input-field col l6 s12">
+                          <span>رقم هاتف الطالب</span>
+                          <input ng-model="studentPhone"
+                            tabindex="8"
+                            type="tel"
+                            class="validate">
                         </div>
                       </div>
                     </div>
@@ -879,8 +877,10 @@
             </div>
             <div class="modal-footer">
               <a class="waves-effect waves-green btn-flat"
-                ng-click="addStudent()" tabindex="10">أضف الطالب</a>
-              <a href="#!" tabindex="11" 
+                ng-click="addStudent()"
+                tabindex="10">أضف الطالب</a>
+              <a href="#!"
+                tabindex="11"
                 class="modal-action modal-close waves-effect waves-green btn-flat">إلغاء</a>
             </div>
           </div>
@@ -1764,7 +1764,8 @@
                         </ul>
                     </div-->
           <div id="addGroup_modal"
-            class="modal bottom-sheet" style="max-height: 100%;">
+            class="modal bottom-sheet"
+            style="max-height: 100%;">
             <div class="modal-content">
               <div>
                 <div class="row">
@@ -2046,13 +2047,14 @@
             </div>
           </div>
           <div id="addExam_modal"
-            class="modal bottom-sheet" style="max-height:100%;">
+            class="modal bottom-sheet"
+            style="max-height:100%;">
             <div class="modal-content">
               <div class="row">
                 <div class="col s12">
                   <label>اسم الامتحان</label>
                   <input type="text"
-                    id="addExam_input" 
+                    id="addExam_input"
                     ng-model="newExam_name">
                 </div>
                 <div class="col s6">
@@ -2220,7 +2222,8 @@
     src="/assets/js/libs/bootstrap-datepicker.min.js"></script>
   <script type="text/javascript"
     src="/assets/js/libs/materialize.min.js"></script>
-    <script type="text/javascript" src="/assets/js/scripts/accessabilty.js"></script>
+  <script type="text/javascript"
+    src="/assets/js/scripts/accessabilty.js"></script>
   <pre id="log"></pre>
   <script type="text/javascript">
     $(document).ready(function () {
