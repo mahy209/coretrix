@@ -51,11 +51,7 @@ bcryptjs@^2.4.3:
 
 bl@^1.2.1:
   version "1.2.2"
-<<<<<<< HEAD
-  resolved "https://registry.yarnpkg.com/bl/-/bl-1.2.2.tgz#a160911717103c07410cef63ef51b397c025af9c"
-=======
   resolved "http://registry.npmjs.org/bl/-/bl-1.2.2.tgz#a160911717103c07410cef63ef51b397c025af9c"
->>>>>>> f7357601fae9458aeccc9cfd2c531aff472675dc
   dependencies:
     readable-stream "^2.3.5"
     safe-buffer "^5.1.1"
