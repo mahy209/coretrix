@@ -1106,7 +1106,7 @@ app.controller('studentsCtrl', function ($rootScope, $scope, sdk) {
       $scope.loadedStudent = null
     }
   })
-  $scope.initializeSearch = () => {
+  function initializeSearch() {
     sdk.ListStudents(0, 0, function (stat, response) {
       switch (stat) {
         case sdk.stats.OK:
@@ -1130,7 +1130,6 @@ app.controller('studentsCtrl', function ($rootScope, $scope, sdk) {
                 $scope.studentName = val
                 const id = data[val];
                 sdk.GetNotesAndDiscount(id, (stat, data) => {
-                  console.log(stat == sdk.stats.OK);
                   if (stat === sdk.stats.OK) {
                     $scope.studentNotes = data.notes;
                     $scope.studentDiscount = data.discount;
@@ -1171,6 +1170,11 @@ app.controller('studentsCtrl', function ($rootScope, $scope, sdk) {
         default:
       }
     });
+  }
+  $scope.initializeSearch = () => {
+    setTimeout(() => {
+      initializeSearch();
+    }, 3000);
   }
   $scope.load_optGroups = () => {
     if (isNaN($scope.opt_grade)) return

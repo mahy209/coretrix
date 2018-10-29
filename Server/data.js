@@ -910,12 +910,15 @@ function editPhone(args, callback) {
 }
 
 function getPhones(args, callback) {
-  var getphones = getReferenced.clone();
-  /* TEMPORARY */
-  if (args.targetuser) args.userDoc.teacherid = args.targetuser;
-  if (args.targetuser) args.userDoc.id = args.targetuser;
-  getphones.col = "phones";
-  getphones(args, callback);
+  db.collection("phones").find({
+    userid: args.targetuser
+  }).toArray((err, result) => {
+    if (err) {
+      callback(err);
+      return;
+    }
+    callback(null, stats.OK, result);
+  });
 }
 
 function removePhones(args, callback) {
