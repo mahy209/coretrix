@@ -79,14 +79,7 @@ app.controller("mainCtrl", function ($rootScope, $scope, sdk) {
   });
 
   $scope.gradeMark = (mark, max) => {
-    if (!$scope.gradings) return '';
-    const percentage = parseInt((mark / max) * 100);
-    for (const grading of $scope.gradings) {
-      if (percentage > grading.percentage) {
-        gradingName = grading.name;
-        return grading.name;
-      }
-    }
+    return gradeMark(mark, max, $scope.gradings);
   }
 
   $scope.refetchLogs = () => {

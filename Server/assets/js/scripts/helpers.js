@@ -48,6 +48,17 @@ function formatPayClass(payment, price) {
 
 const intro = 'نعلم سيادتكم بان الطالب';
 
+function gradeMark(mark, max, gradings) {
+  if (!gradings) return '';
+  const percentage = parseInt((mark / max) * 100);
+  for (const grading of gradings) {
+    if (percentage > grading.percentage) {
+      gradingName = grading.name;
+      return grading.name;
+    }
+  }
+}
+
 function formatExamReport(profile, log, max_mark, examIndex, nointro, grades_names) {
   const grade = grades_names[log.grade];
   if (!log.log) log.log = {};
