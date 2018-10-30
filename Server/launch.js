@@ -52,8 +52,7 @@ function checkActivated() {
       }
 
       // try current and past month
-      // const currentMonth = new Date().getMonth() + 1;
-      const currentMonth = 1;
+      const currentMonth = new Date().getMonth() + 1;
       if (bcrypt.compareSync(`${serial}-${currentMonth-1}${currentMonth}`, hash)) {
         spawnMongo()
       } else {
