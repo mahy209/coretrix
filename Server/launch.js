@@ -3,15 +3,17 @@ const fs = require('fs')
 const bcrypt = require('bcryptjs')
 const serialNumber = require('serial-number')
 const isWindows = require('os').type() != 'Linux'
-const {spawn} = require('child_process')
+const {
+  spawn
+} = require('child_process')
 const opn = require('opn')
 
-function notRegistered () {
+function notRegistered() {
   console.log('machine is not registered')
   process.exit()
 }
 
-function checkActivated () {
+function checkActivated() {
   try {
     // const http = require('http')
 
@@ -49,10 +51,17 @@ function checkActivated () {
         return
       }
 
-      if (bcrypt.compareSync(serial, hash)) {
+      // try current and past month
+      // const currentMonth = new Date().getMonth() + 1;
+      const currentMonth = 1;
+      if (bcrypt.compareSync(`${serial}-${currentMonth-1}${currentMonth}`, hash)) {
         spawnMongo()
       } else {
-        notRegistered()
+        if (bcrypt.compareSync(`${serial}-${currentMonth}${currentMonth+1}`, hash)) {
+          spawnMongo()
+        } else {
+          notRegistered()
+        }
       }
     })
   } catch (e) {
@@ -62,12 +71,12 @@ function checkActivated () {
 
 checkActivated()
 
-function backendUp () {
+function backendUp() {
   // launch browser instance
   opn('http://127.0.0.1:8080')
 }
 
-function databaseUp () {
+function databaseUp() {
   try {
     require(path.join(__dirname, 'main.js'))
     backendUp()
@@ -76,7 +85,7 @@ function databaseUp () {
   }
 }
 
-function repairDB () {
+function repairDB() {
   return new Promise(resolve => {
     let mongod;
     if (isWindows) {
@@ -88,7 +97,7 @@ function repairDB () {
   })
 }
 
-async function spawnMongo () {
+async function spawnMongo() {
   await repairDB();
 
   let mongod;
@@ -98,6 +107,7 @@ async function spawnMongo () {
   } else {
     mongod = spawn('sudo', ['mongod', '--dbpath', 'Mongo', '--storageEngine=mmapv1'])
   }
+
 
   mongod.stdout.on('data', (data) => {
     // if new instance got created
