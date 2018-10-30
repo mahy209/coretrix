@@ -48,33 +48,35 @@ function formatPayClass(payment, price) {
 
 const intro = 'نعلم سيادتكم بان الطالب';
 
-function formatExamReport(profile, log, max_mark, examName, nointro) {
+function formatExamReport(profile, log, max_mark, examIndex, nointro, grades_names) {
+  const grade = grades_names[log.grade];
   if (!log.log) log.log = {};
   const student = log.firstname;
   const attendant = log.log.attendant;
   const mark = log.log.mark;
   const option_attendant = attendant ? 'حضر' : 'لم يحضر';
-  const option_mark = mark ? ('حصل على ' + mark + ' من ' + max_mark) : 'لم تسجل درجة للطالب';
-  return (nointro ? '' : `${intro} ${student} `) + `${option_attendant} و${option_mark} امتحان ${examName}` + (nointro ? '' : ` - ${formatSignature(profile)}`);
+  const option_mark = mark ? ('درجته' + mark + '/' + max_mark) : 'لم يحضر';
+  return (nointro ? '' : `${intro} ${student} `) + `${option_mark} امتحان ${examIndex}` + (nointro ? '' : ` - ${grade} ${formatSignature(profile)}`);
 }
 
-function formatClassReport(profile, log, options, classDay, nointro) {
+function formatClassReport(profile, log, options, classDay, nointro, grades_names) {
+  const grade = grades_names[log.grade];
   if (!log.log) log.log = {};
   const student = log.firstname;
   const homework = log.log.homework;
   const quiz = log.log.quiz;
   const attendant = log.log.attendant;
   let option_attendant = attendant ? 'حضر' : 'لم يحضر';
-  let option_homework = 'الواجب ' + (homework ? (homework.type == 'marks' ? 'حصل فيه على ' + homework.mark + ' من ' + homework.max :
+  let option_homework = 'الواجب ' + (homework ? (homework.type == 'marks' ? homework.mark + '/' + homework.max :
     (homework.option == 'incomplete' ? 'غير مكتمل' : 'كامل')) : 'لم يسجل');
-  let option_quiz = 'التسميع ' + (quiz ? (quiz.type == 'marks' ? 'حصل فيه على ' + quiz.mark + ' من ' + quiz.max : (quiz.option ==
+  let option_quiz = 'التسميع ' + (quiz ? (quiz.type == 'marks' ? quiz.mark + '/' + quiz.max : (quiz.option ==
     'absent' ? 'لم يسمّعه' : 'سمّعه')) : 'لم يسجل');
   let options_string = '';
   options_string =
     (options.attendant ? option_attendant : '') +
     (options.homework ? ' و' + option_homework : '') +
     (options.quiz ? ' و' + option_quiz : '');
-  return ((nointro ? '' : `${intro} ${student} `) + `${options_string}` + (nointro ? '' : ` - ${formatSignature(profile)}`)).replace('  ', ' ').trim();
+  return ((nointro ? '' : `${intro} ${student} `) + `${options_string}` + (nointro ? '' : ` - ${grade} ${formatSignature(profile)}`)).replace('  ', ' ').trim();
 }
 
 function changeLogger(elementName) {

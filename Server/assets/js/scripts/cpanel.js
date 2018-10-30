@@ -545,12 +545,12 @@ app.controller('smsCtrl', function ($rootScope, $scope, $location, sdk) {
           quiz: $scope.smsQuiz,
           homework: $scope.smsHomework
         },
-        formatClassDay($scope.selected_class))
+        formatClassDay($scope.selected_class), undefined, $rootScope.grades_names)
     }
 
     const formatExam = (log) => {
       return formatExamReport(
-        $scope.profile, log, $scope.selected_exam.max_mark, $scope.selected_exam.name)
+        $scope.profile, log, $scope.selected_exam.max_mark, $scope.exams.indexOf($scope.selected_exam) + 1, undefined, $rootScope.grades_names)
     }
 
     const formatMessage = () => {
@@ -623,7 +623,7 @@ app.controller('smsCtrl', function ($rootScope, $scope, $location, sdk) {
                     attendant: true,
                     quiz: true,
                     homework: true
-                  }, formatClassDay(classLog), true))
+                  }, formatClassDay(classLog), true, $rootScope.grades_names))
                 })
 
                 notifs.push(separator)
@@ -634,7 +634,7 @@ app.controller('smsCtrl', function ($rootScope, $scope, $location, sdk) {
                   if (!examLog.log || !examLog.log.attendant) unattExams++
                   examLog.fullname = student.fullname
                   notifs.push(formatExamReport(
-                    $scope.profile, examLog, examLog.max_mark, examLog.name, true))
+                    $scope.profile, examLog, examLog.max_mark, examLog.name, true, $rootScope.grades_names))
                 })
 
                 notifs.push(separator)

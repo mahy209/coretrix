@@ -79,6 +79,7 @@ app.controller("mainCtrl", function ($rootScope, $scope, sdk) {
   });
 
   $scope.gradeMark = (mark, max) => {
+    if (!$scope.gradings) return '';
     const percentage = parseInt((mark / max) * 100);
     for (const grading of $scope.gradings) {
       if (percentage > grading.percentage) {
@@ -103,11 +104,20 @@ app.controller("mainCtrl", function ($rootScope, $scope, sdk) {
 
           $scope.exams = result.exams;
           $scope.unattendedExamsCount = 0;
-          $scope.exams.forEach(examLog => {
+          let examsMarksTotal = 0;
+          let examsMaxTotal = 0;
+          for (const examLog of $scope.exams) {
+            if (examLog.log) {
+              examsMarksTotal += examLog.log.mark;
+            }
+            examsMaxTotal += examLog.max_mark;
             if (!examLog.log || !examLog.log.attendant) {
               $scope.unattendedExamsCount++;
             }
-          });
+          }
+          $scope.examsMarksTotal = examsMarksTotal;
+          $scope.examsMaxTotal = examsMaxTotal;
+          $scope.examsAverage = (examsMarksTotal / examsMaxTotal) * 100;
 
           $scope.classes = result.classes;
           $scope.unattendedClassesCount = 0;

@@ -163,6 +163,14 @@
             </td>
             <td>{{unattendedExamsCount || 0}}</td>
           </tr>
+          <tr>
+            <td>متوسط الامتحانات
+              <span>:</span>
+            </td>
+            <td>
+              {{examsAverage || 0}}% {{gradeMark(examsAverage, 100)}}
+            </td>
+          </tr>
           <tr ng-repeat="p in items">
             <td>{{p.name}}
               <span>:</span>
@@ -192,7 +200,7 @@
             </td>
             <td>{{e.log.attendant ? 'حضر' : 'لم يحضر'}}</td>
             <td>{{e.log.mark ? (e.log.mark + ' / ' + e.max_mark) : 'لم تسجل درجة للطالب'}}</td>
-            <td>{{ gradeMark(e.log.mark, e.max_mark) }}</td>
+            <td>{{ gradeMark(e.log.mark, e.max_mark) || '---' }}</td>
           </tr>
         </table>
         <table>
