@@ -46,7 +46,8 @@ function formatPayClass(payment, price) {
   return payment;
 }
 
-const intro = 'نعلم سيادتكم بان الطالب';
+// const intro = 'نعلم سيادتكم بان الطالب';
+const intro = 'الطالب';
 
 function gradeMark(mark, max, gradings) {
   if (!gradings) return '';
@@ -59,15 +60,16 @@ function gradeMark(mark, max, gradings) {
   }
 }
 
-function formatExamReport(profile, log, max_mark, examIndex, nointro, grades_names) {
+function formatExamReport(profile, log, max_mark, examIndex, nointro, grades_names, gradings) {
   const grade = grades_names[log.grade];
   if (!log.log) log.log = {};
   const student = log.firstname;
   const attendant = log.log.attendant;
   const mark = log.log.mark;
   const option_attendant = attendant ? 'حضر' : 'لم يحضر';
-  const option_mark = mark ? ('درجته' + mark + '/' + max_mark) : 'لم يحضر';
-  return (nointro ? '' : `${intro} ${student} `) + `${option_mark} امتحان ${examIndex}` + (nointro ? '' : ` - ${grade} ${formatSignature(profile)}`);
+  const option_mark = mark ? ('درجته ' + mark + '/' + max_mark) : 'لم يحضر';
+  const option_grading = gradeMark(mark, max_mark, gradings);
+  return (nointro ? '' : `${intro} ${student} `) + `${attendant ? option_grading : ''} ${option_mark} امتحان ${examIndex}` + (nointro ? '' : ` - ${grade} ${formatSignature(profile)}`);
 }
 
 function formatClassReport(profile, log, options, classDay, nointro, grades_names) {
@@ -78,10 +80,10 @@ function formatClassReport(profile, log, options, classDay, nointro, grades_name
   const quiz = log.log.quiz;
   const attendant = log.log.attendant;
   let option_attendant = attendant ? 'حضر' : 'لم يحضر';
-  let option_homework = 'الواجب ' + (homework ? (homework.type == 'marks' ? homework.mark + '/' + homework.max :
-    (homework.option == 'incomplete' ? 'غير مكتمل' : 'كامل')) : 'لم يسجل');
-  let option_quiz = 'التسميع ' + (quiz ? (quiz.type == 'marks' ? quiz.mark + '/' + quiz.max : (quiz.option ==
-    'absent' ? 'لم يسمّعه' : 'سمّعه')) : 'لم يسجل');
+  let option_homework = (homework ? (homework.type == 'marks' ? ' الواجب' + homework.mark + '/' + homework.max :
+    (homework.option == 'incomplete' ? 'الواجب غير مكتمل' : 'الواجب كامل')) : '');
+  let option_quiz = (quiz ? (quiz.type == 'marks' ? ' التسميع' + quiz.mark + '/' + quiz.max : (quiz.option ==
+    'absent' ? 'لم يسمع' : 'سمع')) : '');
   let options_string = '';
   options_string =
     (options.attendant ? option_attendant : '') +

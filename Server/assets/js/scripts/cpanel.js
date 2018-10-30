@@ -318,6 +318,12 @@ app.controller('smsCtrl', function ($rootScope, $scope, $location, sdk) {
   $scope.select_all = true
   $scope.selected_protocol = 'legacy';
 
+  sdk.GetGradings((stat, result) => {
+    if (stat == sdk.stats.OK) {
+      $scope.gradings = result.gradings || [];
+    }
+  })
+
   let params = parseQS($location.hash())
   if (params.tab == 'sms') $rootScope.tab = 'sms'
 
@@ -550,7 +556,7 @@ app.controller('smsCtrl', function ($rootScope, $scope, $location, sdk) {
 
     const formatExam = (log) => {
       return formatExamReport(
-        $scope.profile, log, $scope.selected_exam.max_mark, $scope.exams.indexOf($scope.selected_exam) + 1, undefined, $rootScope.grades_names)
+        $scope.profile, log, $scope.selected_exam.max_mark, $scope.exams.indexOf($scope.selected_exam) + 1, undefined, $rootScope.grades_names, $scope.gradings)
     }
 
     const formatMessage = () => {
@@ -634,7 +640,7 @@ app.controller('smsCtrl', function ($rootScope, $scope, $location, sdk) {
                   if (!examLog.log || !examLog.log.attendant) unattExams++
                   examLog.fullname = student.fullname
                   notifs.push(formatExamReport(
-                    $scope.profile, examLog, examLog.max_mark, examLog.name, true, $rootScope.grades_names))
+                    $scope.profile, examLog, examLog.max_mark, examLog.name, true, $rootScope.grades_names, $scope.gradings))
                 })
 
                 notifs.push(separator)
@@ -1106,6 +1112,7 @@ app.controller('studentsCtrl', function ($rootScope, $scope, sdk) {
       $scope.loadedStudent = null
     }
   })
+
   function initializeSearch() {
     sdk.ListStudents(0, 0, function (stat, response) {
       switch (stat) {
