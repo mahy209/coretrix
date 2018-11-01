@@ -17,7 +17,7 @@ function prioritizeNumber(contacts, goFor = "parent") {
 function formatSignature(profile) {
   const teacher = profile.name;
   // const subjects = profile.subjects;
-  return `استاذ ${teacher}`;
+  return teacher;
 }
 
 function resetModals() {

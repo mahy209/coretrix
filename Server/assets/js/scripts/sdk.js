@@ -485,7 +485,7 @@ sdk.factory('sdk', ['$http', function ($http) {
     var query = {
       token: token
     };
-    if (grade) query.ig_grades = [grade];
+    if (!isNaN(grade)) query.ig_grades = [grade];
     post("api/teacher/groups/" + (distinct ? 'distinct' : 'list'), query, callback);
   }
 
