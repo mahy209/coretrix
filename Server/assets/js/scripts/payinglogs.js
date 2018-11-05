@@ -63,8 +63,6 @@ app.controller("mainCtrl", function ($rootScope, $scope, sdk) {
             $scope.grade_changed((items) => {
               var found = false;
               for (var i = 0; i < items.length; i++) {
-                console.log(items[i]);
-                console.log(parsed);
                 if (items[i].id == parsed) {
                   $scope.selected_category = items[i].category;
                   $scope.selected_item = items[i];
@@ -237,7 +235,7 @@ app.controller("mainCtrl", function ($rootScope, $scope, sdk) {
           // Set discount
           const monthlyDiscount = logs[i].user_data.discount;
           const logDiscount = logs[i].log.discount;
-          if (monthlyDiscount && !logDiscount) {
+          if (monthlyDiscount && !logDiscount && $scope.selected_item.category == 'subscription') {
             logs[i].log.discount = monthlyDiscount;
           }
           var payment = logs[i].log;
