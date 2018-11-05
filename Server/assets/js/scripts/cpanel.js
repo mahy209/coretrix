@@ -106,7 +106,7 @@ app.controller('examsCtrl', function ($rootScope, $scope, sdk) {
   let first = true
   var init = (refreshing, result, type) => {
     var c = null
-    if ($scope.selected_grade) c = $scope.selected_grade
+    if (!isNaN($scope.selected_grade)) c = $scope.selected_grade
     $scope.grades = result
     if (c) $scope.selected_grade = c
     else $scope.selected_grade = result[0]
@@ -115,7 +115,7 @@ app.controller('examsCtrl', function ($rootScope, $scope, sdk) {
   }
   $rootScope.variableListeners.push(init)
   $scope.grade_changed = () => {
-    if ($scope.selected_grade) {
+    if (!isNaN($scope.selected_grade)) {
       sdk.ListExams(parseInt($scope.selected_grade), (stat, exams) => {
         switch (stat) {
           case sdk.stats.OK:
@@ -351,7 +351,7 @@ app.controller('smsCtrl', function ($rootScope, $scope, $location, sdk) {
   }
 
   $scope.grade_changed = () => {
-    if ($scope.selected_grade) $scope.loadClasses();
+    if (!isNaN($scope.selected_grade)) $scope.loadClasses();
     sdk.ListStudents(0, 0, (stat, students) => {
       switch (stat) {
         case sdk.stats.OK:
@@ -362,7 +362,7 @@ app.controller('smsCtrl', function ($rootScope, $scope, $location, sdk) {
       }
     }, $scope.selected_grade, undefined, true);
 
-    if ($scope.selected_grade) sdk.ListGroups(parseInt($scope.selected_grade), (stat, groups) => {
+    if (!isNaN($scope.selected_grade)) sdk.ListGroups(parseInt($scope.selected_grade), (stat, groups) => {
       switch (stat) {
         case sdk.stats.OK:
           $scope.groups = groups
@@ -494,7 +494,7 @@ app.controller('smsCtrl', function ($rootScope, $scope, $location, sdk) {
 
   $scope.selected_recipient = 'parent';
   $scope.send = () => {
-    if (!$scope.selected_grade && !$scope.allStudents) return toast('برجاء اختيار السنه')
+    if (isNaN($scope.selected_grade) && !$scope.allStudents) return toast('برجاء اختيار السنه')
     if (!$scope.selected_type) return toast('برجاء اختيار نوع التقرير')
     if (!$scope.selected_device) return toast('برجاء اختيار الهاتف')
     if (!$scope.selected_recipient) return toast('برجاء اختيار مستلم الرسالة')
@@ -754,7 +754,7 @@ app.controller('paymentsCtrl', function ($rootScope, $scope, sdk) {
   }
   $scope.addItem = () => {
     if (!$scope.new_item_name) return toast('برجاء إدخال الاسم', gradients.error)
-    if (!$scope.add_selected_grade) return toast('برجاء اختيار السنه', gradients.error)
+    if (isNaN($scope.add_selected_grade)) return toast('برجاء اختيار السنه', gradients.error)
     if (!$scope.new_item_price) return toast('برجاء ادخال السعر', gradients.error)
     if (!$scope.selected_category) return toast('برجاء اختيار النوع', gradients.error)
     sdk.AddItem($scope.new_item_name, $scope.add_selected_grade, $scope.new_item_price, $scope.selected_category, (stat) => {
@@ -1244,7 +1244,7 @@ app.controller('studentsCtrl', function ($rootScope, $scope, sdk) {
   $scope.addStudent = () => {
     var n = neutralizeName($scope.studentName)
     if (!n) return toast('من فضلك قم بادخال الاسم رباعياً', gradients.error)
-    if (!$scope.selected_grade) return toast('من فضلك قم باختيار السنه و المجموعه')
+    if (isNaN($scope.selected_grade)) return toast('من فضلك قم باختيار السنه و المجموعه')
     if (!$scope.selected_group) return toast('من فضلك قم باختيار المجموعه')
     let parent1phone = parsePhoneNumber($scope.studentParentPhone1)
     let parent2phone = parsePhoneNumber($scope.studentParentPhone2)
@@ -1721,6 +1721,7 @@ app.controller('mainCtrl', function ($rootScope, $scope, sdk) {
     var c = $scope.selected_grade
     $scope.grades = result
     $scope.selected_grade = c || result[0]
+    console.log('calling grade changed');
     if (first) {
       $scope.grade_changed(true, true, true, true)
       first = false
@@ -1851,7 +1852,7 @@ app.controller('mainCtrl', function ($rootScope, $scope, sdk) {
     })
   }
   $scope.grade_changed = (groups, exams, classes, grouplinks) => {
-    if ($scope.selected_grade) {
+    if (!isNaN($scope.selected_grade)) {
       if (exams) sdk.ListExams(parseInt($scope.selected_grade), (stat, exams) => {
         switch (stat) {
           case sdk.stats.OK:
@@ -1880,7 +1881,7 @@ app.controller('mainCtrl', function ($rootScope, $scope, sdk) {
           default:
         }
       })
-      if (grouplinks) sdk.ListGroupClassesLinks(parseInt($scope.selected_grade), (stat, result) => {
+      sdk.ListGroupClassesLinks(parseInt($scope.selected_grade), (stat, result) => {
         switch (stat) {
           case sdk.stats.OK:
             $scope.classesLinks = []
@@ -1888,6 +1889,10 @@ app.controller('mainCtrl', function ($rootScope, $scope, sdk) {
               if (result.links[i].links) result.links[i].linksString = classesLinksToDayString(result.links[i].links)
               $scope.classesLinks.push(result.links[i])
             }
+            console.log({
+              result,
+              classLinks: $scope.classesLinks
+            });
             break
           default:
             break

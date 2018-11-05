@@ -144,7 +144,7 @@ app.controller("mainCtrl", function ($rootScope, $scope, sdk) {
     }
   }
   $scope.reload = () => {
-    if (!$scope.selected_grade) return toast('لم يتم إختيار السنة!', gradients.error);
+    if (isNaN($scope.selected_grade)) return toast('لم يتم إختيار السنة!', gradients.error);
     if (!$scope.selected_exam) return; //toast('لم يتم إختيار اى إمتحانات!', gradients.error);
     sdk.FetchExamLogs($scope.selected_exam.id, $scope.selected_grade, (stat, logs) => {
       if (stat == sdk.stats.OK) {
@@ -245,7 +245,7 @@ app.controller("mainCtrl", function ($rootScope, $scope, sdk) {
     $scope.loadedExam = null;
   };
   $scope.grade_changed = (callback) => {
-    if ($scope.selected_grade) {
+    if (!isNaN($scope.selected_grade)) {
       sdk.ListExams(parseInt($scope.selected_grade), (stat, exams) => {
         switch (stat) {
           case sdk.stats.OK:

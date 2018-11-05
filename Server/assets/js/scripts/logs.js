@@ -237,7 +237,7 @@ app.controller("mainCtrl", function ($rootScope, $scope, sdk) {
   $scope.reload = () => {
     $scope.loadedLogs = null;
     $scope.logs = null;
-    if (!$scope.selected_grade) return toast('لم يتم إختيار السنة!', gradients.error);
+    if (isNaN($scope.selected_grade)) return toast('لم يتم إختيار السنة!', gradients.error);
     if (!$scope.selected_class) return; //toast('لم يتم إختيار اى حصص!', gradients.error);
     sdk.FetchClassLogs($scope.selected_class.id, $scope.selected_grade, (stat, logs) => {
       if (stat == sdk.stats.OK) {
@@ -329,7 +329,7 @@ app.controller("mainCtrl", function ($rootScope, $scope, sdk) {
     });
   }
   $scope.grade_changed = (callback) => {
-    if ($scope.selected_grade) {
+    if (!isNaN($scope.selected_grade)) {
       sdk.ListGroups(parseInt($scope.selected_grade), (stat, groups) => {
         switch (stat) {
           case sdk.stats.OK:

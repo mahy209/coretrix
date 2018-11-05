@@ -108,7 +108,7 @@ app.controller("mainCtrl", function ($rootScope, $scope, sdk) {
   };
 
   $scope.grade_changed = (callback) => {
-    if ($scope.selected_grade) {
+    if (!isNaN($scope.selected_grade)) {
       sdk.ListGroups(parseInt($scope.selected_grade), (stat, groups) => {
         switch (stat) {
           case sdk.stats.OK:

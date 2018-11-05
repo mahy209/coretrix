@@ -87,7 +87,7 @@ app.controller("mainCtrl", function ($rootScope, $scope, sdk) {
 
   $scope.addItem = () => {
     if (!$scope.new_item_name) toast('برجاء إدخال الاسم', gradients.error);
-    if (!$scope.add_selected_grade) toast('برجاء اختيار السنه', gradients.error);
+    if (isNaN($scope.add_selected_grade)) toast('برجاء اختيار السنه', gradients.error);
     if (!$scope.new_item_price) toast('برجاء ادخال السعر', gradients.error);
     if (!$scope.selected_category) toast('برجاء اختيار النوع', gradients.error);
     sdk.AddItem($scope.new_item_name, $scope.add_selected_grade, $scope.new_item_price, $scope.selected_category, (stat) => {
@@ -217,7 +217,7 @@ app.controller("mainCtrl", function ($rootScope, $scope, sdk) {
     }
   }
   $scope.reload = () => {
-    if (!$scope.selected_grade) return toast('لم يتم إختيار السنة!', gradients.error);
+    if (isNaN($scope.selected_grade)) return toast('لم يتم إختيار السنة!', gradients.error);
     if (!$scope.selected_item) return; //toast('لم يتم إختيار اى حصص!', gradients.error);
     sdk.FetchPaymentLogs($scope.selected_item.id, $scope.selected_grade, (stat, logs) => {
       if (stat == sdk.stats.OK) {
@@ -280,7 +280,7 @@ app.controller("mainCtrl", function ($rootScope, $scope, sdk) {
     });
   }
   $scope.grade_changed = (callback) => {
-    if ($scope.selected_grade) {
+    if (!isNaN($scope.selected_grade)) {
       sdk.ListGroups(parseInt($scope.selected_grade), (stat, groups) => {
         switch (stat) {
           case sdk.stats.OK:
