@@ -899,3 +899,7 @@ function stripDate(date, end) {
   else date.setHours(0, 0, 0, 0);
   return date;
 }
+
+var dateFromObjectId = function (objectId) {
+  return new Date(parseInt(objectId.substring(0, 8), 16) * 1000);
+};

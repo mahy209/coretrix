@@ -2069,7 +2069,6 @@ function getStudent(args, callback) {
     }
   }, {
     $project: {
-      _id: 0,
       [studentForeignIdentifier]: 1,
       id: 1, // link identifier
       fullname: 1,
@@ -2509,7 +2508,7 @@ function linkStudent(args, callback) {
           fullname: result.fullname,
           firstname: result.firstname,
           grade: args.grade,
-          group: args.group
+          group: args.group,
         }, function (err, result) {
           ErrorAndCount(callback, err, result, fields.insertedCount, stats.Error)
         });

@@ -183,6 +183,7 @@ app.controller("mainCtrl", function ($rootScope, $scope, sdk) {
         case sdk.stats.OK:
           $scope.name = data.fullname;
           $scope.notes = data.notes;
+          $scope.date_created = simpleDate(dateFromObjectId(data._id));
           await new Promise(resolve => {
             sdk.GetLinks(parsed, (stat, result) => {
               if (stat == sdk.stats.OK) {

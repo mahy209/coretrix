@@ -1429,7 +1429,13 @@ app.controller('studentsCtrl', function ($rootScope, $scope, sdk) {
             result.nogroup = true
           }
           result.codeName = idToCode(result.studentid)
-          $scope.infoStudent = result
+          console.log({
+            result
+          });
+          $scope.infoStudent = {
+            ...result,
+            date_created: simpleDate(dateFromObjectId(result._id)),
+          };
           for (var i = 0; i < result.phones.length; i++) {
             var phone = result.phones[i]
             if (!phone.phonecode) continue
