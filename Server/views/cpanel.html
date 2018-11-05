@@ -68,6 +68,7 @@
       <i ng-show="tab=='students'"
         id="addStudentBtn"
         class="modal-trigger fa fa-plus"
+        ng-click="prepareAddStudent()"
         href="#addStudent_modal"></i>
       <i ng-show="tab=='times'"
         id="addGroup_btn"
@@ -790,6 +791,7 @@
 
           <div id="addStudent_modal"
             class="modal bottom-sheet"
+            ng-init="prepareAddStudent()"
             style="max-height:100%;">
             <div class="modal-content">
               <div>
@@ -881,7 +883,7 @@
                 tabindex="10">أضف الطالب</a>
               <a href="#!"
                 tabindex="11"
-                class="modal-action modal-close waves-effect waves-green btn-flat">إلغاء</a>
+                class="modal-action modal-close waves-effect waves-green btn-flat" ng-click="prepareAddStudent()">إلغاء</a>
             </div>
           </div>
           <div id="delete_modal"

@@ -1231,7 +1231,8 @@ app.controller('studentsCtrl', function ($rootScope, $scope, sdk) {
     $scope.globalcheck = $scope.selectall
   }
 
-  function prepareAddStudent() {
+  $scope.prepareAddStudent = () => {
+    console.log('here');
     $scope.studentName = null;
     $scope.studentParentPhone1 = null;
     $scope.studentParentPhone2 = null;
@@ -1297,7 +1298,7 @@ app.controller('studentsCtrl', function ($rootScope, $scope, sdk) {
                     addphone()
                   }, id)
                 } else {
-                  prepareAddStudent()
+                  $scope.prepareAddStudent()
                 }
               }
               addphone();
