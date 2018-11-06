@@ -1114,7 +1114,7 @@ app.controller('studentsCtrl', function ($rootScope, $scope, sdk) {
   })
 
   function initializeSearch() {
-    sdk.ListStudents(0, 0, function (stat, response) {
+    sdk.ListStudents(0, 9999999, function (stat, response) {
       switch (stat) {
         case sdk.stats.OK:
           console.log({
@@ -1299,6 +1299,7 @@ app.controller('studentsCtrl', function ($rootScope, $scope, sdk) {
                   }, id)
                 } else {
                   $scope.prepareAddStudent()
+                  $scope.initializeSearch();
                 }
               }
               addphone();
