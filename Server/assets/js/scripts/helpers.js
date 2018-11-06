@@ -69,7 +69,7 @@ function formatExamReport(profile, log, max_mark, examIndex, nointro, grades_nam
   const option_attendant = attendant ? 'حضر' : 'لم يحضر';
   const option_mark = mark ? ('درجته ' + mark + '/' + max_mark) : 'لم يحضر';
   const option_grading = gradeMark(mark, max_mark, gradings);
-  return (nointro ? '' : `${intro} ${student} `) + `${attendant ? option_grading : ''} ${option_mark} امتحان ${examIndex}` + (nointro ? '' : ` - ${grade} ${formatSignature(profile)}`);
+  return `درجة اختبار ${examIndex} ${grade} للطالب ${student} ${option_mark} (${attendant ? option_grading : ''})` + (nointro ? '' : ` ${formatSignature(profile)}`);
 }
 
 function formatClassReport(profile, log, options, classDay, nointro, grades_names) {

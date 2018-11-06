@@ -346,7 +346,7 @@ app.controller('smsCtrl', function ($rootScope, $scope, $location, sdk) {
 
   $scope.allStudentsChange = () => {
     $scope.selected_type = "message";
-    $scope.selected_grade = null;
+    $scope.selected_grade = undefined;
     $scope.grade_changed();
   }
 
