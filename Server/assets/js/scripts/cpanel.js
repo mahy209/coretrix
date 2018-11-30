@@ -1057,16 +1057,9 @@ app.controller('studentsCtrl', function ($rootScope, $scope, sdk) {
       $scope.reload()
     } else {
       $scope.searching_name = neutralizeName($scope.searchStudents_val, true)
-      sdk.SearchStudents($scope.searching_name, function (stat, result) {
-        switch (stat) {
-          case sdk.stats.OK:
-            $scope.mode = 'search'
-            createPagination(result.count)
-            $scope.changePage(1)
-            break
-          default:
-        }
-      }, $scope.selected_grade ? [parseInt($scope.selected_grade)] : undefined)
+      $scope.mode = 'search';
+      createPagination(0);
+      $scope.students = $rootScope.studentsIndexer.search($scope.searching_name);
     }
   }
   $scope.$watch('selectedPage_num', (n) => {})
@@ -1125,7 +1118,18 @@ app.controller('studentsCtrl', function ($rootScope, $scope, sdk) {
     sdk.ListStudents(0, 9999999, function (stat, response) {
       switch (stat) {
         case sdk.stats.OK:
-          $rootScope.students = [...response];
+          var options = {
+            shouldSort: true,
+            threshold: 0.2,
+            location: 0,
+            distance: 100,
+            maxPatternLength: 32,
+            minMatchCharLength: 1,
+            keys: [
+              "fullname",
+            ]
+          };
+          $rootScope.studentsIndexer = new Fuse([...response], options);
           var result = response;
           if (result.length > 0) {
             var data = {}
