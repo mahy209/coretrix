@@ -352,7 +352,7 @@ app.controller('smsCtrl', function ($rootScope, $scope, $location, sdk) {
 
   $scope.grade_changed = () => {
     if (!isNaN($scope.selected_grade)) $scope.loadClasses();
-    sdk.ListStudents(0, 0, (stat, students) => {
+    sdk.ListStudents(0, 9999999, (stat, students) => {
       switch (stat) {
         case sdk.stats.OK:
           $scope.students = students
@@ -483,7 +483,7 @@ app.controller('smsCtrl', function ($rootScope, $scope, $location, sdk) {
   }
 
   $scope.typeChanged = () => {
-    sdk.ListStudents(0, 0, (stat, students) => {
+    sdk.ListStudents(0, 9999999, (stat, students) => {
       if (stat == sdk.stats.OK) {
         $scope.message_students = students
       } else {
@@ -1125,6 +1125,7 @@ app.controller('studentsCtrl', function ($rootScope, $scope, sdk) {
     sdk.ListStudents(0, 9999999, function (stat, response) {
       switch (stat) {
         case sdk.stats.OK:
+          $rootScope.students = [...response];
           var result = response;
           if (result.length > 0) {
             var data = {}

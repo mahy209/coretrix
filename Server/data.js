@@ -2496,6 +2496,9 @@ function linkStudent(args, callback) {
           [studentForeignIdentifier]: args.student,
           fullname: result.fullname,
           firstname: result.firstname,
+          fathername: result.fathername,
+          grandname: result.grandname,
+          lastname: result.lastname,
           grade: args.grade,
           group: args.group,
         }, function (err, result) {
