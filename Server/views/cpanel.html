@@ -774,7 +774,8 @@
               </ol>
               <ul class="pagination">
                 <li ng-class="selectedPage_num == 0 ? 'disabled' : 'waves-effect'"
-                  ng-click="changePage(selectedPage_num)">
+                  ng-click="changePage(selectedPage_num)"
+                  ng-hide="pages.length <= 0">
                   <a class="fa fa-arrow-right">
                   </a>
                 </li>
@@ -784,7 +785,8 @@
                   <a>{{page.num}}</a>
                 </li>
                 <li ng-class="selectedPage_num == pages.length - 1 ? 'disabled' : 'waves-effect'"
-                  ng-click="changePage(selectedPage_num + 2)">
+                  ng-click="changePage(selectedPage_num + 2)"
+                  ng-hide="pages.length <= 0">
                   <a class="fa fa-arrow-left"> </a>
                 </li>
               </ul>
