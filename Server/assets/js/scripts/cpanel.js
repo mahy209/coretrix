@@ -518,6 +518,10 @@ app.controller('smsCtrl', function ($rootScope, $scope, $location, sdk) {
         $scope.smsStudent = log.fullname
         $scope.smsProgress = ((i + 1) / logs.length) * 100
 
+        console.log({
+          selected: $scope.selected_recipient
+        });
+
         let num = prioritizeNumber(log.contacts, $scope.selected_recipient);
 
         console.log({

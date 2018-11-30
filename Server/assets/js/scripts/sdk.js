@@ -932,7 +932,7 @@ sdk.factory('sdk', ['$http', function ($http) {
       token: token
     }
     if (typeof attendant == 'boolean') query.ig_attendant = attendant;
-    if (typeof mark == 'number' && !isNaN(mark)) query.ig_mark = parseInt(mark);
+    if (typeof mark == 'number' && !isNaN(mark)) query.ig_mark = mark;
     post("api/teacher/exams/log", query, callback);
   }
 
