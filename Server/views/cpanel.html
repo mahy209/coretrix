@@ -800,14 +800,21 @@
                     <div id="studentNameDiv"
                       class="input-field">
                       <span>اسم الطالب</span>
-                      <div>
+                      <div style="display: flex;">
                         <input ng-model="studentName"
+                          ng-disabled="linkingStudent"
                           ng-change="nameChanged()"
                           type="text"
                           id="studentName_auto"
                           class="autocomplete"
                           ng-init="initializeSearch()"
                           tabindex="1">
+                        <button class="btn blue-grey"
+                          ng-click="unlinkStudent()"
+                          style="margin-right:1%">
+                          <i class="fa fa-times"
+                            aria-hidden="true"></i>
+                        </button>
                       </div>
                     </div>
                     <div>
@@ -883,7 +890,8 @@
                 tabindex="10">أضف الطالب</a>
               <a href="#!"
                 tabindex="11"
-                class="modal-action modal-close waves-effect waves-green btn-flat" ng-click="prepareAddStudent()">إلغاء</a>
+                class="modal-action modal-close waves-effect waves-green btn-flat"
+                ng-click="prepareAddStudent()">إلغاء</a>
             </div>
           </div>
           <div id="delete_modal"

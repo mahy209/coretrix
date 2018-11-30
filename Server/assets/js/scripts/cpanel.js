@@ -1110,6 +1110,10 @@ app.controller('studentsCtrl', function ($rootScope, $scope, sdk) {
   $scope.registered = []
   $scope.selected_grade = null
   $scope.selected_group = null
+  $scope.linkingStudent = false;
+  $scope.unlinkStudent = () => {
+    $scope.linkingStudent = false;
+  };
   $('#edit_modal').modal({
     complete: () => {
       // unload student
@@ -1121,9 +1125,6 @@ app.controller('studentsCtrl', function ($rootScope, $scope, sdk) {
     sdk.ListStudents(0, 9999999, function (stat, response) {
       switch (stat) {
         case sdk.stats.OK:
-          console.log({
-            response
-          });
           var result = response;
           if (result.length > 0) {
             var data = {}
@@ -1138,7 +1139,8 @@ app.controller('studentsCtrl', function ($rootScope, $scope, sdk) {
               data: cmpdata,
               limit: 10,
               onAutocomplete: function (val) {
-                $scope.studentName = val
+                $scope.studentName = val;
+                $scope.linkingStudent = true;
                 const id = data[val];
                 sdk.GetNotesAndDiscount(id, (stat, data) => {
                   if (stat === sdk.stats.OK) {
@@ -1320,7 +1322,10 @@ app.controller('studentsCtrl', function ($rootScope, $scope, sdk) {
         error()
       })
     }
-    var reg = $scope.registered[n];
+    var reg;
+    if ($scope.linkingStudent) {
+      reg = $scope.registered[n];
+    }
     if (reg) {
       finishShit(reg)
     } else {
