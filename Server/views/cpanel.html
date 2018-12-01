@@ -1172,7 +1172,7 @@
               <div class="col" style="flex-grow: 1;" ng-show="sendingSMS">
                 <label>{{smsStudent}}</label>
                 <div class="progress" ng-class="smsFailed ? 'failed' : ''">
-                  <div class="determinate" style="width: {{smsProgress}}%"></div>
+                  <div class="determinate" style="width: {{smsProgress}%"></div>
                 </div>
               </div>
             </div>
@@ -1485,6 +1485,14 @@
                 </li> -->
               </ul>
             </div>
+            <div>
+                <span style="font-size:1.5em"> بيانات التفعيل</span>
+                <ul>
+                  <li>اسم المشترى : اسم المدرس</li>
+                  <li>النسخه : 1.1.1</li>
+                  <li> تاريخ التفعيل : 11-11-2011</li>
+                </ul>
+            </div>
           </div>
           <div id="confirmChangePassword_modal" class="modal">
             <div class="modal-content gradient">
@@ -1666,6 +1674,30 @@
         </div>
       </div>
     </div>
+    <!-- mohap info modal -->
+    <div id="mohap_modal" class="modal">
+      <div class="modal-content">
+        <h4>mohap akram</h4>
+        <p>A bunch of text</p>
+      </div>
+      <div class="modal-footer">
+        <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
+      </div>
+    </div>
+
+    <!-- ziad info modal -->
+    <div id="ziad_modal" class="modal">
+      <div class="modal-content">
+        <h4>ziad elzaeka</h4>
+        <p>A bunch of text</p>
+      </div>
+      <div class="modal-footer">
+        <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
+      </div>
+    </div>
+
+    <span style="float:left;font-size:1em"> made by <a href="#mohap_modal" class="modal-trigger">mohap akram</a> and <a class="modal-trigger" href="#ziad_modal">ziad alzarka</a> </span>
+    
   </div>
   <script type="text/javascript" src="/assets/js/libs/jquery-3.2.1.min.js"></script>
   <script type="text/javascript" src="/assets/js/libs/bootstrap-datepicker.min.js"></script>
