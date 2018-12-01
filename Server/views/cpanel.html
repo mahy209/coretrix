@@ -3,26 +3,57 @@
 
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link media="all" type="text/css" rel="stylesheet" href="/assets/css/report-page.css">
-  <link type="text/css" rel="stylesheet" href="/assets/css/materialize.min.css" media="screen,projection" />
-  <link type="text/css" rel="stylesheet" href="/assets/css/style.css">
-  <link type="text/css" rel="stylesheet" href="/assets/css/animate.min.css" />
-  <link href="/assets/css/Cairo.css" rel="stylesheet">
-  <link type="text/css" rel="stylesheet" href="/assets/css/font-awesome.min.css" />
-  <link type="text/css" rel="stylesheet" href="/assets/css/responsive-shit.css" />
-  <link type="text/css" rel="stylesheet" href="/assets/css/bootstrap-datepicker.standalone.min.css" />
-  <script type="text/javascript" src="/assets/js/libs/angular/angular.min.js"></script>
-  <script type="text/javascript" src="/assets/js/libs/angular-vs-repeat.min.js"></script>
-  <script type="text/javascript" src="/assets/js/libs/angular-drag-and-drop-lists.min.js"></script>
-  <script type="text/javascript" src="/assets/js/libs/instascan.min.js"></script>
-  <script type="text/javascript" src="/assets/js/libs/js.cookie.js"></script>
-  <script type="text/javascript" src="/assets/js/libs/library.js"></script>
-  <script type="text/javascript" src="/assets/js/libs/date-and-time.min.js"></script>
-  <script type="text/javascript" src="/assets/js/scripts/helpers.js"></script>
-  <script type="text/javascript" src="/assets/js/scripts/liveorlocal.js"></script>
-  <script type="text/javascript" src="/assets/js/scripts/sdk.js"></script>
-  <script type="text/javascript" src="/assets/js/scripts/cpanel.js"></script>
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1.0" />
+  <link media="all"
+    type="text/css"
+    rel="stylesheet"
+    href="/assets/css/report-page.css">
+  <link type="text/css"
+    rel="stylesheet"
+    href="/assets/css/materialize.min.css"
+    media="screen,projection" />
+  <link type="text/css"
+    rel="stylesheet"
+    href="/assets/css/style.css">
+  <link type="text/css"
+    rel="stylesheet"
+    href="/assets/css/animate.min.css" />
+  <link href="/assets/css/Cairo.css"
+    rel="stylesheet">
+  <link type="text/css"
+    rel="stylesheet"
+    href="/assets/css/font-awesome.min.css" />
+  <link type="text/css"
+    rel="stylesheet"
+    href="/assets/css/responsive-shit.css" />
+  <link type="text/css"
+    rel="stylesheet"
+    href="/assets/css/bootstrap-datepicker.standalone.min.css" />
+  <script type="text/javascript"
+    src="/assets/js/libs/fuse.min.js"></script>
+  <script type="text/javascript"
+    src="/assets/js/libs/angular/angular.min.js"></script>
+  <script type="text/javascript"
+    src="/assets/js/libs/angular-vs-repeat.min.js"></script>
+  <script type="text/javascript"
+    src="/assets/js/libs/angular-drag-and-drop-lists.min.js"></script>
+  <script type="text/javascript"
+    src="/assets/js/libs/instascan.min.js"></script>
+  <script type="text/javascript"
+    src="/assets/js/libs/js.cookie.js"></script>
+  <script type="text/javascript"
+    src="/assets/js/libs/library.js"></script>
+  <script type="text/javascript"
+    src="/assets/js/libs/date-and-time.min.js"></script>
+  <script type="text/javascript"
+    src="/assets/js/scripts/helpers.js"></script>
+  <script type="text/javascript"
+    src="/assets/js/scripts/liveorlocal.js"></script>
+  <script type="text/javascript"
+    src="/assets/js/scripts/sdk.js"></script>
+  <script type="text/javascript"
+    src="/assets/js/scripts/cpanel.js"></script>
 </head>
 
 
@@ -544,14 +575,18 @@
                 </li>
               </ol>
               <ul class="pagination">
-                <li ng-class="selectedPage_num == 0 ? 'disabled' : 'waves-effect'" ng-click="changePage(selectedPage_num)">
+                <li ng-class="selectedPage_num == 0 ? 'disabled' : 'waves-effect'"
+                  ng-click="changePage(selectedPage_num)"
+                  ng-hide="pages.length <= 0">
                   <a class="fa fa-arrow-right">
                   </a>
                 </li>
                 <li ng-click="changePage(page.num)" ng-repeat="page in pages" ng-class="page.selected ? 'active blue-grey' : 'waves-effect'">
                   <a>{{page.num}}</a>
                 </li>
-                <li ng-class="selectedPage_num == pages.length - 1 ? 'disabled' : 'waves-effect'" ng-click="changePage(selectedPage_num + 2)">
+                <li ng-class="selectedPage_num == pages.length - 1 ? 'disabled' : 'waves-effect'"
+                  ng-click="changePage(selectedPage_num + 2)"
+                  ng-hide="pages.length <= 0">
                   <a class="fa fa-arrow-left"> </a>
                 </li>
               </ul>
@@ -565,9 +600,21 @@
                   <div>
                     <div id="studentNameDiv" class="input-field">
                       <span>اسم الطالب</span>
-                      <div>
-                        <input ng-model="studentName" ng-change="nameChanged()" type="text" id="studentName_auto" class="autocomplete"
-                          ng-init="initializeSearch()" tabindex="1">
+                      <div style="display: flex;">
+                        <input ng-model="studentName"
+                          ng-disabled="linkingStudent"
+                          ng-change="nameChanged()"
+                          type="text"
+                          id="studentName_auto"
+                          class="autocomplete"
+                          ng-init="initializeSearch()"
+                          tabindex="1">
+                        <button class="btn blue-grey"
+                          ng-click="unlinkStudent()"
+                          style="margin-right:1%">
+                          <i class="fa fa-times"
+                            aria-hidden="true"></i>
+                        </button>
                       </div>
                     </div>
                     <div>
@@ -609,8 +656,13 @@
               </div>
             </div>
             <div class="modal-footer">
-              <a class="waves-effect waves-green btn-flat" ng-click="addStudent()" tabindex="10">أضف الطالب</a>
-              <a href="#!" tabindex="11" class="modal-action modal-close waves-effect waves-green btn-flat" ng-click="prepareAddStudent()">إلغاء</a>
+              <a class="waves-effect waves-green btn-flat"
+                ng-click="addStudent()"
+                tabindex="10">أضف الطالب</a>
+              <a href="#!"
+                tabindex="11"
+                class="modal-action modal-close waves-effect waves-green btn-flat"
+                ng-click="prepareAddStudent()">إلغاء</a>
             </div>
           </div>
           <div id="delete_modal" class="modal">

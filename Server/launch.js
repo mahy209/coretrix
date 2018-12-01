@@ -13,6 +13,8 @@ function notRegistered() {
   process.exit()
 }
 
+const registerer = 'karimgaber';
+
 function checkActivated() {
   try {
     // const http = require('http')
@@ -51,16 +53,10 @@ function checkActivated() {
         return
       }
 
-      // try current and past month
-      const currentMonth = new Date().getMonth() + 1;
-      if (bcrypt.compareSync(`${serial}-${currentMonth-1}${currentMonth}`, hash)) {
+      if (bcrypt.compareSync(`${serial}${registerer}`, hash)) {
         spawnMongo()
       } else {
-        if (bcrypt.compareSync(`${serial}-${currentMonth}${currentMonth+1}`, hash)) {
-          spawnMongo()
-        } else {
-          notRegistered()
-        }
+        notRegistered()
       }
     })
   } catch (e) {

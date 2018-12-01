@@ -1,4 +1,7 @@
 function prioritizeNumber(contacts, goFor = "parent") {
+  console.log({
+    goFor
+  });
   let indexes = {}
   for (let i = 0; i < contacts.length; i++) {
     const contact = contacts[i]

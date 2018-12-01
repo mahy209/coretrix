@@ -2413,23 +2413,12 @@ function renameStudent(args, callback) {
 function registerStudent(args, callback) {
   if (!isTeacherRep(args.userDoc)) return callback(null, stats.IncapableUserType);
   mongoh.Exists(db, "users", {
-    /*$or: [{
-        username: args.username
-    }, {*/
     firstname: args.fullname.first,
     fathername: args.fullname.father,
     grandname: args.fullname.grand,
     lastname: args.fullname.last
-    //}]
   }, function (result) {
     if (result) {
-      // use array to enable furthur modifications
-      /*var rs = {
-          dups: [],
-          username: result.username
-      };
-      if (result.username == args.username) rs.dups.push("username");
-      else rs.dups.push("fullname");*/
       callback(null, stats.Exists);
     } else {
       var password = genPass.generate({
@@ -2507,6 +2496,9 @@ function linkStudent(args, callback) {
           [studentForeignIdentifier]: args.student,
           fullname: result.fullname,
           firstname: result.firstname,
+          fathername: result.fathername,
+          grandname: result.grandname,
+          lastname: result.lastname,
           grade: args.grade,
           group: args.group,
         }, function (err, result) {
@@ -4069,7 +4061,7 @@ function updateStudentNotesAndDiscount(args, callback) {
   if (args.studentDiscount) payload.discount = args.studentDiscount;
   if (args.notes) payload.notes = args.notes;
 
-  if (!Object.keys(payload).length > 0) return;
+  if (!Object.keys(payload).length > 0) return callback(null, stats.OK);
 
   db.collection('users').updateOne({
     [identifier]: args.id,

@@ -352,7 +352,7 @@ app.controller('smsCtrl', function ($rootScope, $scope, $location, sdk) {
 
   $scope.grade_changed = () => {
     if (!isNaN($scope.selected_grade)) $scope.loadClasses();
-    sdk.ListStudents(0, 0, (stat, students) => {
+    sdk.ListStudents(0, 9999999, (stat, students) => {
       switch (stat) {
         case sdk.stats.OK:
           $scope.students = students
@@ -483,7 +483,7 @@ app.controller('smsCtrl', function ($rootScope, $scope, $location, sdk) {
   }
 
   $scope.typeChanged = () => {
-    sdk.ListStudents(0, 0, (stat, students) => {
+    sdk.ListStudents(0, 9999999, (stat, students) => {
       if (stat == sdk.stats.OK) {
         $scope.message_students = students
       } else {
@@ -517,6 +517,10 @@ app.controller('smsCtrl', function ($rootScope, $scope, $location, sdk) {
         // Log progress
         $scope.smsStudent = log.fullname
         $scope.smsProgress = ((i + 1) / logs.length) * 100
+
+        console.log({
+          selected: $scope.selected_recipient
+        });
 
         let num = prioritizeNumber(log.contacts, $scope.selected_recipient);
 
@@ -1053,16 +1057,9 @@ app.controller('studentsCtrl', function ($rootScope, $scope, sdk) {
       $scope.reload()
     } else {
       $scope.searching_name = neutralizeName($scope.searchStudents_val, true)
-      sdk.SearchStudents($scope.searching_name, function (stat, result) {
-        switch (stat) {
-          case sdk.stats.OK:
-            $scope.mode = 'search'
-            createPagination(result.count)
-            $scope.changePage(1)
-            break
-          default:
-        }
-      }, $scope.selected_grade ? [parseInt($scope.selected_grade)] : undefined)
+      $scope.mode = 'search';
+      createPagination(0);
+      $scope.students = $rootScope.studentsIndexer.search($scope.searching_name);
     }
   }
   $scope.$watch('selectedPage_num', (n) => {})
@@ -1106,6 +1103,10 @@ app.controller('studentsCtrl', function ($rootScope, $scope, sdk) {
   $scope.registered = []
   $scope.selected_grade = null
   $scope.selected_group = null
+  $scope.linkingStudent = false;
+  $scope.unlinkStudent = () => {
+    $scope.linkingStudent = false;
+  };
   $('#edit_modal').modal({
     complete: () => {
       // unload student
@@ -1117,9 +1118,18 @@ app.controller('studentsCtrl', function ($rootScope, $scope, sdk) {
     sdk.ListStudents(0, 9999999, function (stat, response) {
       switch (stat) {
         case sdk.stats.OK:
-          console.log({
-            response
-          });
+          var options = {
+            shouldSort: true,
+            threshold: 0.2,
+            location: 0,
+            distance: 100,
+            maxPatternLength: 32,
+            minMatchCharLength: 1,
+            keys: [
+              "fullname",
+            ]
+          };
+          $rootScope.studentsIndexer = new Fuse([...response], options);
           var result = response;
           if (result.length > 0) {
             var data = {}
@@ -1134,7 +1144,8 @@ app.controller('studentsCtrl', function ($rootScope, $scope, sdk) {
               data: cmpdata,
               limit: 10,
               onAutocomplete: function (val) {
-                $scope.studentName = val
+                $scope.studentName = val;
+                $scope.linkingStudent = true;
                 const id = data[val];
                 sdk.GetNotesAndDiscount(id, (stat, data) => {
                   if (stat === sdk.stats.OK) {
@@ -1316,7 +1327,10 @@ app.controller('studentsCtrl', function ($rootScope, $scope, sdk) {
         error()
       })
     }
-    var reg = $scope.registered[n];
+    var reg;
+    if ($scope.linkingStudent) {
+      reg = $scope.registered[n];
+    }
     if (reg) {
       finishShit(reg)
     } else {
