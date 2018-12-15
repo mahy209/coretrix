@@ -100,10 +100,10 @@ app.controller("mainCtrl", function ($rootScope, $scope, sdk) {
           let examsMarksTotal = 0;
           let examsMaxTotal = 0;
           for (const examLog of $scope.exams) {
-            if (examLog.log) {
+            if (examLog.log && examLog.log.attendant) {
               examsMarksTotal += examLog.log.mark;
+              examsMaxTotal += examLog.max_mark;
             }
-            examsMaxTotal += examLog.max_mark;
             if (!examLog.log || !examLog.log.attendant) {
               $scope.unattendedExamsCount++;
             }
