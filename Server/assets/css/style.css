@@ -535,3 +535,7 @@ ul[dnd-list] .dndPlaceholder {
 #info_student>div {
   float: right;
 }
+
+.rtl, .rtl * {
+  text-align: right;
+}

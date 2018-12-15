@@ -2063,6 +2063,47 @@ app.controller('mainCtrl', function ($rootScope, $scope, sdk) {
   })
 })
 
+app.controller('statsCtrl', function ($rootScope, $scope, sdk) {
+
+  var init = (refreshing, result, type) => {
+    var c = null
+    if (!isNaN($scope.selected_grade)) c = $scope.selected_grade
+    $scope.grades = result
+    if (c) $scope.selected_grade = c
+    $scope.grade_changed();
+  }
+
+  $rootScope.variableListeners.push(init);
+
+  function refreshCount() {
+    sdk.Count($scope.selected_grade, $scope.selected_group ? $scope.selected_group.id : null, (err, stats) => {
+      $scope.linksCount = stats.linksCount;
+      $scope.studentsCount = stats.studentsCount;
+      $scope.gradeCount = stats.gradeCount;
+      $scope.groupCount = stats.groupCount;
+    });
+  }
+
+  $scope.grade_changed = () => {
+    refreshCount();
+    // count grade students
+    if (!isNaN($scope.selected_grade)) {
+      sdk.ListGroups(parseInt($scope.selected_grade), (stat, groups) => {
+        switch (stat) {
+          case sdk.stats.OK:
+            $scope.groups = groups
+            break
+          default:
+        }
+      })
+    }
+  }
+
+  $scope.group_changed = () => {
+    refreshCount();
+  }
+});
+
 app.controller('settingsCtrl', function ($rootScope, $scope, sdk) {
   var ValidatePassword = function (obj) {
     if (!validators.ValidateString(obj)) {

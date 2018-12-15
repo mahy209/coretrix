@@ -57,17 +57,29 @@
 </head>
 
 
-<body ng-app="coretrix" class="grey lighten-2" style="direction: rtl;">
+<body ng-app="coretrix"
+  class="grey lighten-2"
+  style="direction: rtl;">
   <!-- <div id="overlay" class="overlay" hidden>
         <i ng-class="overlayProp.stat == 'ok' ? fa-thumbs-up : fa-thumbs-down" class="animated slideInLeft fa fa-thumbs-up fa-5x" aria-hidden="true"></i>
         <p class="animated slideInRight">{{overlayStatus}}</p>
     </div> -->
-  <div ng-show="tab=='students'||tab=='times'||tab=='exams'" class="fixed-action-btn">
+  <div ng-show="tab=='students'||tab=='times'||tab=='exams'"
+    class="fixed-action-btn">
     <a class="btn-floating btn-large blue-grey">
-      <i ng-show="tab=='students'" id="addStudentBtn" class="modal-trigger fa fa-plus" ng-click="prepareAddStudent()"
+      <i ng-show="tab=='students'"
+        id="addStudentBtn"
+        class="modal-trigger fa fa-plus"
+        ng-click="prepareAddStudent()"
         href="#addStudent_modal"></i>
-      <i ng-show="tab=='times'" id="addGroup_btn" class="fa fa-plus modal-trigger " href="#addGroup_modal"></i>
-      <i ng-show="tab=='exams'" id="addExam_btn" class="fa fa-plus modal-trigger" href="#addExam_modal"></i>
+      <i ng-show="tab=='times'"
+        id="addGroup_btn"
+        class="fa fa-plus modal-trigger "
+        href="#addGroup_modal"></i>
+      <i ng-show="tab=='exams'"
+        id="addExam_btn"
+        class="fa fa-plus modal-trigger"
+        href="#addExam_modal"></i>
     </a>
   </div>
 
@@ -81,31 +93,39 @@
       <!-- mobile navigation -->
       <div class="row">
         <div class="col s3">
-          <div ng-click="changeTab('home')" ng-class="tab == 'home' ? 'blue-grey-text text-darken-1' : 'grey-text'"
+          <div ng-click="changeTab('home')"
+            ng-class="tab == 'home' ? 'blue-grey-text text-darken-1' : 'grey-text'"
             class="center-align">
-            <i class="fa fa-inbox fa-2x" aria-hidden="true">
+            <i class="fa fa-inbox fa-2x"
+              aria-hidden="true">
             </i>
           </div>
         </div>
         <div class="col s3">
-          <div ng-click="changeTab('students')" ng-class="tab == 'students' ? 'blue-grey-text  text-darken-1' : 'grey-text'"
+          <div ng-click="changeTab('students')"
+            ng-class="tab == 'students' ? 'blue-grey-text  text-darken-1' : 'grey-text'"
             class="center-align">
-            <i class="fa fa-users fa-2x" aria-hidden="true">
+            <i class="fa fa-users fa-2x"
+              aria-hidden="true">
             </i>
           </div>
         </div>
         <div class="col s3">
-          <div ng-click="changeTab('times')" ng-class="tab == 'times' ? 'blue-grey-text  text-darken-1' : 'grey-text'"
+          <div ng-click="changeTab('times')"
+            ng-class="tab == 'times' ? 'blue-grey-text  text-darken-1' : 'grey-text'"
             class="center-align">
-            <i class="fa fa-calendar fa-2x" aria-hidden="true">
+            <i class="fa fa-calendar fa-2x"
+              aria-hidden="true">
 
             </i>
           </div>
         </div>
         <div class="col s3">
-          <div ng-click="changeTab('exams')" ng-class="tab == 'exams' ? 'blue-grey-text text-darken-1' : 'grey-text'"
+          <div ng-click="changeTab('exams')"
+            ng-class="tab == 'exams' ? 'blue-grey-text text-darken-1' : 'grey-text'"
             class="center-align">
-            <i class="fa fa-th-list fa-2x" aria-hidden="true"></i>
+            <i class="fa fa-th-list fa-2x"
+              aria-hidden="true"></i>
 
             </i>
           </div>
@@ -116,29 +136,47 @@
       <!-- mobile navigation -->
       <div class="row">
         <div class="col s3">
-          <div ng-click="changeTab('payment')" ng-class="tab == 'payment' ? 'blue-grey-text text-darken-1' : 'grey-text'"
+          <div ng-click="changeTab('payment')"
+            ng-class="tab == 'payment' ? 'blue-grey-text text-darken-1' : 'grey-text'"
             class="center-align">
-            <i class="fa fa-credit-card-alt fa-2x" aria-hidden="true">
+            <i class="fa fa-credit-card-alt fa-2x"
+              aria-hidden="true">
             </i>
           </div>
         </div>
         <div class="col s3">
-          <div ng-click="changeTab('sms')" ng-class="tab == 'sms' ? 'blue-grey-text text-darken-1' : 'grey-text'" class="center-align">
-            <i class="fa fa-comment fa-2x" aria-hidden="true">
+          <div ng-click="changeTab('sms')"
+            ng-class="tab == 'sms' ? 'blue-grey-text text-darken-1' : 'grey-text'"
+            class="center-align">
+            <i class="fa fa-comment fa-2x"
+              aria-hidden="true">
             </i>
           </div>
         </div>
         <div class="col s3">
-          <div ng-click="changeTab('paylogs')" ng-class="tab == 'paylogs' ? 'blue-grey-text text-darken-1' : 'grey-text'"
+          <div ng-click="changeTab('stats')"
+            ng-class="tab == 'stats' ? 'blue-grey-text text-darken-1' : 'grey-text'"
             class="center-align">
-            <i class="fa fa-dollar fa-2x" aria-hidden="true">
+            <i class="fa fa-line-chart fa-2x"
+              aria-hidden="true">
             </i>
           </div>
         </div>
         <div class="col s3">
-          <div ng-click="changeTab('settings')" ng-class="tab == 'settings' ? 'blue-grey-text text-darken-1' : 'grey-text'"
+          <div ng-click="changeTab('paylogs')"
+            ng-class="tab == 'paylogs' ? 'blue-grey-text text-darken-1' : 'grey-text'"
             class="center-align">
-            <i class="fa fa-cog fa-2x" aria-hidden="true">
+            <i class="fa fa-dollar fa-2x"
+              aria-hidden="true">
+            </i>
+          </div>
+        </div>
+        <div class="col s3">
+          <div ng-click="changeTab('settings')"
+            ng-class="tab == 'settings' ? 'blue-grey-text text-darken-1' : 'grey-text'"
+            class="center-align">
+            <i class="fa fa-cog fa-2x"
+              aria-hidden="true">
             </i>
 
           </div>
@@ -146,8 +184,11 @@
       </div>
     </div>
     <div class="row">
-      <div id="view" class="col l10 m10 s12">
-        <div class="simpleFadeIn-anim" ng-controller="mainCtrl" ng-show="tab=='home'">
+      <div id="view"
+        class="col l10 m10 s12">
+        <div class="simpleFadeIn-anim"
+          ng-controller="mainCtrl"
+          ng-show="tab=='home'">
           <div class="row">
             <div class="card-panel s12  grey-text">
               <div class="center-align">
@@ -164,36 +205,55 @@
           <!-- will be hidden in mobile -->
           <div class="row">
             <div class="col l6 m6 s12">
-              <div class="card-panel " ng-class="tolog_name == 'اسم الطالب' ? 'grey-text' : ''">
+              <div class="card-panel "
+                ng-class="tolog_name == 'اسم الطالب' ? 'grey-text' : ''">
                 <h5>{{tolog_name}}</h5>
               </div>
-              <div class="card-panel " ng-class="toLogGroup == 'مجموعة الطالب' ? 'grey-text' : ''">
+              <div class="card-panel "
+                ng-class="toLogGroup == 'مجموعة الطالب' ? 'grey-text' : ''">
                 <h5>{{toLogGroup}}</h5>
               </div>
               <div class="card-panel center-align">
-                <button ng-click="toggleLog()" class="btn blue-grey-background btn tooltipped" data-position="top"
-                  data-delay="50" data-tooltip="تبديل غياب الطالب">
-                  <i class="fa" ng-class="cancelled ? 'fa-refresh' : 'fa-times-circle'" aria-hidden="true"></i>
+                <button ng-click="toggleLog()"
+                  class="btn blue-grey-background btn tooltipped"
+                  data-position="top"
+                  data-delay="50"
+                  data-tooltip="تبديل غياب الطالب">
+                  <i class="fa"
+                    ng-class="cancelled ? 'fa-refresh' : 'fa-times-circle'"
+                    aria-hidden="true"></i>
                   </i>
                 </button>
-                <button class="btn blue-grey-background tooltipped" ng-click="open_profile()" data-position="top"
-                  data-delay="50" data-tooltip="ملف الطالب">
-                  <i class="fa fa-file-text" aria-hidden="true"></i>
+                <button class="btn blue-grey-background tooltipped"
+                  ng-click="open_profile()"
+                  data-position="top"
+                  data-delay="50"
+                  data-tooltip="ملف الطالب">
+                  <i class="fa fa-file-text"
+                    aria-hidden="true"></i>
                 </button>
-                <button onclick="window.open('/qrselector', '_blank', 'height=640,width=420')" class="btn blue-grey-background tooltipped"
-                  data-position="top" data-delay="50" data-tooltip="طباعه الاكواد">
-                  <i class="fa fa-print" aria-hidden="true"></i>
+                <button onclick="window.open('/qrselector', '_blank', 'height=640,width=420')"
+                  class="btn blue-grey-background tooltipped"
+                  data-position="top"
+                  data-delay="50"
+                  data-tooltip="طباعه الاكواد">
+                  <i class="fa fa-print"
+                    aria-hidden="true"></i>
                 </button>
               </div>
               <div class="card-panel center-align ">
                 <div class="row">
                   <div class="col l6 m6 s12">
-                    <button ng-click="open_logs()" class="btn blue-grey-background margin_bottom_on_mobile" style="width:100%">
+                    <button ng-click="open_logs()"
+                      class="btn blue-grey-background margin_bottom_on_mobile"
+                      style="width:100%">
                       الغياب والتسميع
                     </button>
                   </div>
                   <div class="col l6 m6 s12">
-                    <button ng-click="open_exam_logs()" class="btn blue-grey-background" style="width:100%">
+                    <button ng-click="open_exam_logs()"
+                      class="btn blue-grey-background"
+                      style="width:100%">
                       درجات الامتحان
                     </button>
                   </div>
@@ -208,19 +268,28 @@
             </div>
             <div class="col l6 m6 s12">
               <div class="card-panel blue-grey ">
-                <video id="preview" width="100%;"></video>
+                <video id="preview"
+                  width="100%;"></video>
               </div>
-              <div class="card-panel  center-align" style="direction:ltr;">
+              <div class="card-panel  center-align"
+                style="direction:ltr;">
                 <h6>الكاميرا</h6>
-                <select style="margin-bottom:2%" class="browser-default" ng-options="c as c.name for c in cameras"
-                  ng-change="camera_changed()" ng-model="selected_camera">
-                  <option value="" disabled selected>إختر الكاميرا</option>
+                <select style="margin-bottom:2%"
+                  class="browser-default"
+                  ng-options="c as c.name for c in cameras"
+                  ng-change="camera_changed()"
+                  ng-model="selected_camera">
+                  <option value=""
+                    disabled
+                    selected>إختر الكاميرا</option>
                 </select>
                 <!-- Switch -->
                 <div class="switch center-align">
                   <label>
                     تشغيل
-                    <input type="checkbox" ng-model="camera_enabled" ng-change="toggleCamera()">
+                    <input type="checkbox"
+                      ng-model="camera_enabled"
+                      ng-change="toggleCamera()">
                     <span class="lever"></span>
                     ايقاف
                   </label>
@@ -232,9 +301,11 @@
           <div class="row">
             <div class="col l6 s12">
               <!-- current exam -->
-              <div class="card-panel " style="transition: all 0.2s">
+              <div class="card-panel "
+                style="transition: all 0.2s">
                 <h6 class="center-align flow-text">الإمتحان الحالى</h6>
-                <div class="row" ng-show="currentExam.name">
+                <div class="row"
+                  ng-show="currentExam.name">
                   <div class="col s12 l6">
                     <label>الخط الاحمر</label>
                     <p>{{currentExam.redline}}</p>
@@ -258,9 +329,11 @@
               </div>
             </div>
             <div class="col l6 s12">
-              <div class="card-panel " style="transition: all 0.2s">
+              <div class="card-panel "
+                style="transition: all 0.2s">
                 <h6 class="center-align flow-text">الحصة الحالية</h6>
-                <div class="row" ng-show="currentClass.date">
+                <div class="row"
+                  ng-show="currentClass.date">
                   <!-- <div class="col s12 l6">
                     <label>الحضور</label>
                     <p>{{currentClass.log[0].attendant ? 'حضر' : 'لم يحضر'}}</p>
@@ -291,12 +364,15 @@
               </div>
             </div>
             <div class="col l12 s12">
-              <div class="card-panel" style="transition: all 0.2s">
+              <div class="card-panel"
+                style="transition: all 0.2s">
                 <div class="row">
                   <div class="col m3 l3 s12">
                     <h6 class="center-align flow-text">امتحان</h6>
-                    <div ng-show="l" ng-class="(l.log[0].mark > l.redline && l.log[0].attendant) ? 'green-text' : ((l.log[0].mark || l.log[0].mark == 0) ? 'red' : '')"
-                      class="card-panel white-text blue-grey" ng-repeat="l in last_exams">
+                    <div ng-show="l"
+                      ng-class="(l.log[0].mark > l.redline && l.log[0].attendant) ? 'green-text' : ((l.log[0].mark || l.log[0].mark == 0) ? 'red' : '')"
+                      class="card-panel white-text blue-grey"
+                      ng-repeat="l in last_exams">
                       {{l.log[0].attendant ? l.name + ': ' : ''}} {{l.log[0] ? (l.log[0].mark || l.log[0].mark == 0) ?
                       (l.log[0].mark + '/' + l.max_mark)
                       : 'لم تسجل درجة الطالب' : 'لم يحضر'}}
@@ -304,7 +380,10 @@
                   </div>
                   <div class="col m3 l3 s12">
                     <h6 class="center-align flow-text">تسميع</h6>
-                    <div ng-show="l.log[0]" ng-repeat="l in last_classes" class="card-panel white-text" ng-class="l.log[0].quiz.option =='absent' ? 'red' : 'blue-grey'">
+                    <div ng-show="l.log[0]"
+                      ng-repeat="l in last_classes"
+                      class="card-panel white-text"
+                      ng-class="l.log[0].quiz.option =='absent' ? 'red' : 'blue-grey'">
                       {{l.log[0].quiz ? (l.log[0].quiz.type == 'marks' ? l.log[0].quiz.mark + '/' + l.log[0].quiz.max :
                       (l.log[0].quiz.option ==
                       'absent' ? 'لم يسمّع' : 'سمّع')) : 'لم تسجل درجة تسميع'}}
@@ -318,13 +397,19 @@
                                     </div> -->
                   <div class="col m3 l3 s12">
                     <h6 class="center-align flow-text">الحضور</h6>
-                    <div ng-show="n.log[0]" ng-repeat="n in last_classes" class="card-panel white-text" ng-class="n.log[0].attendant ? 'green' : 'red'">
+                    <div ng-show="n.log[0]"
+                      ng-repeat="n in last_classes"
+                      class="card-panel white-text"
+                      ng-class="n.log[0].attendant ? 'green' : 'red'">
                       {{n.log[0].attendant ? 'حضر' : 'لم يحضر'}}
                     </div>
                   </div>
                   <div class="col m3 l3 s12">
-                    <h6 class="center-align flow-text" style="margin-bottom:6%;">الحصة</h6>
-                    <div ng-show="l.log[0]" class="card-panel blue-grey white-text" ng-repeat="l in last_classes">
+                    <h6 class="center-align flow-text"
+                      style="margin-bottom:6%;">الحصة</h6>
+                    <div ng-show="l.log[0]"
+                      class="card-panel blue-grey white-text"
+                      ng-repeat="l in last_classes">
                       {{l.date}} - الحصة {{NumericOrderStrings[l.classnum]}}
                     </div>
                   </div>
@@ -334,41 +419,66 @@
           </div>
           <div class="row">
             <div class="col s12">
-              <ul class="tabs tabs-fixed-width" style="overflow:hidden;">
+              <ul class="tabs tabs-fixed-width"
+                style="overflow:hidden;">
                 <li class="tab col s3">
-                  <a class="black-text " ng-class="selectedLogger=='class' ? 'active' : ''" ng-click="selectedLogger='class'"
+                  <a class="black-text "
+                    ng-class="selectedLogger=='class' ? 'active' : ''"
+                    ng-click="selectedLogger='class'"
                     href="#classSelector">غياب حصة</a>
                 </li>
                 <li class="tab col s3">
-                  <a class="black-text" ng-class="selectedLogger=='exam' ? 'active' : ''" ng-click="selectedLogger='exam'"
+                  <a class="black-text"
+                    ng-class="selectedLogger=='exam' ? 'active' : ''"
+                    ng-click="selectedLogger='exam'"
                     href="#examSelector">غياب
                     امتحان</a>
                 </li>
               </ul>
             </div>
-            <div id="classSelector" class="col s12">
+            <div id="classSelector"
+              class="col s12">
               <div class="card-panel animated fadeIn">
                 <label>السنه الدراسيه</label>
-                <select class="browser-default" ng-options="i as grades_names[i] for i in grades" ng-change="grade_changed(true, false, true, false)"
+                <select class="browser-default"
+                  ng-options="i as grades_names[i] for i in grades"
+                  ng-change="grade_changed(true, false, true, false)"
                   ng-model="selected_grade">
-                  <option value="" disabled selected>السنه</option>
+                  <option value=""
+                    disabled
+                    selected>السنه</option>
                 </select>
                 <label>الحصة</label>
-                <select class="browser-default" ng-options="c as (c.date + (c.addedClass ? ' - حصة إضافية' : '') + (c.classnum != null ? ' - الحصة ' + NumericOrderStrings[c.classnum] : '') + (c.linksString ? ' - ' + c.linksString : '')) for c in classes"
+                <select class="browser-default"
+                  ng-options="c as (c.date + (c.addedClass ? ' - حصة إضافية' : '') + (c.classnum != null ? ' - الحصة ' + NumericOrderStrings[c.classnum] : '') + (c.linksString ? ' - ' + c.linksString : '')) for c in classes"
                   ng-model="selected_class">
-                  <option value="" disabled selected>اختر الحصة</option>
+                  <option value=""
+                    disabled
+                    selected>اختر الحصة</option>
                 </select>
                 <label>المجموعة الحالية</label>
-                <select class="browser-default" ng-options="i as i.name for i in groups" ng-model="selected_group">
-                  <option value="" disabled selected>المجموعة التى يتم تسجيل غياب الطلاب بها</option>
+                <select class="browser-default"
+                  ng-options="i as i.name for i in groups"
+                  ng-model="selected_group">
+                  <option value=""
+                    disabled
+                    selected>المجموعة التى يتم تسجيل غياب الطلاب بها</option>
                 </select>
-                <button ng-click="prepareClassDel()" style="margin-top:3%;margin-left:1%" class="btn  red lighten-1 btn tooltipped"
-                  data-position="bottom" data-tooltip="امسح الحصه">
-                  <i class="fa fa-trash" aria-hidden="true"></i>
+                <button ng-click="prepareClassDel()"
+                  style="margin-top:3%;margin-left:1%"
+                  class="btn  red lighten-1 btn tooltipped"
+                  data-position="bottom"
+                  data-tooltip="امسح الحصه">
+                  <i class="fa fa-trash"
+                    aria-hidden="true"></i>
                 </button>
-                <button href="#addClass_modal" style="margin-top:3%;margin-left:1%" class="btn gradient3 modal-trigger btn tooltipped"
-                  data-position="bottom" data-tooltip="أضف حصة">
-                  <i class="fa fa-plus-square" aria-hidden="true"></i>
+                <button href="#addClass_modal"
+                  style="margin-top:3%;margin-left:1%"
+                  class="btn gradient3 modal-trigger btn tooltipped"
+                  data-position="bottom"
+                  data-tooltip="أضف حصة">
+                  <i class="fa fa-plus-square"
+                    aria-hidden="true"></i>
                 </button>
                 <!--button ng-click="refreshClasses()" style="margin-top:3%" class="btn blue-grey-background btn tooltipped" data-position="bottom"
                                     data-tooltip="إعادة تحميل الحصص">
@@ -376,123 +486,184 @@
                                 </button-->
               </div>
             </div>
-            <div id="examSelector" class="col s12">
+            <div id="examSelector"
+              class="col s12">
               <div class="card-panel animated fadeIn">
                 <label>السنه الدراسيه</label>
-                <select class="browser-default" ng-options="i as grades_names[i] for i in grades" ng-change="grade_changed(false, true, false, false)"
+                <select class="browser-default"
+                  ng-options="i as grades_names[i] for i in grades"
+                  ng-change="grade_changed(false, true, false, false)"
                   ng-model="selected_grade">
-                  <option value="" disabled selected>السنه</option>
+                  <option value=""
+                    disabled
+                    selected>السنه</option>
                 </select>
                 <label>الامتحان</label>
-                <select class="browser-default" ng-options="e as e.name for e in exams" ng-model="selected_exam">
-                  <option value="" disabled selected>اختر الامتحان</option>
+                <select class="browser-default"
+                  ng-options="e as e.name for e in exams"
+                  ng-model="selected_exam">
+                  <option value=""
+                    disabled
+                    selected>اختر الامتحان</option>
                 </select>
-                <div class="row" style="margin-top:3%;">
-                  <button ng-click="prepareExamDel()" class="btn red lighten-1 btn tooltipped margin-right_home_btn"
-                    data-position="bottom" data-tooltip="امسح الامتحان">
-                    <i class="fa fa-trash" aria-hidden="true"></i>
+                <div class="row"
+                  style="margin-top:3%;">
+                  <button ng-click="prepareExamDel()"
+                    class="btn red lighten-1 btn tooltipped margin-right_home_btn"
+                    data-position="bottom"
+                    data-tooltip="امسح الامتحان">
+                    <i class="fa fa-trash"
+                      aria-hidden="true"></i>
                   </button>
-                  <button ng-click="loadExam(e)" class="btn blue-grey-background margin-right_home_btn">
-                    <i class="fa fa-pencil" aria-hidden="true"></i>
+                  <button ng-click="loadExam(e)"
+                    class="btn blue-grey-background margin-right_home_btn">
+                    <i class="fa fa-pencil"
+                      aria-hidden="true"></i>
                   </button>
-                  <button href="#addExam_modal_main" class="btn blue-grey-background modal-trigger btn tooltipped margin-right_home_btn"
-                    data-position="bottom" data-tooltip="أضف امتحان">
-                    <i class="fa fa-plus-square" aria-hidden="true"></i>
+                  <button href="#addExam_modal_main"
+                    class="btn blue-grey-background modal-trigger btn tooltipped margin-right_home_btn"
+                    data-position="bottom"
+                    data-tooltip="أضف امتحان">
+                    <i class="fa fa-plus-square"
+                      aria-hidden="true"></i>
                   </button>
                 </div>
 
               </div>
             </div>
-            <div id="deleteExam_modal_main" class="modal">
+            <div id="deleteExam_modal_main"
+              class="modal">
               <div class="modal-content gradient">
                 <h4>هل تريد حذف الإمتحان؟</h4>
                 <p>عند حذف الإمتحان ﻻيمكنك إسترجاع بياناته مجدداً!</p>
               </div>
               <div class="modal-footer blue-grey-background">
-                <a ng-click="removeExam()" class="modal-action modal-close waves-effect waves-green btn-flat">اوافق</a>
+                <a ng-click="removeExam()"
+                  class="modal-action modal-close waves-effect waves-green btn-flat">اوافق</a>
                 <a class="modal-action modal-close waves-effect waves-red btn-flat">ﻻ</a>
               </div>
             </div>
-            <div id="addExam_modal_main" class="modal animated slideInDown">
+            <div id="addExam_modal_main"
+              class="modal animated slideInDown">
               <div class="modal-content">
                 <div class="row">
                   <div class="col s12">
                     <label>اسم الامتحان</label>
-                    <input type="text" ng-model="newExam_name">
+                    <input type="text"
+                      ng-model="newExam_name">
                   </div>
                   <div class="col s6">
                     <label>الخط الأحمر</label>
-                    <input type="number" min="5" max="{{newExam_max}}" ng-model="newExam_redline">
+                    <input type="number"
+                      min="5"
+                      max="{{newExam_max}}"
+                      ng-model="newExam_redline">
                   </div>
                   <div class="col s6">
                     <label>الدرجة النهائية</label>
-                    <input type="number" min="5" max="200" ng-model="newExam_max">
+                    <input type="number"
+                      min="5"
+                      max="200"
+                      ng-model="newExam_max">
                   </div>
                   <div class="col s12">
                     <label>اختر السنه</label>
-                    <select class="browser-default" ng-model="addExam_selectedGrade" ng-options="g as grades_names[g] for g in grades">
-                      <option value="" disabled selected>اختر السنه</option>
+                    <select class="browser-default"
+                      ng-model="addExam_selectedGrade"
+                      ng-options="g as grades_names[g] for g in grades">
+                      <option value=""
+                        disabled
+                        selected>اختر السنه</option>
                     </select>
                   </div>
                 </div>
                 <div class="modal-footer blue-grey-background">
-                  <a ng-click="addExam()" class="waves-effect waves-green btn-flat">أضف الإمتحان</a>
+                  <a ng-click="addExam()"
+                    class="waves-effect waves-green btn-flat">أضف الإمتحان</a>
                   <a class="modal-action modal-close waves-effect waves-red btn-flat">إلغاء</a>
                 </div>
               </div>
             </div>
-            <div id="editExam_modal_main" class="modal animated slideInDown">
+            <div id="editExam_modal_main"
+              class="modal animated slideInDown">
               <div class="modal-content">
                 <div class="row">
                   <div class="col s12">
                     <label>اسم الامتحان</label>
-                    <input type="text" ng-model="editExam_name">
+                    <input type="text"
+                      ng-model="editExam_name">
                   </div>
                   <div class="col s6">
                     <label>الخط الأحمر</label>
-                    <input type="number" min="5" max="{{editExam_max}}" ng-model="editExam_redline">
+                    <input type="number"
+                      min="5"
+                      max="{{editExam_max}}"
+                      ng-model="editExam_redline">
                   </div>
                   <div class="col s6">
                     <label>الدرجة النهائية</label>
-                    <input type="number" min="5" max="200" ng-model="editExam_max">
+                    <input type="number"
+                      min="5"
+                      max="200"
+                      ng-model="editExam_max">
                   </div>
                 </div>
                 <div class="modal-footer blue-grey-background">
-                  <a ng-click="editExam()" class="waves-effect waves-green btn-flat">حفظ</a>
+                  <a ng-click="editExam()"
+                    class="waves-effect waves-green btn-flat">حفظ</a>
                   <a class="modal-action modal-close waves-effect waves-red btn-flat">إلغاء</a>
                 </div>
               </div>
             </div>
-            <div id="deleteClass_modal" class="modal">
+            <div id="deleteClass_modal"
+              class="modal">
               <div class="modal-content gradient">
                 <h4>هل تريد حذف الحصة ؟ </h4>
                 <p>عند حذف الحصة لا يمكنك استرجاع بياناتها</p>
               </div>
               <div class="modal-footer blue-grey-background">
-                <a ng-click="delete_class()" class="modal-action modal-close waves-effect waves-green btn-flat">اوافق</a>
+                <a ng-click="delete_class()"
+                  class="modal-action modal-close waves-effect waves-green btn-flat">اوافق</a>
                 <a class="modal-action modal-close waves-effect waves-red btn-flat">لا</a>
               </div>
             </div>
-            <div id="addClass_modal" class="modal">
-              <div class="modal-content" style="margin-top:2%">
+            <div id="addClass_modal"
+              class="modal">
+              <div class="modal-content"
+                style="margin-top:2%">
                 <h4 class="center-align">أضف حصة</h4>
-                <input id="class_date" type="text" class="datepicker" style="text-align: right; cursor:pointer"
-                  placeholder="تاريخ اول حصة" readonly>
+                <input id="class_date"
+                  type="text"
+                  class="datepicker"
+                  style="text-align: right; cursor:pointer"
+                  placeholder="تاريخ اول حصة"
+                  readonly>
                 <label>السنة</label>
-                <select class="browser-default" ng-options="i as grades_names[i] for i in grades" ng-model="selected_grade">
-                  <option value="" disabled selected>السنه</option>
+                <select class="browser-default"
+                  ng-options="i as grades_names[i] for i in grades"
+                  ng-model="selected_grade">
+                  <option value=""
+                    disabled
+                    selected>السنه</option>
                 </select>
                 <label>الحصة</label>
-                <select class="browser-default" ng-options="i as (NumericOrderStrings[i.classnum] + ' - ' + i.linksString) for i in classesLinks"
+                <select class="browser-default"
+                  ng-options="i as (NumericOrderStrings[i.classnum] + ' - ' + i.linksString) for i in classesLinks"
                   ng-model="selected_classnum">
-                  <option value="" disabled selected>الحصة</option>
+                  <option value=""
+                    disabled
+                    selected>الحصة</option>
                 </select>
                 <div style="margin-top:2%; margin-right: 1%">
-                  <input type="checkbox" ng-model="addedClass" id="addedClassId" />
+                  <input type="checkbox"
+                    ng-model="addedClass"
+                    id="addedClassId" />
                   <label for="addedClassId">حصة إضافية ؟</label>
                 </div>
-                <div class="modal-footer" style="margin-top: 2%;">
-                  <a style="padding-right:1%" class="modal-action modal-close waves-effect waves-green btn-flat"
+                <div class="modal-footer"
+                  style="margin-top: 2%;">
+                  <a style="padding-right:1%"
+                    class="modal-action modal-close waves-effect waves-green btn-flat"
                     ng-click="addClass()">أضف
                     الحصة</a>
                   <a class="modal-action modal-close waves-effect waves-green btn-flat">إلغاء</a>
@@ -501,52 +672,78 @@
             </div>
           </div>
         </div>
-        <div class="simpleFadeIn-anim" ng-controller="studentsCtrl" ng-show="tab=='students'">
+        <div class="simpleFadeIn-anim"
+          ng-controller="studentsCtrl"
+          ng-show="tab=='students'">
           <div class="row">
             <div class="searchbar animated slideInDown">
               <div class="input-field row">
                 <div class="col l6 s12">
-                  <button class="btn-flat search-filter hide_on_mobile" style="margin-left:1%;" id="students_search">اعدادات</button>
-                  <a class="btn-flat search-filter waves-effect hide_on_mobile" ng-click="reload()">
-                    <i class="fa fa-refresh" aria-hidden="true"></i>
+                  <button class="btn-flat search-filter hide_on_mobile"
+                    style="margin-left:1%;"
+                    id="students_search">اعدادات</button>
+                  <a class="btn-flat search-filter waves-effect hide_on_mobile"
+                    ng-click="reload()">
+                    <i class="fa fa-refresh"
+                      aria-hidden="true"></i>
                   </a>
                   <!--input type="number" min="1" value="10" style="width:20%;margin-right:4%;" ng-model="limit" class="limit center-align hide_on_mobile"
                                         ng-change="saveOpts()"-->
                 </div>
                 <div class="col l6 s12 responsive_search">
-                  <input class="autocomplete searchitem" style="padding-right: 1%; /* for the text */" placeholder="ابحث عن طالب"
-                    id="searchStudents" ng-model="searchStudents_val" type="search" ng-change="performSearch($event)"
+                  <input class="autocomplete searchitem"
+                    style="padding-right: 1%; /* for the text */"
+                    placeholder="ابحث عن طالب"
+                    id="searchStudents"
+                    ng-model="searchStudents_val"
+                    type="search"
+                    ng-change="performSearch($event)"
                     required>
                 </div>
               </div>
             </div>
-            <div id="students_searchSettings" style="display:none;" class="students_search_modal_setting">
+            <div id="students_searchSettings"
+              style="display:none;"
+              class="students_search_modal_setting">
               <!--sorry for the name xD -->
               <div class="">
                 <div class="row">
                   <div class="col s6">
                     <label>المجموعه</label>
-                    <select class="browser-default" ng-change="saveOpts()" ng-model="opt_group" ng-options="i.id as i.name for i in opt_groups">
-                      <option value="" disabled selected>المجموعة</option>
+                    <select class="browser-default"
+                      ng-change="saveOpts()"
+                      ng-model="opt_group"
+                      ng-options="i.id as i.name for i in opt_groups">
+                      <option value=""
+                        disabled
+                        selected>المجموعة</option>
                     </select>
                   </div>
                   <div class="col s6">
                     <label>السنه الدراسيه</label>
-                    <select class="browser-default inline" ng-change="load_optGroups(); saveOpts();" ng-options="i as grades_names[i] for i in grades"
+                    <select class="browser-default inline"
+                      ng-change="load_optGroups(); saveOpts();"
+                      ng-options="i as grades_names[i] for i in grades"
                       ng-model="opt_grade">
-                      <option value="" disabled selected>السنة</option>
+                      <option value=""
+                        disabled
+                        selected>السنة</option>
                     </select>
                   </div>
                   <div>
-                    <button class="btn blue-grey" ng-click="reset()" style="margin-right:5%;margin-top:3%;">
-                      <i class="fa fa-times" aria-hidden="true"></i>
+                    <button class="btn blue-grey"
+                      ng-click="reset()"
+                      style="margin-right:5%;margin-top:3%;">
+                      <i class="fa fa-times"
+                        aria-hidden="true"></i>
                     </button>
                   </div>
                 </div>
                 <div class="row">
                   <div class="col s12">
                     <p>
-                      <i class="fa fa-info-circle" style="margin-left: 1%"></i>
+                      <i class="fa fa-info-circle"
+                        style="margin-left: 1%"></i>
                       فى حالة البحث تتم التصفية على حسب السنه فقط و ليس المجموعة
                     </p>
                   </div>
@@ -555,21 +752,31 @@
             </div>
             <div class="row">
               <ol id="staggered-test">
-                <li ng-repeat="s in students" class="card-panel hoverable student_item animated fadeInUp">
+                <li ng-repeat="s in students"
+                  class="card-panel hoverable student_item animated fadeInUp">
                   <span> {{s.fullname}}</span>
                   <span ng-hide="opt_grade && opt_grade !== 0 "> - {{grades_names[s.grade]}}</span>
                   <div class="students_btn ">
-                    <button ng-click="loadInfo(s)" class="btn blue-grey-background">
-                      <i class="fa fa-info-circle" aria-hidden="true"></i>
+                    <button ng-click="loadInfo(s)"
+                      class="btn blue-grey-background">
+                      <i class="fa fa-info-circle"
+                        aria-hidden="true"></i>
                     </button>
-                    <a target='_blank' ng-href="/profile/{{s.studentid}}" class="btn blue-grey-background">
-                      <i class="fa fa-user " aria-hidden="true"></i>
+                    <a target='_blank'
+                      ng-href="/profile/{{s.studentid}}"
+                      class="btn blue-grey-background">
+                      <i class="fa fa-user "
+                        aria-hidden="true"></i>
                     </a>
-                    <button ng-click="loadStudent(s)" class="btn blue-grey-background">
-                      <i class="fa fa-pencil" aria-hidden="true"></i>
+                    <button ng-click="loadStudent(s)"
+                      class="btn blue-grey-background">
+                      <i class="fa fa-pencil"
+                        aria-hidden="true"></i>
                     </button>
-                    <button ng-click="prepareDel(s)" class="btn red lighten-1">
-                      <i class="fa fa-trash" aria-hidden="true"></i>
+                    <button ng-click="prepareDel(s)"
+                      class="btn red lighten-1">
+                      <i class="fa fa-trash"
+                        aria-hidden="true"></i>
                     </button>
                   </div>
                 </li>
@@ -581,7 +788,9 @@
                   <a class="fa fa-arrow-right">
                   </a>
                 </li>
-                <li ng-click="changePage(page.num)" ng-repeat="page in pages" ng-class="page.selected ? 'active blue-grey' : 'waves-effect'">
+                <li ng-click="changePage(page.num)"
+                  ng-repeat="page in pages"
+                  ng-class="page.selected ? 'active blue-grey' : 'waves-effect'">
                   <a>{{page.num}}</a>
                 </li>
                 <li ng-class="selectedPage_num == pages.length - 1 ? 'disabled' : 'waves-effect'"
@@ -593,12 +802,16 @@
             </div>
           </div>
 
-          <div id="addStudent_modal" class="modal bottom-sheet" ng-init="prepareAddStudent()" style="max-height:100%;">
+          <div id="addStudent_modal"
+            class="modal bottom-sheet"
+            ng-init="prepareAddStudent()"
+            style="max-height:100%;">
             <div class="modal-content">
               <div>
                 <div>
                   <div>
-                    <div id="studentNameDiv" class="input-field">
+                    <div id="studentNameDiv"
+                      class="input-field">
                       <span>اسم الطالب</span>
                       <div style="display: flex;">
                         <input ng-model="studentName"
@@ -619,35 +832,64 @@
                     </div>
                     <div>
                       <label>السنه الدراسيه</label>
-                      <select class="browser-default" tabindex="2" ng-change="loadGroups()" ng-model="selected_grade">
-                        <option value="" disabled selected>السنه</option>
-                        <option ng-repeat="g in grades" value="{{g}}">{{grades_names[g]}}</option>
+                      <select class="browser-default"
+                        tabindex="2"
+                        ng-change="loadGroups()"
+                        ng-model="selected_grade">
+                        <option value=""
+                          disabled
+                          selected>السنه</option>
+                        <option ng-repeat="g in grades"
+                          value="{{g}}">{{grades_names[g]}}</option>
                       </select>
                       <label>المجموعه</label>
-                      <select class="browser-default" tabindex="3" ng-model="selected_group">
-                        <option value="" disabled selected>اختر المجموعه</option>
-                        <option ng-repeat="g in groups" value="{{g.id}}">{{g.name}}</option>
+                      <select class="browser-default"
+                        tabindex="3"
+                        ng-model="selected_group">
+                        <option value=""
+                          disabled
+                          selected>اختر المجموعه</option>
+                        <option ng-repeat="g in groups"
+                          value="{{g.id}}">{{g.name}}</option>
                       </select>
                       <label>ملاحظات</label>
-                      <textarea style="margin-bottom: unset;" tabindex="4" ng-model="studentNotes" class="materialize-textarea"></textarea>
+                      <textarea style="margin-bottom: unset;"
+                        tabindex="4"
+                        ng-model="studentNotes"
+                        class="materialize-textarea"></textarea>
                       <label>خصم شهرى</label>
-                      <input ng-model="studentDiscount" tabindex="5" type="number" min="0">
+                      <input ng-model="studentDiscount"
+                        tabindex="5"
+                        type="number"
+                        min="0">
                       <div class="input-field col l6 s12">
                         <span>رقم هاتف ولى الأمر 2</span>
-                        <input ng-model="studentParentPhone2" type="text" class="validate" tabindex="7">
+                        <input ng-model="studentParentPhone2"
+                          type="text"
+                          class="validate"
+                          tabindex="7">
                       </div>
                       <div class="row">
                         <div class="input-field col l6 s12">
                           <span>رقم هاتف ولى الأمر 1</span>
-                          <input ng-model="studentParentPhone1" type="text" class="validate" tabindex="6">
+                          <input ng-model="studentParentPhone1"
+                            type="text"
+                            class="validate"
+                            tabindex="6">
                         </div>
                         <div class="input-field col l6 s12">
                           <span>رقم هاتف المنزل</span>
-                          <input ng-model="studentHomePhone" type="text" class="validate" tabindex="9">
+                          <input ng-model="studentHomePhone"
+                            type="text"
+                            class="validate"
+                            tabindex="9">
                         </div>
                         <div class="input-field col l6 s12">
                           <span>رقم هاتف الطالب</span>
-                          <input ng-model="studentPhone" tabindex="8" type="text" class="validate">
+                          <input ng-model="studentPhone"
+                            tabindex="8"
+                            type="text"
+                            class="validate">
                         </div>
                       </div>
                     </div>
@@ -665,20 +907,25 @@
                 ng-click="prepareAddStudent()">إلغاء</a>
             </div>
           </div>
-          <div id="delete_modal" class="modal">
+          <div id="delete_modal"
+            class="modal">
             <div class="modal-content gradient">
               <h4>هل تريد حذف الطالب ؟ </h4>
               <p>عند حذف الطالب لا يمكنك استرجاع بياناته</p>
             </div>
             <div class="modal-footer blue-grey-background">
-              <a ng-click="removeStudent()" class="modal-action modal-close waves-effect waves-green btn-flat">اوافق</a>
+              <a ng-click="removeStudent()"
+                class="modal-action modal-close waves-effect waves-green btn-flat">اوافق</a>
               <a class="modal-action modal-close waves-effect waves-red btn-flat">لا</a>
             </div>
           </div>
-          <div id="info_modal" class="modal">
+          <div id="info_modal"
+            class="modal">
             <div class="modal-content">
-              <h4 class="center-align" style="margin-bottom:2%">بيانات الطالب</h4>
-              <div class="row" id="info_student">
+              <h4 class="center-align"
+                style="margin-bottom:2%">بيانات الطالب</h4>
+              <div class="row"
+                id="info_student">
                 <div class="col s12 m6 l6">
                   <label>اسم الطالب</label>
                   <p>{{infoStudent.fullname}}</p>
@@ -702,41 +949,54 @@
                 <div class="col s12 m6 l6">
                   <label>المجموعه</label>
                   <p ng-class="infoStudent.nogroup ? 'red-text' : ''">{{infoStudent.groupinfo[0].name}}
-                    <i class="fa fa-info-circle" style="margin-right: 1%" ng-show="infoStudent.nogroup"></i>
+                    <i class="fa fa-info-circle"
+                      style="margin-right: 1%"
+                      ng-show="infoStudent.nogroup"></i>
                   </p>
                 </div>
-                <div class="col s12 m6 l6" ng-show="infoStudent.notes">
+                <div class="col s12 m6 l6"
+                  ng-show="infoStudent.notes">
                   <label>ملاحظات</label>
                   <p>{{infoStudent.notes}}</p>
                 </div>
-                <div class="col s12 m6 l6" ng-show="infoStudent.discount">
+                <div class="col s12 m6 l6"
+                  ng-show="infoStudent.discount">
                   <label>خصم شهرى</label>
                   <p>{{infoStudent.discount}}</p>
                 </div>
               </div>
-              <div class="row" id="info_student">
-                <div class="col s12 m6 l6" ng-show="info_studentParentPhone1">
+              <div class="row"
+                id="info_student">
+                <div class="col s12 m6 l6"
+                  ng-show="info_studentParentPhone1">
                   <label>رقم هاتف ولى الأمر 1</label>
                   <p>{{info_studentParentPhone1}}</p>
                 </div>
-                <div class="col s12 m6 l6" ng-show="info_studentParentPhone2">
+                <div class="col s12 m6 l6"
+                  ng-show="info_studentParentPhone2">
                   <label>رقم هاتف ولى الأمر 2</label>
                   <p>{{info_studentParentPhone2}}</p>
                 </div>
-                <div class="col s12 m6 l6" ng-show="info_studentPhone">
+                <div class="col s12 m6 l6"
+                  ng-show="info_studentPhone">
                   <label>رقم هاتف الطالب</label>
                   <p>{{info_studentPhone}}</p>
                 </div>
-                <div class="col s12 m6 l6" ng-show="info_studentHomePhone">
+                <div class="col s12 m6 l6"
+                  ng-show="info_studentHomePhone">
                   <label>رقم هاتف المنزل</label>
                   <p>{{info_studentHomePhone}}</p>
                 </div>
               </div>
-              <div class="row" id="info_student">
-                <div class="col s12 m6 l6" ng-repeat="p in infoStudent.payments">
+              <div class="row"
+                id="info_student">
+                <div class="col s12 m6 l6"
+                  ng-repeat="p in infoStudent.payments">
                   <span style="color:#9e9e9e">{{p.name}}</span>
                   <p ng-class="p.payClass">{{p.payText}}
-                    <i class="fa fa-info-circle" style="margin-right: 1%" ng-show="p.payClass"></i>
+                    <i class="fa fa-info-circle"
+                      style="margin-right: 1%"
+                      ng-show="p.payClass"></i>
                   </p>
                 </div>
               </div>
@@ -745,120 +1005,183 @@
               </div>
             </div>
           </div>
-          <div id="edit_modal" class="modal">
+          <div id="edit_modal"
+            class="modal">
             <div class="modal-content">
               <h4>تعديل بيانات الطالب</h4>
               <span>اسم الطالب</span>
-              <input ng-model="edit_studentName" type="text" class="validate">
+              <input ng-model="edit_studentName"
+                type="text"
+                class="validate">
               <label>المجموعه</label>
               <label>السنه الدراسيه</label>
-              <select id="edit_s" class="browser-default" ng-options="i as grades_names[i] for i in grades" ng-change="loadGroups(true)"
+              <select id="edit_s"
+                class="browser-default"
+                ng-options="i as grades_names[i] for i in grades"
+                ng-change="loadGroups(true)"
                 ng-model="edit_selected_grade">
-                <option value="" disabled selected>السنه</option>
+                <option value=""
+                  disabled
+                  selected>السنه</option>
               </select>
               <label>المجموعه</label>
-              <select class="browser-default" ng-options="i.id as i.name for i in edit_groups" ng-model="edit_selected_group">
-                <option value="" disabled selected>اختر المجموعه</option>
+              <select class="browser-default"
+                ng-options="i.id as i.name for i in edit_groups"
+                ng-model="edit_selected_group">
+                <option value=""
+                  disabled
+                  selected>اختر المجموعه</option>
               </select>
               <label>ملاحظات</label>
-              <textarea style="margin-bottom: unset;" ng-model="edit_studentNotes" class="materialize-textarea"></textarea>
+              <textarea style="margin-bottom: unset;"
+                ng-model="edit_studentNotes"
+                class="materialize-textarea"></textarea>
               <label>خصم شهرى</label>
-              <input ng-model="edit_studentDiscount" type="number" min="0">
+              <input ng-model="edit_studentDiscount"
+                type="number"
+                min="0">
               <div class="row">
                 <div class="input-field col l6 s12">
                   <span>رقم هاتف ولى الأمر 2</span>
-                  <input ng-model="edit_studentParentPhone2" ng-change="edit_studentParentPhone2Changed=true" type="tel"
+                  <input ng-model="edit_studentParentPhone2"
+                    ng-change="edit_studentParentPhone2Changed=true"
+                    type="tel"
                     class="validate">
                 </div>
                 <div class="input-field col l6 s12">
                   <span>رقم هاتف ولى الأمر 1</span>
-                  <input ng-model="edit_studentParentPhone1" ng-change="edit_studentParentPhone1Changed=true" type="tel"
+                  <input ng-model="edit_studentParentPhone1"
+                    ng-change="edit_studentParentPhone1Changed=true"
+                    type="tel"
                     class="validate">
                 </div>
                 <div class="input-field col l6 s12">
                   <span>رقم هاتف الطالب</span>
-                  <input ng-model="edit_studentPhone" ng-change="edit_studentPhoneChanged=true" type="tel" class="validate">
+                  <input ng-model="edit_studentPhone"
+                    ng-change="edit_studentPhoneChanged=true"
+                    type="tel"
+                    class="validate">
                 </div>
                 <div class="input-field col l6 s12">
                   <span>رقم هاتف المنزل</span>
-                  <input ng-model="edit_studentHomePhone" ng-change="edit_studentHomePhoneChanged=true" type="tel"
+                  <input ng-model="edit_studentHomePhone"
+                    ng-change="edit_studentHomePhoneChanged=true"
+                    type="tel"
                     class="validate">
                 </div>
               </div>
               <div class="modal-footer">
-                <a ng-click="saveStudent()" class="waves-effect waves-green btn-flat">حفظ</a>
+                <a ng-click="saveStudent()"
+                  class="waves-effect waves-green btn-flat">حفظ</a>
                 <a class="modal-action modal-close waves-effect waves-green btn-flat">الغاء</a>
               </div>
             </div>
           </div>
         </div>
         <!-- payments tab -->
-        <div class="simpleFadeIn-anim" ng-controller="paymentsCtrl" ng-show="tab=='payment'">
+        <div class="simpleFadeIn-anim"
+          ng-controller="paymentsCtrl"
+          ng-show="tab=='payment'">
           <div class="row">
             <div class="col s8 offset-s2">
               <div style="margin-top:0;margin-bottom:5%;">
-                <select class="browser-default animated slideInDown" ng-options="i as grades_names[i] for i in grades"
-                  ng-model="selected_grade" ng-change="grade_changed()" style="margin-top:1rem;">
-                  <option value="" disabled selected>السنه</option>
+                <select class="browser-default animated slideInDown"
+                  ng-options="i as grades_names[i] for i in grades"
+                  ng-model="selected_grade"
+                  ng-change="grade_changed()"
+                  style="margin-top:1rem;">
+                  <option value=""
+                    disabled
+                    selected>السنه</option>
                 </select>
               </div>
             </div>
             <div class="row">
               <ul dnd-list="items">
-                <li class="col l3 m3 s12" style="float:right;">
-                  <div style="width:100%;" ng-click="add_selected_grade = selected_grade" class="card-panel payment-card center-align hoverable waves-effect grey-text modal-trigger animated slideInUp"
-                    href="#addItem_modal" style="display: block important!">
-                    <i class="fa fa-plus fa-3x " aria-hidden="true"></i>
+                <li class="col l3 m3 s12"
+                  style="float:right;">
+                  <div style="width:100%;"
+                    ng-click="add_selected_grade = selected_grade"
+                    class="card-panel payment-card center-align hoverable waves-effect grey-text modal-trigger animated slideInUp"
+                    href="#addItem_modal"
+                    style="display: block important!">
+                    <i class="fa fa-plus fa-3x "
+                      aria-hidden="true"></i>
                     <p>اضافه</p>
                   </div>
                 </li>
-                <li class="col m3 l3 s12" style="float:right;" ng-repeat="i in items" dnd-draggable="i"
-                  dnd-effect-allowed="move" dnd-moved="items.splice($index, 1);" dnd-dragstart="showbasket()"
+                <li class="col m3 l3 s12"
+                  style="float:right;"
+                  ng-repeat="i in items"
+                  dnd-draggable="i"
+                  dnd-effect-allowed="move"
+                  dnd-moved="items.splice($index, 1);"
+                  dnd-dragstart="showbasket()"
                   dnd-dragend="hidebasket()">
-                  <a style="width: 100%;" ng-click="openLink('/payments/' + i.id)" class="card-panel payment-card center-align hoverable waves-effect blue-grey-text animated slideInUp"
+                  <a style="width: 100%;"
+                    ng-click="openLink('/payments/' + i.id)"
+                    class="card-panel payment-card center-align hoverable waves-effect blue-grey-text animated slideInUp"
                     style="display: block important!">
-                    <i class="fa fa-3x" ng-class="categoriesIcons[i.category]" aria-hidden="true"></i>
+                    <i class="fa fa-3x"
+                      ng-class="categoriesIcons[i.category]"
+                      aria-hidden="true"></i>
                     <p>{{i.name}}</p>
                   </a>
                 </li>
               </ul>
             </div>
-            <div id="basket" class="row trash" hidden>
-              <ul dnd-list="trash" dnd-inserted="deleteItems()">
+            <div id="basket"
+              class="row trash"
+              hidden>
+              <ul dnd-list="trash"
+                dnd-inserted="deleteItems()">
                 <li>
                   <i class="fa fa-trash"></i>
                 </li>
               </ul>
             </div>
             <div>
-              <div id="addItem_modal" class="modal animated slideInDown">
+              <div id="addItem_modal"
+                class="modal animated slideInDown">
                 <div class="modal-content">
                   <div>
                     <div class="row">
                       <div class="col s12">
                         <label>الاسم</label>
-                        <input type="text" ng-model="new_item_name">
+                        <input type="text"
+                          ng-model="new_item_name">
                       </div>
                       <div class="col s12">
                         <label>اختر السنه</label>
-                        <select class="browser-default" ng-options="i as grades_names[i] for i in grades" ng-model="add_selected_grade">
-                          <option value="" disabled selected>السنه</option>
+                        <select class="browser-default"
+                          ng-options="i as grades_names[i] for i in grades"
+                          ng-model="add_selected_grade">
+                          <option value=""
+                            disabled
+                            selected>السنه</option>
                         </select>
                       </div>
                       <div class="col s12">
                         <label>النوع</label>
-                        <select class="browser-default" ng-options="i as itemCategoryNames[i] for i in itemCategories"
+                        <select class="browser-default"
+                          ng-options="i as itemCategoryNames[i] for i in itemCategories"
                           ng-model="selected_category">
-                          <option value="" disabled selected>النوع</option>
+                          <option value=""
+                            disabled
+                            selected>النوع</option>
                         </select>
                       </div>
                       <div class="col s12">
                         <label>السعر</label>
-                        <input type="number" min="0" style="padding-right: 1%" ng-model="new_item_price"></input>
+                        <input type="number"
+                          min="0"
+                          style="padding-right: 1%"
+                          ng-model="new_item_price"></input>
                       </div>
                     </div>
                     <div class="modal-footer blue-grey-background">
-                      <a ng-click="addItem()" class="waves-effect waves-green btn-flat">اضف</a>
+                      <a ng-click="addItem()"
+                        class="waves-effect waves-green btn-flat">اضف</a>
                       <a class="modal-action modal-close waves-effect waves-red btn-flat">إلغاء</a>
                     </div>
                   </div>
@@ -867,24 +1190,35 @@
             </div>
           </div>
         </div>
-        <div class="simpleFadeIn-anim" ng-controller="paylogsCtrl" ng-show="tab=='paylogs'">
+        <div class="simpleFadeIn-anim"
+          ng-controller="paylogsCtrl"
+          ng-show="tab=='paylogs'">
           <div class="card-panel hideonprint">
 
             <div style="display: flex">
               <div style="flex-grow: 1; display: flex;">
                 <div style="flex-grow: 1">
                   <span>تاريخ البداية</span>
-                  <input id="comparing_paylogs_date" type="text" class="datepicker" style="text-align: right; cursor:pointer; margin-bottom: 0;"
-                    placeholder="التاريخ" readonly>
+                  <input id="comparing_paylogs_date"
+                    type="text"
+                    class="datepicker"
+                    style="text-align: right; cursor:pointer; margin-bottom: 0;"
+                    placeholder="التاريخ"
+                    readonly>
                 </div>
                 <div style="flex-grow: 1">
                   <span>تاريخ النهاية</span>
-                  <input id="paylogs_date" type="text" class="datepicker" style="text-align: right; cursor:pointer; margin-bottom: 0;"
-                    placeholder="التاريخ" readonly>
+                  <input id="paylogs_date"
+                    type="text"
+                    class="datepicker"
+                    style="text-align: right; cursor:pointer; margin-bottom: 0;"
+                    placeholder="التاريخ"
+                    readonly>
                 </div>
               </div>
               <div style="padding-right: 10px; align-self: flex-end">
-                <button ng-click="refreshLogs()" class="waves-effect waves-light blue-grey btn">
+                <button ng-click="refreshLogs()"
+                  class="waves-effect waves-light blue-grey btn">
                   تحميل
                 </button>
               </div>
@@ -892,17 +1226,28 @@
 
 
             <span>تعليق</span>
-            <input type="text" min="0" placeholder="تعليق" ng-model="paylog_name">
+            <input type="text"
+              min="0"
+              placeholder="تعليق"
+              ng-model="paylog_name">
             <span>المبلغ</span>
-            <input type="number" min="0" placeholder="0" ng-model="paylog_amount">
+            <input type="number"
+              min="0"
+              placeholder="0"
+              ng-model="paylog_amount">
 
-            <button ng-click="addIncome()" style="margin-left: 9px" class="waves-effect waves-light blue-grey btn">
+            <button ng-click="addIncome()"
+              style="margin-left: 9px"
+              class="waves-effect waves-light blue-grey btn">
               أضف دخل
             </button>
-            <button ng-click="addExpense()" style="margin-left: 9px" class="waves-effect waves-light blue-grey btn">
+            <button ng-click="addExpense()"
+              style="margin-left: 9px"
+              class="waves-effect waves-light blue-grey btn">
               أضف مصروف
             </button>
-            <button ng-click="print()" class="waves-effect waves-light blue-grey btn">
+            <button ng-click="print()"
+              class="waves-effect waves-light blue-grey btn">
               اطبع
             </button>
 
@@ -977,7 +1322,8 @@
           </div>
 
           <div class="logs">
-            <table dir="rtl" id="paylogs_table">
+            <table dir="rtl"
+              id="paylogs_table">
               <thead>
                 <tr>
                   <th>
@@ -992,57 +1338,167 @@
                 </tr>
               </thead>
               <tbody>
-                <tr class="vs-item" ng-repeat="log in paylogs">
+                <tr class="vs-item"
+                  ng-repeat="log in paylogs">
                   <td width="50%">
                     {{log.name}}
                   </td>
-                  <td width="50%" ng-class="log.payed > 0 ? 'income' : 'expense'">
+                  <td width="50%"
+                    ng-class="log.payed > 0 ? 'income' : 'expense'">
                     {{log.payed}}
                   </td>
                   <td class="hideonprint">
-                    <button class="float-left btn blue-grey" ng-click="openRemoveModal(log._id)">حذف</button>
+                    <button class="float-left btn blue-grey"
+                      ng-click="openRemoveModal(log._id)">حذف</button>
                   </td>
                 </tr>
               </tbody>
             </table>
           </div>
 
-          <div id="paylog_delete_modal" class="modal">
+          <div id="paylog_delete_modal"
+            class="modal">
             <div class="modal-content gradient">
               <h4>هل أنت متاكد من هذه الخطوة؟</h4>
               <p>عند خذف التسجيل لا يمكن استرجاع البيانات مره اخرى</p>
             </div>
             <div class="modal-footer blue-grey-background">
-              <a ng-click="removePayLog()" class="modal-action modal-close waves-effect waves-green btn-flat">اوافق</a>
+              <a ng-click="removePayLog()"
+                class="modal-action modal-close waves-effect waves-green btn-flat">اوافق</a>
               <a class="modal-action modal-close waves-effect waves-red btn-flat">لا</a>
             </div>
           </div>
         </div>
-        <div class="simpleFadeIn-anim" ng-controller="smsCtrl" ng-show="tab=='sms'">
+        <div class="simpleFadeIn-anim"
+          ng-controller="statsCtrl"
+          ng-show="tab=='stats'">
+
+          <div class="card-panel">
+
+            <div>
+              <label>اختر السنة</label>
+              <div style="display: flex; align-items: baseline;">
+                <select style="margin-left: 12px"
+                  class="browser-default"
+                  ng-options="i as grades_names[i] for i in grades"
+                  ng-model="selected_grade"
+                  ng-change="grade_changed()">
+                  <option value=""
+                    disabled
+                    selected>السنه</option>
+                </select>
+                <button ng-click="selected_grade = null; grade_changed();"
+                  class="waves-effect waves-light blue-grey btn">
+                  <i class="fa fa-trash"></i></i>
+                </button>
+              </div>
+            </div>
+
+            <div>
+              <label>اختر المجموعة</label>
+              <div style="display: flex; align-items: baseline;">
+                <select style="margin-left: 12px"
+                  class="browser-default"
+                  ng-options="i as i.name for i in groups"
+                  ng-change="group_changed()"
+                  ng-model="selected_group">
+                  <option value=""
+                    disabled
+                    selected>المجموعة</option>
+                </select>
+                <button ng-click="selected_group = null; group_changed();"
+                  class="waves-effect waves-light blue-grey btn">
+                  <i class="fa fa-trash"></i></i>
+                </button>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="card-panel">
+            <table class="rtl">
+              <tbody>
+                <thead>
+                  <th width="50%"></th>
+                  <th width="50%">العدد</th>
+                </thead>
+                <tr>
+                  <td>
+                    عدد كل الطلاب
+                  </td>
+                  <td>
+                    {{ studentsCount || 0 }}
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    عدد الاشتراكات
+                  </td>
+                  <td>
+                    {{ linksCount || 0 }}
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    عدد الطلاب فى السنة
+                  </td>
+                  <td>
+                    {{ gradeCount || 0 }}
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    عدد الطلاب فى المجموعة
+                  </td>
+                  <td>
+                    {{ groupCount || 0 }}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+        </div>
+        <div class="simpleFadeIn-anim"
+          ng-controller="smsCtrl"
+          ng-show="tab=='sms'">
           <div class="card-panel">
             <div class="sms_filter">
 
               <div>
-                <input type="checkbox" id="allStudents" ng-model="allStudents" ng-change="allStudentsChange()" />
+                <input type="checkbox"
+                  id="allStudents"
+                  ng-model="allStudents"
+                  ng-change="allStudentsChange()" />
                 <label for="allStudents">كل الطلاب</label>
               </div>
 
               <div ng-hide="allStudents">
                 <label>اختر السنة</label>
-                <select id="gradesSelector" class="browser-default" ng-options="i as grades_names[i] for i in grades"
-                  ng-model="selected_grade" ng-change="grade_changed()">
-                  <option value="" disabled selected>السنه</option>
+                <select id="gradesSelector"
+                  class="browser-default"
+                  ng-options="i as grades_names[i] for i in grades"
+                  ng-model="selected_grade"
+                  ng-change="grade_changed()">
+                  <option value=""
+                    disabled
+                    selected>السنه</option>
                 </select>
               </div>
 
               <div ng-hide="allStudents">
                 <label>المجموعة</label>
                 <div style="display: flex; align-items: baseline;">
-                  <select style="margin-left: 12px" class="browser-default" ng-options="i as i.name for i in groups"
+                  <select style="margin-left: 12px"
+                    class="browser-default"
+                    ng-options="i as i.name for i in groups"
                     ng-model="selected_group">
-                    <option value="" disabled selected>المجموعة</option>
+                    <option value=""
+                      disabled
+                      selected>المجموعة</option>
                   </select>
-                  <button ng-click="selected_group = null" class="waves-effect waves-light blue-grey btn">
+                  <button ng-click="selected_group = null"
+                    class="waves-effect waves-light blue-grey btn">
                     <i class="fa fa-trash"></i></i>
                   </button>
                 </div>
@@ -1051,11 +1507,16 @@
               <div>
                 <label>الهاتف</label>
                 <div style="display: flex; align-items: baseline;">
-                  <select style="margin-left: 12px" class="browser-default" ng-options="d as d.name for d in devices"
+                  <select style="margin-left: 12px"
+                    class="browser-default"
+                    ng-options="d as d.name for d in devices"
                     ng-model="selected_device">
-                    <option value="" disabled selected>الهاتف</option>
+                    <option value=""
+                      disabled
+                      selected>الهاتف</option>
                   </select>
-                  <button ng-click="loadDevices()" class="waves-effect waves-light blue-grey btn">
+                  <button ng-click="loadDevices()"
+                    class="waves-effect waves-light blue-grey btn">
                     <i class="fa fa-refresh"></i></i>
                   </button>
                 </div>
@@ -1063,7 +1524,8 @@
 
               <div>
                 <label>البروتوكول</label>
-                <select class="browser-default" ng-model="selected_protocol">
+                <select class="browser-default"
+                  ng-model="selected_protocol">
                   <option value="legacy">Legacy</option>
                   <option value="shellms">ShellMS</option>
                 </select>
@@ -1076,10 +1538,16 @@
 
               <div>
                 <label>النوع</label>
-                <select class="browser-default" ng-model="selected_type" ng-change="typeChanged()">
-                  <option value="" disabled selected>اختر نوع التقرير</option>
-                  <option ng-hide="allStudents" value="lesson">حصة</option>
-                  <option ng-hide="allStudents" value="exam">امتحان</option>
+                <select class="browser-default"
+                  ng-model="selected_type"
+                  ng-change="typeChanged()">
+                  <option value=""
+                    disabled
+                    selected>اختر نوع التقرير</option>
+                  <option ng-hide="allStudents"
+                    value="lesson">حصة</option>
+                  <option ng-hide="allStudents"
+                    value="exam">امتحان</option>
                   <!-- <option value="report">تقرير شهري</option> -->
                   <option value="message">رسالة</option>
                 </select>
@@ -1087,39 +1555,58 @@
 
               <label>ارسل الى</label>
               <div>
-                <select class="browser-default" ng-options="i as {'parent': 'ولى الامر', 'student': 'الطالب'}[i] for i in ['parent', 'student']"
+                <select class="browser-default"
+                  ng-options="i as {'parent': 'ولى الامر', 'student': 'الطالب'}[i] for i in ['parent', 'student']"
                   ng-model="selected_recipient">
-                  <option value="" disabled selected>إختر</option>
+                  <option value=""
+                    disabled
+                    selected>إختر</option>
                 </select>
               </div>
 
 
               <div ng-show="selected_type == 'lesson'">
                 <label>الحصة</label>
-                <select class="browser-default" ng-change="classChanged()" ng-options="c as (c.date + (c.addedClass ? ' - حصة إضافية' : '') + (c.classnum != null ? ' - الحصة ' + NumericOrderStrings[c.classnum] : '') + (c.linksString ? ' - ' + c.linksString : '')) for c in classes"
+                <select class="browser-default"
+                  ng-change="classChanged()"
+                  ng-options="c as (c.date + (c.addedClass ? ' - حصة إضافية' : '') + (c.classnum != null ? ' - الحصة ' + NumericOrderStrings[c.classnum] : '') + (c.linksString ? ' - ' + c.linksString : '')) for c in classes"
                   ng-model="selected_class">
-                  <option value="" disabled selected>اختر الحصة</option>
+                  <option value=""
+                    disabled
+                    selected>اختر الحصة</option>
                 </select>
               </div>
 
               <div ng-show="selected_type == 'exam'">
                 <label>الامتحان</label>
-                <select class="browser-default" ng-change="examChanged()" ng-options="e as e.name for e in exams"
+                <select class="browser-default"
+                  ng-change="examChanged()"
+                  ng-options="e as e.name for e in exams"
                   ng-model="selected_exam">
-                  <option value="" disabled selected>اختر الامتحان</option>
+                  <option value=""
+                    disabled
+                    selected>اختر الامتحان</option>
                 </select>
               </div>
 
               <div ng-show="selected_type == 'report'">
                 <label>الشهر</label>
-                <select class="browser-default" ng-options="m as m.name for m in months" ng-model="selected_month">
-                  <option value="" disabled selected>اختر الشهر</option>
+                <select class="browser-default"
+                  ng-options="m as m.name for m in months"
+                  ng-model="selected_month">
+                  <option value=""
+                    disabled
+                    selected>اختر الشهر</option>
                 </select>
               </div>
 
               <div ng-show="selected_type == 'message'">
                 <label for="msg_txt">الرسالة</label>
-                <textarea id="msg_txt" style="margin-bottom: unset;" ng-model="message" maxlength="70" class="materialize-textarea"></textarea>
+                <textarea id="msg_txt"
+                  style="margin-bottom: unset;"
+                  ng-model="message"
+                  maxlength="70"
+                  class="materialize-textarea"></textarea>
                 <label ng-class="message.length >= 70 ? 'red-text' : ''">{{ message.length || 0 }}</label>
               </div>
 
@@ -1141,38 +1628,54 @@
 							}
 						</style>
 
-            <div class="sms_options" ng-show="selected_type == 'lesson'">
+            <div class="sms_options"
+              ng-show="selected_type == 'lesson'">
               <div>
-                <input type="checkbox" id="smsAttendant" ng-model="smsAttendant" />
+                <input type="checkbox"
+                  id="smsAttendant"
+                  ng-model="smsAttendant" />
                 <label for="smsAttendant">الحضور</label>
               </div>
 
               <div>
-                <input type="checkbox" id="smsQuiz" ng-model="smsQuiz" />
+                <input type="checkbox"
+                  id="smsQuiz"
+                  ng-model="smsQuiz" />
                 <label for="smsQuiz">التسميع</label>
               </div>
 
               <div>
-                <input type="checkbox" id="smsHomework" ng-model="smsHomework" />
+                <input type="checkbox"
+                  id="smsHomework"
+                  ng-model="smsHomework" />
                 <label for="smsHomework">الواجب</label>
               </div>
             </div>
 
-            <div class="sms_options" ng-show="selected_type == 'message'">
+            <div class="sms_options"
+              ng-show="selected_type == 'message'">
               <div>
-                <input type="checkbox" id="addSignature" ng-model="addSignature" />
+                <input type="checkbox"
+                  id="addSignature"
+                  ng-model="addSignature" />
                 <label for="addSignature">اضف اسم المدرس والمادة</label>
               </div>
             </div>
 
             <div style="display: flex; align-items: baseline;">
               <div>
-                <button class="waves-effect waves-light blue-grey btn" ng-click="send()" style="margin-left: 8.35%; margin-top:1rem;">أرسل</button>
+                <button class="waves-effect waves-light blue-grey btn"
+                  ng-click="send()"
+                  style="margin-left: 8.35%; margin-top:1rem;">أرسل</button>
               </div>
-              <div class="col" style="flex-grow: 1;" ng-show="sendingSMS">
+              <div class="col"
+                style="flex-grow: 1;"
+                ng-show="sendingSMS">
                 <label>{{smsStudent}}</label>
-                <div class="progress" ng-class="smsFailed ? 'failed' : ''">
-                  <div class="determinate" style="width: {{smsProgress}%"></div>
+                <div class="progress"
+                  ng-class="smsFailed ? 'failed' : ''">
+                  <div class="determinate"
+                    style="width: {{smsProgress}%"></div>
                 </div>
               </div>
             </div>
@@ -1203,11 +1706,14 @@
                 <tr ng-repeat="n in class_logs" ng-show="(!selected_group || n.group == selected_group.id) && (!filterAttendance || !n.log.attendant)">
                   <td>
                     <!-- TODO: fix css -->
-                    <input type="checkbox" ng-model="n.selected" id="cid{{n.studentid}}" class="checkbox" />
-                    <label for="cid{{n.studentid}}">f</label>
-                    <span class="green-text" ng-show="n.log.attendant">حضر</span>
-                    <span class="red-text" ng-show="!n.log.attendant">لم يحضر</span>
-                    - {{n.fullname}}
+                    <input type="checkbox" ng-model="n.selected" id="cid{{n.studentid}}"
+                    class="checkbox" />
+                  <label for="cid{{n.studentid}}">f</label>
+                  <span class="green-text"
+                    ng-show="n.log.attendant">حضر</span>
+                  <span class="red-text"
+                    ng-show="!n.log.attendant">لم يحضر</span>
+                  - {{n.fullname}}
                   </td>
                   <td>{{n.log.quiz ? (n.log.quiz.type == 'marks' ? n.log.quiz.mark + ' / ' + n.log.quiz.max :
                     (n.log.quiz.option
@@ -1215,263 +1721,352 @@
                   <td>{{n.log.homework ? (n.log.homework.type == 'marks' ? n.log.homework.mark + '/' +
                     n.log.homework.max
                     : (n.log.homework.option == 'incomplete' ? 'غير مكتمل' : 'كامل')) : 'لم يسجل واجب الطالب'}}</td>
-                </tr>
-              </table>
-            </div>
+                  </tr>
+                  </table>
+                </div>
 
-            <div class="logs containers" ng-show="selected_type == 'exam'">
-              <table>
-                <tr>
-                  <th>
-                    اسم الطالب
-                  </th>
-                  <th>
-                    الدرجة
-                  </th>
-                </tr>
-                <tr ng-repeat="n in exam_logs" ng-show="(!selected_group || n.group == selected_group.id) && (!filterAttendance || !n.log.attendant)">
-                  <td>
-                    <!-- TODO: fix css -->
-                    <input type="checkbox" ng-model="n.selected" id="cid{{n.studentid}}" class="checkbox" />
-                    <label for="cid{{n.studentid}}">f</label>
-                    <span class="green-text" ng-show="n.log.attendant">حضر</span>
-                    <span class="red-text" ng-show="!n.log.attendant">لم يحضر</span>
-                    - {{n.fullname}}
-                  </td>
-                  <td>{{n.log.mark ? (n.log.mark + ' / ' + selected_exam.max_mark) : 'لم تسجل درجة للطالب'}}</td>
-                </tr>
-              </table>
-            </div>
+                <div class="logs containers"
+                  ng-show="selected_type == 'exam'">
+                  <table>
+                    <tr>
+                      <th>
+                        اسم الطالب
+                      </th>
+                      <th>
+                        الدرجة
+                      </th>
+                    </tr>
+                    <tr ng-repeat="n in exam_logs"
+                      ng-show="(!selected_group || n.group == selected_group.id) && (!filterAttendance || !n.log.attendant)">
+                      <td>
+                        <!-- TODO: fix css -->
+                        <input type="checkbox"
+                          ng-model="n.selected"
+                          id="cid{{n.studentid}}"
+                          class="checkbox" />
+                        <label for="cid{{n.studentid}}">f</label>
+                        <span class="green-text"
+                          ng-show="n.log.attendant">حضر</span>
+                        <span class="red-text"
+                          ng-show="!n.log.attendant">لم يحضر</span>
+                        - {{n.fullname}}
+                      </td>
+                      <td>{{n.log.mark ? (n.log.mark + ' / ' + selected_exam.max_mark) : 'لم تسجل درجة للطالب'}}</td>
+                    </tr>
+                  </table>
+                </div>
 
-            <div class="logs containers" ng-show="selected_type == 'message'">
-              <table>
-                <tr>
-                  <th>
-                    اسم الطالب
-                  </th>
-                </tr>
-                <tr ng-repeat="n in message_students" ng-show="!selected_group || n.group == selected_group.id">
-                  <td>
-                    <!-- TODO: fix css -->
-                    <input type="checkbox" ng-model="n.selected" id="cid{{n.studentid}}" class="checkbox" />
-                    <label for="cid{{n.studentid}}">f</label>
-                    {{n.fullname}}
-                  </td>
-                </tr>
-              </table>
-            </div>
-          </div>
-        </div>
-        <div class="simpleFadeIn-anim" ng-controller="groupsCtrl" ng-show="tab=='times'">
-          <div class="row">
-            <div class="row">
-              <div class="col s10" style="margin-left: 8.35%; margin-top:1rem;">
-                <select id="gradesSelector" class="browser-default animated slideInDown" ng-options="i as grades_names[i] for i in grades"
-                  ng-model="selected_grade" ng-change="grade_changed()">
-                  <option value="" disabled selected>السنه</option>
-                </select>
+                <div class="logs containers"
+                  ng-show="selected_type == 'message'">
+                  <table>
+                    <tr>
+                      <th>
+                        اسم الطالب
+                      </th>
+                    </tr>
+                    <tr ng-repeat="n in message_students"
+                      ng-show="!selected_group || n.group == selected_group.id">
+                      <td>
+                        <!-- TODO: fix css -->
+                        <input type="checkbox"
+                          ng-model="n.selected"
+                          id="cid{{n.studentid}}"
+                          class="checkbox" />
+                        <label for="cid{{n.studentid}}">f</label>
+                        {{n.fullname}}
+                      </td>
+                    </tr>
+                  </table>
+                </div>
               </div>
             </div>
-            <div class="row">
-              <ol id="staggered-test">
-                <li ng-repeat="g in groups" class="card-panel hoverable student_item animated slideInUp">
-                  <span> {{g.name}}
-                    <div class="students_btn">
-                      <!--button class="btn blue-grey-background">
+            <div class="simpleFadeIn-anim"
+              ng-controller="groupsCtrl"
+              ng-show="tab=='times'">
+              <div class="row">
+                <div class="row">
+                  <div class="col s10"
+                    style="margin-left: 8.35%; margin-top:1rem;">
+                    <select id="gradesSelector"
+                      class="browser-default animated slideInDown"
+                      ng-options="i as grades_names[i] for i in grades"
+                      ng-model="selected_grade"
+                      ng-change="grade_changed()">
+                      <option value=""
+                        disabled
+                        selected>السنه</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="row">
+                  <ol id="staggered-test">
+                    <li ng-repeat="g in groups"
+                      class="card-panel hoverable student_item animated slideInUp">
+                      <span> {{g.name}}
+                        <div class="students_btn">
+                          <!--button class="btn blue-grey-background">
                                                 <i class="fa fa-user" aria-hidden="true"></i>
                                             </button-->
-                      <button ng-click="loadGroup(g)" class="btn blue-grey-background">
-                        <i class="fa fa-pencil" aria-hidden="true"></i>
-                      </button>
-                      <button ng-click="prepareDel(g)" class="btn red lighten-1">
-                        <i class="fa fa-trash" aria-hidden="true"></i>
-                      </button>
-                    </div>
-                  </span>
-                </li>
-              </ol>
-            </div>
-            <div class="row animated slideInUp">
-              <div class="col s12">
-                <ul class="collection" dnd-list="freelinks" dnd-inserted="linkGroupClass(item, -1)">
-                  <li class="collection-item collection-header">
-                    <h5>حصص غير مربوطه</h5>
-                  </li>
-                  <li ng-repeat="link in freelinks" class="collection-item" dnd-draggable="link" dnd-effect-allowed="move"
-                    dnd-moved="freelinks.splice($index, 1);" dnd-dragstart="showbasket()" dnd-dragend="hidebasket()">{{groupsUniques[link.groupid]}}
-                    - {{weekdays[link.day]}}</li>
-                </ul>
+                          <button ng-click="loadGroup(g)"
+                            class="btn blue-grey-background">
+                            <i class="fa fa-pencil"
+                              aria-hidden="true"></i>
+                          </button>
+                          <button ng-click="prepareDel(g)"
+                            class="btn red lighten-1">
+                            <i class="fa fa-trash"
+                              aria-hidden="true"></i>
+                          </button>
+                        </div>
+                      </span>
+                    </li>
+                  </ol>
+                </div>
+                <div class="row animated slideInUp">
+                  <div class="col s12">
+                    <ul class="collection"
+                      dnd-list="freelinks"
+                      dnd-inserted="linkGroupClass(item, -1)">
+                      <li class="collection-item collection-header">
+                        <h5>حصص غير مربوطه</h5>
+                      </li>
+                      <li ng-repeat="link in freelinks"
+                        class="collection-item"
+                        dnd-draggable="link"
+                        dnd-effect-allowed="move"
+                        dnd-moved="freelinks.splice($index, 1);"
+                        dnd-dragstart="showbasket()"
+                        dnd-dragend="hidebasket()">{{groupsUniques[link.groupid]}}
+                        - {{weekdays[link.day]}}</li>
+                    </ul>
+                  </div>
+                  <div class="col m12 l4"
+                    ng-repeat="i in linkers"
+                    style="float:right;">
+                    <ul class="collection"
+                      dnd-list="i"
+                      dnd-inserted="linkGroupClass(item, $index)">
+                      <li class="collection-item collection-header">
+                        <h5>الحصة {{NumericOrderStrings[$index]}}</h5>
+                      </li>
+                      <li ng-repeat="link in i"
+                        class="collection-item"
+                        dnd-draggable="link"
+                        dnd-effect-allowed="move"
+                        dnd-moved="i.splice($index, 1);"
+                        dnd-dragstart="showbasket()"
+                        dnd-dragend="hidebasket()">{{groupsUniques[link.groupid]}}
+                        -
+                        {{weekdays[link.day]}}</li>
+                    </ul>
+                  </div>
+                </div>
               </div>
-              <div class="col m12 l4" ng-repeat="i in linkers" style="float:right;">
-                <ul class="collection" dnd-list="i" dnd-inserted="linkGroupClass(item, $index)">
-                  <li class="collection-item collection-header">
-                    <h5>الحصة {{NumericOrderStrings[$index]}}</h5>
-                  </li>
-                  <li ng-repeat="link in i" class="collection-item" dnd-draggable="link" dnd-effect-allowed="move"
-                    dnd-moved="i.splice($index, 1);" dnd-dragstart="showbasket()" dnd-dragend="hidebasket()">{{groupsUniques[link.groupid]}}
-                    -
-                    {{weekdays[link.day]}}</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-          <!--div id="basket_groupclasses" class="row trash" hidden>
+              <!--div id="basket_groupclasses" class="row trash" hidden>
                         <ul dnd-list="trash" dnd-inserted="deleteGroupClasses()">
                             <li>
                                 <i class="fa fa-trash"></i>
                             </li>
                         </ul>
                     </div-->
-          <div id="addGroup_modal" class="modal bottom-sheet" style="max-height: 100%;">
-            <div class="modal-content">
-              <div>
-                <div class="row">
-                  <div class="col s12">
-                    <label>اسم المجموعه</label>
-                    <input id="group_name" type="text" ng-model="new_group_name">
-                  </div>
-                  <div class="col s12">
-                    <label>اختر السنه</label>
-                    <select id="addGroup_gradesSelector" class="browser-default" ng-options="i as grades_names[i] for i in grades"
-                      ng-model="addGroup_selected_grade">
-                      <option value="" disabled selected>السنه</option>
-                    </select>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col" style="float: right;" ng-repeat="d in selected_days">
-                    <input type="checkbox" id="d{{d.id}}" ng-model="d.selected" />
-                    <label for="d{{d.id}}">{{d.name}}</label>
-                  </div>
-                </div>
-                <!--div class="row">
+              <div id="addGroup_modal"
+                class="modal bottom-sheet"
+                style="max-height: 100%;">
+                <div class="modal-content">
+                  <div>
+                    <div class="row">
+                      <div class="col s12">
+                        <label>اسم المجموعه</label>
+                        <input id="group_name"
+                          type="text"
+                          ng-model="new_group_name">
+                      </div>
+                      <div class="col s12">
+                        <label>اختر السنه</label>
+                        <select id="addGroup_gradesSelector"
+                          class="browser-default"
+                          ng-options="i as grades_names[i] for i in grades"
+                          ng-model="addGroup_selected_grade">
+                          <option value=""
+                            disabled
+                            selected>السنه</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col"
+                        style="float: right;"
+                        ng-repeat="d in selected_days">
+                        <input type="checkbox"
+                          id="d{{d.id}}"
+                          ng-model="d.selected" />
+                        <label for="d{{d.id}}">{{d.name}}</label>
+                      </div>
+                    </div>
+                    <!--div class="row">
                                     <div class="col s12">
                                         <input id="grouptime" type="text" class="timepicker" placeholder="ميعاد الحصة" readonly>
                                     </div>
                                 </div-->
-                <div class="modal-footer blue-grey-background">
-                  <a ng-click="group_add()" class="waves-effect waves-green btn-flat">اضف المجموعة</a>
-                  <a class="modal-action modal-close waves-effect waves-red btn-flat">إلغاء</a>
+                    <div class="modal-footer blue-grey-background">
+                      <a ng-click="group_add()"
+                        class="waves-effect waves-green btn-flat">اضف المجموعة</a>
+                      <a class="modal-action modal-close waves-effect waves-red btn-flat">إلغاء</a>
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
-          </div>
-          <div id="editGroup_modal" class="modal animated">
-            <div class="modal-content">
-              <div>
-                <div id="edit_content" style="transition: all 0.2s">
-                  <div class="row">
-                    <div class="col s12">
-                      <label>اسم المجموعه</label>
-                      <input type="text" ng-model="edit_group_name">
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col" style="float: right;" ng-repeat="d in edit_selected_days">
-                      <input type="checkbox" id="d{{d.id}}" ng-model="d.selected" />
-                      <label for="d{{d.id}}">{{d.name}}</label>
-                    </div>
-                  </div>
-                  <!--div class="row">
+              <div id="editGroup_modal"
+                class="modal animated">
+                <div class="modal-content">
+                  <div>
+                    <div id="edit_content"
+                      style="transition: all 0.2s">
+                      <div class="row">
+                        <div class="col s12">
+                          <label>اسم المجموعه</label>
+                          <input type="text"
+                            ng-model="edit_group_name">
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col"
+                          style="float: right;"
+                          ng-repeat="d in edit_selected_days">
+                          <input type="checkbox"
+                            id="d{{d.id}}"
+                            ng-model="d.selected" />
+                          <label for="d{{d.id}}">{{d.name}}</label>
+                        </div>
+                      </div>
+                      <!--div class="row">
                                         <div class="col s12">
                                             <input id="edit_grouptime" type="text" class="timepicker" placeholder="ميعاد الحصة" readonly>
                                         </div>
                                     </div-->
+                    </div>
+                    <div class="modal-footer blue-grey-background">
+                      <a ng-click="group_edit()"
+                        class="waves-effect waves-green btn-flat">موافق</a>
+                      <a class="modal-action modal-close waves-effect waves-red btn-flat">إلغاء</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div id="deleteGroup_modal"
+                class="modal">
+                <div class="modal-content gradient">
+                  <h4>هل تريد حذف المجموعة؟</h4>
+                  <p>عند حذف المجموعة ﻻيمكنك إسترجاع بياناتها مجدداً!</p>
                 </div>
                 <div class="modal-footer blue-grey-background">
-                  <a ng-click="group_edit()" class="waves-effect waves-green btn-flat">موافق</a>
-                  <a class="modal-action modal-close waves-effect waves-red btn-flat">إلغاء</a>
+                  <a ng-click="removeGroup()"
+                    class="modal-action modal-close waves-effect waves-green btn-flat">اوافق</a>
+                  <a class="modal-action modal-close waves-effect waves-red btn-flat">ﻻ</a>
                 </div>
               </div>
             </div>
-          </div>
-          <div id="deleteGroup_modal" class="modal">
-            <div class="modal-content gradient">
-              <h4>هل تريد حذف المجموعة؟</h4>
-              <p>عند حذف المجموعة ﻻيمكنك إسترجاع بياناتها مجدداً!</p>
-            </div>
-            <div class="modal-footer blue-grey-background">
-              <a ng-click="removeGroup()" class="modal-action modal-close waves-effect waves-green btn-flat">اوافق</a>
-              <a class="modal-action modal-close waves-effect waves-red btn-flat">ﻻ</a>
-            </div>
-          </div>
-        </div>
-        <div class="simpleFadeIn-anim" ng-controller="settingsCtrl" ng-show="tab=='settings'">
-          <div class="padding-pad animated zoomIn">
-            <div class="row">
-              <ul class="collapsible" data-collapsible="accordion">
-                <li class="active">
-                  <div class="collapsible-header">بيانات المدرس</div>
-                  <div class="collapsible-body">
-                    <label>اسم المدرس</label>
-                    <input type="text" class="validate" ng-model="teacherName">
-                    <label>المواد</label>
-                    <input type="text" class="validate" ng-model="subjects">
-                    <button style="margin-top: 20px;" ng-click="updateNameAndSubject()" class="btn blue-grey-background">حفظ</button>
-                  </div>
-                </li>
-                <li>
-                  <div class="collapsible-header">نسب التقدير</div>
-                  <div class="collapsible-body">
+            <div class="simpleFadeIn-anim"
+              ng-controller="settingsCtrl"
+              ng-show="tab=='settings'">
+              <div class="padding-pad animated zoomIn">
+                <div class="row">
+                  <ul class="collapsible"
+                    data-collapsible="accordion">
+                    <li class="active">
+                      <div class="collapsible-header">بيانات المدرس</div>
+                      <div class="collapsible-body">
+                        <label>اسم المدرس</label>
+                        <input type="text"
+                          class="validate"
+                          ng-model="teacherName">
+                        <label>المواد</label>
+                        <input type="text"
+                          class="validate"
+                          ng-model="subjects">
+                        <button style="margin-top: 20px;"
+                          ng-click="updateNameAndSubject()"
+                          class="btn blue-grey-background">حفظ</button>
+                      </div>
+                    </li>
+                    <li>
+                      <div class="collapsible-header">نسب التقدير</div>
+                      <div class="collapsible-body">
 
-                    <button ng-click="addGrading()" class="btn blue-grey-background">اضف تقدير</button>
-                    <button ng-click="updateGradings()" style="margin-right: 6px" class="btn blue-grey-background">حفظ</button>
+                        <button ng-click="addGrading()"
+                          class="btn blue-grey-background">اضف تقدير</button>
+                        <button ng-click="updateGradings()"
+                          style="margin-right: 6px"
+                          class="btn blue-grey-background">حفظ</button>
 
-                    <div class="logs">
-                      <table>
-                        <thead>
-                          <th>اسم التقدير</th>
-                          <th>نسبة التقدير</th>
-                          <th>اجراءات</th>
-                        </thead>
+                        <div class="logs">
+                          <table>
+                            <thead>
+                              <th>اسم التقدير</th>
+                              <th>نسبة التقدير</th>
+                              <th>اجراءات</th>
+                            </thead>
 
-                        <tbody>
-                          <tr ng-repeat="grading in gradings">
-                            <td>
-                              <input type="text" class="validate" ng-model="grading.name">
-                            </td>
-                            <td>
-                              <input type="number" class="validate" min="0" max="100" ng-model="grading.percentage">
-                            </td>
-                            <td>
-                              <button ng-click="removeGrading($index)" class="btn blue-grey-background">حذف</button>
-                            </td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    </div>
-                  </div>
-                </li>
-                <li>
-                  <div class="collapsible-header">الصفوف</div>
-                  <div class="collapsible-body">
+                            <tbody>
+                              <tr ng-repeat="grading in gradings">
+                                <td>
+                                  <input type="text"
+                                    class="validate"
+                                    ng-model="grading.name">
+                                </td>
+                                <td>
+                                  <input type="number"
+                                    class="validate"
+                                    min="0"
+                                    max="100"
+                                    ng-model="grading.percentage">
+                                </td>
+                                <td>
+                                  <button ng-click="removeGrading($index)"
+                                    class="btn blue-grey-background">حذف</button>
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </li>
+                    <li>
+                      <div class="collapsible-header">الصفوف</div>
+                      <div class="collapsible-body">
 
-                    <button ng-click="addGrade()" class="btn blue-grey-background">اضف سنة</button>
-                    <button ng-click="updateGrades()" style="margin-right: 6px" class="btn blue-grey-background">حفظ</button>
+                        <button ng-click="addGrade()"
+                          class="btn blue-grey-background">اضف سنة</button>
+                        <button ng-click="updateGrades()"
+                          style="margin-right: 6px"
+                          class="btn blue-grey-background">حفظ</button>
 
-                    <div class="logs">
-                      <table>
-                        <thead>
-                          <th>اسم السنة</th>
-                          <th>اجراءات</th>
-                        </thead>
+                        <div class="logs">
+                          <table>
+                            <thead>
+                              <th>اسم السنة</th>
+                              <th>اجراءات</th>
+                            </thead>
 
-                        <tbody>
-                          <tr ng-repeat="grade in localSdkGrades">
-                            <td>
-                              <input type="text" class="validate" ng-model="grade.name">
-                            </td>
-                            <td>
-                              <button ng-click="removeGrade($index)" class="btn blue-grey-background">حذف</button>
-                            </td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    </div>
-                  </div>
-                </li>
-                <!-- not needed -->
-                <!-- <li>
+                            <tbody>
+                              <tr ng-repeat="grade in localSdkGrades">
+                                <td>
+                                  <input type="text"
+                                    class="validate"
+                                    ng-model="grade.name">
+                                </td>
+                                <td>
+                                  <button ng-click="removeGrade($index)"
+                                    class="btn blue-grey-background">حذف</button>
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </li>
+                    <!-- not needed -->
+                    <!-- <li>
                   <div class="collapsible-header">إعادة تعيين كلمة المرور</div>
                   <div class="collapsible-body">
                     <label>كلمة المرور الحالية</label>
@@ -1483,85 +2078,114 @@
                     <button ng-click="prepChange()" class="btn blue-grey-background">أعد تعيين كلمة المرور</button>
                   </div>
                 </li> -->
-              </ul>
-            </div>
-            <div>
-                <span style="font-size:1.5em">بيانات التفعيل</span>
-                <ul>
-                  <li>اسم المشترى : كريم جابر</li>
-                  <li>النسخه : 1.3.11</li>
-                  <li>تاريخ التفعيل : 15-12-2018</li>
-                </ul>
-            </div>
-          </div>
-          <div id="confirmChangePassword_modal" class="modal">
-            <div class="modal-content gradient">
-              <h4>هل أنت متأكد من هذه الخطوة؟</h4>
-              <p>برجاء حفظ كلمة المرور لصعوبة إسترجاعها!</p>
-            </div>
-            <div class="modal-footer blue-grey-background">
-              <a ng-click="changePass()" class="modal-action modal-close waves-effect waves-green btn-flat">أجل أنا
-                متأكد</a>
-              <a class="modal-action modal-close waves-effect waves-red btn-flat">ﻻ</a>
-            </div>
-          </div>
-        </div>
-        <div class="simpleFadeIn-anim" ng-controller="examsCtrl" ng-show="tab=='exams'">
-          <div class="row">
-            <div class="row">
-              <div class="col s10" style="margin-left: 8.35%; margin-top:1rem;">
-                <select id="gradesSelector" class="browser-default animated slideInDown" ng-options="i as grades_names[i] for i in grades"
-                  ng-model="selected_grade" ng-change="grade_changed()">
-                  <option value="" disabled selected>السنه</option>
-                </select>
+                  </ul>
+                </div>
+                <div>
+                  <span style="font-size:1.5em">بيانات التفعيل</span>
+                  <ul>
+                    <li>اسم المشترى : كريم جابر</li>
+                    <li>النسخه : 1.3.11</li>
+                    <li>تاريخ التفعيل : 15-12-2018</li>
+                  </ul>
+                </div>
+              </div>
+              <div id="confirmChangePassword_modal"
+                class="modal">
+                <div class="modal-content gradient">
+                  <h4>هل أنت متأكد من هذه الخطوة؟</h4>
+                  <p>برجاء حفظ كلمة المرور لصعوبة إسترجاعها!</p>
+                </div>
+                <div class="modal-footer blue-grey-background">
+                  <a ng-click="changePass()"
+                    class="modal-action modal-close waves-effect waves-green btn-flat">أجل أنا
+                    متأكد</a>
+                  <a class="modal-action modal-close waves-effect waves-red btn-flat">ﻻ</a>
+                </div>
               </div>
             </div>
-            <div class="row">
-              <ol id="staggered-test">
-                <li ng-repeat="e in exams" class="card-panel hoverable student_item animated slideInUp">
-                  <span> {{e.name}}
-                    <div class="students_btn">
-                      <button class="btn blue-grey-background" ng-click="openExamLogs(e)">
-                        <i class="fa fa-user" aria-hidden="true"></i>
-                      </button>
-                      <button ng-click="loadExam(e)" class="btn blue-grey-background">
-                        <i class="fa fa-pencil" aria-hidden="true"></i>
-                      </button>
-                      <button ng-click="prepareDel(e)" class="btn red lighten-1">
-                        <i class="fa fa-trash" aria-hidden="true"></i>
-                      </button>
-                    </div>
-                  </span>
-                </li>
-              </ol>
-            </div>
-          </div>
-          <div id="deleteExam_modal" class="modal">
-            <div class="modal-content gradient">
-              <h4>هل تريد حذف الإمتحان؟</h4>
-              <p>عند حذف الإمتحان ﻻيمكنك إسترجاع بياناته مجدداً!</p>
-            </div>
-            <div class="modal-footer blue-grey-background">
-              <a ng-click="removeExam()" class="modal-action modal-close waves-effect waves-green btn-flat">اوافق</a>
-              <a class="modal-action modal-close waves-effect waves-red btn-flat">ﻻ</a>
-            </div>
-          </div>
-          <div id="addExam_modal" class="modal bottom-sheet" style="max-height:100%;">
-            <div class="modal-content">
+            <div class="simpleFadeIn-anim"
+              ng-controller="examsCtrl"
+              ng-show="tab=='exams'">
               <div class="row">
-                <div class="col s12">
-                  <label>اسم الامتحان</label>
-                  <input type="text" id="addExam_input" ng-model="newExam_name">
+                <div class="row">
+                  <div class="col s10"
+                    style="margin-left: 8.35%; margin-top:1rem;">
+                    <select id="gradesSelector"
+                      class="browser-default animated slideInDown"
+                      ng-options="i as grades_names[i] for i in grades"
+                      ng-model="selected_grade"
+                      ng-change="grade_changed()">
+                      <option value=""
+                        disabled
+                        selected>السنه</option>
+                    </select>
+                  </div>
                 </div>
-                <div class="col s6">
-                  <label>الخط الأحمر</label>
-                  <input type="number" min="5" max="{{newExam_max}}" ng-model="newExam_redline">
+                <div class="row">
+                  <ol id="staggered-test">
+                    <li ng-repeat="e in exams"
+                      class="card-panel hoverable student_item animated slideInUp">
+                      <span> {{e.name}}
+                        <div class="students_btn">
+                          <button class="btn blue-grey-background"
+                            ng-click="openExamLogs(e)">
+                            <i class="fa fa-user"
+                              aria-hidden="true"></i>
+                          </button>
+                          <button ng-click="loadExam(e)"
+                            class="btn blue-grey-background">
+                            <i class="fa fa-pencil"
+                              aria-hidden="true"></i>
+                          </button>
+                          <button ng-click="prepareDel(e)"
+                            class="btn red lighten-1">
+                            <i class="fa fa-trash"
+                              aria-hidden="true"></i>
+                          </button>
+                        </div>
+                      </span>
+                    </li>
+                  </ol>
                 </div>
-                <div class="col s6">
-                  <label>الدرجة النهائية</label>
-                  <input type="number" min="5" max="200" ng-model="newExam_max">
+              </div>
+              <div id="deleteExam_modal"
+                class="modal">
+                <div class="modal-content gradient">
+                  <h4>هل تريد حذف الإمتحان؟</h4>
+                  <p>عند حذف الإمتحان ﻻيمكنك إسترجاع بياناته مجدداً!</p>
                 </div>
-                <!--div class="col s12">
+                <div class="modal-footer blue-grey-background">
+                  <a ng-click="removeExam()"
+                    class="modal-action modal-close waves-effect waves-green btn-flat">اوافق</a>
+                  <a class="modal-action modal-close waves-effect waves-red btn-flat">ﻻ</a>
+                </div>
+              </div>
+              <div id="addExam_modal"
+                class="modal bottom-sheet"
+                style="max-height:100%;">
+                <div class="modal-content">
+                  <div class="row">
+                    <div class="col s12">
+                      <label>اسم الامتحان</label>
+                      <input type="text"
+                        id="addExam_input"
+                        ng-model="newExam_name">
+                    </div>
+                    <div class="col s6">
+                      <label>الخط الأحمر</label>
+                      <input type="number"
+                        min="5"
+                        max="{{newExam_max}}"
+                        ng-model="newExam_redline">
+                    </div>
+                    <div class="col s6">
+                      <label>الدرجة النهائية</label>
+                      <input type="number"
+                        min="5"
+                        max="200"
+                        ng-model="newExam_max">
+                    </div>
+                    <!--div class="col s12">
                                     <label>الوقت</1label>
                                     <input type="text" class="timepicker">
                                 </div>
@@ -1569,182 +2193,234 @@
                                     <label>التاريخ</label>
                                     <input type="text" class="datepicker">
                                 </div-->
-                <div class="col s12">
-                  <label>اختر السنه</label>
-                  <select class="browser-default" ng-model="addExam_selectedGrade" ng-options="g as grades_names[g] for g in grades">
-                    <option value="" disabled selected>اختر السنه</option>
-                  </select>
+                    <div class="col s12">
+                      <label>اختر السنه</label>
+                      <select class="browser-default"
+                        ng-model="addExam_selectedGrade"
+                        ng-options="g as grades_names[g] for g in grades">
+                        <option value=""
+                          disabled
+                          selected>اختر السنه</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="modal-footer blue-grey-background">
+                    <a ng-click="addExam()"
+                      class="waves-effect waves-green btn-flat">أضف الإمتحان</a>
+                    <a class="modal-action modal-close waves-effect waves-red btn-flat">إلغاء</a>
+                  </div>
                 </div>
               </div>
-              <div class="modal-footer blue-grey-background">
-                <a ng-click="addExam()" class="waves-effect waves-green btn-flat">أضف الإمتحان</a>
-                <a class="modal-action modal-close waves-effect waves-red btn-flat">إلغاء</a>
+              <div id="editExam_modal"
+                class="modal animated slideInDown">
+                <div class="modal-content">
+                  <div class="row">
+                    <div class="col s12">
+                      <label>اسم الامتحان</label>
+                      <input type="text"
+                        ng-model="editExam_name">
+                    </div>
+                    <div class="col s6">
+                      <label>الخط الأحمر</label>
+                      <input type="number"
+                        min="5"
+                        max="{{editExam_max}}"
+                        ng-model="editExam_redline">
+                    </div>
+                    <div class="col s6">
+                      <label>الدرجة النهائية</label>
+                      <input type="number"
+                        min="5"
+                        max="200"
+                        ng-model="editExam_max">
+                    </div>
+                  </div>
+                  <div class="modal-footer blue-grey-background">
+                    <a ng-click="editExam()"
+                      class="waves-effect waves-green btn-flat">حفظ</a>
+                    <a class="modal-action modal-close waves-effect waves-red btn-flat">إلغاء</a>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-          <div id="editExam_modal" class="modal animated slideInDown">
-            <div class="modal-content">
-              <div class="row">
-                <div class="col s12">
-                  <label>اسم الامتحان</label>
-                  <input type="text" ng-model="editExam_name">
-                </div>
-                <div class="col s6">
-                  <label>الخط الأحمر</label>
-                  <input type="number" min="5" max="{{editExam_max}}" ng-model="editExam_redline">
-                </div>
-                <div class="col s6">
-                  <label>الدرجة النهائية</label>
-                  <input type="number" min="5" max="200" ng-model="editExam_max">
-                </div>
+          <div class="col l2 m2 hide_on_mobile hideonprint">
+            <div id="aside_cpanel">
+              <div ng-click="changeTab('home')"
+                ng-class="tab == 'home' ? 'blue-grey-text text-darken-1' : 'grey-text'"
+                class="center-align">
+                <i class="fa fa-inbox fa-2x"
+                  aria-hidden="true">
+                  <span>الرئيسيه</span>
+                </i>
+
               </div>
-              <div class="modal-footer blue-grey-background">
-                <a ng-click="editExam()" class="waves-effect waves-green btn-flat">حفظ</a>
-                <a class="modal-action modal-close waves-effect waves-red btn-flat">إلغاء</a>
+              <div ng-click="changeTab('students')"
+                ng-class="tab == 'students' ? 'blue-grey-text  text-darken-1' : 'grey-text'"
+                class="center-align">
+                <i class="fa fa-users fa-2x"
+                  aria-hidden="true">
+                  <span>الطلاب</span>
+                </i>
+
               </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col l2 m2 hide_on_mobile hideonprint">
-        <div id="aside_cpanel">
-          <div ng-click="changeTab('home')" ng-class="tab == 'home' ? 'blue-grey-text text-darken-1' : 'grey-text'"
-            class="center-align">
-            <i class="fa fa-inbox fa-2x" aria-hidden="true">
-              <span>الرئيسيه</span>
-            </i>
+              <div ng-click="changeTab('times')"
+                ng-class="tab == 'times' ? 'blue-grey-text  text-darken-1' : 'grey-text'"
+                class="center-align">
+                <i class="fa fa-calendar fa-2x"
+                  aria-hidden="true">
+                  <span>المواعيد</span>
+                </i>
 
-          </div>
-          <div ng-click="changeTab('students')" ng-class="tab == 'students' ? 'blue-grey-text  text-darken-1' : 'grey-text'"
-            class="center-align">
-            <i class="fa fa-users fa-2x" aria-hidden="true">
-              <span>الطلاب</span>
-            </i>
+              </div>
+              <div ng-click="changeTab('exams')"
+                ng-class="tab == 'exams' ? 'blue-grey-text text-darken-1' : 'grey-text'"
+                class="center-align">
+                <i class="fa fa-th-list fa-2x"
+                  aria-hidden="true">
+                  <span>الامتحانات</span>
+                </i>
 
-          </div>
-          <div ng-click="changeTab('times')" ng-class="tab == 'times' ? 'blue-grey-text  text-darken-1' : 'grey-text'"
-            class="center-align">
-            <i class="fa fa-calendar fa-2x" aria-hidden="true">
-              <span>المواعيد</span>
-            </i>
+              </div>
+              <div ng-click="changeTab('payment')"
+                ng-class="tab == 'payment' ? 'blue-grey-text text-darken-1' : 'grey-text'"
+                class="center-align">
+                <i class="fa fa-credit-card-alt fa-2x"
+                  aria-hidden="true">
+                  <span>الدفع</span>
+                </i>
 
-          </div>
-          <div ng-click="changeTab('exams')" ng-class="tab == 'exams' ? 'blue-grey-text text-darken-1' : 'grey-text'"
-            class="center-align">
-            <i class="fa fa-th-list fa-2x" aria-hidden="true">
-              <span>الامتحانات</span>
-            </i>
+              </div>
 
-          </div>
-          <div ng-click="changeTab('payment')" ng-class="tab == 'payment' ? 'blue-grey-text text-darken-1' : 'grey-text'"
-            class="center-align">
-            <i class="fa fa-credit-card-alt fa-2x" aria-hidden="true">
-              <span>الدفع</span>
-            </i>
+              <div ng-click="changeTab('sms')"
+                ng-class="tab == 'sms' ? 'blue-grey-text text-darken-1' : 'grey-text'"
+                class="center-align">
+                <i class="fa fa-comment fa-2x"
+                  aria-hidden="true">
+                  <span>الرسائل</span>
+                </i>
+              </div>
 
-          </div>
+              <div ng-click="changeTab('stats')"
+                ng-class="tab == 'stats' ? 'blue-grey-text text-darken-1' : 'grey-text'"
+                class="center-align">
+                <i class="fa fa-line-chart fa-2x"
+                  aria-hidden="true">
+                  <span>احصائيات</span>
+                </i>
+              </div>
 
-          <div ng-click="changeTab('sms')" ng-class="tab == 'sms' ? 'blue-grey-text text-darken-1' : 'grey-text'" class="center-align">
-            <i class="fa fa-comment fa-2x" aria-hidden="true">
-              <span>الرسائل</span>
-            </i>
-          </div>
+              <div ng-click="changeTab('paylogs')"
+                ng-class="tab == 'paylogs' ? 'blue-grey-text text-darken-1' : 'grey-text'"
+                class="center-align">
+                <i class="fa fa-dollar fa-2x"
+                  aria-hidden="true">
+                  <span>الحسابات</span>
+                </i>
+              </div>
 
-          <div ng-click="changeTab('paylogs')" ng-class="tab == 'paylogs' ? 'blue-grey-text text-darken-1' : 'grey-text'"
-            class="center-align">
-            <i class="fa fa-dollar fa-2x" aria-hidden="true">
-              <span>الحسابات</span>
-            </i>
-          </div>
+              <div ng-click="changeTab('settings')"
+                ng-class="tab == 'settings' ? 'blue-grey-text text-darken-1' : 'grey-text'"
+                class="center-align">
+                <i class="fa fa-cog fa-2x"
+                  aria-hidden="true">
+                  <span>الإعدادات</span>
+                </i>
 
-          <div ng-click="changeTab('settings')" ng-class="tab == 'settings' ? 'blue-grey-text text-darken-1' : 'grey-text'"
-            class="center-align">
-            <i class="fa fa-cog fa-2x" aria-hidden="true">
-              <span>الإعدادات</span>
-            </i>
+              </div>
 
-          </div>
-
-          <!-- not needed -->
-          <!-- <div ng-click="logout()" class="grey-text center-align" id="log_out">
+              <!-- not needed -->
+              <!-- <div ng-click="logout()" class="grey-text center-align" id="log_out">
             <i class="fa fa-sign-out fa-2x" aria-hidden="true">
               <span>تسجيل الخروج</span>
             </i>
           </div> -->
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
-    <!-- mohap info modal -->
-    <div id="mohap_modal" class="modal">
-      <div class="modal-content">
-        <h4>Mohap Akram</h4>
-        <p>01069392983</p>
-        <a href="https://www.facebook.com/mohapakram" target="_blank">Facebook</a>
-      </div>
-      <div class="modal-footer">
-        <a href="#!" class="modal-close waves-effect waves-green btn-flat">تم</a>
-      </div>
-    </div>
+        <!-- mohap info modal -->
+        <div id="mohap_modal"
+          class="modal">
+          <div class="modal-content">
+            <h4>Mohap Akram</h4>
+            <p>01069392983</p>
+            <a href="https://www.facebook.com/mohapakram"
+              target="_blank">Facebook</a>
+          </div>
+          <div class="modal-footer">
+            <a href="#!"
+              class="modal-close waves-effect waves-green btn-flat">تم</a>
+          </div>
+        </div>
 
-    <!-- ziad info modal -->
-    <div id="ziad_modal" class="modal">
-      <div class="modal-content">
-        <h4>Ziad Alzarka</h4>
-        <p>01096707442</p>
-        <a href="https://www.facebook.com/zzthemadprogrammer" target="_blank">Facebook</a>
-      </div>
-      <div class="modal-footer">
-        <a href="#!" class="modal-close waves-effect waves-green btn-flat">تم</a>
-      </div>
-    </div>
+        <!-- ziad info modal -->
+        <div id="ziad_modal"
+          class="modal">
+          <div class="modal-content">
+            <h4>Ziad Alzarka</h4>
+            <p>01096707442</p>
+            <a href="https://www.facebook.com/zzthemadprogrammer"
+              target="_blank">Facebook</a>
+          </div>
+          <div class="modal-footer">
+            <a href="#!"
+              class="modal-close waves-effect waves-green btn-flat">تم</a>
+          </div>
+        </div>
 
-    <span style="float:left;font-size:1em">Made by <a href="#mohap_modal" class="modal-trigger">Mohap Akram</a> and <a class="modal-trigger" href="#ziad_modal">Ziad Alzarka</a> </span>
-    
-  </div>
-  <script type="text/javascript" src="/assets/js/libs/jquery-3.2.1.min.js"></script>
-  <script type="text/javascript" src="/assets/js/libs/bootstrap-datepicker.min.js"></script>
-  <script type="text/javascript" src="/assets/js/libs/materialize.min.js"></script>
-  <script type="text/javascript" src="/assets/js/scripts/accessabilty.js"></script>
-  <pre id="log"></pre>
-  <script type="text/javascript">
-    $(document).ready(function () {
-      $('.timepicker').pickatime({
-        default: 'now', // Set default time: 'now', '1:30AM', '16:30'
-        fromnow: 0, // set default time to * milliseconds from now (using with default = 'now')
-        twelvehour: true, // Use AM/PM or 24-hour format
-        donetext: 'تم ', // fuck you !!!
-        canceltext: 'الغاء', // Text for cancel-button
-        autoclose: false, // automatic close timepicker
-        ampmclickable: true, // make AM PM clickable
-        beforeShow: () => {
-          /*$('#click-am').text("صباحاً");
-          $('#click-pm').text("مساءأً");*/
-          $('#edit_content').css({
-            'padding-top': '7%',
-            'padding-bottom': '7%'
+        <span style="float:left;font-size:1em">Made by <a href="#mohap_modal"
+            class="modal-trigger">Mohap Akram</a> and <a class="modal-trigger"
+            href="#ziad_modal">Ziad Alzarka</a> </span>
+
+      </div>
+      <script type="text/javascript"
+        src="/assets/js/libs/jquery-3.2.1.min.js"></script>
+      <script type="text/javascript"
+        src="/assets/js/libs/bootstrap-datepicker.min.js"></script>
+      <script type="text/javascript"
+        src="/assets/js/libs/materialize.min.js"></script>
+      <script type="text/javascript"
+        src="/assets/js/scripts/accessabilty.js"></script>
+      <pre id="log"></pre>
+      <script type="text/javascript">
+        $(document).ready(function () {
+          $('.timepicker').pickatime({
+            default: 'now', // Set default time: 'now', '1:30AM', '16:30'
+            fromnow: 0, // set default time to * milliseconds from now (using with default = 'now')
+            twelvehour: true, // Use AM/PM or 24-hour format
+            donetext: 'تم ', // fuck you !!!
+            canceltext: 'الغاء', // Text for cancel-button
+            autoclose: false, // automatic close timepicker
+            ampmclickable: true, // make AM PM clickable
+            beforeShow: () => {
+              /*$('#click-am').text("صباحاً");
+              $('#click-pm').text("مساءأً");*/
+              $('#edit_content').css({
+                'padding-top': '7%',
+                'padding-bottom': '7%'
+              });
+            },
+            afterHide: () => {
+              $('#edit_content').css({
+                'padding-top': '0',
+                'padding-bottom': '0'
+              })
+            }
           });
-        },
-        afterHide: () => {
-          $('#edit_content').css({
-            'padding-top': '0',
-            'padding-bottom': '0'
-          })
-        }
-      });
-      $('.datepicker').datepicker({
-        todayHighlight: true
-      });
-      $('.tooltipped').tooltip({
-        delay: 50
-      });
-      // my code dont move it anywhere for now !
-      //global use !
-      $("#students_search").click(function () {
-        $("#students_searchSettings").slideToggle("slow");
-      });
+          $('.datepicker').datepicker({
+            todayHighlight: true
+          });
+          $('.tooltipped').tooltip({
+            delay: 50
+          });
+          // my code dont move it anywhere for now !
+          //global use !
+          $("#students_search").click(function () {
+            $("#students_searchSettings").slideToggle("slow");
+          });
 
-    });
-  </script>
+        });
+      </script>
 
 </body>
 

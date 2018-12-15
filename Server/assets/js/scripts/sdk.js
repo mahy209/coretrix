@@ -748,6 +748,16 @@ sdk.factory('sdk', ['$http', function ($http) {
     post("api/teacher/logs/brief", query, callback);
   }
 
+  function count(grade, group, callback) {
+    var token = Cookies.get('token');
+    var query = {
+      token: token
+    };
+    if (typeof grade == 'number' && !isNaN(grade)) query.ig_grade = parseInt(grade);
+    if (typeof group == 'number' && !isNaN(group)) query.ig_groupid = parseInt(group);
+    post("api/count", query, callback);
+  }
+
   function FetchPaymentLogs(itemid, grade, callback) {
     var token = Cookies.get('token');
     post("api/teacher/payments/fetchlogs", {
@@ -1080,6 +1090,7 @@ sdk.factory('sdk', ['$http', function ($http) {
     UpdateGrade: UpdateGrade,
     DeleteGrade: DeleteGrade,
     GetLinks: GetLinks,
+    Count: count,
     /* ----------------------- */
     ListGroupClassesLinks: ListGroupClassesLinks,
     LinkGroupClasses: LinkGroupClasses,

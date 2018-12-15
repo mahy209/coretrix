@@ -286,6 +286,8 @@ var inputvalidators = {
   notes: validators.ValidateOrIgnoreString,
   // list payments
   comparingDate: validators.ValidateDate,
+  // count
+  ig_grade: validators.ValidateOrIgnoreNumber,
 }
 
 // REG CALLS
@@ -467,6 +469,8 @@ registerApiCall("/teacher/logs/clear", ["token", "targetuser", "logtype"], userD
 //STUDENT
 registerApiCall("/student/grade/edit", ["token", "grade"], userDocDefault, data.EditGrade);
 registerApiCall("/student/grade/get", ["token", "targetuser"], userDocDefault, data.GetGrade);
+
+registerApiCall("/count", ["token", "ig_grade", "ig_groupid"], userDocDefault, data.Count);
 
 
 

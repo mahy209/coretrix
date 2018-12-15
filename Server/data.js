@@ -3771,6 +3771,47 @@ function fetchLogs(args, callback) {
   });
 }
 
+async function count(args, callback) {
+  const returner = {};
+  db.collection("links").count((err, linksCount) => {
+    if (err) return callback(err);
+    returner.linksCount = linksCount
+    db.collection("links").aggregate([{
+      $group: {
+        _id: "$studentid"
+      }
+    }], (err, studentsCount) => {
+      if (err) return callback(err);
+      returner.studentsCount = studentsCount.length;
+      db.collection("links").aggregate([{
+        $match: {
+          grade: args.ig_grade
+        }
+      }, {
+        $group: {
+          _id: "$studentid"
+        }
+      }], (err, gradeCount) => {
+        if (err) return callback(err);
+        returner.gradeCount = gradeCount.length;
+        db.collection("links").aggregate([{
+          $match: {
+            group: args.ig_groupid
+          }
+        }, {
+          $group: {
+            _id: "$studentid"
+          }
+        }], (err, groupCount) => {
+          if (err) return callback(err);
+          returner.groupCount = groupCount.length;
+          callback(null, stats.OK, returner);
+        });
+      });
+    });
+  });
+}
+
 function briefLog(args, callback) {
   db.collection("links").aggregate([{
       $match: {
@@ -4268,6 +4309,9 @@ module.exports = {
 
   // VALIDATORS
   validators: validators,
+
+  // STATISTICS
+  Count: count,
 
   LinkGroupClasses: linkGroupClasses,
   ListGroupClassesLinks: listGroupClassesLinks,
