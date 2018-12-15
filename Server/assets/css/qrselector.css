@@ -111,18 +111,3 @@ tbody {
 td>div>input {
     direction: ltr;
 }
-
-td, td>select, td>input, td>div>input {
-    color: #444;
-    transition: all 0.2s;
-}
-
-tbody:hover td, tbody:hover td>select, tbody:hover td>div>input {
-    color: transparent;
-    text-shadow: 0 0 3px #aaa;
-}
-
-tr:hover td, tr:hover td>select, tr:hover td>div>input {
-    color: #444;
-    text-shadow: 0 1px 0 #fff;
-}
