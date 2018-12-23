@@ -74,7 +74,7 @@ app.run(function ($rootScope, $window, $location, sdk) {
     })
   }
   $rootScope.barcodeObservers = [];
-  barcodeScanner(() => $rootScope.barcodeObservers.forEach(observer => observer()));
+  barcodeScanner((code) => $rootScope.barcodeObservers.forEach(observer => observer(code)));
   $rootScope.changeTab = (newtab) => {
     if ($rootScope.tab == 'home') last_cam_state = $rootScope.camera_enabled
     // to avoid errors when mainCtrl is not loaded yet
@@ -2047,6 +2047,9 @@ app.controller('mainCtrl', function ($rootScope, $scope, sdk) {
     process(parsed.id);
   });
   $rootScope.barcodeObservers.push((id) => {
+    console.log({
+      id
+    });
     process(id);
   });
   $scope.camera_changed = () => {
