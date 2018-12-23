@@ -1020,9 +1020,6 @@ sdk.factory('sdk', ['$http', function ($http) {
   }
 
   function GenerateBarcodeA4PrintHTML(users, A4) {
-    console.log({
-      A4
-    });
     const barcodeHTML =
       `
     <html>
@@ -1033,6 +1030,12 @@ sdk.factory('sdk', ['$http', function ($http) {
       <script type="text/javascript" src="/assets/js/libs/jquery-3.2.1.min.js"></script>
       <script type="text/javascript" src="/assets/js/libs/barcode-generator.js"></script>
       <style>
+        @import url('/assets/css/Cairo.css');
+
+        body {
+            font-family: 'Cairo', sans-serif;
+        }
+        
         .text-center {
           text-align: center;
         }
@@ -1086,9 +1089,121 @@ sdk.factory('sdk', ['$http', function ($http) {
     `;
     return barcodeHTML;
   }
+
+  function GenerateReceipt(data) {
+    const {
+      id,
+      fullname,
+      profile,
+      item,
+      grade
+    } = data;
+    return `
+    <html>
+
+    <head>
+      <meta charset="utf-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link type="text/css" rel="stylesheet" href="/assets/css/materialize.min.css" media="all" />
+      <script type="text/javascript" src="/assets/js/libs/jquery-3.2.1.min.js"></script>
+      <script type="text/javascript" src="/assets/js/libs/barcode-generator.js"></script>
+      <style>
+        @import url('/assets/css/Cairo.css');
+        
+        body {
+          font-family: 'Cairo', sans-serif;
+          padding: 16px;
+        }
+    
+        .text-center, .text-center * {
+          text-align: center;
+        }
+    
+        .text-right,
+        .text-right * {
+          text-align: right;
+        }
+    
+        .no-margin {
+          margin: 0;
+        }
+    
+        td {
+          padding: 0;
+        }
+      </style>
+      <script>
+      setTimeout(() => {
+        JsBarcode('#barcode', ${data.id}, {
+          displayValue: false,
+          height: 40,
+          margin: 0,
+          marginTop: 20,
+        });
+      }, 1000);
+      </script>
+    </head>
+    
+    <body dir="rtl">
+      <div class="row">
+        <div class="col s12 text-center">
+          <h5>ايصال دفع</h5>
+          <h6>${profile.name} - ${profile.subjects}</h6>
+          <h6>${moment().format('M/D/YYYY hh:mm A')}</h6>
+        </div>
+        <div class="col s12 text-center">
+          <table class="text-right">
+            <tbody>
+              <tr>
+                <td width="18%">الطالب</td>
+                <td style="padding-right: 6px;">:</td>
+                <td>${fullname}</td>
+              </tr>
+              <tr>
+                <td>السنة</td>
+                <td>:</td>
+                <td>${grade}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="col s12 text-center">
+          <table class="text-right">
+            <thead>
+              <tr>
+                <td>الوحدة</td>
+                <td>السعر</td>
+                <td>خصم</td>
+                <td>المدفوع</td>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>${item.name}</td>
+                <td>${item.price}</td>
+                <td>${item.discount}</td>
+                <td>${item.payed}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="col s12 text-center">
+          <svg id="barcode"></svg>
+        </div>
+        <div class="col s12 text-center">
+          <small>فريق جراى</small>
+          <small>01096707442</small>
+        </div>
+      </div>
+    </body>
+    
+    </html>
+    `;
+  }
   return {
     GeneratePrintingPageHtml: generatePrintingPageHtml,
     GenerateBarcodeA4PrintHTML,
+    GenerateReceipt,
     // -----------------------------------------------------
     stats: stats,
     itemCategories: itemCategories,

@@ -133,6 +133,30 @@ app.controller("mainCtrl", function ($rootScope, $scope, sdk) {
       }
     });
   });
+  sdk.GetNameAndSubject((stat, result) => {
+    $scope.profile = result
+  })
+
+  function PrintImage(body) {
+    Pagelink = "about:blank";
+    var pwa = window.open(Pagelink, "_new");
+    pwa.document.open();
+    pwa.document.write(body);
+  }
+  $scope.printLog = (log) => {
+    PrintImage(sdk.GenerateReceipt({
+      id: log.studentid,
+      fullname: log.fullname,
+      grade: $rootScope.grades_names[log.grade],
+      item: {
+        name: $scope.selected_item.name,
+        price: $scope.selected_item.price,
+        discount: log.log.discount,
+        payed: log.log.payed,
+      },
+      profile: $scope.profile,
+    }));
+  };
   $scope.logSearchedPayment = (e, auto) => {
     if (auto || e.keyCode == 13) {
       $scope.logs[0].log.payed = $scope.selected_item.price - $scope.logs[0].log.discount;
