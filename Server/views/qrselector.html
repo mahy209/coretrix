@@ -2,71 +2,73 @@
 <html>
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link type="text/css" rel="stylesheet" href="/assets/css/materialize.min.css"
-    media="screen,projection" />
-<link type="text/css" rel="stylesheet" href="/assets/css/animate.min.css" />
-<link type="text/css" rel="stylesheet" href="/assets/css/font-awesome.min.css"
-    />
-    <script type="text/javascript" src="/assets/js/libs/angular/angular.min.js"></script>
-    <script type="text/javascript" src="/assets/js/libs/js.cookie.js"></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link type="text/css" rel="stylesheet" href="/assets/css/materialize.min.css" media="screen,projection" />
+  <link type="text/css" rel="stylesheet" href="/assets/css/animate.min.css" />
+  <link type="text/css" rel="stylesheet" href="/assets/css/font-awesome.min.css" />
+  <script type="text/javascript" src="/assets/js/libs/angular/angular.min.js"></script>
+  <script type="text/javascript" src="/assets/js/libs/js.cookie.js"></script>
 
-    <script type="text/JavaScript" src="/assets/js/libs/qrious.js" />
+  <script type="text/JavaScript" src="/assets/js/libs/qrious.js" />
 
-    <script type="text/javascript" src="/assets/js/libs/library.js"></script>
-    <script type="text/javascript" src="/assets/js/scripts/helpers.js"></script>
-    <link type="text/css" rel="stylesheet" href="/assets/css/style.css">
-    <script type="text/javascript" src="/assets/js/scripts/liveorlocal.js"></script>
-    <script type="text/javascript" src="/assets/js/scripts/sdk.js"></script>
-    <script type="text/javascript" src="/assets/js/scripts/qrselector.js"></script>
-    <link type="text/css" rel="stylesheet" href="/assets/css/qrselector.css">
+  <script type="text/javascript" src="/assets/js/libs/library.js"></script>
+  <script type="text/javascript" src="/assets/js/scripts/helpers.js"></script>
+  <link type="text/css" rel="stylesheet" href="/assets/css/style.css">
+  <script type="text/javascript" src="/assets/js/scripts/liveorlocal.js"></script>
+  <script type="text/javascript" src="/assets/js/scripts/sdk.js"></script>
+  <script type="text/javascript" src="/assets/js/scripts/qrselector.js"></script>
+  <link type="text/css" rel="stylesheet" href="/assets/css/qrselector.css">
 </head>
 
 <body ng-app="coretrix" class="grey lighten-2" style="direction: rtl;">
 
-    <head>
-        <title>{{title}}</title>
-    </head>
-    <div class="contanier" ng-controller="mainCtrl">
-        <div class="row">
-            <div class="card-panel animated slideInDown" style="padding: 2%; margin-bottom: 2%; margin-top: 2%;">
-                <label>السنه الدراسيه</label>
-                <select class="browser-default" ng-options="i as grades_names[i] for i in grades" ng-change="grade_changed()" ng-model="selected_grade">
-                    <option value="" disabled selected>السنه</option>
-                </select>
-                <label>المجموعة</label>
-                <select class="browser-default" ng-options="i as i.name for i in groups" ng-model="selected_group" ng-change="group_changed()">
-                    <option value="" disabled selected>المجموعة</option>
-                </select>
-                <label>عدد النسخ</label>
-                <input type="number" ng-model="printingCount" min="1" style="padding-right:1%">
-                <button style="margin-top:3%; margin-bottom:3%; width: 100%" ng-click="print_qr()" class="btn gradient2">إطبع</button>
-            </div>
-            <div class="animated slideInLeft" style="margin-right:5%;">
-                <input type="checkbox" ng-model="selectall" id="selectall" ng-change="toggleSelectAll()" />
-                <label for="selectall">حدد الكل</label>
-            </div>
-            <!-- logs is there to avoid interfering with external libraries -->
-            <table class="animated slideInUp logs logs-noblur">
-                <tr>
-                    <th>
-                        اسم الطالب
-                    </th>
-                </tr>
-                <tr ng-repeat="s in students" class="animated slideInLeft">
-                    <td>
-                        <p style="display:inline;">
-                            <input type="checkbox" ng-model="s.selected" id="cid{{s.studentid}}" />
-                            <label for="cid{{s.studentid}}"></label>
-                            <i style="margin-right:3%">{{s.fullname}}</i>
-                        </p>
-                    </td>
-                </tr>
-            </table>
-        </div>
-        <!--Import jQuery before materialize.js-->
-        <script type="text/javascript" src="/assets/js/libs/jquery-3.2.1.min.js"></script>
+  <head>
+    <title>{{title}}</title>
+  </head>
+  <div class="contanier" ng-controller="mainCtrl">
+    <div class="row">
+      <div class="card-panel animated slideInDown" style="padding: 2%; margin-bottom: 2%; margin-top: 2%;">
+        <label>نوع الكود</label>
+        <select class="browser-default" ng-options="i as i for i in ['A4 Barcode', 'Barcode', 'QR']" ng-model="selected_code_type">
+        </select>
+        <label>السنه الدراسيه</label>
+        <select class="browser-default" ng-options="i as grades_names[i] for i in grades" ng-change="grade_changed()"
+          ng-model="selected_grade">
+          <option value="" disabled selected>السنه</option>
+        </select>
+        <label>المجموعة</label>
+        <select class="browser-default" ng-options="i as i.name for i in groups" ng-model="selected_group" ng-change="group_changed()">
+          <option value="" disabled selected>المجموعة</option>
+        </select>
+        <label>عدد النسخ</label>
+        <input type="number" ng-model="printingCount" min="1" style="padding-right:1%">
+        <button style="margin-top:3%; margin-bottom:3%; width: 100%" ng-click="print_qr()" class="btn gradient2">إطبع</button>
+      </div>
+      <div class="animated slideInLeft" style="margin-right:5%;">
+        <input type="checkbox" ng-model="selectall" id="selectall" ng-change="toggleSelectAll()" />
+        <label for="selectall">حدد الكل</label>
+      </div>
+      <!-- logs is there to avoid interfering with external libraries -->
+      <table class="animated slideInUp logs logs-noblur">
+        <tr>
+          <th>
+            اسم الطالب
+          </th>
+        </tr>
+        <tr ng-repeat="s in students" class="animated slideInLeft">
+          <td>
+            <p style="display:inline;">
+              <input type="checkbox" ng-model="s.selected" id="cid{{s.studentid}}" />
+              <label for="cid{{s.studentid}}"></label>
+              <i style="margin-right:3%">{{s.fullname}}</i>
+            </p>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <!--Import jQuery before materialize.js-->
+    <script type="text/javascript" src="/assets/js/libs/jquery-3.2.1.min.js"></script>
     <script type="text/javascript" src="/assets/js/libs/materialize.min.js"></script>
 </body>
 

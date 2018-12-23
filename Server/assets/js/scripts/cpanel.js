@@ -73,6 +73,8 @@ app.run(function ($rootScope, $window, $location, sdk) {
       }
     })
   }
+  $rootScope.barcodeObservers = [];
+  barcodeScanner(() => $rootScope.barcodeObservers.forEach(observer => observer()));
   $rootScope.changeTab = (newtab) => {
     if ($rootScope.tab == 'home') last_cam_state = $rootScope.camera_enabled
     // to avoid errors when mainCtrl is not loaded yet
@@ -1948,20 +1950,12 @@ app.controller('mainCtrl', function ($rootScope, $scope, sdk) {
   $scope.currentExam = {}
   $scope.currentClass = {}
   $scope.selectedLogger = 'class'
-  scanner.addListener('scan', function (content) {
-    var parsed = {}
-    try {
-      var parsed = JSON.parse(content)
-    } catch (e) {
-      return toast('هذا كود ﻻ يخص البرنامج!', gradients.error)
-    }
-    if (typeof parsed.id != 'number') return toast('هذا كود ﻻ يخص البرنامج!', gradients.error)
-    if (typeof parsed.code != 'string') return toast('هذا كود ﻻ يخص البرنامج!', gradients.error)
-    // TODO select between exam and class
+
+  function process(id) {
     if (!$scope.selected_group && $scope.selectedLogger == 'class') return toast('برجاء إختيار المجموعة!', gradients.error)
     if (!$scope.selected_class && $scope.selectedLogger == 'class') return toast('برجاء إختيار الحصة!', gradients.error)
     if (!$scope.selected_exam && $scope.selectedLogger == 'exam') return toast('برجاء إختيار الامتحان!', gradients.error)
-    $scope.studentid = parsed.id
+    $scope.studentid = id
     $scope.cancelled = false
     sdk.BriefLog($scope.studentid, (stat, result) => {
       $scope.currentExam = null
@@ -2039,7 +2033,22 @@ app.controller('mainCtrl', function ($rootScope, $scope, sdk) {
         // TODO 'الطالب مش موجود عند المدرس'
       }
     }, $scope.selected_class ? $scope.selected_class.id : null, $scope.selected_exam ? $scope.selected_exam.id : null)
-  })
+  }
+  scanner.addListener('scan', function (content) {
+    var parsed = {}
+    try {
+      var parsed = JSON.parse(content)
+    } catch (e) {
+      return toast('هذا كود ﻻ يخص البرنامج!', gradients.error)
+    }
+    if (typeof parsed.id != 'number') return toast('هذا كود ﻻ يخص البرنامج!', gradients.error)
+    if (typeof parsed.code != 'string') return toast('هذا كود ﻻ يخص البرنامج!', gradients.error)
+    // TODO select between exam and class
+    process(parsed.id);
+  });
+  $rootScope.barcodeObservers.push((id) => {
+    process(id);
+  });
   $scope.camera_changed = () => {
     if ($rootScope.camera_enabled) scanner.start($scope.selected_camera)
     else scanner.stop()

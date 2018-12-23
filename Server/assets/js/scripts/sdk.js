@@ -1011,8 +1011,74 @@ sdk.factory('sdk', ['$http', function ($http) {
     }
     return html.replace("<!--here-->", text);
   }
+
+  function GenerateBarcodeA4PrintHTML(users, A4) {
+    const barcodeHTML =
+      `
+    <html>
+
+    <head>
+      <meta charset="utf-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <script type="text/javascript" src="/assets/js/libs/jquery-3.2.1.min.js"></script>
+      <script type="text/javascript" src="/assets/js/libs/barcode-generator.js"></script>
+      <style>
+        .text-center {
+          text-align: center;
+        }
+    
+        .no-margin {
+          margin: 0;
+        }
+
+        .row {
+          width: 100%;
+        }
+        
+        .col.s3 {
+          display: inline-block;
+          width: 24%;
+        }
+      </style>
+      <script>
+      setTimeout(() => {
+        ${users.map(user => {
+          return `
+          JsBarcode('#barcode${user.id}', '${user.id}', {
+            displayValue: false,
+            height: 40,
+            margin: 0,
+            marginTop: 20,
+          });
+          `;
+        }).join('')}
+        window.print();
+      }, 1000);
+      </script>
+    </head>
+    
+    <body>
+      <div class="row">
+        ${users.map(user => {
+          return  `
+          <div class="${A4 ? 'col s3' : ''} text-center">
+            <svg id="barcode${user.id}"></svg>
+            <p class="no-margin">
+              ${user.name}
+            </p>
+          </div>
+          `;
+        }).join('')}
+      </div>
+    </body>
+    
+    </html>
+    `;
+    return barcodeHTML;
+  }
   return {
     GeneratePrintingPageHtml: generatePrintingPageHtml,
+    GenerateBarcodeA4PrintHTML,
     // -----------------------------------------------------
     stats: stats,
     itemCategories: itemCategories,

@@ -34,6 +34,7 @@ function confirm(rootscope, sdk, name) {
 }
 
 app.controller("mainCtrl", function ($rootScope, $scope, sdk) {
+  $scope.selected_code_type = 'Barcode';
   $scope.printingCount = 1;
   sdk.GetGrades((stat, result) => {
     switch (stat) {
@@ -74,9 +75,19 @@ app.controller("mainCtrl", function ($rootScope, $scope, sdk) {
       var pwa = window.open(Pagelink, "_new");
       pwa.document.open();
       pwa.document.write(body);
-      pwa.document.close();
     }
-    PrintImage(sdk.GeneratePrintingPageHtml(users));
+
+    switch ($scope.selected_code_type) {
+      case 'QR':
+        PrintImage(sdk.GeneratePrintingPageHtml(users));
+        break;
+      case 'A4 Barcode':
+        PrintImage(sdk.GenerateBarcodeA4PrintHTML(users), true);
+        break;
+      case 'Barcode':
+        PrintImage(sdk.GenerateBarcodeA4PrintHTML(users), false);
+        break;
+    }
   };
 
   $scope.toggleSelectAll = () => {
