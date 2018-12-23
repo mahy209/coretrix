@@ -59,7 +59,8 @@ app.controller("mainCtrl", function ($rootScope, $scope, sdk) {
           })
         });
         var obj = {
-          id: idToCode($scope.students[i].studentid),
+          id: $scope.students[i].studentid,
+          idCode: idToCode($scope.students[i].studentid),
           name: $scope.students[i].fullname,
           code: $scope.students[i].user[0].code,
           link: qr.toDataURL('image/jpeg')
@@ -77,15 +78,17 @@ app.controller("mainCtrl", function ($rootScope, $scope, sdk) {
       pwa.document.write(body);
     }
 
+    console.log($scope.selected_code_type);
+
     switch ($scope.selected_code_type) {
       case 'QR':
         PrintImage(sdk.GeneratePrintingPageHtml(users));
         break;
       case 'A4 Barcode':
-        PrintImage(sdk.GenerateBarcodeA4PrintHTML(users), true);
+        PrintImage(sdk.GenerateBarcodeA4PrintHTML(users, true));
         break;
       case 'Barcode':
-        PrintImage(sdk.GenerateBarcodeA4PrintHTML(users), false);
+        PrintImage(sdk.GenerateBarcodeA4PrintHTML(users, false));
         break;
     }
   };

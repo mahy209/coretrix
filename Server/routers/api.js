@@ -426,6 +426,7 @@ registerApiCall("/teacher/students/get", ["token", "targetuser"], userDocDefault
 registerApiCall("/teacher/secretaries/create", ["token", "name", "username"], userDocDefault, data.CreateSecretary);
 /*registerApiCall("/teacher/secretaries/list", ["token", "ig_grades"], userDocRestricts.ListGroups, data.ListGroups);
 registerApiCall("/teacher/secretaries/remove", ["token", "groupid"], userDocDefault, data.RemoveGroup);*/
+registerApiCall("/teacher/contacts/list", ["token"], userDocDefault, data.ListContacts);
 
 registerApiCall("/teacher/items/add", ["token", "name", "grade", "price", "itemCategory"], userDocDefault, data.AddItem);
 registerApiCall("/teacher/items/get", ["token", "itemid"], userDocDefault, data.GetItem);

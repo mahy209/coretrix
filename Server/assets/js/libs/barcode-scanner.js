@@ -14,8 +14,9 @@ function barcodeScanner(callback) {
     $(window).keypress(function (e) {
       // save last char in a variable
       lastChar = e.which;
-      // check if key was `enter`
-      if (e.which != 13) {
+      // check the keys pressed are numbers
+      if (e.which >= 48 && e.which <= 57) {
+        // if a number is pressed we add it to the chars array
         chars.push(String.fromCharCode(e.which));
       }
       // Pressed is initially set to false so we enter - this variable is here to stop us setting a

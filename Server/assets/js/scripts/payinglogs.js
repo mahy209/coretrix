@@ -109,9 +109,13 @@ app.controller("mainCtrl", function ($rootScope, $scope, sdk) {
   $scope.setBlurCookie = () => {
     setCookie('blurPaymentLogsTable', $scope.blurTable);
   }
-  $scope.search = () => {
-    if ($scope.searchText) {
-      var result = $scope.fuse.search($scope.searchText);
+  $scope.search = (query) => {
+    if (query) {
+      let result = $scope.loadedLogs.find(log => log.studentid == query);
+      $scope.searchText = result.fullname;
+      $scope.logs = [result];
+    } else if ($scope.searchText) {
+      let result = $scope.fuse.search($scope.searchText);
       $scope.logs = result;
     } else {
       $scope.logs = $scope.loadedLogs;

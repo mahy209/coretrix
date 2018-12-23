@@ -328,6 +328,13 @@ sdk.factory('sdk', ['$http', function ($http) {
     post("api/teacher/students/list", query, callback);
   }
 
+  function ListContacts(callback) {
+    var token = Cookies.get('token');
+    post("api/teacher/contacts/list", {
+      token
+    }, callback);
+  }
+
   function QRListStudents(grade, group, callback) {
     var token = Cookies.get('token');
     var query = {
@@ -1007,12 +1014,15 @@ sdk.factory('sdk', ['$http', function ($http) {
   function generatePrintingPageHtml(users) {
     var text = "";
     for (var i = 0; i < users.length; i++) {
-      text += `<div class="col s3"><img src=${users[i].link}></img><div style="display: inline-flex; text-align:right; width: 100%"><p style="width:100%">${users[i].name}<i style="float:left; margin-right: 2%">${users[i].code + ' - ' + users[i].id}</i></p></div></div>`;
+      text += `<div class="col s3"><img src=${users[i].link}></img><div style="display: inline-flex; text-align:right; width: 100%"><p style="width:100%">${users[i].name}<i style="float:left; margin-right: 2%">${users[i].code + ' - ' + users[i].idCode}</i></p></div></div>`;
     }
     return html.replace("<!--here-->", text);
   }
 
   function GenerateBarcodeA4PrintHTML(users, A4) {
+    console.log({
+      A4
+    });
     const barcodeHTML =
       `
     <html>
@@ -1164,6 +1174,7 @@ sdk.factory('sdk', ['$http', function ($http) {
     RefreshClaases: RefreshClaases,
     ListStartDates: ListStartDates,
     SetStartDate: SetStartDate,
-    CountGroupsLinks: CountGroupsLinks
+    CountGroupsLinks: CountGroupsLinks,
+    ListContacts,
   };
 }])

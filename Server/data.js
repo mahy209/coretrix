@@ -2158,6 +2158,24 @@ function qrListStudents(args, callback) {
   });
 }
 
+function listContacts(args, callback) {
+  if (!isTeacherRep(args.userDoc)) return callback(null, stats.IncapableUserType);
+
+  query = [{
+    $lookup: {
+      from: 'phones',
+      localField: identifier,
+      foreignField: foreignIdentifier,
+      as: 'contacts'
+    }
+  }];
+
+  db.collection("users").aggregate(query, (err, result) => {
+    if (err) callback(err);
+    callback(null, stats.OK, result);
+  });
+}
+
 function listStudents(args, callback) {
   if (!isTeacherRep(args.userDoc)) return callback(null, stats.IncapableUserType);
   var match_query = {
@@ -2865,11 +2883,6 @@ function listTeachers(args, callback) {
     if (err) callback(err);
     else callback(null, stats.OK, teachers);
   })
-}
-// datePeriod, teacherid
-function listStudentsCountLogs(args, callback) {
-
-  db.collection();
 }
 
 function logStudentsCount() {
@@ -4261,6 +4274,7 @@ module.exports = {
   RemoveGroup: removeGroup,
   LogExam: addExamLog,
   ListStudents: listStudents,
+  ListContacts: listContacts,
   CountStudents: countStudents,
   InitializeClass: initializeClass,
   DeleteClass: deleteClass,

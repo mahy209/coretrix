@@ -1117,21 +1117,25 @@ app.controller('studentsCtrl', function ($rootScope, $scope, sdk) {
   })
 
   function initializeSearch() {
-    sdk.ListStudents(0, 9999999, function (stat, response) {
+    sdk.ListStudents(0, 999999999, (stat, response) => {
+      if (stat == sdk.stats.OK) {
+        var options = {
+          shouldSort: true,
+          threshold: 0.2,
+          location: 0,
+          distance: 100,
+          maxPatternLength: 32,
+          minMatchCharLength: 1,
+          keys: [
+            "fullname",
+          ]
+        };
+        $rootScope.studentsIndexer = new Fuse([...response], options);
+      }
+    });
+    sdk.ListContacts(function (stat, response) {
       switch (stat) {
         case sdk.stats.OK:
-          var options = {
-            shouldSort: true,
-            threshold: 0.2,
-            location: 0,
-            distance: 100,
-            maxPatternLength: 32,
-            minMatchCharLength: 1,
-            keys: [
-              "fullname",
-            ]
-          };
-          $rootScope.studentsIndexer = new Fuse([...response], options);
           var result = response;
           if (result.length > 0) {
             var data = {}
@@ -2047,10 +2051,9 @@ app.controller('mainCtrl', function ($rootScope, $scope, sdk) {
     process(parsed.id);
   });
   $rootScope.barcodeObservers.push((id) => {
-    console.log({
-      id
-    });
-    process(id);
+    if ($rootScope.tab == 'home') {
+      process(id);
+    }
   });
   $scope.camera_changed = () => {
     if ($rootScope.camera_enabled) scanner.start($scope.selected_camera)
