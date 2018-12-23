@@ -983,15 +983,13 @@ sdk.factory('sdk', ['$http', function ($http) {
       token: token
     }, callback);
   }
-  var html = `<script>
-        function step1() {
-            setTimeout('step2()', 100);
-        }
-
-        function step2() {
-            window.print();
-            //window.close();
-        }
+  var html = `
+    <script type="text/javascript" src="/assets/js/libs/jquery-3.2.1.min.js"></script>
+    <script>
+      $(document).ready(() => { 
+        window.print();
+        window.close();
+      });
     </script>
     <link type="text/css" rel="stylesheet" href="/assets/css/materialize.min.css" media="all" />
     <style>
@@ -1054,7 +1052,7 @@ sdk.factory('sdk', ['$http', function ($http) {
         }
       </style>
       <script>
-      setTimeout(() => {
+      $(document).ready(() => {
         ${users.map(user => {
           return `
           JsBarcode('#barcode${user.id}', '${user.id}', {
@@ -1066,7 +1064,8 @@ sdk.factory('sdk', ['$http', function ($http) {
           `;
         }).join('')}
         window.print();
-      }, 1000);
+        window.close();
+      });
       </script>
     </head>
     
@@ -1133,14 +1132,16 @@ sdk.factory('sdk', ['$http', function ($http) {
         }
       </style>
       <script>
-      setTimeout(() => {
+      $(document).ready(() => {
         JsBarcode('#barcode', ${data.id}, {
           displayValue: false,
           height: 40,
           margin: 0,
           marginTop: 20,
         });
-      }, 1000);
+        window.print();
+        window.close();
+      })
       </script>
     </head>
     

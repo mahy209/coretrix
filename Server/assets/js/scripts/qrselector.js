@@ -72,10 +72,10 @@ app.controller("mainCtrl", function ($rootScope, $scope, sdk) {
     }
 
     function PrintImage(body) {
-      Pagelink = "about:blank";
-      var pwa = window.open(Pagelink, "_new");
+      var pwa = window.open();
       pwa.document.open();
       pwa.document.write(body);
+      pwa.document.close();
     }
 
     console.log($scope.selected_code_type);
