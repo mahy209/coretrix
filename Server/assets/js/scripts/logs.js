@@ -102,6 +102,20 @@ app.controller("mainCtrl", function ($rootScope, $scope, sdk) {
       }
     });
   }
+
+  $scope.barcodeAttendanceCheck = false;
+  barcodeScanner((code) => {
+    $scope.$apply(() => {
+      $scope.searchText = code;
+      $scope.search(code);
+      if ($scope.barcodeAttendanceCheck) {
+        setTimeout(() => {
+          $scope.logSearchedAttendance(null, true);
+        }, 100);
+      }
+    });
+  });
+
   $scope.compare = (a, b, option) => {
     switch (option) {
       case 'gt':
@@ -228,9 +242,9 @@ app.controller("mainCtrl", function ($rootScope, $scope, sdk) {
       }
     }
   }
-  $scope.logSearchedAttendance = (e) => {
-    if (e.keyCode == 13) {
-      $scope.logs[0].log.attendant = !$scope.logs[0].log.attendant;
+  $scope.logSearchedAttendance = (e, auto) => {
+    if (auto || e.keyCode == 13) {
+      $scope.logs[0].log.attendant = true;
       $scope.studentAttendanceChanged($scope.logs[0]);
     }
   }

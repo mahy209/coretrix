@@ -23,40 +23,40 @@
   <style>
 
     @media print {
-            table{
-                    width: 100%;
-                   margin: none;
-                   border: none;
-                   padding: none;
-            }
-             .logs td {
-                padding: 0;
-                border: none;
-            }
-             .logs th {
-                padding: 0;
-                border: none;
-                padding: 0;
-                margin: 0;
-                font-style: italic;
-                color: black;
-                box-shadow: none;
-                text-shadow: none;
-            }
-             .logs{
-                text-align: center;
-                font-size: smaller;
-                border: none;
-             }
-             .logs th:first-child{
-                box-shadow: none;
-                border: none;
-             }
-             .logs th:last-child{
-                box-shadow: none;
-                border: none;
-             }
-        }        
+      table{
+        width: 100%;
+        margin: none;
+        border: none;
+        padding: none;
+      }
+      .logs td {
+        padding: 0;
+        border: none;
+      }
+      .logs th {
+        padding: 0;
+        border: none;
+        padding: 0;
+        margin: 0;
+        font-style: italic;
+        color: black;
+        box-shadow: none;
+        text-shadow: none;
+      }
+      .logs{
+        text-align: center;
+        font-size: smaller;
+        border: none;
+      }
+      .logs th:first-child{
+        box-shadow: none;
+        border: none;
+      }
+      .logs th:last-child{
+        box-shadow: none;
+        border: none;
+      }
+    }        
     </style>
 </head>
 
@@ -184,13 +184,46 @@
             <input ng-model="globalAttendanceCheck" ng-change="setGlobalAttendance()" type="checkbox" id="globalAttendanceCheck" />
             <label for="globalAttendanceCheck"">حضور الكل</label>
           </div>
-          <div style="display: inline-block; margin-right: 16px;">
-            <input ng-model="barcodeAttendanceCheck" type="checkbox" id="barcodeAttendanceCheck" />
-            <label for="barcodeAttendanceCheck"">تسجيل الغياب بالباركود</label>
+          <div style=" display:
+              inline-block; margin-right: 16px;">
+              <input ng-model="barcodeAttendanceCheck" type="checkbox" id="barcodeAttendanceCheck" />
+              <label for="barcodeAttendanceCheck"">تسجيل الغياب بالباركود</label>
           </div>
         </div>
-        <div class=" logs logs-noblur
-            hide_on_mobile">
+        <div class="
+                logs logs-noblur hide_on_mobile">
+                <table class="animated slideInUp">
+                  <tr>
+                    <th>
+                      اسم الطالب
+                    </th>
+                    <th>
+                      الدرجة
+                    </th>
+                  </tr>
+                  <tr ng-repeat="n in logs" ng-show="!filterLogs || (filterLogs && ((filterMarkSelector=='lt' && n.log.mark < filterMark) || (filterMarkSelector=='eq' && n.log.mark == filterMark) || (filterMarkSelector=='gt' && n.log.mark > filterMark)))">
+                    <td style="width: 25%">
+                      <p style="display:inline;">
+                        <input type="checkbox" ng-model="n.log.attendant" ng-change="attendanceChanged(n)" id="cid{{n.studentid}}" />
+                        <label for="cid{{n.studentid}}">{{n.codeName}}</label>
+                        <i style="margin-right:3%">{{n.fullname}}</i>
+                      </p>
+                    </td>
+                    <td style="width: 20%">
+                      <p class="showonprint">{{n.log.mark ? (n.log.mark + ' / ' + selected_exam.max_mark) : 'لم تسجل
+                        درجة
+                        للطالب'}}</p>
+                      <div class="hideonprint" style="display: inline-flex">
+                        <input ng-init="n.log.mark = n.log.mark ? n.log.mark : 0" type="number" ng-model="n.log.mark"
+                          ng-blur="markChanged(n)">
+                        <p style="width: 100%; margin-right: 8%; direction: ltr; font-size: larger;">{{selected_exam.max_mark}}
+                          من</p>
+                      </div>
+                    </td>
+                  </tr>
+                </table>
+          </div>
+          <div class="logs logs-noblur only_on_mobile">
             <table class="animated slideInUp">
               <tr>
                 <th>
@@ -200,82 +233,52 @@
                   الدرجة
                 </th>
               </tr>
-              <tr ng-repeat="n in logs" ng-show="!filterLogs || (filterLogs && ((filterMarkSelector=='lt' && n.log.mark < filterMark) || (filterMarkSelector=='eq' && n.log.mark == filterMark) || (filterMarkSelector=='gt' && n.log.mark > filterMark)))">
-                <td style="width: 25%">
+              <tr ng-repeat="n in logs">
+                <td style="width:70%;">
                   <p style="display:inline;">
                     <input type="checkbox" ng-model="n.log.attendant" ng-change="attendanceChanged(n)" id="cid{{n.studentid}}" />
                     <label for="cid{{n.studentid}}">{{n.codeName}}</label>
-                    <i style="margin-right:3%">{{n.fullname}}</i>
+                    <i>{{n.fullname}}</i>
                   </p>
                 </td>
-                <td style="width: 20%">
+                <td>
                   <p class="showonprint">{{n.log.mark ? (n.log.mark + ' / ' + selected_exam.max_mark) : 'لم تسجل درجة
                     للطالب'}}</p>
                   <div class="hideonprint" style="display: inline-flex">
                     <input ng-init="n.log.mark = n.log.mark ? n.log.mark : 0" type="number" ng-model="n.log.mark"
                       ng-blur="markChanged(n)">
-                    <p style="width: 100%; margin-right: 8%; direction: ltr; font-size: larger;">{{selected_exam.max_mark}}
-                      من</p>
+                    <p style="width: 100%; direction: ltr; font-size: larger;">{{selected_exam.max_mark}} /</p>
                   </div>
                 </td>
               </tr>
             </table>
-        </div>
-        <div class="logs logs-noblur only_on_mobile">
-          <table class="animated slideInUp">
-            <tr>
-              <th>
-                اسم الطالب
-              </th>
-              <th>
-                الدرجة
-              </th>
-            </tr>
-            <tr ng-repeat="n in logs">
-              <td style="width:70%;">
-                <p style="display:inline;">
-                  <input type="checkbox" ng-model="n.log.attendant" ng-change="attendanceChanged(n)" id="cid{{n.studentid}}" />
-                  <label for="cid{{n.studentid}}">{{n.codeName}}</label>
-                  <i>{{n.fullname}}</i>
-                </p>
-              </td>
-              <td>
-                <p class="showonprint">{{n.log.mark ? (n.log.mark + ' / ' + selected_exam.max_mark) : 'لم تسجل درجة
-                  للطالب'}}</p>
-                <div class="hideonprint" style="display: inline-flex">
-                  <input ng-init="n.log.mark = n.log.mark ? n.log.mark : 0" type="number" ng-model="n.log.mark" ng-blur="markChanged(n)">
-                  <p style="width: 100%; direction: ltr; font-size: larger;">{{selected_exam.max_mark}} /</p>
-                </div>
-              </td>
-            </tr>
-          </table>
-        </div>
+          </div>
 
+        </div>
       </div>
-    </div>
-    <!--Import jQuery before materialize.js-->
-    <script type="text/javascript" src="/assets/js/libs/jquery-3.2.1.min.js"></script>
-    <script type="text/javascript" src="/assets/js/libs/bootstrap-datepicker.min.js"></script>
-    <script type="text/javascript" src="/assets/js/libs/materialize.min.js"></script>
-    <script type="text/javascript">
-      $(document).ready(function () {
-        $('.modal').modal();
-        $('.tooltipped').tooltip({
-          delay: 50
+      <!--Import jQuery before materialize.js-->
+      <script type="text/javascript" src="/assets/js/libs/jquery-3.2.1.min.js"></script>
+      <script type="text/javascript" src="/assets/js/libs/bootstrap-datepicker.min.js"></script>
+      <script type="text/javascript" src="/assets/js/libs/materialize.min.js"></script>
+      <script type="text/javascript">
+        $(document).ready(function () {
+          $('.modal').modal();
+          $('.tooltipped').tooltip({
+            delay: 50
+          });
+          $(".btn_switch").click(function () {
+            $("#exam_selector").slideToggle("slow");
+          });
         });
-        $(".btn_switch").click(function () {
-          $("#exam_selector").slideToggle("slow");
+        s1 = $("#selector_1");
+        b1 = $("#btn_selector_1");
+        b1.click(function () {
+          s1.slideToggle("slow");
         });
-      });
-      s1 = $("#selector_1");
-      b1 = $("#btn_selector_1");
-      b1.click(function () {
-        s1.slideToggle("slow");
-      });
-      $("#exam_selector").css("display", "none");
-      $("#selector_1").css("display", "none");
-    </script>
-    <script type="text/javascript" src="/assets/js/scripts/selectonfocus.js"></script>
+        $("#exam_selector").css("display", "none");
+        $("#selector_1").css("display", "none");
+      </script>
+      <script type="text/javascript" src="/assets/js/scripts/selectonfocus.js"></script>
 </body>
 
 </html>
