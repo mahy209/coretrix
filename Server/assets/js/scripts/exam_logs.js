@@ -122,22 +122,24 @@ app.controller("mainCtrl", function ($rootScope, $scope, sdk) {
       toast('ﻻ توجد سجلات ليتم طباعتها!', gradients.error);
     }
   }
-  $scope.search = () => {
-    if ($scope.searchText) {
-      var options = {
-        shouldSort: true,
-        threshold: 0.2,
-        location: 0,
-        distance: 100,
-        maxPatternLength: 32,
-        minMatchCharLength: 1,
-        keys: [
-          "fullname",
-          "codeName"
-        ]
-      };
-      var fuse = new Fuse($scope.loadedLogs, options);
-      var result = fuse.search($scope.searchText);
+  $scope.barcodeAttendanceCheck = false;
+  barcodeScanner((code) => {
+    $scope.$apply(() => {
+      $scope.searchText = code;
+      $scope.search(code);
+      if ($scope.barcodeAttendanceCheck) {
+        setTimeout(() => {
+          $scope.logSearchedAttendance(null, true);
+        }, 100);
+      }
+    });
+  });
+  $scope.search = (query) => {
+    if (!query) {
+      query = $scope.searchText;
+    }
+    if (query) {
+      var result = $scope.fuse.search(query);
       $scope.logs = result;
     } else {
       $scope.logs = $scope.loadedLogs;
@@ -152,6 +154,19 @@ app.controller("mainCtrl", function ($rootScope, $scope, sdk) {
           logs[i].codeName = idToCode(logs[i].studentid);
         }
         $scope.loadedLogs = logs;
+        var options = {
+          shouldSort: true,
+          threshold: 0.2,
+          location: 0,
+          distance: 100,
+          maxPatternLength: 32,
+          minMatchCharLength: 1,
+          keys: [
+            "fullname",
+            "codeName"
+          ]
+        };
+        $scope.fuse = new Fuse(logs, options);
         $scope.logs = logs;
       }
     });
@@ -212,9 +227,9 @@ app.controller("mainCtrl", function ($rootScope, $scope, sdk) {
       toast('تعذر تعديل درجة الطالب!', gradients.error);
     }
   }
-  $scope.logSearchedAttendance = (e) => {
-    if (e.keyCode == 13) {
-      $scope.logs[0].log.attendant = !$scope.logs[0].log.attendant;
+  $scope.logSearchedAttendance = (e, auto) => {
+    if (auto || e.keyCode == 13) {
+      $scope.logs[0].log.attendant = true;
       $scope.attendanceChanged($scope.logs[0]);
     }
   }
