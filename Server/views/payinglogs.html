@@ -3,285 +3,197 @@
 
 <head>
   <meta charset="utf-8">
-  <meta name="viewport"
-    content="width=device-width, initial-scale=1.0" />
-  <link type="text/css"
-    rel="stylesheet"
-    href="/assets/css/materialize.min.css"
-    media="all" />
-  <link type="text/css"
-    rel="stylesheet"
-    href="/assets/css/font-awesome.min.css" />
-  <link type="text/css"
-    rel="stylesheet"
-    href="/assets/css/bootstrap-datepicker.standalone.min.css" />
-  <script type="text/javascript"
-    src="/assets/js/libs/angular/angular.min.js"></script>
-  <script type="text/javascript"
-    src="/assets/js/libs/fuse.min.js"></script>
-  <script type="text/javascript"
-    src="/assets/js/libs/js.cookie.js"></script>
-  <link type="text/css"
-    rel="stylesheet"
-    href="/assets/css/animate.min.css" />
-  <link media="all"
-    type="text/css"
-    rel="stylesheet"
-    href="../assets/css/report-page.css">
-  <link media="all"
-    type="text/css"
-    rel="stylesheet"
-    href="../assets/css/style.css">
-  <script type="text/javascript"
-    src="/assets/js/libs/library.js"></script>
-  <script type="text/javascript"
-    src="/assets/js/scripts/helpers.js"></script>
-  <script type="text/javascript"
-    src="/assets/js/scripts/liveorlocal.js"></script>
-  <script type="text/javascript"
-    src="/assets/js/scripts/sdk.js"></script>
-  <script type="text/javascript"
-    src="/assets/js/scripts/payinglogs.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link type="text/css" rel="stylesheet" href="/assets/css/materialize.min.css" media="all" />
+  <link type="text/css" rel="stylesheet" href="/assets/css/font-awesome.min.css" />
+  <link type="text/css" rel="stylesheet" href="/assets/css/bootstrap-datepicker.standalone.min.css" />
+  <script type="text/javascript" src="/assets/js/libs/barcode-scanner.js"></script>
+  <script type="text/javascript" src="/assets/js/libs/angular/angular.min.js"></script>
+  <script type="text/javascript" src="/assets/js/libs/fuse.min.js"></script>
+  <script type="text/javascript" src="/assets/js/libs/js.cookie.js"></script>
+  <link type="text/css" rel="stylesheet" href="/assets/css/animate.min.css" />
+  <link media="all" type="text/css" rel="stylesheet" href="../assets/css/report-page.css">
+  <link media="all" type="text/css" rel="stylesheet" href="../assets/css/style.css">
+  <script type="text/javascript" src="/assets/js/libs/library.js"></script>
+  <script type="text/javascript" src="/assets/js/scripts/helpers.js"></script>
+  <script type="text/javascript" src="/assets/js/scripts/liveorlocal.js"></script>
+  <script type="text/javascript" src="/assets/js/scripts/sdk.js"></script>
+  <script type="text/javascript" src="/assets/js/scripts/payinglogs.js"></script>
 </head>
 
-<body ng-app="coretrix"
-  class="grey lighten-2"
-  style="direction: rtl;">
+<body ng-app="coretrix" class="grey lighten-2" style="direction: rtl;">
 
   <head>
     <title>{{title}}</title>
   </head>
-  <div class="container"
-    ng-controller="mainCtrl">
+  <div class="container" ng-controller="mainCtrl">
     <div class="showonprint">
       <h2 class="center-align">الحسابات</h2>
       <h6 class="center-align">{{'الصف ' + grades_names[selected_grade]}}</h6>
       <h6 class="center-align">{{selected_item.name}}</h6>
     </div>
-    <div class="row"
-      style="margin-top: 3%;">
-      <div class="col s12 l8"
-        style="float:right;">
+    <div class="row" style="margin-top: 3%;">
+      <div class="col s12 l8" style="float:right;">
         <div class="card-panel hide_on_mobile hideonprint animated slideInDown">
           <h4 class="center-align">إختيار الوحدة</h4>
           <label>السنه الدراسيه</label>
-          <select class="browser-default"
-            ng-options="i as grades_names[i] for i in grades"
-            ng-change="grade_changed()"
+          <select class="browser-default" ng-options="i as grades_names[i] for i in grades" ng-change="grade_changed()"
             ng-model="selected_grade">
-            <option value=""
-              disabled
-              selected>السنه</option>
+            <option value="" disabled selected>السنه</option>
           </select>
           <label>المجموعة</label>
           <div style="display: flex; align-items: baseline;">
-            <select class="browser-default"
-              style="margin-left: 12px"
-              ng-options="i as i.name for i in groups"
-              ng-model="selected_group">
-              <option value=""
-                disabled
-                selected>المجموعة</option>
+            <select class="browser-default" style="margin-left: 12px" ng-options="i as i.name for i in groups" ng-model="selected_group">
+              <option value="" disabled selected>المجموعة</option>
             </select>
-            <button ng-click="selected_group = null"
-              class="waves-effect waves-light blue-grey btn">
+            <button ng-click="selected_group = null" class="waves-effect waves-light blue-grey btn">
               <i class="fa fa-trash"></i></i>
             </button>
           </div>
           <label>النوع</label>
-          <select class="browser-default"
-            ng-options="i as itemCategoryNames[i] for i in categories"
-            ng-model="selected_category">
-            <option value=""
-              disabled
-              selected>اختر النوع</option>
+          <select class="browser-default" ng-options="i as itemCategoryNames[i] for i in categories" ng-model="selected_category">
+            <option value="" disabled selected>اختر النوع</option>
           </select>
           <label>الوحدة</label>
-          <select class="browser-default"
-            ng-change="reload()"
-            ng-options="i as i.name for i in items[selected_category]"
+          <select class="browser-default" ng-change="reload()" ng-options="i as i.name for i in items[selected_category]"
             ng-model="selected_item">
-            <option value=""
-              disabled
-              selected>اختر الوحدة</option>
+            <option value="" disabled selected>اختر الوحدة</option>
           </select>
           <label>السعر</label>
           <p>{{selected_item ? selected_item.price : 'لم يتم اختيار اى وحدات'}}</p>
           <div style="margin-top:2%;">
-            <button ng-click="prepareItemDel()"
-              style="margin-left:0.5%"
-              class="btn btn-red-background btn tooltipped"
-              data-position="bottom"
-              data-tooltip="امسح الوحدة">
-              <i class="fa fa-trash"
-                aria-hidden="true"></i>
+            <button ng-click="prepareItemDel()" style="margin-left:0.5%" class="btn btn-red-background btn tooltipped"
+              data-position="bottom" data-tooltip="امسح الوحدة">
+              <i class="fa fa-trash" aria-hidden="true"></i>
             </button>
-            <button href="#addItem_modal"
-              style="margin-left:0.5%"
-              class="btn gradient3 modal-trigger btn tooltipped"
-              data-position="bottom"
-              data-tooltip="أضف وحدة">
-              <i class="fa fa-plus-square"
-                aria-hidden="true"></i>
+            <button href="#addItem_modal" style="margin-left:0.5%" class="btn gradient3 modal-trigger btn tooltipped"
+              data-position="bottom" data-tooltip="أضف وحدة">
+              <i class="fa fa-plus-square" aria-hidden="true"></i>
             </button>
-            <button ng-click="printPage()"
-              style="left: 0;"
-              class="btn blue-grey-background">إطبع</button>
+            <button ng-click="printPage()" style="left: 0;" class="btn blue-grey-background">إطبع</button>
           </div>
         </div>
       </div>
-      <div class="col s12 l4"
-        style="float: left;">
+      <div class="col s12 l4" style="float: left;">
         <div class="card-panel hide_on_mobile hideonprint animated slideInDown">
           <h4 class="center-align">تصفية</h4>
           <label>المبلغ المدفوع</label>
-          <select class="browser-default"
-            ng-options="i as {all:'الكل',payed: 'دفع', notpayed: 'لم يدفع', payedmore: 'دفع أكثر من سعرها', payedless: 'دفع أقل من سعرها'}[i] for i in ['all','payed', 'notpayed', 'payedless','payedmore']"
+          <select class="browser-default" ng-options="i as {all:'الكل',payed: 'دفع', notpayed: 'لم يدفع', payedmore: 'دفع أكثر من سعرها', payedless: 'دفع أقل من سعرها'}[i] for i in ['all','payed', 'notpayed', 'payedless','payedmore']"
             ng-model="selectedFilter">
           </select>
         </div>
       </div>
     </div>
-    <div id="deleteItem_modal"
-      class="modal">
+    <div id="deleteItem_modal" class="modal">
       <div class="modal-content gradient">
         <h4>هل تريد حذف الوحدة؟</h4>
         <p>عند الحذف ﻻ يمكنك إسترجاع البانات مره اخرى</p>
       </div>
       <div class="modal-footer gradient2">
-        <a ng-click="delete_item()"
-          class="modal-action modal-close waves-effect waves-green btn-flat">اوافق</a>
+        <a ng-click="delete_item()" class="modal-action modal-close waves-effect waves-green btn-flat">اوافق</a>
         <a class="modal-action modal-close waves-effect waves-red btn-flat">إلغاء</a>
       </div>
     </div>
-    <div id="addItem_modal"
-      class="modal animated slideInDown">
+    <div id="addItem_modal" class="modal animated slideInDown">
       <div class="modal-content">
         <div>
           <div class="row">
             <div class="col s12">
               <label>الاسم</label>
-              <input type="text"
-                ng-model="new_item_name">
+              <input type="text" ng-model="new_item_name">
             </div>
             <div class="col s12">
               <label>اختر السنه</label>
-              <select class="browser-default"
-                ng-options="i as grades_names[i] for i in grades"
-                ng-model="add_selected_grade">
-                <option value=""
-                  disabled
-                  selected>السنه</option>
+              <select class="browser-default" ng-options="i as grades_names[i] for i in grades" ng-model="add_selected_grade">
+                <option value="" disabled selected>السنه</option>
               </select>
             </div>
             <div class="col s12">
               <label>النوع</label>
-              <select class="browser-default"
-                ng-options="i as itemCategoryNames[i] for i in itemCategories"
-                ng-model="selected_category">
-                <option value=""
-                  disabled
-                  selected>النوع</option>
+              <select class="browser-default" ng-options="i as itemCategoryNames[i] for i in itemCategories" ng-model="selected_category">
+                <option value="" disabled selected>النوع</option>
               </select>
             </div>
             <div class="col s12">
               <label>السعر</label>
-              <input type="number"
-                min="0"
-                style="padding-right: 1%"
-                ng-model="new_item_price"></input>
+              <input type="number" min="0" style="padding-right: 1%" ng-model="new_item_price"></input>
             </div>
           </div>
           <div class="modal-footer gradient2">
-            <a ng-click="addItem()"
-              class="waves-effect waves-green btn-flat">اضف</a>
+            <a ng-click="addItem()" class="waves-effect waves-green btn-flat">اضف</a>
             <a class="modal-action modal-close waves-effect waves-red btn-flat">إلغاء</a>
           </div>
         </div>
       </div>
     </div>
     <div class="col s7 offset-s3 animated slideInUp hideonprint">
-      <div class="col">
-        <input ng-model="searchText"
-          ng-keypress="logSearchedPayment($event)"
-          ng-change="search()"
-          class="autocomplete searchitem"
-          style="padding-right: 1%; /* for the text */"
-          placeholder="ابحث عن طالب"
-          id="searchStudents"
-          type="search"
+      <div class="col s12">
+        <input ng-model="searchText" ng-keypress="logSearchedPayment($event)" ng-change="search()" class="autocomplete searchitem"
+          style="padding-right: 1%; /* for the text */" placeholder="ابحث عن طالب" id="searchStudents" type="search"
           required>
       </div>
+      <div class="col s12">
+        <input ng-model="barcodePayCheck" type="checkbox" id="barcodePayCheck" />
+        <label for="barcodePayCheck"">الدفع بالباركود</label>
+      </div>
     </div>
-    <div class="logs logs-noblur">
-      <table class="animated slideInUp">
-        <tr>
-          <th>
-            اسم الطالب
-          </th>
-          <th>
-            المبلغ المدفوع
-          </th>
-          <th>
-            التخفيض
-          </th>
-          <th>
-            تاريخ الدفع
-          </th>
-        </tr>
-        <tr ng-repeat="n in logs"
-          ng-show="(selected_group ? n.group == selected_group.id : true) && ((selectedFilter=='all')  || (selectedFilter=='payed' && (n.log.payed + n.log.discount == selected_item.price)) || (selectedFilter=='notpayed' && (!n.log.payed) && (n.log.payed + n.log.discount != selected_item.price)) || (selectedFilter=='payedmore' && (n.log.payed + n.log.discount > selected_item.price)) || (selectedFilter=='payedless' && (n.log.payed + n.log.discount < selected_item.price) && (n.log.payed + n.log.discount != 0)))">
-          <td style="width: 30%">
-            <label>{{n.codeName}}</label>
-            <i style="margin-right:3%; margin-left: 3%">{{n.fullname}}</i>
-            <!--i class="hideonprint" ng-class="n.payClass">{{n.payText}}</i>
+    <div class="
+          logs logs-noblur">
+          <table class="animated slideInUp">
+            <tr>
+              <th>
+                اسم الطالب
+              </th>
+              <th>
+                المبلغ المدفوع
+              </th>
+              <th>
+                التخفيض
+              </th>
+              <th>
+                تاريخ الدفع
+              </th>
+            </tr>
+            <tr ng-repeat="n in logs" ng-show="(selected_group ? n.group == selected_group.id : true) && ((selectedFilter=='all')  || (selectedFilter=='payed' && (n.log.payed + n.log.discount == selected_item.price)) || (selectedFilter=='notpayed' && (!n.log.payed) && (n.log.payed + n.log.discount != selected_item.price)) || (selectedFilter=='payedmore' && (n.log.payed + n.log.discount > selected_item.price)) || (selectedFilter=='payedless' && (n.log.payed + n.log.discount < selected_item.price) && (n.log.payed + n.log.discount != 0)))">
+              <td style="width: 30%">
+                <label>{{n.codeName}}</label>
+                <i style="margin-right:3%; margin-left: 3%">{{n.fullname}}</i>
+                <!--i class="hideonprint" ng-class="n.payClass">{{n.payText}}</i>
                         <i ng-class="n.payClass" class="fa fa-info-circle hideonprint" style="margin-right: 1%" ng-show="n.payClass"></i-->
-          </td>
-          <td style="width: 35%">
-            <div>
-              <div class="hideonprint">
-                <input type="number"
-                  ng-model="n.log.payed"
-                  ng-blur="payedAmountChanged(n)">
-              </div>
-              <p class="showonprint"
-                ng-class="n.payClass">{{n.payText}}
-                <i class="fa fa-info-circle"
-                  style="margin-right: 1%"
-                  ng-show="n.payClass"></i>
-              </p>
-            </div>
-          </td>
-          <td style="width: 15%">
-            <p class="showonprint">{{n.log.discount}}</p>
-            <input class="hideonprint"
-              type="number"
-              ng-model="n.log.discount"
-              ng-blur="discountChanged(n)">
-          </td>
-          <td style="width: 20%">
-            <p>{{n.log.date}}</p>
-          </td>
-        </tr>
-      </table>
-    </div>
-    <!--Import jQuery before materialize.js-->
-    <script type="text/javascript"
-      src="/assets/js/libs/jquery-3.2.1.min.js"></script>
-    <script type="text/javascript"
-      src="/assets/js/libs/materialize.min.js"></script>
-    <script type="text/javascript"
-      src="/assets/js/libs/bootstrap-datepicker.min.js"></script>
-    <script type="text/javascript">
-      $(document).ready(function () {
-        $('.modal').modal();
-        $('.tooltipped').tooltip({
-          delay: 50
+              </td>
+              <td style="width: 35%">
+                <div>
+                  <div class="hideonprint">
+                    <input type="number" ng-model="n.log.payed" ng-blur="payedAmountChanged(n)">
+                  </div>
+                  <p class="showonprint" ng-class="n.payClass">{{n.payText}}
+                    <i class="fa fa-info-circle" style="margin-right: 1%" ng-show="n.payClass"></i>
+                  </p>
+                </div>
+              </td>
+              <td style="width: 15%">
+                <p class="showonprint">{{n.log.discount}}</p>
+                <input class="hideonprint" type="number" ng-model="n.log.discount" ng-blur="discountChanged(n)">
+              </td>
+              <td style="width: 20%">
+                <p>{{n.log.date}}</p>
+              </td>
+            </tr>
+          </table>
+      </div>
+      <!--Import jQuery before materialize.js-->
+      <script type="text/javascript" src="/assets/js/libs/jquery-3.2.1.min.js"></script>
+      <script type="text/javascript" src="/assets/js/libs/materialize.min.js"></script>
+      <script type="text/javascript" src="/assets/js/libs/bootstrap-datepicker.min.js"></script>
+      <script type="text/javascript">
+        $(document).ready(function () {
+          $('.modal').modal();
+          $('.tooltipped').tooltip({
+            delay: 50
+          });
         });
-      });
-    </script>
-    <script type="text/javascript"
-      src="/assets/js/scripts/selectonfocus.js"></script>
+      </script>
+      <script type="text/javascript" src="/assets/js/scripts/selectonfocus.js"></script>
 </body>
 
 </html>

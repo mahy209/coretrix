@@ -111,27 +111,26 @@ app.controller("mainCtrl", function ($rootScope, $scope, sdk) {
   }
   $scope.search = () => {
     if ($scope.searchText) {
-      var options = {
-        shouldSort: true,
-        threshold: 0.2,
-        location: 0,
-        distance: 100,
-        maxPatternLength: 32,
-        minMatchCharLength: 1,
-        keys: [
-          "fullname",
-          "codeName"
-        ]
-      };
-      var fuse = new Fuse($scope.loadedLogs, options);
-      var result = fuse.search($scope.searchText);
+      var result = $scope.fuse.search($scope.searchText);
       $scope.logs = result;
     } else {
       $scope.logs = $scope.loadedLogs;
     }
   }
-  $scope.logSearchedPayment = (e) => {
-    if (e.keyCode == 13) {
+  $scope.barcodePayCheck = false;
+  barcodeScanner((code) => {
+    $scope.$apply(() => {
+      $scope.searchText = code;
+      $scope.search(code);
+      if ($scope.barcodePayCheck) {
+        setTimeout(() => {
+          $scope.logSearchedPayment(null, true);
+        }, 100);
+      }
+    });
+  });
+  $scope.logSearchedPayment = (e, auto) => {
+    if (auto || e.keyCode == 13) {
       $scope.logs[0].log.payed = $scope.selected_item.price - $scope.logs[0].log.discount;
       $scope.payedAmountChanged($scope.logs[0]);
     }
@@ -256,6 +255,19 @@ app.controller("mainCtrl", function ($rootScope, $scope, sdk) {
             }
           }
         }
+        var options = {
+          shouldSort: true,
+          threshold: 0.2,
+          location: 0,
+          distance: 100,
+          maxPatternLength: 32,
+          minMatchCharLength: 1,
+          keys: [
+            "fullname",
+            "codeName"
+          ]
+        };
+        $scope.fuse = new Fuse(logs, options);
         $scope.loadedLogs = logs;
         $scope.logs = logs;
       }
@@ -272,6 +284,7 @@ app.controller("mainCtrl", function ($rootScope, $scope, sdk) {
       if (stat == sdk.stats.OK) {
         $scope.grade_changed();
         $scope.loadedLogs = null;
+        $scope.fuse = new Fuse([], {});
         $scope.logs = null;
         toast('تم حذف الوحدة!');
       }
