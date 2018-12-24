@@ -1956,8 +1956,8 @@ app.controller('mainCtrl', function ($rootScope, $scope, sdk) {
   $scope.selectedLogger = 'class'
 
   function process(id) {
-    if (!$scope.selected_group && $scope.selectedLogger == 'class') return toast('برجاء إختيار المجموعة!', gradients.error)
     if (!$scope.selected_class && $scope.selectedLogger == 'class') return toast('برجاء إختيار الحصة!', gradients.error)
+    if (!$scope.selected_group && $scope.selectedLogger == 'class') return toast('برجاء إختيار المجموعة!', gradients.error)
     if (!$scope.selected_exam && $scope.selectedLogger == 'exam') return toast('برجاء إختيار الامتحان!', gradients.error)
     $scope.studentid = id
     $scope.cancelled = false
@@ -1977,7 +1977,7 @@ app.controller('mainCtrl', function ($rootScope, $scope, sdk) {
             const exam = result.exams[i]
             if (exam.id == $scope.selected_exam.id) {
               $scope.currentExam = exam
-              delete result.exams[i]
+              result.exams.splice(i, 1);
             }
           }
         }
@@ -1986,12 +1986,15 @@ app.controller('mainCtrl', function ($rootScope, $scope, sdk) {
             const cc = result.classes[i]
             if (cc.id == $scope.selected_class.id) {
               $scope.currentClass = cc
-              delete result.classes[i]
+              result.classes.splice(i, 1);
             }
           }
         }
         $scope.last_exams = result.exams
         $scope.last_classes = result.classes
+        console.log({
+          result
+        });
         if ($scope.selectedLogger == 'class') {
           if (result.data.group_id != $scope.selected_group.id) {
             $rootScope.overlayStatus = 'مجموعة أخرى!'

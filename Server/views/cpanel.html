@@ -142,12 +142,6 @@
           <!-- will be hidden in mobile -->
           <div class="row">
             <div class="col l6 m6 s12">
-              <div class="card-panel " ng-class="tolog_name == 'اسم الطالب' ? 'grey-text' : ''">
-                <h5>{{tolog_name}}</h5>
-              </div>
-              <div class="card-panel " ng-class="toLogGroup == 'مجموعة الطالب' ? 'grey-text' : ''">
-                <h5>{{toLogGroup}}</h5>
-              </div>
               <div class="card-panel center-align">
                 <button ng-click="toggleLog()" class="btn blue-grey-background btn tooltipped" data-position="top"
                   data-delay="50" data-tooltip="تبديل غياب الطالب">
@@ -183,6 +177,12 @@
                 </div>
 
               </div>
+              <div class="card-panel " ng-class="tolog_name == 'اسم الطالب' ? 'grey-text' : ''">
+                  <h5>{{tolog_name}}</h5>
+                </div>
+                <div class="card-panel " ng-class="toLogGroup == 'مجموعة الطالب' ? 'grey-text' : ''">
+                  <h5>{{toLogGroup}}</h5>
+                </div>
             </div>
             <div class="col l6 m6 s12">
               <div class="card-panel blue-grey ">
@@ -208,6 +208,47 @@
             </div>
           </div>
           <div class="row">
+            <div class="col l12 s12">
+              <div class="card-panel" style="transition: all 0.2s">
+                <div class="row">
+                  <div class="col m3 l3 s12">
+                    <h6 class="center-align flow-text">امتحان</h6>
+                    <div ng-show="l" ng-class="(l.log[0].mark > l.redline && l.log[0].attendant) ? 'green-text' : ((l.log[0].mark || l.log[0].mark == 0) ? 'red' : '')"
+                      class="card-panel white-text blue-grey" ng-repeat="l in last_exams">
+                      {{l.log[0].attendant ? l.name + ': ' : ''}} {{l.log[0] ? (l.log[0].mark || l.log[0].mark == 0) ?
+                      (l.log[0].mark + '/' + l.max_mark)
+                      : 'لم تسجل درجة الطالب' : 'لم يحضر'}}
+                    </div>
+                  </div>
+                  <div class="col m3 l3 s12">
+                    <h6 class="center-align flow-text">تسميع</h6>
+                    <div ng-repeat="l in last_classes" class="card-panel white-text" ng-class="l.log[0].quiz.option =='absent' ? 'red' : 'blue-grey'">
+                      {{l.log[0].quiz ? (l.log[0].quiz.type == 'marks' ? l.log[0].quiz.mark + '/' + l.log[0].quiz.max :
+                      (l.log[0].quiz.option ==
+                      'absent' ? 'لم يسمّع' : 'سمّع')) : 'لم تسجل درجة تسميع'}}
+                    </div>
+                  </div>
+                  <!-- <div class="col m3 l3 s12"> we dont need it
+                                            <h6 class="center-align flow-text" >الواجب</h6>
+                                            <div ng-repeat="l in last_classes" class="card-panel blue-grey white-text">
+                                                {{l.homework ? (l.homework.type == 'marks' ? l.homework.mark + '/' + l.homework.max : (l.homework.option == 'incomplete' ? 'غير مكتمل' : 'كامل')) : 'لا يوجد واجب'}}
+                                            </div>
+                                        </div> -->
+                  <div class="col m3 l3 s12">
+                    <h6 class="center-align flow-text">الحضور</h6>
+                    <div ng-repeat="n in last_classes" class="card-panel white-text" ng-class="n.log[0].attendant ? 'green' : 'red'">
+                      {{n.log[0].attendant ? 'حضر' : 'لم يحضر'}}
+                    </div>
+                  </div>
+                  <div class="col m3 l3 s12">
+                    <h6 class="center-align flow-text" style="margin-bottom:6%;">الحصة</h6>
+                    <div class="card-panel blue-grey white-text" ng-repeat="l in last_classes">
+                      {{l.date}} {{ l.classnum >= 0 ? 'الحصة -' : ''}} {{NumericOrderStrings[l.classnum]}}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
             <div class="col l6 s12">
               <!-- current exam -->
               <div class="card-panel " style="transition: all 0.2s">
@@ -268,47 +309,7 @@
                 </div>
               </div>
             </div>
-            <div class="col l12 s12">
-              <div class="card-panel" style="transition: all 0.2s">
-                <div class="row">
-                  <div class="col m3 l3 s12">
-                    <h6 class="center-align flow-text">امتحان</h6>
-                    <div ng-show="l" ng-class="(l.log[0].mark > l.redline && l.log[0].attendant) ? 'green-text' : ((l.log[0].mark || l.log[0].mark == 0) ? 'red' : '')"
-                      class="card-panel white-text blue-grey" ng-repeat="l in last_exams">
-                      {{l.log[0].attendant ? l.name + ': ' : ''}} {{l.log[0] ? (l.log[0].mark || l.log[0].mark == 0) ?
-                      (l.log[0].mark + '/' + l.max_mark)
-                      : 'لم تسجل درجة الطالب' : 'لم يحضر'}}
-                    </div>
-                  </div>
-                  <div class="col m3 l3 s12">
-                    <h6 class="center-align flow-text">تسميع</h6>
-                    <div ng-show="l.log[0]" ng-repeat="l in last_classes" class="card-panel white-text" ng-class="l.log[0].quiz.option =='absent' ? 'red' : 'blue-grey'">
-                      {{l.log[0].quiz ? (l.log[0].quiz.type == 'marks' ? l.log[0].quiz.mark + '/' + l.log[0].quiz.max :
-                      (l.log[0].quiz.option ==
-                      'absent' ? 'لم يسمّع' : 'سمّع')) : 'لم تسجل درجة تسميع'}}
-                    </div>
-                  </div>
-                  <!-- <div class="col m3 l3 s12"> we dont need it
-                                        <h6 class="center-align flow-text" >الواجب</h6>
-                                        <div ng-repeat="l in last_classes" class="card-panel blue-grey white-text">
-                                            {{l.homework ? (l.homework.type == 'marks' ? l.homework.mark + '/' + l.homework.max : (l.homework.option == 'incomplete' ? 'غير مكتمل' : 'كامل')) : 'لا يوجد واجب'}}
-                                        </div>
-                                    </div> -->
-                  <div class="col m3 l3 s12">
-                    <h6 class="center-align flow-text">الحضور</h6>
-                    <div ng-show="n.log[0]" ng-repeat="n in last_classes" class="card-panel white-text" ng-class="n.log[0].attendant ? 'green' : 'red'">
-                      {{n.log[0].attendant ? 'حضر' : 'لم يحضر'}}
-                    </div>
-                  </div>
-                  <div class="col m3 l3 s12">
-                    <h6 class="center-align flow-text" style="margin-bottom:6%;">الحصة</h6>
-                    <div ng-show="l.log[0]" class="card-panel blue-grey white-text" ng-repeat="l in last_classes">
-                      {{l.date}} - الحصة {{NumericOrderStrings[l.classnum]}}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+
           </div>
           <div class="row">
             <div class="col s12">

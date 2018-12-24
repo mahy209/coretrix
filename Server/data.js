@@ -3866,21 +3866,13 @@ function briefLog(args, callback) {
         date: -1
       }
     }, {
-      $limit: 2
-    }, {
-      $lookup: {
-        from: 'logs',
-        localField: 'id',
-        foreignField: 'classid',
-        as: 'log'
-      }
+      $limit: 4
     }, {
       $project: {
         _id: 0,
         id: 1,
         date: 1,
         classnum: 1,
-        log: 1
       }
     }], (err, classes) => {
       if (err) callback(err);
@@ -3894,14 +3886,7 @@ function briefLog(args, callback) {
           date: -1
         }
       }, {
-        $limit: 2
-      }, {
-        $lookup: {
-          from: 'logs',
-          localField: 'id',
-          foreignField: 'exam',
-          as: 'log'
-        }
+        $limit: 3
       }, {
         $project: {
           _id: 0,
@@ -3909,18 +3894,80 @@ function briefLog(args, callback) {
           name: 1,
           max_mark: 1,
           redline: 1,
-          log: 1
         }
-      }], (err, exams) => {
-        if (err) callback(err);
-        else callback(null, stats.OK, {
-          data: data,
-          classes: classes,
-          exams: exams
-        });
+      }], async (err, exams) => {
+        if (err) {
+          callback(err);
+        } else {
+          try {
+            for (let i = 0; i < classes.length; i++) {
+              const teacherClass = classes[i];
+              const log = await resolveClassLog(args.targetuser, teacherClass.id);
+              classes[i] = {
+                ...teacherClass,
+                log: [log],
+              };
+            }
+            for (let i = 0; i < exams.length; i++) {
+              const exam = exams[i];
+              const log = await resolveExamLog(args.targetuser, exam.id);
+              exams[i] = {
+                ...exam,
+                log: [log],
+              };
+            }
+          } catch (e) {}
+          callback(null, stats.OK, {
+            data: data,
+            classes: classes,
+            exams: exams
+          });
+        }
       })
     })
   });
+}
+
+/**
+ * Resolve a class log
+ * @param  {number} studentid Target student id
+ * @param  {number} classid Target class id
+ * @returns {Promise} Promise that resolves into the class log
+ */
+function resolveClassLog(studentid, classid) {
+  return new Promise((resolve, reject) => {
+    db.collection('logs').findOne({
+      studentid,
+      classid,
+    }, (error, result) => {
+      if (error) {
+        reject(error);
+      } else {
+        resolve(result);
+      }
+    });
+  })
+}
+
+/**
+ * Resolve an class log
+ * @param  {number} studentid Target student id
+ * @param  {number} examid Target exam id
+ * @returns {Promise} Promise that resolves into the class log
+ */
+function resolveExamLog(studentid, examid) {
+  return new Promise((resolve, reject) => {
+    db.collection('logs').findOne({
+      studentid,
+      exam: examid,
+    }, (error, result) => {
+      if (error) {
+        reject(error);
+      } else {
+        resolve(result);
+      }
+    });
+  })
 }
 
 function addClassLog(args, callback) {
