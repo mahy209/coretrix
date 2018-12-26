@@ -288,6 +288,8 @@ var inputvalidators = {
   comparingDate: validators.ValidateDate,
   // count
   ig_grade: validators.ValidateOrIgnoreNumber,
+  month: validators.ValidateOrIgnoreNumber,
+  year: validators.ValidateOrIgnoreNumber,
 }
 
 // REG CALLS
@@ -428,7 +430,7 @@ registerApiCall("/teacher/secretaries/create", ["token", "name", "username"], us
 registerApiCall("/teacher/secretaries/remove", ["token", "groupid"], userDocDefault, data.RemoveGroup);*/
 registerApiCall("/teacher/contacts/list", ["token"], userDocDefault, data.ListContacts);
 
-registerApiCall("/teacher/items/add", ["token", "name", "grade", "price", "itemCategory"], userDocDefault, data.AddItem);
+registerApiCall("/teacher/items/add", ["token", "name", "grade", "price", "itemCategory", "month", "year"], userDocDefault, data.AddItem);
 registerApiCall("/teacher/items/get", ["token", "itemid"], userDocDefault, data.GetItem);
 registerApiCall("/teacher/items/remove", ["token", "itemid"], userDocDefault, data.RemoveItem);
 registerApiCall("/teacher/items/list", ["token", "grade"], userDocDefault, data.ListItems);

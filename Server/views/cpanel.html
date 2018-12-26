@@ -178,11 +178,11 @@
 
               </div>
               <div class="card-panel " ng-class="tolog_name == 'اسم الطالب' ? 'grey-text' : ''">
-                  <h5>{{tolog_name}}</h5>
-                </div>
-                <div class="card-panel " ng-class="toLogGroup == 'مجموعة الطالب' ? 'grey-text' : ''">
-                  <h5>{{toLogGroup}}</h5>
-                </div>
+                <h5>{{tolog_name}}</h5>
+              </div>
+              <div class="card-panel " ng-class="toLogGroup == 'مجموعة الطالب' ? 'grey-text' : ''">
+                <h5>{{toLogGroup}}</h5>
+              </div>
             </div>
             <div class="col l6 m6 s12">
               <div class="card-panel blue-grey ">
@@ -815,6 +815,14 @@
                           <option value="" disabled selected>النوع</option>
                         </select>
                       </div>
+                      <div class="col s6" ng-show="selected_category == 'subscription'">
+                        <label>الشهر</label>
+                        <input type="number" ng-model="new_item_month">
+                      </div>
+                      <div class="col s6" ng-show="selected_category == 'subscription'">
+                        <label>السنة</label>
+                        <input type="number" ng-model="new_item_year">
+                      </div>
                       <div class="col s12">
                         <label>السعر</label>
                         <input type="number" min="0" style="padding-right: 1%" ng-model="new_item_price"></input>
@@ -831,476 +839,492 @@
           </div>
         </div>
         <div class="simpleFadeIn-anim" ng-controller="paylogsCtrl" ng-show="tab=='paylogs'">
-          <div class="card-panel hideonprint">
+          <div class="padding-pad">
+            <div class="row">
+              <div class="card-panel hideonprint">
 
-            <div style="display: flex">
-              <div style="flex-grow: 1; display: flex;">
-                <div style="flex-grow: 1">
-                  <span>تاريخ البداية</span>
-                  <input id="comparing_paylogs_date" type="text" class="datepicker" style="text-align: right; cursor:pointer; margin-bottom: 0;"
-                    placeholder="التاريخ" readonly>
+                <div style="display: flex">
+                  <div style="flex-grow: 1; display: flex;">
+                    <div style="flex-grow: 1">
+                      <span>تاريخ البداية</span>
+                      <input id="comparing_paylogs_date" type="text" class="datepicker" style="text-align: right; cursor:pointer; margin-bottom: 0;"
+                        placeholder="التاريخ" readonly>
+                    </div>
+                    <div style="flex-grow: 1">
+                      <span>تاريخ النهاية</span>
+                      <input id="paylogs_date" type="text" class="datepicker" style="text-align: right; cursor:pointer; margin-bottom: 0;"
+                        placeholder="التاريخ" readonly>
+                    </div>
+                  </div>
+                  <div style="padding-right: 10px; align-self: flex-end">
+                    <button ng-click="refreshLogs()" class="waves-effect waves-light blue-grey btn">
+                      تحميل
+                    </button>
+                  </div>
                 </div>
-                <div style="flex-grow: 1">
-                  <span>تاريخ النهاية</span>
-                  <input id="paylogs_date" type="text" class="datepicker" style="text-align: right; cursor:pointer; margin-bottom: 0;"
-                    placeholder="التاريخ" readonly>
-                </div>
-              </div>
-              <div style="padding-right: 10px; align-self: flex-end">
-                <button ng-click="refreshLogs()" class="waves-effect waves-light blue-grey btn">
-                  تحميل
+
+
+                <span>تعليق</span>
+                <input type="text" min="0" placeholder="تعليق" ng-model="paylog_name">
+                <span>المبلغ</span>
+                <input type="number" min="0" placeholder="0" ng-model="paylog_amount">
+
+                <button ng-click="addIncome()" style="margin-left: 9px" class="waves-effect waves-light blue-grey btn">
+                  أضف دخل
                 </button>
+                <button ng-click="addExpense()" style="margin-left: 9px" class="waves-effect waves-light blue-grey btn">
+                  أضف مصروف
+                </button>
+                <button ng-click="print()" class="waves-effect waves-light blue-grey btn">
+                  اطبع
+                </button>
+
+              </div>
+
+              <div class="card-panel hideonprint">
+                <table>
+                  <thead>
+                    <th>
+                      <span>تاريخ اليوم</span>
+                    </th>
+                    <th>
+                      <span>اجمالى الايرادات</span>
+                    </th>
+                    <th>
+                      <span>اجمالى المصروفات</span>
+                    </th>
+                    <th>
+                      <span>المجموع</span>
+                    </th>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td style="text-align: right;">
+                        <span>{{currentDay}}</span>
+                      </td>
+                      <td style="text-align: right;">
+                        <span>{{totalIncome}}</span>
+                      </td>
+                      <td style="text-align: right;">
+                        <span>{{totalOutcome}}</span>
+                      </td>
+                      <td style="text-align: right;">
+                        <span>{{totalAmount}}</span>
+                      </td>
+                    </tr>
+                    <tr ng-show="comparingDay">
+                      <td style="text-align: right;">
+                        <span>{{comparingDay}}</span>
+                      </td>
+                      <td style="text-align: right;">
+                        <span>{{comparingTotalIncome}}</span>
+                      </td>
+                      <td style="text-align: right;">
+                        <span>{{comparingTotalOutcome}}</span>
+                      </td>
+                      <td style="text-align: right;">
+                        <span>{{comparingTotalAmount}}</span>
+                      </td>
+                    </tr>
+                    <tr ng-show="comparingDay">
+                      <td colspan="4">
+                        <hr>
+                      </td>
+                    </tr>
+                    <tr ng-show="comparingDay">
+                      <td style="text-align: right;">
+                        <span>---</span>
+                      </td>
+                      <td style="text-align: right;">
+                        <span>{{abs(comparingTotalIncome - totalIncome)}}</span>
+                      </td>
+                      <td style="text-align: right;">
+                        <span>{{abs(comparingTotalOutcome - totalOutcome)}}</span>
+                      </td>
+                      <td style="text-align: right;">
+                        <span>{{abs(comparingTotalAmount - totalAmount)}}</span>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <div class="logs">
+                <table dir="rtl" id="paylogs_table">
+                  <thead>
+                    <tr>
+                      <th>
+                        تعليق
+                      </th>
+                      <th>
+                        المبلغ
+                      </th>
+                      <th class="hideonprint">
+                        اجراءات
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr class="vs-item" ng-repeat="log in paylogs">
+                      <td width="50%">
+                        {{log.name}}
+                      </td>
+                      <td width="50%" ng-class="log.payed > 0 ? 'income' : 'expense'">
+                        {{log.payed}}
+                      </td>
+                      <td class="hideonprint">
+                        <button class="float-left btn blue-grey" ng-click="openRemoveModal(log._id)">حذف</button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <div id="paylog_delete_modal" class="modal">
+                <div class="modal-content gradient">
+                  <h4>هل أنت متاكد من هذه الخطوة؟</h4>
+                  <p>عند خذف التسجيل لا يمكن استرجاع البيانات مره اخرى</p>
+                </div>
+                <div class="modal-footer blue-grey-background">
+                  <a ng-click="removePayLog()" class="modal-action modal-close waves-effect waves-green btn-flat">اوافق</a>
+                  <a class="modal-action modal-close waves-effect waves-red btn-flat">لا</a>
+                </div>
               </div>
             </div>
-
-
-            <span>تعليق</span>
-            <input type="text" min="0" placeholder="تعليق" ng-model="paylog_name">
-            <span>المبلغ</span>
-            <input type="number" min="0" placeholder="0" ng-model="paylog_amount">
-
-            <button ng-click="addIncome()" style="margin-left: 9px" class="waves-effect waves-light blue-grey btn">
-              أضف دخل
-            </button>
-            <button ng-click="addExpense()" style="margin-left: 9px" class="waves-effect waves-light blue-grey btn">
-              أضف مصروف
-            </button>
-            <button ng-click="print()" class="waves-effect waves-light blue-grey btn">
-              اطبع
-            </button>
-
           </div>
 
-          <div class="card-panel hideonprint">
-            <table>
-              <thead>
-                <th>
-                  <span>تاريخ اليوم</span>
-                </th>
-                <th>
-                  <span>اجمالى الايرادات</span>
-                </th>
-                <th>
-                  <span>اجمالى المصروفات</span>
-                </th>
-                <th>
-                  <span>المجموع</span>
-                </th>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="text-align: right;">
-                    <span>{{currentDay}}</span>
-                  </td>
-                  <td style="text-align: right;">
-                    <span>{{totalIncome}}</span>
-                  </td>
-                  <td style="text-align: right;">
-                    <span>{{totalOutcome}}</span>
-                  </td>
-                  <td style="text-align: right;">
-                    <span>{{totalAmount}}</span>
-                  </td>
-                </tr>
-                <tr ng-show="comparingDay">
-                  <td style="text-align: right;">
-                    <span>{{comparingDay}}</span>
-                  </td>
-                  <td style="text-align: right;">
-                    <span>{{comparingTotalIncome}}</span>
-                  </td>
-                  <td style="text-align: right;">
-                    <span>{{comparingTotalOutcome}}</span>
-                  </td>
-                  <td style="text-align: right;">
-                    <span>{{comparingTotalAmount}}</span>
-                  </td>
-                </tr>
-                <tr ng-show="comparingDay">
-                  <td colspan="4">
-                    <hr>
-                  </td>
-                </tr>
-                <tr ng-show="comparingDay">
-                  <td style="text-align: right;">
-                    <span>---</span>
-                  </td>
-                  <td style="text-align: right;">
-                    <span>{{abs(comparingTotalIncome - totalIncome)}}</span>
-                  </td>
-                  <td style="text-align: right;">
-                    <span>{{abs(comparingTotalOutcome - totalOutcome)}}</span>
-                  </td>
-                  <td style="text-align: right;">
-                    <span>{{abs(comparingTotalAmount - totalAmount)}}</span>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-
-          <div class="logs">
-            <table dir="rtl" id="paylogs_table">
-              <thead>
-                <tr>
-                  <th>
-                    تعليق
-                  </th>
-                  <th>
-                    المبلغ
-                  </th>
-                  <th class="hideonprint">
-                    اجراءات
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr class="vs-item" ng-repeat="log in paylogs">
-                  <td width="50%">
-                    {{log.name}}
-                  </td>
-                  <td width="50%" ng-class="log.payed > 0 ? 'income' : 'expense'">
-                    {{log.payed}}
-                  </td>
-                  <td class="hideonprint">
-                    <button class="float-left btn blue-grey" ng-click="openRemoveModal(log._id)">حذف</button>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-
-          <div id="paylog_delete_modal" class="modal">
-            <div class="modal-content gradient">
-              <h4>هل أنت متاكد من هذه الخطوة؟</h4>
-              <p>عند خذف التسجيل لا يمكن استرجاع البيانات مره اخرى</p>
-            </div>
-            <div class="modal-footer blue-grey-background">
-              <a ng-click="removePayLog()" class="modal-action modal-close waves-effect waves-green btn-flat">اوافق</a>
-              <a class="modal-action modal-close waves-effect waves-red btn-flat">لا</a>
-            </div>
-          </div>
         </div>
         <div class="simpleFadeIn-anim" ng-controller="statsCtrl" ng-show="tab=='stats'">
+          <div class="padding-pad">
+            <div class="row">
+              <ul class="collapsible" data-collapsible="accordion">
+                <li>
+                  <div class="collapsible-header">اعداد الطلاب</div>
+                  <div class="collapsible-body">
 
-          <div class="card-panel">
+                    <div>
+                      <label>اختر السنة</label>
+                      <div style="display: flex; align-items: baseline;">
+                        <select style="margin-left: 12px" class="browser-default" ng-options="i as grades_names[i] for i in grades"
+                          ng-model="selected_grade" ng-change="grade_changed()">
+                          <option value="" disabled selected>السنه</option>
+                        </select>
+                        <button ng-click="selected_grade = null; grade_changed();" class="waves-effect waves-light blue-grey btn">
+                          <i class="fa fa-trash"></i></i>
+                        </button>
+                      </div>
+                    </div>
 
-            <div>
-              <label>اختر السنة</label>
-              <div style="display: flex; align-items: baseline;">
-                <select style="margin-left: 12px" class="browser-default" ng-options="i as grades_names[i] for i in grades"
-                  ng-model="selected_grade" ng-change="grade_changed()">
-                  <option value="" disabled selected>السنه</option>
-                </select>
-                <button ng-click="selected_grade = null; grade_changed();" class="waves-effect waves-light blue-grey btn">
-                  <i class="fa fa-trash"></i></i>
-                </button>
-              </div>
+                    <div>
+                      <label>اختر المجموعة</label>
+                      <div style="display: flex; align-items: baseline;">
+                        <select style="margin-left: 12px" class="browser-default" ng-options="i as i.name for i in groups"
+                          ng-change="group_changed()" ng-model="selected_group">
+                          <option value="" disabled selected>المجموعة</option>
+                        </select>
+                        <button ng-click="selected_group = null; group_changed();" class="waves-effect waves-light blue-grey btn">
+                          <i class="fa fa-trash"></i></i>
+                        </button>
+                      </div>
+                    </div>
+
+
+                    <table class="rtl">
+                      <tbody>
+                        <thead>
+                          <th width="50%"></th>
+                          <th width="50%">العدد</th>
+                        </thead>
+                        <tr>
+                          <td>
+                            عدد كل الطلاب
+                          </td>
+                          <td>
+                            {{ studentsCount || 0 }}
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>
+                            عدد الاشتراكات
+                          </td>
+                          <td>
+                            {{ linksCount || 0 }}
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>
+                            عدد الطلاب فى السنة
+                          </td>
+                          <td>
+                            {{ gradeCount || 0 }}
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>
+                            عدد الطلاب فى المجموعة
+                          </td>
+                          <td>
+                            {{ groupCount || 0 }}
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </li>
+              </ul>
             </div>
-
-            <div>
-              <label>اختر المجموعة</label>
-              <div style="display: flex; align-items: baseline;">
-                <select style="margin-left: 12px" class="browser-default" ng-options="i as i.name for i in groups"
-                  ng-change="group_changed()" ng-model="selected_group">
-                  <option value="" disabled selected>المجموعة</option>
-                </select>
-                <button ng-click="selected_group = null; group_changed();" class="waves-effect waves-light blue-grey btn">
-                  <i class="fa fa-trash"></i></i>
-                </button>
-              </div>
-            </div>
-
-          </div>
-
-          <div class="card-panel">
-            <table class="rtl">
-              <tbody>
-                <thead>
-                  <th width="50%"></th>
-                  <th width="50%">العدد</th>
-                </thead>
-                <tr>
-                  <td>
-                    عدد كل الطلاب
-                  </td>
-                  <td>
-                    {{ studentsCount || 0 }}
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    عدد الاشتراكات
-                  </td>
-                  <td>
-                    {{ linksCount || 0 }}
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    عدد الطلاب فى السنة
-                  </td>
-                  <td>
-                    {{ gradeCount || 0 }}
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    عدد الطلاب فى المجموعة
-                  </td>
-                  <td>
-                    {{ groupCount || 0 }}
-                  </td>
-                </tr>
-              </tbody>
-            </table>
           </div>
 
         </div>
         <div class="simpleFadeIn-anim" ng-controller="smsCtrl" ng-show="tab=='sms'">
-          <div class="card-panel">
-            <div class="sms_filter">
+          <div class="padding-pad">
+            <div class="row">
+              <div class="card-panel">
+                <div class="sms_filter">
 
-              <div>
-                <input type="checkbox" id="allStudents" ng-model="allStudents" ng-change="allStudentsChange()" />
-                <label for="allStudents">كل الطلاب</label>
-              </div>
+                  <div>
+                    <input type="checkbox" id="allStudents" ng-model="allStudents" ng-change="allStudentsChange()" />
+                    <label for="allStudents">كل الطلاب</label>
+                  </div>
 
-              <div ng-hide="allStudents">
-                <label>اختر السنة</label>
-                <select id="gradesSelector" class="browser-default" ng-options="i as grades_names[i] for i in grades"
-                  ng-model="selected_grade" ng-change="grade_changed()">
-                  <option value="" disabled selected>السنه</option>
-                </select>
-              </div>
+                  <div ng-hide="allStudents">
+                    <label>اختر السنة</label>
+                    <select id="gradesSelector" class="browser-default" ng-options="i as grades_names[i] for i in grades"
+                      ng-model="selected_grade" ng-change="grade_changed()">
+                      <option value="" disabled selected>السنه</option>
+                    </select>
+                  </div>
 
-              <div ng-hide="allStudents">
-                <label>المجموعة</label>
+                  <div ng-hide="allStudents">
+                    <label>المجموعة</label>
+                    <div style="display: flex; align-items: baseline;">
+                      <select style="margin-left: 12px" class="browser-default" ng-options="i as i.name for i in groups"
+                        ng-model="selected_group">
+                        <option value="" disabled selected>المجموعة</option>
+                      </select>
+                      <button ng-click="selected_group = null" class="waves-effect waves-light blue-grey btn">
+                        <i class="fa fa-trash"></i></i>
+                      </button>
+                    </div>
+                  </div>
+
+                  <div>
+                    <label>الهاتف</label>
+                    <div style="display: flex; align-items: baseline;">
+                      <select style="margin-left: 12px" class="browser-default" ng-options="d as d.name for d in devices"
+                        ng-model="selected_device">
+                        <option value="" disabled selected>الهاتف</option>
+                      </select>
+                      <button ng-click="loadDevices()" class="waves-effect waves-light blue-grey btn">
+                        <i class="fa fa-refresh"></i></i>
+                      </button>
+                    </div>
+                  </div>
+
+                  <div>
+                    <label>البروتوكول</label>
+                    <select class="browser-default" ng-model="selected_protocol">
+                      <option value="legacy">Legacy</option>
+                      <option value="shellms">ShellMS</option>
+                    </select>
+                  </div>
+
+                  <!-- <div>
+                        <label>انتظار - يتم تعديله ليناسب الهاتف</label>
+                        <input type="number" min="0" max="4000" ng-model="threshold">
+                      </div> -->
+
+                  <div>
+                    <label>النوع</label>
+                    <select class="browser-default" ng-model="selected_type" ng-change="typeChanged()">
+                      <option value="" disabled selected>اختر نوع التقرير</option>
+                      <option ng-hide="allStudents" value="lesson">حصة</option>
+                      <option ng-hide="allStudents" value="exam">امتحان</option>
+                      <!-- <option value="report">تقرير شهري</option> -->
+                      <option value="message">رسالة</option>
+                    </select>
+                  </div>
+
+                  <label>ارسل الى</label>
+                  <div>
+                    <select class="browser-default" ng-options="i as {'parent': 'ولى الامر', 'student': 'الطالب'}[i] for i in ['parent', 'student']"
+                      ng-model="selected_recipient">
+                      <option value="" disabled selected>إختر</option>
+                    </select>
+                  </div>
+
+
+                  <div ng-show="selected_type == 'lesson'">
+                    <label>الحصة</label>
+                    <select class="browser-default" ng-change="classChanged()" ng-options="c as (c.date + (c.addedClass ? ' - حصة إضافية' : '') + (c.classnum != null ? ' - الحصة ' + NumericOrderStrings[c.classnum] : '') + (c.linksString ? ' - ' + c.linksString : '')) for c in classes"
+                      ng-model="selected_class">
+                      <option value="" disabled selected>اختر الحصة</option>
+                    </select>
+                  </div>
+
+                  <div ng-show="selected_type == 'exam'">
+                    <label>الامتحان</label>
+                    <select class="browser-default" ng-change="examChanged()" ng-options="e as e.name for e in exams"
+                      ng-model="selected_exam">
+                      <option value="" disabled selected>اختر الامتحان</option>
+                    </select>
+                  </div>
+
+                  <div ng-show="selected_type == 'report'">
+                    <label>الشهر</label>
+                    <select class="browser-default" ng-options="m as m.name for m in months" ng-model="selected_month">
+                      <option value="" disabled selected>اختر الشهر</option>
+                    </select>
+                  </div>
+
+                  <div ng-show="selected_type == 'message'">
+                    <label for="msg_txt">الرسالة</label>
+                    <textarea id="msg_txt" style="margin-bottom: unset;" ng-model="message" maxlength="70" class="materialize-textarea"></textarea>
+                    <label ng-class="message.length >= 70 ? 'red-text' : ''">{{ message.length || 0 }}</label>
+                  </div>
+
+                </div>
+
+                <style>
+                  .sms_options {
+                        margin-top: 12px;
+                      }
+                      .sms_options div {
+                        display: inline-block;
+                        margin-left: 12px;
+                      }
+                      .progress.failed {
+                        background: #efbae6;
+                      }
+                      .progress.failed .determinate {
+                        background: crimson;
+                      }
+                    </style>
+
+                <div class="sms_options" ng-show="selected_type == 'lesson'">
+                  <div>
+                    <input type="checkbox" id="smsAttendant" ng-model="smsAttendant" />
+                    <label for="smsAttendant">الحضور</label>
+                  </div>
+
+                  <div>
+                    <input type="checkbox" id="smsQuiz" ng-model="smsQuiz" />
+                    <label for="smsQuiz">التسميع</label>
+                  </div>
+
+                  <div>
+                    <input type="checkbox" id="smsHomework" ng-model="smsHomework" />
+                    <label for="smsHomework">الواجب</label>
+                  </div>
+                </div>
+
+                <div class="sms_options" ng-show="selected_type == 'message'">
+                  <div>
+                    <input type="checkbox" id="addSignature" ng-model="addSignature" />
+                    <label for="addSignature">اضف اسم المدرس والمادة</label>
+                  </div>
+                </div>
+
                 <div style="display: flex; align-items: baseline;">
-                  <select style="margin-left: 12px" class="browser-default" ng-options="i as i.name for i in groups"
-                    ng-model="selected_group">
-                    <option value="" disabled selected>المجموعة</option>
-                  </select>
-                  <button ng-click="selected_group = null" class="waves-effect waves-light blue-grey btn">
-                    <i class="fa fa-trash"></i></i>
-                  </button>
-                </div>
-              </div>
-
-              <div>
-                <label>الهاتف</label>
-                <div style="display: flex; align-items: baseline;">
-                  <select style="margin-left: 12px" class="browser-default" ng-options="d as d.name for d in devices"
-                    ng-model="selected_device">
-                    <option value="" disabled selected>الهاتف</option>
-                  </select>
-                  <button ng-click="loadDevices()" class="waves-effect waves-light blue-grey btn">
-                    <i class="fa fa-refresh"></i></i>
-                  </button>
-                </div>
-              </div>
-
-              <div>
-                <label>البروتوكول</label>
-                <select class="browser-default" ng-model="selected_protocol">
-                  <option value="legacy">Legacy</option>
-                  <option value="shellms">ShellMS</option>
-                </select>
-              </div>
-
-              <!-- <div>
-                <label>انتظار - يتم تعديله ليناسب الهاتف</label>
-                <input type="number" min="0" max="4000" ng-model="threshold">
-              </div> -->
-
-              <div>
-                <label>النوع</label>
-                <select class="browser-default" ng-model="selected_type" ng-change="typeChanged()">
-                  <option value="" disabled selected>اختر نوع التقرير</option>
-                  <option ng-hide="allStudents" value="lesson">حصة</option>
-                  <option ng-hide="allStudents" value="exam">امتحان</option>
-                  <!-- <option value="report">تقرير شهري</option> -->
-                  <option value="message">رسالة</option>
-                </select>
-              </div>
-
-              <label>ارسل الى</label>
-              <div>
-                <select class="browser-default" ng-options="i as {'parent': 'ولى الامر', 'student': 'الطالب'}[i] for i in ['parent', 'student']"
-                  ng-model="selected_recipient">
-                  <option value="" disabled selected>إختر</option>
-                </select>
-              </div>
-
-
-              <div ng-show="selected_type == 'lesson'">
-                <label>الحصة</label>
-                <select class="browser-default" ng-change="classChanged()" ng-options="c as (c.date + (c.addedClass ? ' - حصة إضافية' : '') + (c.classnum != null ? ' - الحصة ' + NumericOrderStrings[c.classnum] : '') + (c.linksString ? ' - ' + c.linksString : '')) for c in classes"
-                  ng-model="selected_class">
-                  <option value="" disabled selected>اختر الحصة</option>
-                </select>
-              </div>
-
-              <div ng-show="selected_type == 'exam'">
-                <label>الامتحان</label>
-                <select class="browser-default" ng-change="examChanged()" ng-options="e as e.name for e in exams"
-                  ng-model="selected_exam">
-                  <option value="" disabled selected>اختر الامتحان</option>
-                </select>
-              </div>
-
-              <div ng-show="selected_type == 'report'">
-                <label>الشهر</label>
-                <select class="browser-default" ng-options="m as m.name for m in months" ng-model="selected_month">
-                  <option value="" disabled selected>اختر الشهر</option>
-                </select>
-              </div>
-
-              <div ng-show="selected_type == 'message'">
-                <label for="msg_txt">الرسالة</label>
-                <textarea id="msg_txt" style="margin-bottom: unset;" ng-model="message" maxlength="70" class="materialize-textarea"></textarea>
-                <label ng-class="message.length >= 70 ? 'red-text' : ''">{{ message.length || 0 }}</label>
-              </div>
-
-            </div>
-
-            <style>
-              .sms_options {
-								margin-top: 12px;
-							}
-							.sms_options div {
-								display: inline-block;
-								margin-left: 12px;
-							}
-							.progress.failed {
-								background: #efbae6;
-							}
-							.progress.failed .determinate {
-								background: crimson;
-							}
-						</style>
-
-            <div class="sms_options" ng-show="selected_type == 'lesson'">
-              <div>
-                <input type="checkbox" id="smsAttendant" ng-model="smsAttendant" />
-                <label for="smsAttendant">الحضور</label>
-              </div>
-
-              <div>
-                <input type="checkbox" id="smsQuiz" ng-model="smsQuiz" />
-                <label for="smsQuiz">التسميع</label>
-              </div>
-
-              <div>
-                <input type="checkbox" id="smsHomework" ng-model="smsHomework" />
-                <label for="smsHomework">الواجب</label>
-              </div>
-            </div>
-
-            <div class="sms_options" ng-show="selected_type == 'message'">
-              <div>
-                <input type="checkbox" id="addSignature" ng-model="addSignature" />
-                <label for="addSignature">اضف اسم المدرس والمادة</label>
-              </div>
-            </div>
-
-            <div style="display: flex; align-items: baseline;">
-              <div>
-                <button class="waves-effect waves-light blue-grey btn" ng-click="send()" style="margin-left: 8.35%; margin-top:1rem;">أرسل</button>
-              </div>
-              <div class="col" style="flex-grow: 1;" ng-show="sendingSMS">
-                <label>{{smsStudent}}</label>
-                <div class="progress" ng-class="smsFailed ? 'failed' : ''">
-                  <div class="determinate" style="width: {{smsProgress}%"></div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <input type="checkbox" ng-model="select_all" ng-change="assertSelectAll()" id="toggleSelect" class="checkbox" />
-          <label for="toggleSelect">تحديد الكل</label>
-
-          <div ng-show="selected_type != 'message'">
-            <input type="checkbox" ng-model="filterAttendance" id="filterAttendance" class="checkbox" />
-            <label for="filterAttendance">لم يحضر</label>
-          </div>
-
-          <div>
-            <div class="logs containers" ng-show="selected_type == 'lesson'">
-              <table>
-                <tr>
-                  <th>
-                    اسم الطالب
-                  </th>
-                  <th>
-                    درجة التسميع
-                  </th>
-                  <th>
-                    درجة الواجب
-                  </th>
-                </tr>
-                <tr ng-repeat="n in class_logs" ng-show="(!selected_group || n.group == selected_group.id) && (!filterAttendance || !n.log.attendant)">
-                  <td>
-                    <!-- TODO: fix css -->
-                    <input type="checkbox" ng-model="n.selected" id="cid{{n.studentid}}"
-                    class="checkbox" />
-                  <label for="cid{{n.studentid}}">f</label>
-                  <span class="green-text" ng-show="n.log.attendant">حضر</span>
-                  <span class="red-text" ng-show="!n.log.attendant">لم يحضر</span>
-                  - {{n.fullname}}
-                  </td>
-                  <td>{{n.log.quiz ? (n.log.quiz.type == 'marks' ? n.log.quiz.mark + ' / ' + n.log.quiz.max :
-                    (n.log.quiz.option
-                    == 'absent' ? 'لم يسمّع' : 'سمّع')) : 'لم يسجل تسميع الطالب'}}</td>
-                  <td>{{n.log.homework ? (n.log.homework.type == 'marks' ? n.log.homework.mark + '/' +
-                    n.log.homework.max
-                    : (n.log.homework.option == 'incomplete' ? 'غير مكتمل' : 'كامل')) : 'لم يسجل واجب الطالب'}}</td>
-                  </tr>
-                  </table>
-                </div>
-
-                <div class="logs containers" ng-show="selected_type == 'exam'">
-                  <table>
-                    <tr>
-                      <th>
-                        اسم الطالب
-                      </th>
-                      <th>
-                        الدرجة
-                      </th>
-                    </tr>
-                    <tr ng-repeat="n in exam_logs" ng-show="(!selected_group || n.group == selected_group.id) && (!filterAttendance || !n.log.attendant)">
-                      <td>
-                        <!-- TODO: fix css -->
-                        <input type="checkbox" ng-model="n.selected" id="cid{{n.studentid}}" class="checkbox" />
-                        <label for="cid{{n.studentid}}">f</label>
-                        <span class="green-text" ng-show="n.log.attendant">حضر</span>
-                        <span class="red-text" ng-show="!n.log.attendant">لم يحضر</span>
-                        - {{n.fullname}}
+                  <div>
+                    <button class="waves-effect waves-light blue-grey btn" ng-click="send()" style="margin-left: 8.35%; margin-top:1rem;">أرسل</button>
+                  </div>
+                  <div class="col" style="flex-grow: 1;" ng-show="sendingSMS">
+                    <label>{{smsStudent}}</label>
+                    <div class="progress" ng-class="smsFailed ? 'failed' : ''">
+                      <div class="determinate" style="width: {{smsProgress}%"></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+        
+                  <input type="checkbox" ng-model="select_all" ng-change="assertSelectAll()" id="toggleSelect" class="checkbox" />
+                  <label for="toggleSelect">تحديد الكل</label>
+        
+                  <div ng-show="selected_type != 'message'">
+                    <input type="checkbox" ng-model="filterAttendance" id="filterAttendance" class="checkbox" />
+                    <label for="filterAttendance">لم يحضر</label>
+                  </div>
+        
+                  <div>
+                    <div class="logs containers" ng-show="selected_type == 'lesson'">
+                      <table>
+                        <tr>
+                          <th>
+                            اسم الطالب
+                          </th>
+                          <th>
+                            درجة التسميع
+                          </th>
+                          <th>
+                            درجة الواجب
+                          </th>
+                        </tr>
+                        <tr ng-repeat="n in class_logs" ng-show="(!selected_group || n.group == selected_group.id) && (!filterAttendance || !n.log.attendant)">
+                          <td>
+                            <!-- TODO: fix css -->
+                            <input type="checkbox" ng-model="n.selected" id="cid{{n.studentid}}"
+                        class="checkbox" />
+                      <label for="cid{{n.studentid}}">f</label>
+                      <span class="green-text" ng-show="n.log.attendant">حضر</span>
+                      <span class="red-text" ng-show="!n.log.attendant">لم يحضر</span>
+                      - {{n.fullname}}
                       </td>
-                      <td>{{n.log.mark ? (n.log.mark + ' / ' + selected_exam.max_mark) : 'لم تسجل درجة للطالب'}}</td>
-                    </tr>
-                  </table>
-                </div>
+                      <td>{{n.log.quiz ? (n.log.quiz.type == 'marks' ? n.log.quiz.mark + ' / ' + n.log.quiz.max :
+                        (n.log.quiz.option
+                        == 'absent' ? 'لم يسمّع' : 'سمّع')) : 'لم يسجل تسميع الطالب'}}</td>
+                      <td>{{n.log.homework ? (n.log.homework.type == 'marks' ? n.log.homework.mark + '/' +
+                        n.log.homework.max
+                        : (n.log.homework.option == 'incomplete' ? 'غير مكتمل' : 'كامل')) : 'لم يسجل واجب الطالب'}}</td>
+                      </tr>
+                      </table>
+                    </div>
 
-                <div class="logs containers" ng-show="selected_type == 'message'">
-                  <table>
-                    <tr>
-                      <th>
-                        اسم الطالب
-                      </th>
-                    </tr>
-                    <tr ng-repeat="n in message_students" ng-show="!selected_group || n.group == selected_group.id">
-                      <td>
-                        <!-- TODO: fix css -->
-                        <input type="checkbox" ng-model="n.selected" id="cid{{n.studentid}}" class="checkbox" />
-                        <label for="cid{{n.studentid}}">f</label>
-                        {{n.fullname}}
-                      </td>
-                    </tr>
-                  </table>
+                    <div class="logs containers" ng-show="selected_type == 'exam'">
+                      <table>
+                        <tr>
+                          <th>
+                            اسم الطالب
+                          </th>
+                          <th>
+                            الدرجة
+                          </th>
+                        </tr>
+                        <tr ng-repeat="n in exam_logs" ng-show="(!selected_group || n.group == selected_group.id) && (!filterAttendance || !n.log.attendant)">
+                          <td>
+                            <!-- TODO: fix css -->
+                            <input type="checkbox" ng-model="n.selected" id="cid{{n.studentid}}" class="checkbox" />
+                            <label for="cid{{n.studentid}}">f</label>
+                            <span class="green-text" ng-show="n.log.attendant">حضر</span>
+                            <span class="red-text" ng-show="!n.log.attendant">لم يحضر</span>
+                            - {{n.fullname}}
+                          </td>
+                          <td>{{n.log.mark ? (n.log.mark + ' / ' + selected_exam.max_mark) : 'لم تسجل درجة للطالب'}}</td>
+                        </tr>
+                      </table>
+                    </div>
+
+                    <div class="logs containers" ng-show="selected_type == 'message'">
+                      <table>
+                        <tr>
+                          <th>
+                            اسم الطالب
+                          </th>
+                        </tr>
+                        <tr ng-repeat="n in message_students" ng-show="!selected_group || n.group == selected_group.id">
+                          <td>
+                            <!-- TODO: fix css -->
+                            <input type="checkbox" ng-model="n.selected" id="cid{{n.studentid}}" class="checkbox" />
+                            <label for="cid{{n.studentid}}">f</label>
+                            {{n.fullname}}
+                          </td>
+                        </tr>
+                      </table>
+                    </div>
+                  </div>
                 </div>
               </div>
+
             </div>
             <div class="simpleFadeIn-anim" ng-controller="groupsCtrl" ng-show="tab=='times'">
               <div class="row">

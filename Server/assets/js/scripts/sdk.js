@@ -847,13 +847,15 @@ sdk.factory('sdk', ['$http', function ($http) {
     }, callback);
   }
 
-  function AddItem(name, grade, price, itemCategory, callback) {
+  function AddItem(name, grade, price, itemCategory, month, year, callback) {
     var token = Cookies.get('token');
     post("api/teacher/items/add", {
-      name: name,
+      name,
       grade: parseInt(grade),
-      price: price,
+      price,
       itemCategory: itemCategory,
+      month,
+      year,
       token: token
     }, callback);
   }

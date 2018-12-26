@@ -763,7 +763,11 @@ app.controller('paymentsCtrl', function ($rootScope, $scope, sdk) {
     if (isNaN($scope.add_selected_grade)) return toast('برجاء اختيار السنه', gradients.error)
     if (!$scope.new_item_price) return toast('برجاء ادخال السعر', gradients.error)
     if (!$scope.selected_category) return toast('برجاء اختيار النوع', gradients.error)
-    sdk.AddItem($scope.new_item_name, $scope.add_selected_grade, $scope.new_item_price, $scope.selected_category, (stat) => {
+    if ($scope.selected_category != 'subscription') {
+      $scope.new_item_month = null;
+      $scope.new_item_year = null;
+    }
+    sdk.AddItem($scope.new_item_name, $scope.add_selected_grade, $scope.new_item_price, $scope.selected_category, $scope.new_item_month, $scope.new_item_year, (stat) => {
       if (stat == sdk.stats.OK) {
         $scope.grade_changed()
         toast('تم الإضافة بنجاح')

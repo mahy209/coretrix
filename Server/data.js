@@ -3111,13 +3111,16 @@ function addItem(args, callback) {
   if (!isTeacherRep(args.userDoc)) return callback(null, stats.IncapableUserType);
   mongoh.GetNextSequence(db, 'items', {}, 'id', lib.IntIncrementer, function (newid) {
     if (typeof newid != 'number') return callback(null, stats.Error);
+    const { name, grade, price, month, year } = args;
     db.collection("items").insertOne({
       id: newid,
       [teacherForeignIdentifier]: teacherRep(args.userDoc),
-      name: args.name,
-      grade: args.grade,
-      price: args.price,
-      category: args.itemCategory
+      name,
+      grade,
+      price,
+      category: args.itemCategory,
+      month,
+      year,
     }, (err, result) => {
       ErrorAndCount(callback, err, result, fields.insertedCount, stats.Error);
     })
