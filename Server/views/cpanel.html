@@ -228,12 +228,13 @@
                       'absent' ? 'لم يسمّع' : 'سمّع')) : 'لم تسجل درجة تسميع'}}
                     </div>
                   </div>
-                  <!-- <div class="col m3 l3 s12"> we dont need it
-                                            <h6 class="center-align flow-text" >الواجب</h6>
-                                            <div ng-repeat="l in last_classes" class="card-panel blue-grey white-text">
-                                                {{l.homework ? (l.homework.type == 'marks' ? l.homework.mark + '/' + l.homework.max : (l.homework.option == 'incomplete' ? 'غير مكتمل' : 'كامل')) : 'لا يوجد واجب'}}
-                                            </div>
-                                        </div> -->
+                  <!-- 
+                  <div class="col m3 l3 s12"> we dont need it
+                    <h6 class="center-align flow-text" >الواجب</h6>
+                    <div ng-repeat="l in last_classes" class="card-panel blue-grey white-text">
+                        {{l.homework ? (l.homework.type == 'marks' ? l.homework.mark + '/' + l.homework.max : (l.homework.option == 'incomplete' ? 'غير مكتمل' : 'كامل')) : 'لا يوجد واجب'}}
+                    </div>
+                  </div> -->
                   <div class="col m3 l3 s12">
                     <h6 class="center-align flow-text">الحضور</h6>
                     <div ng-repeat="n in last_classes" class="card-panel white-text" ng-class="n.log[0].attendant ? 'green' : 'red'">
@@ -249,6 +250,21 @@
                 </div>
               </div>
             </div>
+            <div class="col l12 s12">
+                <div class="card-panel" style="transition: all 0.2s">
+                  <div class="row">
+                    <div class="col m3 l3 s12">
+                      <h6 class="center-align flow-text">امتحان</h6>
+                      <div ng-show="l" ng-class="(l.log[0].mark > l.redline && l.log[0].attendant) ? 'green-text' : ((l.log[0].mark || l.log[0].mark == 0) ? 'red' : '')"
+                        class="card-panel white-text blue-grey" ng-repeat="l in last_exams">
+                        {{l.log[0].attendant ? l.name + ': ' : ''}} {{l.log[0] ? (l.log[0].mark || l.log[0].mark == 0) ?
+                        (l.log[0].mark + '/' + l.max_mark)
+                        : 'لم تسجل درجة الطالب' : 'لم يحضر'}}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             <div class="col l6 s12">
               <!-- current exam -->
               <div class="card-panel " style="transition: all 0.2s">
@@ -277,7 +293,7 @@
               </div>
             </div>
             <div class="col l6 s12">
-              <div class="card-panel " style="transition: all 0.2s">
+              <div class="card-panel" style="transition: all 0.2s">
                 <h6 class="center-align flow-text">الحصة الحالية</h6>
                 <div class="row" ng-show="currentClass.date">
                   <!-- <div class="col s12 l6">

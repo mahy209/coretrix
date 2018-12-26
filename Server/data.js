@@ -352,6 +352,7 @@ var db;
 const ip = require(__dirname + "/imageprocessor")
 const mongoh = require(__dirname + "/mongoh");
 var loaded = false;
+const moment = require('moment')
 const mongodb = require('mongodb')
 var MongoClient = mongodb.MongoClient;
 var ObjectId = mongodb.ObjectID;
@@ -3111,7 +3112,13 @@ function addItem(args, callback) {
   if (!isTeacherRep(args.userDoc)) return callback(null, stats.IncapableUserType);
   mongoh.GetNextSequence(db, 'items', {}, 'id', lib.IntIncrementer, function (newid) {
     if (typeof newid != 'number') return callback(null, stats.Error);
-    const { name, grade, price, month, year } = args;
+    const {
+      name,
+      grade,
+      price,
+      month,
+      year
+    } = args;
     db.collection("items").insertOne({
       id: newid,
       [teacherForeignIdentifier]: teacherRep(args.userDoc),
@@ -3845,7 +3852,7 @@ function briefLog(args, callback) {
     },
     {
       $project: {
-        _id: 0,
+        _id: 1,
         grade: 1,
         fullname: 1,
         'group_data.name': 1,
@@ -3902,6 +3909,7 @@ function briefLog(args, callback) {
         if (err) {
           callback(err);
         } else {
+          const subscriptions = generateSubscriptions(data);
           try {
             for (let i = 0; i < classes.length; i++) {
               const teacherClass = classes[i];
@@ -3919,16 +3927,98 @@ function briefLog(args, callback) {
                 log: [log],
               };
             }
+            for (let i = 0; i < subscriptions.length; i++) {
+              const subscription = subscriptions[i];
+              const log = await resolveSubscriptionLog(args.targetuser, subscription);
+              subscriptions[i] = {
+                ...subscription,
+                log,
+              };
+            }
           } catch (e) {}
           callback(null, stats.OK, {
-            data: data,
-            classes: classes,
-            exams: exams
+            data,
+            classes,
+            exams,
+            subscriptions,
           });
         }
       })
     })
   });
+}
+
+function generateSubscriptions(data) {
+  const miminumDate = new ObjectId(data._id).getTimestamp();
+  const groundedMinimumDate = new Date(groundMonth(miminumDate));
+  console.log(groundedMinimumDate);
+  const subscriptions = [];
+  for (let i = 0; i < 5; i++) {
+    const generatedDate = moment().subtract(i, 'months').toDate();
+    const groundedGeneratedDate = groundMonth(generatedDate);
+    console.log(groundedGeneratedDate);
+    if (groundedGeneratedDate >= groundedMinimumDate) {
+      console.log('generated is bigger');
+      subscriptions.push(generateSubscription(generatedDate, data.grade));
+    }
+  }
+  return subscriptions;
+}
+
+/**
+ * @param  {Date} date
+ */
+function groundMonth(date) {
+  date.setHours(0, 0, 0, 0);
+  date.setDate(1);
+  return date;
+}
+
+function generateSubscription(date, grade) {
+  return {
+    month: Number(moment(date).format('M')),
+    year: Number(moment(date).format('YYYY')),
+    grade,
+  }
+}
+
+/**
+ * Payment subscription
+ * @typedef {Object} Subscription
+ * @property {number} month Month of year
+ * @property {number} year Year of subscription
+ * @property {number} grade Subscription grade id
+ */
+
+/**
+ * Resolve a month payment log
+ * @param  {number} studentid Target student id
+ * @param  {Subscription} subscription Target class id
+ * @returns {Promise} Promise that resolves into the class log
+ */
+function resolveSubscriptionLog(studentid, subscription) {
+  return new Promise((resolve, reject) => {
+    db.collection('items').findOne(subscription, (error, result) => {
+      if (error) {
+        reject(error);
+        return;
+      }
+      if (result) {
+        db.collection('payments').findOne({
+          itemid: result.id,
+          studentid,
+        }, (error, result) => {
+          if (error) {
+            reject(error);
+            return;
+          }
+          resolve(result);
+        });
+      } else {
+        resolve();
+      }
+    });
+  })
 }
 
 /**
