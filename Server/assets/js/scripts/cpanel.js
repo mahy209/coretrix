@@ -1996,8 +1996,12 @@ app.controller('mainCtrl', function ($rootScope, $scope, sdk) {
         }
         $scope.last_exams = result.exams
         $scope.last_classes = result.classes
-        console.log({
-          result
+        $scope.subscriptions = result.subscriptions.map(subscription => {
+          const log = formatPayClass(subscription.log, subscription.item.price);
+          return {
+            ...subscription,
+            log,
+          }
         });
         if ($scope.selectedLogger == 'class') {
           if (result.data.group_id != $scope.selected_group.id) {

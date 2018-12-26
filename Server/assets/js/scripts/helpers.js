@@ -30,18 +30,25 @@ function resetModals() {
 }
 
 function formatPayClass(payment, price) {
+  if (!payment) {
+    payment = {};
+  }
   if (!payment.payed) {
+    payment.cardClass = 'red';
     payment.payClass = 'red-text darken-1';
     payment.payText = 'لم يدفعها';
   } else {
     var payedMoney = payment.payed + (payment.discount || 0);
     if (payedMoney > price) {
+      payment.cardClass = 'purple';
       payment.payClass = 'green-text';
       payment.payText = 'دفع أكثر من سعرها و يتبقى له ' + (payedMoney - price) + ' جنيه';
     } else if (payedMoney < price) {
+      payment.cardClass = 'purple';
       payment.payClass = 'purple-text';
       payment.payText = 'لم يدفع بالكامل متبقى ' + (price - payedMoney) + ' جنيه';
     } else if (payedMoney == price) {
+      payment.cardClass = 'blue-grey';
       payment.payClass = 'blue-text';
       payment.payText = 'دفعها';
     }

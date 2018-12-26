@@ -3929,10 +3929,10 @@ function briefLog(args, callback) {
             }
             for (let i = 0; i < subscriptions.length; i++) {
               const subscription = subscriptions[i];
-              const log = await resolveSubscriptionLog(args.targetuser, subscription);
+              const resolved = await resolveSubscriptionLog(args.targetuser, subscription);
               subscriptions[i] = {
                 ...subscription,
-                log,
+                ...resolved,
               };
             }
           } catch (e) {}
@@ -3951,14 +3951,11 @@ function briefLog(args, callback) {
 function generateSubscriptions(data) {
   const miminumDate = new ObjectId(data._id).getTimestamp();
   const groundedMinimumDate = new Date(groundMonth(miminumDate));
-  console.log(groundedMinimumDate);
   const subscriptions = [];
   for (let i = 0; i < 5; i++) {
     const generatedDate = moment().subtract(i, 'months').toDate();
     const groundedGeneratedDate = groundMonth(generatedDate);
-    console.log(groundedGeneratedDate);
     if (groundedGeneratedDate >= groundedMinimumDate) {
-      console.log('generated is bigger');
       subscriptions.push(generateSubscription(generatedDate, data.grade));
     }
   }
@@ -3998,21 +3995,24 @@ function generateSubscription(date, grade) {
  */
 function resolveSubscriptionLog(studentid, subscription) {
   return new Promise((resolve, reject) => {
-    db.collection('items').findOne(subscription, (error, result) => {
+    db.collection('items').findOne(subscription, (error, item) => {
       if (error) {
         reject(error);
         return;
       }
-      if (result) {
+      if (item) {
         db.collection('payments').findOne({
-          itemid: result.id,
+          itemid: item.id,
           studentid,
-        }, (error, result) => {
+        }, (error, log) => {
           if (error) {
             reject(error);
             return;
           }
-          resolve(result);
+          resolve({
+            item,
+            log
+          });
         });
       } else {
         resolve();

@@ -539,3 +539,7 @@ ul[dnd-list] .dndPlaceholder {
 .rtl, .rtl * {
   text-align: right;
 }
+
+.float-right {
+  float: right !important;
+}
