@@ -1746,8 +1746,7 @@ function confirm(rootscope, sdk, name) {
 app.controller('mainCtrl', function ($rootScope, $scope, sdk) {
   $scope.tolog_name = 'اسم الطالب'
   $scope.toLogGroup = 'مجموعة الطالب'
-  confirm($rootScope, sdk)
-
+  confirm($rootScope, sdk);
   let first = true
   var init = (refreshing, result, type) => {
     var c = $scope.selected_grade
@@ -1935,6 +1934,13 @@ app.controller('mainCtrl', function ($rootScope, $scope, sdk) {
   $rootScope.reloadClassesLinks = () => {
     $scope.grade_changed(false, false, false, true)
   }
+  sdk.GetBeeps((err, result) => {
+    if (err) {
+      toast('برجاء تسجيل الانذارات فى الاعدادات');
+      return;
+    }
+    $scope.beeps = result.beeps;
+  });
   $scope.toggleLog = () => {
     if (!$scope.studentid) return toast('لم يسجل حضور اى طالب!', gradients.error)
     $scope.cancelled = !$scope.cancelled
@@ -2003,6 +2009,60 @@ app.controller('mainCtrl', function ($rootScope, $scope, sdk) {
             log,
           }
         });
+        // BEEPS LOGIC
+        let beep_exams = true;
+        for (let i = 0; i < result.exams.length; i++) {
+          const {
+            log
+          } = result.exams[i];
+          console.log('examlog', log);
+          if (log[0] && log[0].attendant) {
+            beep_exams = false;
+          }
+        }
+        let beep_classes = true;
+        for (let i = 0; i < result.classes.length; i++) {
+          const {
+            log
+          } = result.classes[i];
+          console.log('classlog', log);
+          if (log[0] && log[0].attendant) {
+            beep_classes = false;
+          }
+        }
+        const currentSubscription = result.subscriptions
+          .find(sub => sub.month == Number(moment().format('M')) && sub.year == Number(moment().format('Y')));
+        const beep_subscription = !currentSubscription.log || ((currentSubscription.log.payed - currentSubscription.log.discount) != currentSubscription.item.price);
+        let beep_passed_subscriptions = false;
+        for (const sub of result.subscriptions) {
+          if (sub == currentSubscription) {
+            continue;
+          }
+          console.log({
+            sub
+          });
+          const beep = !sub.log || ((sub.log.payed - sub.log.discount) != sub.item.price);
+          if (beep) {
+            beep_passed_subscriptions = beep;
+          }
+        }
+        console.log({
+          beep_exams,
+          beep_classes,
+          beep_subscription,
+          beeps: $scope.beeps,
+          beep_passed_subscriptions,
+          passedSubscriptions: $scope.beeps.passedSubscriptions,
+          passed: beep_passed_subscriptions && $scope.beeps.passedSubscriptions,
+        });
+        if (beep_exams || beep_classes ||
+          (beep_subscription && $scope.beeps.currentSubscription) ||
+          (beep_passed_subscriptions && $scope.beeps.passedSubscriptions)) {
+          new Audio('assets/sound/error.wav').play();
+        } else {
+          new Audio('assets/sound/success.wav').play();
+        }
+        // LOGING LOGIC
         if ($scope.selectedLogger == 'class') {
           if (result.data.group_id != $scope.selected_group.id) {
             $rootScope.overlayStatus = 'مجموعة أخرى!'
