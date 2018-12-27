@@ -1041,6 +1041,7 @@ app.controller('studentsCtrl', function ($rootScope, $scope, sdk) {
     else $scope.opt_grade = result[0]
     if (type == 'groups') $scope.load_optGroups()
   }
+
   $rootScope.variableListeners.push(init)
   initLoadMode = () => {
     sdk.CountStudents((stat, count) => {
@@ -1058,6 +1059,7 @@ app.controller('studentsCtrl', function ($rootScope, $scope, sdk) {
     $scope.mode = 'load'
     initLoadMode()
   }
+
   $scope.performSearch = (e) => {
     if ($scope.searchStudents_val == undefined) {
       $scope.reload()
@@ -1120,6 +1122,17 @@ app.controller('studentsCtrl', function ($rootScope, $scope, sdk) {
     }
   })
 
+  $rootScope.barcodeObservers.push((id) => {
+    if ($rootScope.tab != 'students') {
+      return;
+    }
+    $scope.$apply(() => {
+      const student = $scope.barcodeStudents.find(student => student.studentid == parseInt(id));
+      $scope.searchStudents_val = student.fullname;
+      $scope.performSearch();
+    })
+  });
+
   function initializeSearch() {
     sdk.ListStudents(0, 999999999, (stat, response) => {
       if (stat == sdk.stats.OK) {
@@ -1134,6 +1147,7 @@ app.controller('studentsCtrl', function ($rootScope, $scope, sdk) {
             "fullname",
           ]
         };
+        $scope.barcodeStudents = response;
         $rootScope.studentsIndexer = new Fuse([...response], options);
       }
     });
@@ -1145,7 +1159,7 @@ app.controller('studentsCtrl', function ($rootScope, $scope, sdk) {
             var data = {}
             var cmpdata = {}
             for (var i = 0; i < result.length; i++) {
-              data[result[i].fullname] = result[i].studentid
+              data[result[i].fullname] = result[i].id
               result[i] = result[i].fullname
               cmpdata[result[i]] = null
             }
@@ -1341,6 +1355,11 @@ app.controller('studentsCtrl', function ($rootScope, $scope, sdk) {
     if ($scope.linkingStudent) {
       reg = $scope.registered[n];
     }
+    console.log({
+      reg,
+      link: $scope.linkingStudent,
+      regs: $scope.registered
+    });
     if (reg) {
       finishShit(reg)
     } else {
