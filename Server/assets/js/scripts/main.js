@@ -54,9 +54,7 @@ app.controller("loginCtrl", function ($scope, $rootScope, $window, sdk) {
                 loading(false);
                 switch (stat) {
                     case sdk.stats.OK:
-                        Cookies.set("token", result, {
-                            path: '/'
-                        });
+                        localStorage.setItem('token', result);
                         $window.location.href = '/';
                         break;
                     case sdk.stats.UserNonExisting:
