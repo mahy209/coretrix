@@ -4282,6 +4282,35 @@ function getNameAndSubjects(args, callback) {
   });
 }
 
+function UpdateBeeps(args, callback) {
+  console.log({
+    args
+  });
+  db.collection('users').updateOne({
+    [identifier]: teacherRep(args.userDoc),
+  }, {
+    $set: {
+      beeps: args.beeps,
+    }
+  }, (err, result) => {
+    ErrorAndCount(callback, err, result, fields.matchedCount, stats.Error);
+  });
+}
+
+function GetBeeps(args, callback) {
+  db.collection('users').findOne({
+    [identifier]: teacherRep(args.userDoc),
+  }, {
+    _id: 0,
+    beeps: 1
+  }, (err, result) => {
+    if (err) {
+      return callback(err);
+    }
+    callback(null, stats.OK, result);
+  });
+}
+
 function updateNameAndSubjects(args, callback) {
   db.collection('users').updateOne({
     [identifier]: teacherRep(args.userDoc),
@@ -4454,6 +4483,9 @@ module.exports = {
   UpdateStudentNotesAndDiscount: updateStudentNotesAndDiscount,
   GetStudentNotesAndDiscount: getStudentNotesAndDiscount,
   GetLinks: getLinks,
+
+  UpdateBeeps,
+  GetBeeps,
 
   // GRADES
   CreateGrade: createGrade,

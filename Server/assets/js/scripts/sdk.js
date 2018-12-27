@@ -823,6 +823,21 @@ sdk.factory('sdk', ['$http', function ($http) {
     }, callback);
   }
 
+  function GetBeeps(callback) {
+    const token = Cookies.get('token');
+    post("api/teacher/beeps", {
+      token,
+    }, callback);
+  }
+
+  function UpdateBeeps(beeps, callback) {
+    const token = Cookies.get('token');
+    post("api/teacher/beeps/update", {
+      token,
+      beeps,
+    }, callback);
+  }
+
   function ListGrades(callback) {
     const token = Cookies.get('token');
     post("api/grades/list", {
@@ -1285,6 +1300,8 @@ sdk.factory('sdk', ['$http', function ($http) {
     DeleteGrade: DeleteGrade,
     GetLinks: GetLinks,
     Count: count,
+    GetBeeps,
+    UpdateBeeps,
     /* ----------------------- */
     ListGroupClassesLinks: ListGroupClassesLinks,
     LinkGroupClasses: LinkGroupClasses,

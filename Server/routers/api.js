@@ -290,6 +290,7 @@ var inputvalidators = {
   ig_grade: validators.ValidateOrIgnoreNumber,
   month: validators.ValidateOrIgnoreNumber,
   year: validators.ValidateOrIgnoreNumber,
+  beeps: validators.Pass,
 }
 
 // REG CALLS
@@ -407,6 +408,9 @@ registerApiCall("/profile/gradings/get", ["token"], userDocDefault, data.GetGrad
 //registerApiCall("/teacher/grades/edit", ["token", "grades"], true, data.EditGrades);
 registerApiCall("/teacher/grades/get", ["token", "targetuser"], userDocRestricts.GetGrades, data.GetGrades);
 registerApiCall("/teacher/grades/months", ["token", "grade"], userDocDefault, data.ListGradeMonths);
+
+registerApiCall("/teacher/beeps", ["token"], userDocDefault, data.GetBeeps);
+registerApiCall("/teacher/beeps/update", ["token", "beeps"], userDocDefault, data.UpdateBeeps);
 
 registerApiCall("/teacher/defaults/supertt/set", ["token", "days", "duration", "whours", "break", "fbreak"], userDocDefault, data.SetSuperTTDefaults);
 registerApiCall("/teacher/defaults/supertt/get", ["token"], userDocRestricts.GetSuperTtDefaults, data.GetSuperTTDefaults);

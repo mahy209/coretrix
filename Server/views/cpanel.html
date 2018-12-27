@@ -255,8 +255,7 @@
                 <div class="row">
                   <div class="col s4 float-right" ng-repeat="sub in subscriptions">
                     <h6 class="center-align flow-text">{{ sub.item.name }}</h6>
-                    <div ng-class="sub.log.cardClass"
-                      class="card-panel white-text">
+                    <div ng-class="sub.log.cardClass" class="card-panel white-text">
                       {{ sub.log.payText }}
                     </div>
                   </div>
@@ -1546,6 +1545,22 @@
                             </tbody>
                           </table>
                         </div>
+                      </div>
+                    </li>
+                    <li class="active">
+                      <div class="collapsible-header">اصوات الانذارات</div>
+                      <div class="collapsible-body">
+                        <label>عدد الغياب</label>
+                        <input type="number" min="0" max="3" class="validate" ng-model="classesBeep">
+                        <label>عدد الامتحانات</label>
+                        <input type="number" min="0" max="3" class="validate" ng-model="examsBeep">
+                        <div>
+                          <input type="checkbox" ng-model="currentSubscription" id="currentSubscription" />
+                          <label for="currentSubscription">الشهر الحالي</label>
+                          <input type="checkbox" ng-model="passedSubscriptions" id="passedSubscriptions" />
+                          <label for="passedSubscriptions">الشهور السابقة</label>
+                        </div>
+                        <button style="margin-top: 20px;" ng-click="updateBeeps()" class="btn blue-grey-background">حفظ</button>
                       </div>
                     </li>
                     <!-- not needed -->

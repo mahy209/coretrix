@@ -2131,6 +2131,43 @@ app.controller('statsCtrl', function ($rootScope, $scope, sdk) {
 });
 
 app.controller('settingsCtrl', function ($rootScope, $scope, sdk) {
+  sdk.GetBeeps((err, result) => {
+    let {
+      beeps
+    } = result;
+    if (!beeps || beeps == {}) {
+      beeps = {
+        exams: 1,
+        classes: 2,
+        currentSubscription: false,
+        passedSubscriptions: true,
+      };
+      $scope.updateBeeps(beeps);
+    }
+    const {
+      exams,
+      classes,
+      currentSubscription,
+      passedSubscriptions,
+    } = beeps;
+    $scope.currentSubscription = currentSubscription;
+    $scope.passedSubscriptions = passedSubscriptions;
+    $scope.classesBeep = classes;
+    $scope.examsBeep = exams;
+  });
+  $scope.updateBeeps = (beeps) => {
+    sdk.UpdateBeeps(beeps || {
+      exams: $scope.examsBeep,
+      classes: $scope.classesBeep,
+      currentSubscription: $scope.currentSubscription,
+      passedSubscriptions: $scope.passedSubscriptions,
+    }, (err, result) => {
+      if (!err) {
+        toast("تم حفظ البيانات");
+        location.reload();
+      }
+    });
+  }
   var ValidatePassword = function (obj) {
     if (!validators.ValidateString(obj)) {
       return false
