@@ -110,7 +110,7 @@ app.controller("mainCtrl", function ($rootScope, $scope, sdk) {
           }
           $scope.examsMarksTotal = examsMarksTotal;
           $scope.examsMaxTotal = examsMaxTotal;
-          $scope.examsAverage = (examsMarksTotal / examsMaxTotal) * 100;
+          $scope.examsAverage = Math.round((examsMarksTotal / examsMaxTotal) * 100);
 
           $scope.classes = result.classes;
           $scope.unattendedClassesCount = 0;

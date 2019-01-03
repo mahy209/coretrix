@@ -205,7 +205,7 @@
               {{e.name}}
             </td>
             <td>{{e.log.attendant ? 'حضر' : 'لم يحضر'}}</td>
-            <td>{{e.log.mark ? (e.log.mark + ' / ' + e.max_mark) : 'لم تسجل درجة للطالب'}}</td>
+            <td>{{e.log.mark >= 0 ? (e.log.mark + ' / ' + e.max_mark) : 'لم تسجل درجة للطالب'}}</td>
             <td>{{ gradeMark(e.log.mark, e.max_mark) || '---' }}</td>
           </tr>
         </table>
