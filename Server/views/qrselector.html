@@ -32,6 +32,8 @@
         <label>نوع الكود</label>
         <select class="browser-default" ng-options="i as i for i in ['A4 Barcode', 'Barcode', 'QR']" ng-model="selected_code_type">
         </select>
+        <label>المسافة الفاصلة</label>
+        <input type="number" ng-model="marginSize" min="1" style="padding-right:1%">
         <label>السنه الدراسيه</label>
         <select class="browser-default" ng-options="i as grades_names[i] for i in grades" ng-change="grade_changed()"
           ng-model="selected_grade">

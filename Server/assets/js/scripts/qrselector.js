@@ -36,6 +36,7 @@ function confirm(rootscope, sdk, name) {
 app.controller("mainCtrl", function ($rootScope, $scope, sdk) {
   $scope.selected_code_type = 'Barcode';
   $scope.printingCount = 1;
+  $scope.marginSize = 6;
   sdk.GetGrades((stat, result) => {
     switch (stat) {
       case sdk.stats.OK:
@@ -78,8 +79,6 @@ app.controller("mainCtrl", function ($rootScope, $scope, sdk) {
       pwa.document.close();
     }
 
-    console.log($scope.selected_code_type);
-
     switch ($scope.selected_code_type) {
       case 'QR':
         PrintImage(sdk.GeneratePrintingPageHtml(users));
@@ -88,7 +87,7 @@ app.controller("mainCtrl", function ($rootScope, $scope, sdk) {
         PrintImage(sdk.GenerateBarcodeA4PrintHTML(users, true));
         break;
       case 'Barcode':
-        PrintImage(sdk.GenerateBarcodeA4PrintHTML(users, false));
+        PrintImage(sdk.GenerateBarcodeA4PrintHTML(users, false, $scope.marginSize));
         break;
     }
   };

@@ -1034,7 +1034,8 @@ sdk.factory('sdk', ['$http', function ($http) {
     return html.replace("<!--here-->", text);
   }
 
-  function GenerateBarcodeA4PrintHTML(users, A4) {
+  function GenerateBarcodeA4PrintHTML(users, A4, margin = 0) {
+    console.log({margin});
     const barcodeHTML =
       `
     <html>
@@ -1090,7 +1091,7 @@ sdk.factory('sdk', ['$http', function ($http) {
       <div class="row">
         ${users.map(user => {
           return  `
-          <div class="${A4 ? 'col s3' : ''} text-center">
+          <div class="${A4 ? 'col s3' : ''} text-center" style="padding-top: ${margin}px; padding-bottom: ${margin}px">
             <svg id="barcode${user.id}"></svg>
             <p class="no-margin">
               ${user.name}
