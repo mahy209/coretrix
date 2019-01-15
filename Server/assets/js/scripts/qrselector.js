@@ -36,7 +36,9 @@ function confirm(rootscope, sdk, name) {
 app.controller("mainCtrl", function ($rootScope, $scope, sdk) {
   $scope.selected_code_type = 'Barcode';
   $scope.printingCount = 1;
-  $scope.marginSize = 6;
+  $scope.barcodeHeight = Number(localStorage.getItem('barcodeHeight')) || 30;
+  $scope.marginTop = Number(localStorage.getItem('marginTop')) || 10;
+  $scope.fontSize = Number(localStorage.getItem('fontSize')) || 12;
   sdk.GetGrades((stat, result) => {
     switch (stat) {
       case sdk.stats.OK:
@@ -49,6 +51,9 @@ app.controller("mainCtrl", function ($rootScope, $scope, sdk) {
   });
 
   $scope.print_qr = () => {
+    localStorage.setItem('barcodeHeight', $scope.barcodeHeight);
+    localStorage.setItem('marginTop', $scope.marginTop);
+    localStorage.setItem('fontSize', $scope.fontSize);
     var users = [];
     for (var i = 0; i < $scope.students.length; i++) {
       if ($scope.students[i].selected) {
@@ -84,10 +89,10 @@ app.controller("mainCtrl", function ($rootScope, $scope, sdk) {
         PrintImage(sdk.GeneratePrintingPageHtml(users));
         break;
       case 'A4 Barcode':
-        PrintImage(sdk.GenerateBarcodeA4PrintHTML(users, true));
+        PrintImage(sdk.GenerateBarcodeA4PrintHTML(users, true, $scope.barcodeHeight, $scope.marginTop, $scope.fontSize));
         break;
       case 'Barcode':
-        PrintImage(sdk.GenerateBarcodeA4PrintHTML(users, false, $scope.marginSize));
+        PrintImage(sdk.GenerateBarcodeA4PrintHTML(users, false, $scope.barcodeHeight, $scope.marginTop, $scope.fontSize));
         break;
     }
   };

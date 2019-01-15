@@ -1004,8 +1004,10 @@ sdk.factory('sdk', ['$http', function ($http) {
     <script type="text/javascript" src="/assets/js/libs/jquery-3.2.1.min.js"></script>
     <script>
       $(document).ready(() => { 
-        window.print();
-        window.close();
+        setTimeout(() => {
+          window.print();
+          window.close();
+        }, 1000)
       });
     </script>
     <link type="text/css" rel="stylesheet" href="/assets/css/materialize.min.css" media="all" />
@@ -1034,8 +1036,7 @@ sdk.factory('sdk', ['$http', function ($http) {
     return html.replace("<!--here-->", text);
   }
 
-  function GenerateBarcodeA4PrintHTML(users, A4, margin = 0) {
-    console.log({margin});
+  function GenerateBarcodeA4PrintHTML(users, A4, height, margin, fontSize) {
     const barcodeHTML =
       `
     <html>
@@ -1045,19 +1046,17 @@ sdk.factory('sdk', ['$http', function ($http) {
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <script type="text/javascript" src="/assets/js/libs/jquery-3.2.1.min.js"></script>
       <script type="text/javascript" src="/assets/js/libs/barcode-generator.js"></script>
-      <style>
-        @import url('/assets/css/Cairo.css');
-
-        body {
-            font-family: 'Cairo', sans-serif;
-        }
-        
+      <style>        
         .text-center {
           text-align: center;
         }
     
         .no-margin {
           margin: 0;
+        }
+
+        p {
+          font-size: ${fontSize}px;
         }
 
         .row {
@@ -1075,14 +1074,16 @@ sdk.factory('sdk', ['$http', function ($http) {
           return `
           JsBarcode('#barcode${user.id}', '${user.id}', {
             displayValue: false,
-            height: 40,
+            height: ${height},
             margin: 0,
-            marginTop: 20,
+            marginTop: ${margin},
           });
           `;
         }).join('')}
-        window.print();
-        window.close();
+        setTimeout(() => {
+          window.print();
+          window.close();
+        }, 1000)
       });
       </script>
     </head>
@@ -1091,7 +1092,7 @@ sdk.factory('sdk', ['$http', function ($http) {
       <div class="row">
         ${users.map(user => {
           return  `
-          <div class="${A4 ? 'col s3' : ''} text-center" style="padding-top: ${margin}px; padding-bottom: ${margin}px">
+          <div class="${A4 ? 'col s3' : ''} text-center">
             <svg id="barcode${user.id}"></svg>
             <p class="no-margin">
               ${user.name}

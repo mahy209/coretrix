@@ -32,8 +32,6 @@
         <label>نوع الكود</label>
         <select class="browser-default" ng-options="i as i for i in ['A4 Barcode', 'Barcode', 'QR']" ng-model="selected_code_type">
         </select>
-        <label>المسافة الفاصلة</label>
-        <input type="number" ng-model="marginSize" min="1" style="padding-right:1%">
         <label>السنه الدراسيه</label>
         <select class="browser-default" ng-options="i as grades_names[i] for i in grades" ng-change="grade_changed()"
           ng-model="selected_grade">
@@ -43,6 +41,14 @@
         <select class="browser-default" ng-options="i as i.name for i in groups" ng-model="selected_group" ng-change="group_changed()">
           <option value="" disabled selected>المجموعة</option>
         </select>
+        <ng-template ng-show="selected_code_type != 'QR'">
+          <label>حجم الباركود</label>
+          <input type="number" ng-model="barcodeHeight" min="1" style="padding-right:1%">
+          <label>المسافة الفاصلة</label>
+          <input type="number" ng-model="marginTop" min="1" style="padding-right:1%">
+          <label>حجم الخط</label>
+          <input type="number" ng-model="fontSize" min="1" style="padding-right:1%">
+        </ng-template>
         <label>عدد النسخ</label>
         <input type="number" ng-model="printingCount" min="1" style="padding-right:1%">
         <button style="margin-top:3%; margin-bottom:3%; width: 100%" ng-click="print_qr()" class="btn gradient2">إطبع</button>
