@@ -1109,6 +1109,7 @@ sdk.factory('sdk', ['$http', function ($http) {
   }
 
   function GenerateReceipt(data) {
+    const barcodeHeight = Number(localStorage.getItem('barcodeHeight'));
     const {
       id,
       fullname,
@@ -1125,14 +1126,7 @@ sdk.factory('sdk', ['$http', function ($http) {
       <link type="text/css" rel="stylesheet" href="/assets/css/materialize.min.css" media="all" />
       <script type="text/javascript" src="/assets/js/libs/jquery-3.2.1.min.js"></script>
       <script type="text/javascript" src="/assets/js/libs/barcode-generator.js"></script>
-      <style>
-        @import url('/assets/css/Cairo.css');
-        
-        body {
-          font-family: 'Cairo', sans-serif;
-          padding: 16px;
-        }
-    
+      <style>    
         .text-center, .text-center * {
           text-align: center;
         }
@@ -1140,6 +1134,14 @@ sdk.factory('sdk', ['$http', function ($http) {
         .text-right,
         .text-right * {
           text-align: right;
+        }
+
+        h5 {
+          font-size: 1.4rem;
+        }
+
+        td {
+          font-size: 1rem;
         }
     
         .no-margin {
@@ -1154,12 +1156,12 @@ sdk.factory('sdk', ['$http', function ($http) {
       $(document).ready(() => {
         JsBarcode('#barcode', ${data.id}, {
           displayValue: false,
-          height: 40,
+          height: ${barcodeHeight},
           margin: 0,
           marginTop: 20,
         });
-        window.print();
-        window.close();
+        // window.print();
+        // window.close();
       })
       </script>
     </head>
@@ -1176,12 +1178,12 @@ sdk.factory('sdk', ['$http', function ($http) {
             <tbody>
               <tr>
                 <td width="18%">الطالب</td>
-                <td style="padding-right: 6px;">:</td>
+                <td style="padding-right: 3px; padding-left: 3px;">:</td>
                 <td>${fullname}</td>
               </tr>
               <tr>
                 <td>السنة</td>
-                <td>:</td>
+                <td style="padding-right: 3px; padding-left: 3px;">:</td>
                 <td>${grade}</td>
               </tr>
             </tbody>
