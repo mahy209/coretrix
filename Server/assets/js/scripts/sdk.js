@@ -1095,8 +1095,8 @@ sdk.factory('sdk', ['$http', function ($http) {
       <div class="row">
         ${users.map(user => {
           return  `
-          <div class="${A4 ? 'col s3' : ''} text-center">
-            <p class="no-margin" style="margin-top: ${margin}px; margin-bottom: 3px">
+          <div class="${A4 ? 'col s3' : ''} text-center" style="margin-bottom: ${margin}px">
+            <p class="no-margin" style="margin-bottom: 3px">
               ${profile.name}
             </p>
             <svg id="barcode${user.id}"></svg>
