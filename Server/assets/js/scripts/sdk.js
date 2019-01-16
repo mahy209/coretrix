@@ -1036,7 +1036,10 @@ sdk.factory('sdk', ['$http', function ($http) {
     return html.replace("<!--here-->", text);
   }
 
-  function GenerateBarcodeA4PrintHTML(users, A4, height, margin, fontSize) {
+  function GenerateBarcodeA4PrintHTML(users, A4, height, margin, fontSize, profile) {
+    console.log({
+      profile
+    });
     const barcodeHTML =
       `
     <html>
@@ -1076,7 +1079,7 @@ sdk.factory('sdk', ['$http', function ($http) {
             displayValue: false,
             height: ${height},
             margin: 0,
-            marginTop: ${margin},
+            marginTop: 0,
           });
           `;
         }).join('')}
@@ -1093,6 +1096,9 @@ sdk.factory('sdk', ['$http', function ($http) {
         ${users.map(user => {
           return  `
           <div class="${A4 ? 'col s3' : ''} text-center">
+            <p class="no-margin" style="margin-top: ${margin}px; margin-bottom: 3px">
+              ${profile.name}
+            </p>
             <svg id="barcode${user.id}"></svg>
             <p class="no-margin">
               ${user.name}

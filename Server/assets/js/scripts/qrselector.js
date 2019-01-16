@@ -50,6 +50,10 @@ app.controller("mainCtrl", function ($rootScope, $scope, sdk) {
     }
   });
 
+  sdk.GetNameAndSubject((stat, result) => {
+    $scope.profile = result
+  });
+
   $scope.print_qr = () => {
     localStorage.setItem('barcodeHeight', $scope.barcodeHeight);
     localStorage.setItem('marginTop', $scope.marginTop);
@@ -89,10 +93,10 @@ app.controller("mainCtrl", function ($rootScope, $scope, sdk) {
         PrintImage(sdk.GeneratePrintingPageHtml(users));
         break;
       case 'A4 Barcode':
-        PrintImage(sdk.GenerateBarcodeA4PrintHTML(users, true, $scope.barcodeHeight, $scope.marginTop, $scope.fontSize));
+        PrintImage(sdk.GenerateBarcodeA4PrintHTML(users, true, $scope.barcodeHeight, $scope.marginTop, $scope.fontSize, $scope.profile));
         break;
       case 'Barcode':
-        PrintImage(sdk.GenerateBarcodeA4PrintHTML(users, false, $scope.barcodeHeight, $scope.marginTop, $scope.fontSize));
+        PrintImage(sdk.GenerateBarcodeA4PrintHTML(users, false, $scope.barcodeHeight, $scope.marginTop, $scope.fontSize, $scope.profile));
         break;
     }
   };
