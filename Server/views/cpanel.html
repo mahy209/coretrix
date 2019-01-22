@@ -1565,18 +1565,20 @@
                       </div>
                     </li>
                     <!-- not needed -->
-                    <!-- <li>
-                  <div class="collapsible-header">إعادة تعيين كلمة المرور</div>
-                  <div class="collapsible-body">
-                    <label>كلمة المرور الحالية</label>
-                    <input id="oldpassword" type="password" class="validate" ng-model="oldpassword">
-                    <label>كلمة المرور الجديدة</label>
-                    <input id="password" type="password" class="validate" ng-model="password">
-                    <label>أعد كتابة كلمة المرور الجديدة</label>
-                    <input id="password2" type="password" class="validate" ng-model="password2">
-                    <button ng-click="prepChange()" class="btn blue-grey-background">أعد تعيين كلمة المرور</button>
-                  </div>
-                </li> -->
+                    <li>
+                      <div class="collapsible-header">إعادة تعيين كلمة المرور</div>
+                      <div class="collapsible-body">
+                        <label>اسم المستخدم</label>
+                        <input id="username" type="password" class="validate" ng-model="username">
+                        <label>كلمة المرور الحالية</label>
+                        <input id="oldpassword" type="password" class="validate" ng-model="oldpassword">
+                        <label>كلمة المرور الجديدة</label>
+                        <input id="password" type="password" class="validate" ng-model="password">
+                        <label>أعد كتابة كلمة المرور الجديدة</label>
+                        <input id="password2" type="password" class="validate" ng-model="password2">
+                        <button ng-click="prepChange()" class="btn blue-grey-background">أعد تعيين كلمة المرور</button>
+                      </div>
+                    </li>
                   </ul>
                 </div>
                 <div>
@@ -1764,7 +1766,12 @@
                 <i class="fa fa-cog fa-2x" aria-hidden="true">
                   <span>الإعدادات</span>
                 </i>
+              </div>
 
+              <div ng-click="logout()" class="grey-text center-align">
+                <i class="fa fa-sign-out fa-2x" aria-hidden="true">
+                  <span>تسجيل الخروج</span>
+                </i>
               </div>
 
               <!-- not needed -->

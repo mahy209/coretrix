@@ -172,10 +172,8 @@ var validators = {
   ValidatePassword: function (obj) {
     if (!validators.ValidateString(obj)) {
       return false;
-    } else {
-      if (obj.length < 8) return false;
-      else return true;
     }
+    return true;
   },
   ValidateDate: function (dt) {
     return (dt && typeof dt == 'string' && new Date(dt) != "Invalid Date");

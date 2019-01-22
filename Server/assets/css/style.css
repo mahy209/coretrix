@@ -306,9 +306,9 @@ button a {
 
 #aside_cpanel div {
   display: block;
-  padding: 10%;
+  padding: 8px;
   overflow: hidden;
-  margin-bottom: 20%;
+  margin-bottom: 2px;
   cursor: pointer;
 }
 

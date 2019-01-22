@@ -774,7 +774,8 @@ function changePassword(args, callback) {
       username: args.userDoc.username
     }, {
       $set: {
-        password: hash(args.password)
+        password: hash(args.password),
+        username: args.username,
       }
     }, function (err, result) {
       ErrorAndCount(callback, err, result, fields.modifiedCount, stats.Error);

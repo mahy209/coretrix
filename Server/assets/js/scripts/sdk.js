@@ -180,10 +180,8 @@ var validators = {
   ValidatePassword: function (obj) {
     if (!validators.ValidateString(obj)) {
       return false;
-    } else {
-      if (obj.length < 8) return false;
-      else return true;
     }
+    return true;
   },
 }
 
@@ -213,7 +211,7 @@ sdk.factory('sdk', ['$http', function ($http) {
   }
 
   function CheckToken(student, teacher, def) {
-    var token = localStorage.getItem('token');
+    var token = sessionStorage.getItem('token');
     if (token) {
       _isAlive(token, function (stat, result) {
         switch (stat) {
@@ -258,30 +256,31 @@ sdk.factory('sdk', ['$http', function ($http) {
   }
 
   function GetTokens(callback) {
-    var token = localStorage.getItem('token');
+    var token = sessionStorage.getItem('token');
     post("api/tokens/get", {
       token: token
     }, callback);
   }
 
   function Deauthorize(unique, callback) {
-    var token = localStorage.getItem('token');
+    var token = sessionStorage.getItem('token');
     post("api/deauthorize", {
       unique: unique,
       token: token
     }, callback);
   }
 
-  function ChangePassword(password, oldpassword, callback) {
-    var token = localStorage.getItem('token');
+  function ChangePassword(password, oldpassword, username, callback) {
+    var token = sessionStorage.getItem('token');
     post("api/password/change", {
-      password: password,
-      oldpassword: oldpassword,
-      token: token
+      username,
+      password,
+      oldpassword,
+      token
     }, callback);
   }
   /*function AddPhone(phonecode, number, callback) {
-      var token = localStorage.getItem('token');
+      var token = sessionStorage.getItem('token');
       post("api/phones/add", {
           phonecode: phonecode,
           number: number,
@@ -290,7 +289,7 @@ sdk.factory('sdk', ['$http', function ($http) {
   }
 
   function GetPhones(callback, ids, startid, limit) {
-      var token = localStorage.getItem('token');
+      var token = sessionStorage.getItem('token');
       var req = {
           token: token
       };
@@ -301,7 +300,7 @@ sdk.factory('sdk', ['$http', function ($http) {
   }
 
   function RemovePhones(d_ids, callback) {
-      var token = localStorage.getItem('token');
+      var token = sessionStorage.getItem('token');
       post("api/phones/remove", {
           d_ids: d_ids,
           token: token
@@ -309,14 +308,14 @@ sdk.factory('sdk', ['$http', function ($http) {
   }*/
 
   function GetSuperTTDefaults(callback) {
-    var token = localStorage.getItem('token');
+    var token = sessionStorage.getItem('token');
     post("api/teacher/supertt/defaults/get", {
       token: token
     }, callback);
   }
 
   function ListStudents(startid, limit, callback, grade, group, getcontacts) {
-    var token = localStorage.getItem('token');
+    var token = sessionStorage.getItem('token');
     var query = {
       students_limit: limit,
       startid: startid,
@@ -329,14 +328,14 @@ sdk.factory('sdk', ['$http', function ($http) {
   }
 
   function ListContacts(callback) {
-    var token = localStorage.getItem('token');
+    var token = sessionStorage.getItem('token');
     post("api/teacher/contacts/list", {
       token
     }, callback);
   }
 
   function QRListStudents(grade, group, callback) {
-    var token = localStorage.getItem('token');
+    var token = sessionStorage.getItem('token');
     var query = {
       token: token
     };
@@ -346,7 +345,7 @@ sdk.factory('sdk', ['$http', function ($http) {
   }
 
   function GetStudent(targetuser, callback, getpayments) {
-    var token = localStorage.getItem('token');
+    var token = sessionStorage.getItem('token');
     post("api/teacher/students/get", {
       targetuser: parseInt(targetuser),
       getpayments: getpayments ? true : false /* can be undefined and I'm too lazy to check if that's okay with the server's validator */ ,
@@ -355,14 +354,14 @@ sdk.factory('sdk', ['$http', function ($http) {
   }
 
   function GetGrades(callback) {
-    var token = localStorage.getItem('token');
+    var token = sessionStorage.getItem('token');
     post("api/teacher/grades/get", {
       token: token
     }, callback);
   }
 
   function GetGradeMonths(grade, callback) {
-    var token = localStorage.getItem('token');
+    var token = sessionStorage.getItem('token');
     post("api/teacher/grades/months", {
       grade: grade,
       token: token,
@@ -370,14 +369,14 @@ sdk.factory('sdk', ['$http', function ($http) {
   }
 
   function ADBListDevices(callback) {
-    var token = localStorage.getItem('token');
+    var token = sessionStorage.getItem('token');
     post("api/adb/devices/list", {
       token: token,
     }, callback);
   }
 
   function ADBSendSMS(serial, recipient, message, protocol, callback) {
-    var token = localStorage.getItem('token');
+    var token = sessionStorage.getItem('token');
     post("api/adb/sms/send", {
       serial: serial,
       recipient: recipient,
@@ -389,14 +388,14 @@ sdk.factory('sdk', ['$http', function ($http) {
   }
 
   function getNameAndSubject(callback) {
-    var token = localStorage.getItem('token');
+    var token = sessionStorage.getItem('token');
     post("api/profile/get", {
       token: token,
     }, callback);
   }
 
   function updateNameAndSubject(name, subjects, callback) {
-    var token = localStorage.getItem('token');
+    var token = sessionStorage.getItem('token');
     post("api/profile/updatens", {
       fullname: name,
       subjects: subjects,
@@ -405,7 +404,7 @@ sdk.factory('sdk', ['$http', function ($http) {
   }
 
   function GetNotesAndDiscount(id, callback) {
-    var token = localStorage.getItem('token');
+    var token = sessionStorage.getItem('token');
     post("api/students/extra", {
       id: id,
       token: token,
@@ -413,7 +412,7 @@ sdk.factory('sdk', ['$http', function ($http) {
   }
 
   function UpdateNotesAndDiscount(id, notes, studentDiscount, callback) {
-    var token = localStorage.getItem('token');
+    var token = sessionStorage.getItem('token');
     post("api/teacher/students/extra", {
       id: id,
       notes: notes,
@@ -424,14 +423,14 @@ sdk.factory('sdk', ['$http', function ($http) {
 
 
   function getGradings(callback) {
-    var token = localStorage.getItem('token');
+    var token = sessionStorage.getItem('token');
     post("api/profile/gradings/get", {
       token,
     }, callback);
   }
 
   function updateGradings(gradings, callback) {
-    var token = localStorage.getItem('token');
+    var token = sessionStorage.getItem('token');
     post("api/profile/gradings/update", {
       gradings,
       token,
@@ -439,7 +438,7 @@ sdk.factory('sdk', ['$http', function ($http) {
   }
 
   function AddExam(name, grade, max, redline, callback) {
-    var token = localStorage.getItem('token');
+    var token = sessionStorage.getItem('token');
     post("api/teacher/exams/add", {
       name: name,
       grade: grade,
@@ -450,7 +449,7 @@ sdk.factory('sdk', ['$http', function ($http) {
   }
 
   function EditExam(id, name, max, redline, callback) {
-    var token = localStorage.getItem('token');
+    var token = sessionStorage.getItem('token');
     var query = {
       id: id,
       token: token
@@ -462,7 +461,7 @@ sdk.factory('sdk', ['$http', function ($http) {
   }
 
   function ListExams(grade, callback, getdata) {
-    var token = localStorage.getItem('token');
+    var token = sessionStorage.getItem('token');
     var query = {
       token: token
     };
@@ -472,7 +471,7 @@ sdk.factory('sdk', ['$http', function ($http) {
   }
 
   function GetExam(id, callback) {
-    var token = localStorage.getItem('token');
+    var token = sessionStorage.getItem('token');
     post("api/teacher/exams/getone", {
       id: parseInt(id),
       token: token
@@ -480,7 +479,7 @@ sdk.factory('sdk', ['$http', function ($http) {
   }
 
   function RemoveExam(id, callback) {
-    var token = localStorage.getItem('token');
+    var token = sessionStorage.getItem('token');
     post("api/teacher/exams/remove", {
       id: id,
       token: token
@@ -488,7 +487,7 @@ sdk.factory('sdk', ['$http', function ($http) {
   }
 
   function ListGroups(grade, callback, distinct) {
-    var token = localStorage.getItem('token');
+    var token = sessionStorage.getItem('token');
     var query = {
       token: token
     };
@@ -497,7 +496,7 @@ sdk.factory('sdk', ['$http', function ($http) {
   }
 
   function LinkGroupClasses(grade, classnum, groupid, groupday, callback) {
-    var token = localStorage.getItem('token');
+    var token = sessionStorage.getItem('token');
     post("api/teacher/classes/groups/link", {
       grade: grade,
       classnum: classnum,
@@ -508,7 +507,7 @@ sdk.factory('sdk', ['$http', function ($http) {
   }
 
   function RemoveGroupClass(groupid, groupday, grade, callback) {
-    var token = localStorage.getItem('token');
+    var token = sessionStorage.getItem('token');
     post("api/teacher/classes/groups/remove", {
       grade: grade,
       groupid: groupid,
@@ -518,7 +517,7 @@ sdk.factory('sdk', ['$http', function ($http) {
   }
 
   function GetGroup(id, callback) {
-    var token = localStorage.getItem('token');
+    var token = sessionStorage.getItem('token');
     post("api/teacher/groups/get", {
       id: id,
       token: token
@@ -526,7 +525,7 @@ sdk.factory('sdk', ['$http', function ($http) {
   }
 
   function CountGroupsLinks(grade, callback) {
-    var token = localStorage.getItem('token');
+    var token = sessionStorage.getItem('token');
     post("api/teacher/classes/countlinked", {
       grade: grade,
       token: token
@@ -534,7 +533,7 @@ sdk.factory('sdk', ['$http', function ($http) {
   }
 
   function CreateGroup(name, grade, schedule, callback) {
-    var token = localStorage.getItem('token');
+    var token = sessionStorage.getItem('token');
     post("api/teacher/groups/create", {
       name: name,
       grade: grade,
@@ -544,7 +543,7 @@ sdk.factory('sdk', ['$http', function ($http) {
   }
 
   function EditGroup(id, name, schedule, callback) {
-    var token = localStorage.getItem('token');
+    var token = sessionStorage.getItem('token');
     var query = {
       id: parseInt(id),
       token: token
@@ -555,7 +554,7 @@ sdk.factory('sdk', ['$http', function ($http) {
   }
 
   function RemoveGroup(groupid, callback) {
-    var token = localStorage.getItem('token');
+    var token = sessionStorage.getItem('token');
     post("api/teacher/groups/remove", {
       groupid: groupid,
       token: token
@@ -563,14 +562,14 @@ sdk.factory('sdk', ['$http', function ($http) {
   }
 
   function RefreshClaases(callback) {
-    var token = localStorage.getItem('token');
+    var token = sessionStorage.getItem('token');
     post("api/teacher/classes/refresh", {
       token: token
     }, callback);
   }
 
   function SearchStudents(name, callback, grades, search_limit, startid) {
-    var token = localStorage.getItem('token');
+    var token = sessionStorage.getItem('token');
     var query = {
       name: name,
       search_limit: search_limit ? search_limit : 5,
@@ -582,7 +581,7 @@ sdk.factory('sdk', ['$http', function ($http) {
   }
 
   function RegisterStudent(fullname, callback) {
-    var token = localStorage.getItem('token');
+    var token = sessionStorage.getItem('token');
     post("api/teacher/students/register", {
       fullname: fullname,
       token: token
@@ -590,7 +589,7 @@ sdk.factory('sdk', ['$http', function ($http) {
   }
 
   function LinkStudent(grade, group, studentid, callback, error) {
-    var token = localStorage.getItem('token');
+    var token = sessionStorage.getItem('token');
     post("api/teacher/students/link", {
       grade: parseInt(grade),
       group: parseInt(group),
@@ -600,7 +599,7 @@ sdk.factory('sdk', ['$http', function ($http) {
   }
 
   function EditStudentLink(linkid, grade, group, callback) {
-    var token = localStorage.getItem('token');
+    var token = sessionStorage.getItem('token');
     post("api/teacher/students/edit", {
       grade: parseInt(grade),
       group: parseInt(group),
@@ -610,7 +609,7 @@ sdk.factory('sdk', ['$http', function ($http) {
   }
 
   function UnlinkStudent(linkid, callback) {
-    var token = localStorage.getItem('token');
+    var token = sessionStorage.getItem('token');
     post("api/teacher/students/unlink", {
       linkid: linkid,
       token: token
@@ -619,7 +618,7 @@ sdk.factory('sdk', ['$http', function ($http) {
 
   function SetPhone(number, phonecode, phonetype, callback, targetuser, cancel) {
     if (cancel) return callback(stats.OK);
-    var token = localStorage.getItem('token');
+    var token = sessionStorage.getItem('token');
     var query = {
       targetuser: targetuser || null,
       phonetype: phonetype,
@@ -632,7 +631,7 @@ sdk.factory('sdk', ['$http', function ($http) {
   }
 
   function RemovePhones(ids, callback, targetuser) {
-    var token = localStorage.getItem('token');
+    var token = sessionStorage.getItem('token');
     post("api/phones/remove", {
       targetuser: targetuser || null,
       ids: ids,
@@ -641,7 +640,7 @@ sdk.factory('sdk', ['$http', function ($http) {
   }
 
   function ListPhones(callback, targetuser) {
-    var token = localStorage.getItem('token');
+    var token = sessionStorage.getItem('token');
     post("api/phones/list", {
       targetuser: targetuser || null,
       token: token
@@ -649,7 +648,7 @@ sdk.factory('sdk', ['$http', function ($http) {
   }
 
   function InitializeClass(grade, date, classnum, addedClass, callback) {
-    var token = localStorage.getItem('token');
+    var token = sessionStorage.getItem('token');
     var query = {
       grade: parseInt(grade),
       date: date,
@@ -661,7 +660,7 @@ sdk.factory('sdk', ['$http', function ($http) {
   }
 
   function ClearLog(targetuser, logtype, callback) {
-    var token = localStorage.getItem('token');
+    var token = sessionStorage.getItem('token');
     post("api/teacher/logs/clear", {
       targetuser: parseInt(targetuser),
       logtype: logtype,
@@ -670,7 +669,7 @@ sdk.factory('sdk', ['$http', function ($http) {
   }
 
   function DeleteClass(classid, callback) {
-    var token = localStorage.getItem('token');
+    var token = sessionStorage.getItem('token');
     post("api/teacher/classes/delete", {
       classid: classid,
       token: token
@@ -678,7 +677,7 @@ sdk.factory('sdk', ['$http', function ($http) {
   }
 
   function ListClasses(grade, callback) {
-    var token = localStorage.getItem('token');
+    var token = sessionStorage.getItem('token');
     post("api/teacher/classes/list", {
       grade: parseInt(grade),
       token: token
@@ -686,7 +685,7 @@ sdk.factory('sdk', ['$http', function ($http) {
   }
 
   function ListGroupClassesLinks(grade, callback) {
-    var token = localStorage.getItem('token');
+    var token = sessionStorage.getItem('token');
     post("api/teacher/classes/groups/links", {
       grade: parseInt(grade),
       token: token
@@ -694,7 +693,7 @@ sdk.factory('sdk', ['$http', function ($http) {
   }
 
   function GetClass(id, callback) {
-    var token = localStorage.getItem('token');
+    var token = sessionStorage.getItem('token');
     post("api/teacher/classes/get", {
       classid: parseInt(id),
       token: token
@@ -702,7 +701,7 @@ sdk.factory('sdk', ['$http', function ($http) {
   }
 
   function FetchLogs(student, grade, datePeriod, callback) {
-    var token = localStorage.getItem('token');
+    var token = sessionStorage.getItem('token');
     var query = {
       targetuser: parseInt(student),
       grade: grade,
@@ -723,7 +722,7 @@ sdk.factory('sdk', ['$http', function ($http) {
   }
 
   function FetchExamLogs(classid, grade, callback, getcontacts) {
-    var token = localStorage.getItem('token');
+    var token = sessionStorage.getItem('token');
     let query = {
       id: parseInt(classid),
       grade: grade,
@@ -734,7 +733,7 @@ sdk.factory('sdk', ['$http', function ($http) {
   }
 
   function FetchClassLogs(classid, grade, callback, getcontacts) {
-    var token = localStorage.getItem('token');
+    var token = sessionStorage.getItem('token');
     var query = {
       classid: parseInt(classid),
       grade: grade,
@@ -745,7 +744,7 @@ sdk.factory('sdk', ['$http', function ($http) {
   }
 
   function BriefLog(student, callback, /*current_classid, current_examid*/ ) {
-    var token = localStorage.getItem('token');
+    var token = sessionStorage.getItem('token');
     var query = {
       targetuser: parseInt(student),
       token: token
@@ -756,7 +755,7 @@ sdk.factory('sdk', ['$http', function ($http) {
   }
 
   function count(grade, group, callback) {
-    var token = localStorage.getItem('token');
+    var token = sessionStorage.getItem('token');
     var query = {
       token: token
     };
@@ -766,7 +765,7 @@ sdk.factory('sdk', ['$http', function ($http) {
   }
 
   function FetchPaymentLogs(itemid, grade, callback) {
-    var token = localStorage.getItem('token');
+    var token = sessionStorage.getItem('token');
     post("api/teacher/payments/fetchlogs", {
       itemid: parseInt(itemid),
       grade: grade,
@@ -775,7 +774,7 @@ sdk.factory('sdk', ['$http', function ($http) {
   }
 
   function AddPayLog(name, payed, date, callback) {
-    var token = localStorage.getItem('token');
+    var token = sessionStorage.getItem('token');
     let query = {
       payedAmount: payed,
       name: name,
@@ -786,7 +785,7 @@ sdk.factory('sdk', ['$http', function ($http) {
   }
 
   function SetPayLog(_id, payed, callback) {
-    var token = localStorage.getItem('token');
+    var token = sessionStorage.getItem('token');
     post("api/teacher/paylogs/set", {
       _id: _id,
       payedAmount: payed,
@@ -795,7 +794,7 @@ sdk.factory('sdk', ['$http', function ($http) {
   }
 
   function ListPayments(date, comparingDate, callback) {
-    var token = localStorage.getItem('token');
+    var token = sessionStorage.getItem('token');
     post("api/teacher/payments/list", {
       date: date,
       comparingDate: comparingDate,
@@ -804,7 +803,7 @@ sdk.factory('sdk', ['$http', function ($http) {
   }
 
   function SetPaymentLog(itemid, studentid, payedAmount, discount, callback) {
-    var token = localStorage.getItem('token');
+    var token = sessionStorage.getItem('token');
     var query = {
       itemid: parseInt(itemid),
       student: parseInt(studentid),
@@ -816,7 +815,7 @@ sdk.factory('sdk', ['$http', function ($http) {
   }
 
   function CreateGrade(name, callback) {
-    const token = localStorage.getItem('token');
+    const token = sessionStorage.getItem('token');
     post("api/grades/create", {
       name,
       token,
@@ -824,14 +823,14 @@ sdk.factory('sdk', ['$http', function ($http) {
   }
 
   function GetBeeps(callback) {
-    const token = localStorage.getItem('token');
+    const token = sessionStorage.getItem('token');
     post("api/teacher/beeps", {
       token,
     }, callback);
   }
 
   function UpdateBeeps(beeps, callback) {
-    const token = localStorage.getItem('token');
+    const token = sessionStorage.getItem('token');
     post("api/teacher/beeps/update", {
       token,
       beeps,
@@ -839,14 +838,14 @@ sdk.factory('sdk', ['$http', function ($http) {
   }
 
   function ListGrades(callback) {
-    const token = localStorage.getItem('token');
+    const token = sessionStorage.getItem('token');
     post("api/grades/list", {
       token,
     }, callback);
   }
 
   function UpdateGrade(id, name, callback) {
-    const token = localStorage.getItem('token');
+    const token = sessionStorage.getItem('token');
     post("api/grades/update", {
       id,
       name,
@@ -855,7 +854,7 @@ sdk.factory('sdk', ['$http', function ($http) {
   }
 
   function DeleteGrade(id, callback) {
-    const token = localStorage.getItem('token');
+    const token = sessionStorage.getItem('token');
     post("api/grades/delete", {
       id,
       token,
@@ -863,7 +862,7 @@ sdk.factory('sdk', ['$http', function ($http) {
   }
 
   function AddItem(name, grade, price, itemCategory, month, year, callback) {
-    var token = localStorage.getItem('token');
+    var token = sessionStorage.getItem('token');
     post("api/teacher/items/add", {
       name,
       grade: parseInt(grade),
@@ -876,7 +875,7 @@ sdk.factory('sdk', ['$http', function ($http) {
   }
 
   function GetItem(id, callback) {
-    var token = localStorage.getItem('token');
+    var token = sessionStorage.getItem('token');
     post("api/teacher/items/get", {
       itemid: parseInt(id),
       token: token
@@ -884,7 +883,7 @@ sdk.factory('sdk', ['$http', function ($http) {
   }
 
   function DeleteItem(id, callback) {
-    var token = localStorage.getItem('token');
+    var token = sessionStorage.getItem('token');
     post("api/teacher/items/remove", {
       itemid: parseInt(id),
       token: token
@@ -892,7 +891,7 @@ sdk.factory('sdk', ['$http', function ($http) {
   }
 
   function ListItems(grade, callback) {
-    var token = localStorage.getItem('token');
+    var token = sessionStorage.getItem('token');
     post("api/teacher/items/list", {
       grade: parseInt(grade),
       token: token
@@ -900,7 +899,7 @@ sdk.factory('sdk', ['$http', function ($http) {
   }
 
   function ListCategories(grade, callback) {
-    var token = localStorage.getItem('token');
+    var token = sessionStorage.getItem('token');
     post("api/teacher/items/listcategories", {
       grade: parseInt(grade),
       token: token
@@ -920,7 +919,7 @@ sdk.factory('sdk', ['$http', function ($http) {
   }
 
   function GetLinks(targetuser, callback) {
-    var token = localStorage.getItem('token');
+    var token = sessionStorage.getItem('token');
     post("api/report/links/get", {
       targetuser: targetuser,
       token: token
@@ -928,7 +927,7 @@ sdk.factory('sdk', ['$http', function ($http) {
   }
 
   function SetStartDate(grade, date, allback) {
-    var token = localStorage.getItem('token');
+    var token = sessionStorage.getItem('token');
     post("api/teacher/defaults/startdates/set", {
       grade: grade,
       date: date,
@@ -937,14 +936,14 @@ sdk.factory('sdk', ['$http', function ($http) {
   }
 
   function ListStartDates(callback) {
-    var token = localStorage.getItem('token');
+    var token = sessionStorage.getItem('token');
     post("api/teacher/defaults/startdates/get", {
       token: token
     }, callback);
   }
 
   function LogClass(student, classid, groupid, attendant, quiz, homework, callback) {
-    var token = localStorage.getItem('token');
+    var token = sessionStorage.getItem('token');
     var query = {
       classid: parseInt(classid),
       student: parseInt(student),
@@ -958,7 +957,7 @@ sdk.factory('sdk', ['$http', function ($http) {
   }
 
   function LogExam(student, examid, attendant, mark, callback) {
-    var token = localStorage.getItem('token');
+    var token = sessionStorage.getItem('token');
     var query = {
       id: parseInt(examid),
       student: parseInt(student),
@@ -970,7 +969,7 @@ sdk.factory('sdk', ['$http', function ($http) {
   }
 
   function CountStudents(callback, skip, groups, grades) {
-    var token = localStorage.getItem('token');
+    var token = sessionStorage.getItem('token');
     var query = {
       token: token
     };
@@ -981,7 +980,7 @@ sdk.factory('sdk', ['$http', function ($http) {
   }
 
   function EditPhone(number, phonecode, phonetype, callback, targetuser) {
-    var token = localStorage.getItem('token');
+    var token = sessionStorage.getItem('token');
     post("api/phones/edit", {
       targetuser: targetuser || null,
       new_number: number,
@@ -992,7 +991,7 @@ sdk.factory('sdk', ['$http', function ($http) {
   }
 
   function RenameStudent(id, newname, callback) {
-    var token = localStorage.getItem('token');
+    var token = sessionStorage.getItem('token');
     post("api/teacher/students/rename", {
       targetuser: id || null,
       fullname: newname,

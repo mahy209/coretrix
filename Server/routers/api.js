@@ -345,7 +345,7 @@ registerApiCall("/admin/teachers/register", ["username", "name", "subjects", "ke
 registerApiCall("/alive", ["token"], userDocDefault, data.isAlive);
 //TODO make it 2 seconds : 2000ms
 registerApiCall("/authorize", ["login", "password", "model", "device"], null, data.Authorize, false, false, 0);
-registerApiCall("/password/change", ["password", "oldpassword", "token"], null, data.ChangePassword);
+registerApiCall("/password/change", ["password", "oldpassword", "username","token"], null, data.ChangePassword);
 registerApiCall("/search/students", ["token", "name", "search_limit", "startid", "ig_grades"], null, data.SearchStudents);
 
 registerApiCall("/phones/set", ["token", "targetuser", "phonecode", "number", "phonetype", "delete"], userDocDefault, data.SetPhone);

@@ -89,8 +89,8 @@ app.run(function ($rootScope, $window, $location, sdk) {
   $('#view').show()
   $rootScope.showshit = false
   $rootScope.logout = function () {
-    Cookies.remove('token')
-    $rootScope.navigate()
+    sessionStorage.removeItem('token');
+    $rootScope.navigate();
   }
   /*$('.modal').modal()
   $('select').material_select();*/
@@ -191,8 +191,7 @@ app.controller('paylogsCtrl', function ($scope, sdk) {
 
   $scope.paylogs = [];
 
-  $scope.initMessage = (item) => {
-  }
+  $scope.initMessage = (item) => {}
   $scope.refreshLogs = () => {
     const calculate = (paylogs) => {
       let totalAmount = 0;
@@ -2211,15 +2210,20 @@ app.controller('settingsCtrl', function ($rootScope, $scope, sdk) {
   }
   var ValidatePassword = function (obj) {
     if (!validators.ValidateString(obj)) {
-      return false
-    } else {
-      if (obj.length < 8) return false
-      else return true
+      return false;
     }
+    if (!obj.length >= 1) {
+      return false;
+    }
+    return true;
   }
   /* end library.js */
   $scope.prepChange = () => {
     var wanna_return = false
+    if (!$scope.username || !ValidatePassword($scope.username)) {
+      $('#username').addClass('invalid')
+      wanna_return = true
+    }
     if (!$scope.oldpassword || !ValidatePassword($scope.oldpassword)) {
       $('#oldpassword').addClass('invalid')
       wanna_return = true
@@ -2233,7 +2237,6 @@ app.controller('settingsCtrl', function ($rootScope, $scope, sdk) {
       wanna_return = true
     }
     if ($scope.password != $scope.password2) {
-      $('#password').addClass('invalid')
       $('#password2').addClass('invalid')
       toast('كلمات المرور ﻻ تتطابق!', gradients.error)
       wanna_return = true
@@ -2243,7 +2246,7 @@ app.controller('settingsCtrl', function ($rootScope, $scope, sdk) {
   }
 
   $scope.changePass = () => {
-    sdk.ChangePassword($scope.password, $scope.oldpassword, (stat, result) => {
+    sdk.ChangePassword($scope.password, $scope.oldpassword, $scope.username, (stat, result) => {
       switch (stat) {
         case sdk.stats.OK:
           toast('تم إعادة تعيين كلمة المرور بنجاح!')
