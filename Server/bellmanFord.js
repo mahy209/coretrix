@@ -111,7 +111,7 @@ input = input.sort(function(a, b) {
 1    4
 1 3*/
 
-Number.prototype.inRange(start, end) {
+Number.prototype.inRange = (start, end) => {
     if (this > start && this < end) return true;
     else return false;
 }
