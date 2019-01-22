@@ -1118,6 +1118,7 @@ sdk.factory('sdk', ['$http', function ($http) {
       item,
       grade
     } = data;
+    console.log({data});
     return `
     <html>
 
@@ -1128,13 +1129,22 @@ sdk.factory('sdk', ['$http', function ($http) {
       <script type="text/javascript" src="/assets/js/libs/jquery-3.2.1.min.js"></script>
       <script type="text/javascript" src="/assets/js/libs/barcode-generator.js"></script>
       <style>    
-        .text-center, .text-center * {
+        .text-center {
           text-align: center;
         }
+
+        .text-left {
+          text-align: left;
+        }
     
-        .text-right,
-        .text-right * {
+        .text-right {
           text-align: right;
+        }
+
+        .padding-left {
+          padding-left: 3px;
+          width: 1%;
+          white-space: nowrap;
         }
 
         h5 {
@@ -1155,15 +1165,17 @@ sdk.factory('sdk', ['$http', function ($http) {
       </style>
       <script>
       $(document).ready(() => {
-        JsBarcode('#barcode', ${data.id}, {
+        JsBarcode('#barcode', ${id}, {
           displayValue: false,
           height: ${barcodeHeight},
           margin: 0,
           marginTop: 20,
         });
+        console.log(${barcodeHeight});
+        console.log(${id});
         setTimeout(() => {
-          window.print();
-          window.close();
+          // window.print();
+          // window.close();
         }, 1000);
       })
       </script>
@@ -1177,37 +1189,27 @@ sdk.factory('sdk', ['$http', function ($http) {
           <h6>${moment().format('M/D/YYYY hh:mm A')}</h6>
         </div>
         <div class="col s12 text-center">
-          <table class="text-right">
+          <table>
             <tbody>
               <tr>
-                <td width="18%">الطالب</td>
-                <td style="padding-right: 3px; padding-left: 3px;">:</td>
-                <td>${fullname}</td>
+                <td class="text-left padding-left">الطالب : </td>
+                <td class="text-center">${fullname}</td>
               </tr>
               <tr>
-                <td>السنة</td>
-                <td style="padding-right: 3px; padding-left: 3px;">:</td>
-                <td>${grade}</td>
+                <td class="text-left padding-left">السنة : </td>
+                <td class="text-center">${grade}</td>
               </tr>
-            </tbody>
-          </table>
-        </div>
-        <div class="col s12 text-center">
-          <table class="text-right">
-            <thead>
               <tr>
-                <td>الوحدة</td>
-                <td>السعر</td>
-                <td>خصم</td>
-                <td>المدفوع</td>
+                <td class="text-left padding-left">الوحدة : </td>
+                <td class="text-center">${item.name}</td>
               </tr>
-            </thead>
-            <tbody>
               <tr>
-                <td>${item.name}</td>
-                <td>${item.price}</td>
-                <td>${item.discount}</td>
-                <td>${item.payed}</td>
+                <td class="text-left padding-left">السعر : </td>
+                <td class="text-center">${item.price}</td>
+              </tr>
+              <tr>
+                <td class="text-left padding-left">المدفوع : </td>
+                <td class="text-center">${item.payed}</td>
               </tr>
             </tbody>
           </table>
@@ -1216,7 +1218,7 @@ sdk.factory('sdk', ['$http', function ($http) {
           <svg id="barcode"></svg>
         </div>
         <div class="col s12 text-center">
-          <small>فريق جراى</small>
+          <small>Gray team</small>
           <small>01096707442</small>
         </div>
       </div>
