@@ -1,7 +1,9 @@
 var app = angular.module("coretrix", ['coretrix.sdk'])
 
 app.run(function ($rootScope, $window, $location, sdk) {
-  $rootScope.grades_names = {};
+  $rootScope.grades_names = {
+    'all': 'كل السنين'
+  };
   $rootScope.title = "Coretrix";
   $rootScope.navigate = (link) => {
     if (!link) link = '';
@@ -76,7 +78,7 @@ app.controller("mainCtrl", function ($rootScope, $scope, sdk) {
     sdk.GetGrades((stat, result) => {
       switch (stat) {
         case sdk.stats.OK:
-          $scope.grades = result;
+          $scope.grades = ['all', ...result];
           if (result.indexOf(grade) > -1) {
             $scope.selected_grade = grade;
             $scope.grade_changed(() => {
@@ -147,9 +149,14 @@ app.controller("mainCtrl", function ($rootScope, $scope, sdk) {
     }
   }
   $scope.reload = () => {
-    if (isNaN($scope.selected_grade)) return toast('لم يتم إختيار السنة!', gradients.error);
-    if (!$scope.selected_exam) return; //toast('لم يتم إختيار اى إمتحانات!', gradients.error);
-    sdk.FetchExamLogs($scope.selected_exam.id, $scope.selected_grade, (stat, logs) => {
+    if (isNaN($scope.selected_grade) && $scope.selected_grade != 'all') return toast('لم يتم إختيار السنة!', gradients.error);
+    if (!$scope.selected_exam) {
+      $scope.loadedLogs = [];
+      $scope.logs = [];
+      $scope.fuse = {};
+      return;
+    }
+    sdk.FetchExamLogs($scope.selected_exam.id, $scope.selected_exam.grade, (stat, logs) => {
       if (stat == sdk.stats.OK) {
         for (let i = 0; i < logs.length; i++) {
           logs[i].codeName = idToCode(logs[i].studentid);
@@ -261,18 +268,18 @@ app.controller("mainCtrl", function ($rootScope, $scope, sdk) {
     $scope.loadedExam = null;
   };
   $scope.grade_changed = (callback) => {
-    if (!isNaN($scope.selected_grade)) {
-      sdk.ListExams(parseInt($scope.selected_grade), (stat, exams) => {
+    if (!isNaN($scope.selected_grade) || $scope.selected_grade == 'all') {
+      sdk.ListExams($scope.selected_grade == 'all' ? undefined : parseInt($scope.selected_grade), (stat, exams) => {
         switch (stat) {
           case sdk.stats.OK:
+            const examid = $scope.selected_exam ? $scope.selected_exam.id : undefined;
             $scope.exams = exams;
+            for (const exam of exams) {
+              if (exam.id == examid) {
+                $scope.selected_exam = exam;
+              }
+            }
             if (callback) callback();
-            /*$scope.examsIds = [];
-            $scope.examsNames = {};
-            for (var i = 0; i < groups.length; i++) {
-                $scope.examsIds.push(exams[i].id);
-                $scope.examsNames[exams[i].id] = exams[i].name;
-            }*/
             break;
           default:
         }

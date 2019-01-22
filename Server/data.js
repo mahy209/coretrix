@@ -2606,6 +2606,7 @@ function getExams(args, callback) {
     _id: 0,
     id: 1,
     name: 1,
+    grade: 1,
   };
   if (args.getdata) {
     restrictions.max_mark = 1;
@@ -2613,8 +2614,10 @@ function getExams(args, callback) {
   }
   db.collection("exams").find({
     [foreignIdentifier]: teacherRep(args.userDoc),
-    grade: {
-      $in: args.ig_grades || args.userDoc.grades
+    ...args.ig_grades && {
+      grade: {
+        $in: args.ig_grades
+      }
     }
   }, restrictions).toArray(function (err, results) {
     if (err) callback(err);
