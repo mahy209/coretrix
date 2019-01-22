@@ -12,7 +12,6 @@ $(function(){
    	btn.click(function(){
     setTimeout(function(){ 
    	 input.focus();
-   	 console.log("done");
     }, 500);
    });
    }

@@ -954,7 +954,6 @@ sdk.factory('sdk', ['$http', function ($http) {
     if (typeof attendant == 'boolean') query.ig_attendant = attendant;
     if (quiz) query.quiz = quiz;
     if (homework) query.homework = homework;
-    console.log(query);
     post("api/teacher/classes/log", query, callback);
   }
 
@@ -1037,9 +1036,6 @@ sdk.factory('sdk', ['$http', function ($http) {
   }
 
   function GenerateBarcodeA4PrintHTML(users, A4, height, margin, fontSize, profile) {
-    console.log({
-      profile
-    });
     const barcodeHTML =
       `
     <html>
@@ -1166,8 +1162,10 @@ sdk.factory('sdk', ['$http', function ($http) {
           margin: 0,
           marginTop: 20,
         });
-        // window.print();
-        // window.close();
+        setTimeout(() => {
+          window.print();
+          window.close();
+        }, 1000);
       })
       </script>
     </head>

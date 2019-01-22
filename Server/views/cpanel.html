@@ -214,8 +214,8 @@
                 <div class="row">
                   <div class="col m3 l3 s12">
                     <h6 class="center-align flow-text">امتحان</h6>
-                    <div ng-show="l" ng-class="(l.log[0].mark > l.redline && l.log[0].attendant) ? 'green-text' : ((l.log[0].mark || l.log[0].mark == 0) ? 'red' : '')"
-                      class="card-panel white-text blue-grey" ng-repeat="l in last_exams">
+                    <div ng-show="l" ng-class="(l.log[0].mark >= l.redline) && l.log[0].attendant ? 'green' : 'red'"
+                      class="card-panel white-text" ng-repeat="l in last_exams">
                       {{l.log[0].attendant ? l.name + ': ' : ''}} {{l.log[0] ? (l.log[0].mark || l.log[0].mark == 0) ?
                       (l.log[0].mark + '/' + l.max_mark)
                       : 'لم تسجل درجة الطالب' : 'لم يحضر'}}
@@ -223,7 +223,7 @@
                   </div>
                   <div class="col m3 l3 s12">
                     <h6 class="center-align flow-text">تسميع</h6>
-                    <div ng-repeat="l in last_classes" class="card-panel white-text" ng-class="l.log[0].quiz.option =='absent' ? 'red' : 'blue-grey'">
+                    <div ng-repeat="l in last_classes" class="card-panel white-text" ng-class="l.log[0].quiz.option =='absent' ? 'red' : 'green'">
                       {{l.log[0].quiz ? (l.log[0].quiz.type == 'marks' ? l.log[0].quiz.mark + '/' + l.log[0].quiz.max :
                       (l.log[0].quiz.option ==
                       'absent' ? 'لم يسمّع' : 'سمّع')) : 'لم تسجل درجة تسميع'}}
@@ -443,11 +443,11 @@
                   </div>
                   <div class="col s6">
                     <label>الخط الأحمر</label>
-                    <input type="number" min="5" max="{{editExam_max}}" ng-model="editExam_redline">
+                    <input type="number" max="{{editExam_max}}" ng-model="editExam_redline">
                   </div>
                   <div class="col s6">
                     <label>الدرجة النهائية</label>
-                    <input type="number" min="5" max="200" ng-model="editExam_max">
+                    <input type="number" ng-model="editExam_max">
                   </div>
                 </div>
                 <div class="modal-footer blue-grey-background">
@@ -1649,11 +1649,11 @@
                     </div>
                     <div class="col s6">
                       <label>الخط الأحمر</label>
-                      <input type="number" min="5" max="{{newExam_max}}" ng-model="newExam_redline">
+                      <input type="number" max="{{newExam_max}}" ng-model="newExam_redline">
                     </div>
                     <div class="col s6">
                       <label>الدرجة النهائية</label>
-                      <input type="number" min="5" max="200" ng-model="newExam_max">
+                      <input type="number" ng-model="newExam_max">
                     </div>
                     <!--div class="col s12">
                                     <label>الوقت</1label>
@@ -1685,11 +1685,11 @@
                     </div>
                     <div class="col s6">
                       <label>الخط الأحمر</label>
-                      <input type="number" min="5" max="{{editExam_max}}" ng-model="editExam_redline">
+                      <input type="number" max="{{editExam_max}}" ng-model="editExam_redline">
                     </div>
                     <div class="col s6">
                       <label>الدرجة النهائية</label>
-                      <input type="number" min="5" max="200" ng-model="editExam_max">
+                      <input type="number" ng-model="editExam_max">
                     </div>
                   </div>
                   <div class="modal-footer blue-grey-background">

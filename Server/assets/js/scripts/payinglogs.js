@@ -307,8 +307,6 @@ app.controller("mainCtrl", function ($rootScope, $scope, sdk) {
   }
   $scope.delete_item = () => {
     sdk.DeleteItem($scope.selected_item.id, (stat, result) => {
-      console.log(stat);
-      console.log(result);
       if (stat == sdk.stats.OK) {
         $scope.grade_changed();
         $scope.loadedLogs = null;

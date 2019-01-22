@@ -675,7 +675,6 @@ function getReferenced(args, callback) {
 }
 
 function _pass(args, callback) {
-  console.log(args);
   callback(null, stats.PassedFunction);
 }
 
@@ -2773,7 +2772,6 @@ function createMissingClasses(refresherId, callback) {
                 console.error(err);
             } else {
                 for (let i = 0; i < teachers.length; i++) {
-                    console.log(teachers[i].grade);
                     var days = [
                         'Sat',
                         'Sun',

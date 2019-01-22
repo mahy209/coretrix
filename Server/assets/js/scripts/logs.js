@@ -220,7 +220,6 @@ app.controller("mainCtrl", function ($rootScope, $scope, sdk) {
       }
 
       if ($scope.globalAttendanceCheck != 'none') {
-        console.log($scope.globalAttendanceCheck);
         switch ($scope.globalAttendanceCheck) {
           case 'setTrue':
             $scope.logs[i].log.attendant = true;

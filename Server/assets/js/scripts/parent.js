@@ -10,7 +10,6 @@ app.run(function ($rootScope, $window, $location) {
 
 app.controller("parentCtrl", function ($rootScope, $scope, sdk) {
     function submit(code) {
-        console.log(code.toUpperCase());
         sdk.RequestParentToken(code.toUpperCase(), (stat, token) => {
             switch (stat) {
                 case sdk.stats.OK:

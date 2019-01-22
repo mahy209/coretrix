@@ -192,9 +192,6 @@ app.controller('paylogsCtrl', function ($scope, sdk) {
   $scope.paylogs = [];
 
   $scope.initMessage = (item) => {
-    console.log({
-      item
-    });
   }
   $scope.refreshLogs = () => {
     const calculate = (paylogs) => {
@@ -520,16 +517,7 @@ app.controller('smsCtrl', function ($rootScope, $scope, $location, sdk) {
         $scope.smsStudent = log.fullname
         $scope.smsProgress = ((i + 1) / logs.length) * 100
 
-        console.log({
-          selected: $scope.selected_recipient
-        });
-
         let num = prioritizeNumber(log.contacts, $scope.selected_recipient);
-
-        console.log({
-          log,
-          num
-        });
 
         if (!num) return send(i + 1);
 
@@ -1267,7 +1255,6 @@ app.controller('studentsCtrl', function ($rootScope, $scope, sdk) {
   }
 
   $scope.prepareAddStudent = () => {
-    console.log('here');
     $scope.studentName = null;
     $scope.studentParentPhone1 = null;
     $scope.studentParentPhone2 = null;
@@ -1355,11 +1342,6 @@ app.controller('studentsCtrl', function ($rootScope, $scope, sdk) {
     if ($scope.linkingStudent) {
       reg = $scope.registered[n];
     }
-    console.log({
-      reg,
-      link: $scope.linkingStudent,
-      regs: $scope.registered
-    });
     if (reg) {
       finishShit(reg)
     } else {
@@ -1474,9 +1456,6 @@ app.controller('studentsCtrl', function ($rootScope, $scope, sdk) {
             result.nogroup = true
           }
           result.codeName = idToCode(result.studentid)
-          console.log({
-            result
-          });
           $scope.infoStudent = {
             ...result,
             date_created: simpleDate(dateFromObjectId(result._id)),
@@ -1771,7 +1750,6 @@ app.controller('mainCtrl', function ($rootScope, $scope, sdk) {
     var c = $scope.selected_grade
     $scope.grades = result
     $scope.selected_grade = c || result[0]
-    console.log('calling grade changed');
     if (first) {
       $scope.grade_changed(true, true, true, true)
       first = false
@@ -1939,10 +1917,6 @@ app.controller('mainCtrl', function ($rootScope, $scope, sdk) {
               if (result.links[i].links) result.links[i].linksString = classesLinksToDayString(result.links[i].links)
               $scope.classesLinks.push(result.links[i])
             }
-            console.log({
-              result,
-              classLinks: $scope.classesLinks
-            });
             break
           default:
             break
@@ -2032,10 +2006,11 @@ app.controller('mainCtrl', function ($rootScope, $scope, sdk) {
         let beep_exams = true;
         for (let i = 0; i < result.exams.length; i++) {
           const {
-            log
+            log,
+            redline
           } = result.exams[i];
-          console.log('examlog', log);
-          if (log[0] && log[0].attendant) {
+          // TODO: fix redline
+          if (log[0] && log[0].attendant && log[0].mark && log[0].mark >= redline) {
             beep_exams = false;
           }
         }
@@ -2044,7 +2019,6 @@ app.controller('mainCtrl', function ($rootScope, $scope, sdk) {
           const {
             log
           } = result.classes[i];
-          console.log('classlog', log);
           if (log[0] && log[0].attendant) {
             beep_classes = false;
           }
@@ -2057,23 +2031,11 @@ app.controller('mainCtrl', function ($rootScope, $scope, sdk) {
           if (sub == currentSubscription) {
             continue;
           }
-          console.log({
-            sub
-          });
           const beep = !sub.log || ((sub.log.payed - sub.log.discount) != sub.item.price);
           if (beep) {
             beep_passed_subscriptions = beep;
           }
         }
-        console.log({
-          beep_exams,
-          beep_classes,
-          beep_subscription,
-          beeps: $scope.beeps,
-          beep_passed_subscriptions,
-          passedSubscriptions: $scope.beeps.passedSubscriptions,
-          passed: beep_passed_subscriptions && $scope.beeps.passedSubscriptions,
-        });
         if (beep_exams || beep_classes ||
           (beep_subscription && $scope.beeps.currentSubscription) ||
           (beep_passed_subscriptions && $scope.beeps.passedSubscriptions)) {
@@ -2366,7 +2328,6 @@ app.controller('settingsCtrl', function ($rootScope, $scope, sdk) {
   $scope.localSdkGrades = [];
 
   var init = (_, grades) => {
-    console.log('reloading');
     $scope.localSdkGrades = angular.copy($rootScope.sdkGrades);
   }
 

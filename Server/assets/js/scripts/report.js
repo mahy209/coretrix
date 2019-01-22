@@ -222,7 +222,6 @@ app.controller("mainCtrl", function ($rootScope, $scope, sdk) {
           $scope.name = result.fullname;
           $scope.links = result.links;
           $scope.reload();
-          console.log(result);
           break;
           //TODO invalid data means token is not 64 chars long
         case sdk.stats.InvalidData:
