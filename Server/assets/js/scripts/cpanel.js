@@ -2008,7 +2008,6 @@ app.controller('mainCtrl', function ($rootScope, $scope, sdk) {
             log,
             redline
           } = result.exams[i];
-          // TODO: fix redline
           if (log[0] && log[0].attendant && log[0].mark && log[0].mark >= redline) {
             beep_exams = false;
           }
@@ -2024,7 +2023,14 @@ app.controller('mainCtrl', function ($rootScope, $scope, sdk) {
         }
         const currentSubscription = result.subscriptions
           .find(sub => sub.month == Number(moment().format('M')) && sub.year == Number(moment().format('Y')));
-        const beep_subscription = !currentSubscription.log || ((currentSubscription.log.payed - currentSubscription.log.discount) != currentSubscription.item.price);
+        const beepDayOfMonth = parseInt(localStorage.getItem('beepDayOfMonth'));
+        const currentDay = new Date().getDate();
+        const beep_subscription = currentDay >= beepDayOfMonth && (!currentSubscription.log || (((currentSubscription.log.payed - currentSubscription.log.discount) != currentSubscription.item.price)));
+        console.log({
+          currentDay,
+          beepDayOfMonth,
+          beep_subscription,
+        });
         let beep_passed_subscriptions = false;
         for (const sub of result.subscriptions) {
           if (sub == currentSubscription) {
@@ -2171,6 +2177,11 @@ app.controller('statsCtrl', function ($rootScope, $scope, sdk) {
 });
 
 app.controller('settingsCtrl', function ($rootScope, $scope, sdk) {
+  $scope.beepDayOfMonth = parseInt(localStorage.getItem('beepDayOfMonth'));
+  if (!$scope.beepDayOfMonth) {
+    localStorage.setItem('beepDayOfMonth', 10);
+    $scope.beepDayOfMonth = 10;
+  }
   sdk.GetBeeps((err, result) => {
     let {
       beeps
@@ -2196,6 +2207,7 @@ app.controller('settingsCtrl', function ($rootScope, $scope, sdk) {
     $scope.examsBeep = exams;
   });
   $scope.updateBeeps = (beeps) => {
+    localStorage.setItem('beepDayOfMonth', $scope.beepDayOfMonth);
     sdk.UpdateBeeps(beeps || {
       exams: $scope.examsBeep,
       classes: $scope.classesBeep,
