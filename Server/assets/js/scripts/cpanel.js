@@ -2026,11 +2026,6 @@ app.controller('mainCtrl', function ($rootScope, $scope, sdk) {
         const beepDayOfMonth = parseInt(localStorage.getItem('beepDayOfMonth'));
         const currentDay = new Date().getDate();
         const beep_subscription = currentDay >= beepDayOfMonth && (!currentSubscription.log || (((currentSubscription.log.payed - currentSubscription.log.discount) != currentSubscription.item.price)));
-        console.log({
-          currentDay,
-          beepDayOfMonth,
-          beep_subscription,
-        });
         let beep_passed_subscriptions = false;
         for (const sub of result.subscriptions) {
           if (sub == currentSubscription) {
