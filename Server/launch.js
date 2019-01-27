@@ -15,35 +15,35 @@ function notRegistered() {
 
 const registerer = 'karimgaber';
 
+function onlineActivation(unique) {
+  const http = require('http')
+
+  http.get(`http://grayinstasave.000webhostapp.com/coretrix/active.php?name=${registerer}&uuid=${unique}`, (resp) => {
+    let data = ''
+
+    // A chunk of data has been recieved.
+    resp.on('data', (chunk) => {
+      data += chunk
+    })
+
+    // The whole response has been received. Print out the result.
+    resp.on('end', () => {
+      let authentic = bcrypt.compareSync(`${registerer}:${unique}`, data.toString())
+      if (authentic) {
+        spawnMongo()
+      } else {
+        notRegistered()
+      }
+    })
+
+  }).on("error", (err) => {
+    notRegistered()
+  })
+}
+
 function checkActivated() {
   try {
-    // const http = require('http')
-
-    // let unique = Date.now()
-
-    // http.get('http://grayinstasave.000webhostapp.com/coretrix/active.php?msg=' + unique, (resp) => {
-    // 	let data = ''
-
-    // 	// A chunk of data has been recieved.
-    // 	resp.on('data', (chunk) => {
-    // 		data += chunk
-    // 	})
-
-    // 	// The whole response has been received. Print out the result.
-    // 	resp.on('end', () => {
-    // 		let authentic = bcrypt.compareSync("active" + unique, data.toString())
-    // 		if (authentic) {
-    // 			spawnMongo()
-    // 		} else {
-    // 			notRegistered()
-    // 		}
-    // 	})
-
-    // }).on("error", (err) => {
-    // 	notRegistered()
-    // })
-
-    const hash = fs.readFileSync('C:/Microsoft/db_lock').toString()
+    // const hash = fs.readFileSync('C:/Microsoft/db_lock').toString()
 
     serialNumber.preferUUID = true
 
@@ -53,11 +53,12 @@ function checkActivated() {
         return
       }
 
-      if (bcrypt.compareSync(`${serial}${registerer}`, hash)) {
-        spawnMongo()
-      } else {
-        notRegistered()
-      }
+      // if (bcrypt.compareSync(`${serial}${registerer}`, hash)) {
+      //   spawnMongo()
+      // } else {
+      //   notRegistered()
+      // }
+      onlineActivation(serial);
     })
   } catch (e) {
     notRegistered()
