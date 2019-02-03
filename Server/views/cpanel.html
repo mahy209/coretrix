@@ -1273,6 +1273,9 @@
                       <th>
                         درجة الواجب
                       </th>
+                      <th>
+                        هاتف
+                      </th>
                     </tr>
                     <tr ng-repeat="n in class_logs" ng-show="(!selected_group || n.group == selected_group.id) && (!filterAttendance || !n.log.attendant)">
                       <td>
@@ -1289,6 +1292,17 @@
                       <td>{{n.log.homework ? (n.log.homework.type == 'marks' ? n.log.homework.mark + '/' +
                         n.log.homework.max
                         : (n.log.homework.option == 'incomplete' ? 'غير مكتمل' : 'كامل')) : 'لم يسجل واجب الطالب'}}</td>
+                      <td>
+                        <span ng-repeat="contact in n.contacts">
+                          <ng-template ng-show="
+                            (selected_recipient == 'parent' && (contact.type == 'parent1' || contact.type == 'parent2')) ||
+                            (selected_recipient == 'student' && (contact.type == 'mobile'))
+                          ">
+                            {{ contact.phonecode }}{{ contact.number }}
+                            <br>
+                          </ng-template>
+                        </span>
+                      </td>
                     </tr>
                   </table>
                 </div>
@@ -1302,6 +1316,9 @@
                       <th>
                         الدرجة
                       </th>
+                      <th>
+                        هاتف
+                      </th>
                     </tr>
                     <tr ng-repeat="n in exam_logs" ng-show="(!selected_group || n.group == selected_group.id) && (!filterAttendance || !n.log.attendant)">
                       <td>
@@ -1313,6 +1330,17 @@
                         - {{n.fullname}}
                       </td>
                       <td>{{n.log.mark ? (n.log.mark + ' / ' + selected_exam.max_mark) : 'لم تسجل درجة للطالب'}}</td>
+                      <td>
+                        <span ng-repeat="contact in n.contacts">
+                          <ng-template ng-show="
+                                  (selected_recipient == 'parent' && (contact.type == 'parent1' || contact.type == 'parent2')) ||
+                                  (selected_recipient == 'student' && (contact.type == 'mobile'))
+                                ">
+                            {{ contact.phonecode }}{{ contact.number }}
+                            <br>
+                          </ng-template>
+                        </span>
+                      </td>
                     </tr>
                   </table>
                 </div>
@@ -1323,6 +1351,9 @@
                       <th>
                         اسم الطالب
                       </th>
+                      <th>
+                        هاتف
+                      </th>
                     </tr>
                     <tr ng-repeat="n in message_students" ng-show="!selected_group || n.group == selected_group.id">
                       <td>
@@ -1330,6 +1361,17 @@
                         <input type="checkbox" ng-model="n.selected" id="cid{{n.studentid}}" class="checkbox" />
                         <label for="cid{{n.studentid}}">f</label>
                         {{n.fullname}}
+                      </td>
+                      <td>
+                        <span ng-repeat="contact in n.contacts">
+                          <ng-template ng-show="
+                                  (selected_recipient == 'parent' && (contact.type == 'parent1' || contact.type == 'parent2')) ||
+                                  (selected_recipient == 'student' && (contact.type == 'mobile'))
+                                ">
+                            {{ contact.phonecode }}{{ contact.number }}
+                            <br>
+                          </ng-template>
+                        </span>
                       </td>
                     </tr>
                   </table>
