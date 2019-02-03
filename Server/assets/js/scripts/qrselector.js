@@ -14,6 +14,8 @@ app.run(function ($rootScope, $window, $location, sdk) {
       default:
     }
   })
+  $rootScope.barcodeObservers = [];
+  barcodeScanner((code) => $rootScope.barcodeObservers.forEach(observer => observer(code)));
   $rootScope.title = "Coretrix";
   $rootScope.navigate = (link) => {
     if (!link) link = '';
@@ -128,6 +130,14 @@ app.controller("mainCtrl", function ($rootScope, $scope, sdk) {
       }
     });
   };
+
+  $rootScope.barcodeObservers.push((id) => {
+    $scope.$apply(() => {
+      const student = $scope.fuse.list.find(student => student.studentid == parseInt(id));
+      $scope.searchQuery = student.fullname;
+      $scope.performSearch();
+    })
+  });
 
   $scope.performSearch = (event) => {
     if (!$scope.searchQuery) {
