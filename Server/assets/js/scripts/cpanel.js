@@ -470,6 +470,17 @@ app.controller('smsCtrl', function ($rootScope, $scope, $location, sdk) {
     ]
   };
 
+  $rootScope.barcodeObservers.push((id) => {
+    if ($rootScope.tab != 'sms') {
+      return;
+    }
+    $scope.$apply(() => {
+      const student = $scope.fuse.list.find(student => student.studentid == parseInt(id));
+      $scope.searchQuery = student.fullname;
+      $scope.performSearch();
+    })
+  });
+
   $scope.performSearch = (event) => {
     if (!$scope.searchQuery) {
       $scope.students = $scope.fuse.list;
