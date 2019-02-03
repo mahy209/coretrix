@@ -14,8 +14,21 @@ function notRegistered() {
 }
 
 const registerer = 'karimgaber';
+const offline = false;
 
-function onlineActivation(unique) {
+function writeOfflineActivation(hash) {
+  try {
+    fs.writeFileSync('C:/Microsoft/db_lock', hash);
+  } catch (err) {}
+}
+
+function deleteOfflineActivation() {
+  try {
+    fs.unlinkSync('C:/Microsoft/db_lock');
+  } catch (err) {}
+}
+
+function onlineActivation(unique, noInternet) {
   const http = require('http')
 
   http.get(`http://grayinstasave.000webhostapp.com/coretrix/active.php?name=${registerer}&uuid=${unique}`, (resp) => {
@@ -28,37 +41,52 @@ function onlineActivation(unique) {
 
     // The whole response has been received. Print out the result.
     resp.on('end', () => {
-      let authentic = bcrypt.compareSync(`${registerer}:${unique}`, data.toString())
+      const hash = data.toString();
+      let authentic = bcrypt.compareSync(`${registerer}:${unique}`, hash)
       if (authentic) {
+        writeOfflineActivation(hash);
         spawnMongo()
       } else {
+        deleteOfflineActivation();
         notRegistered()
       }
     })
 
   }).on("error", (err) => {
-    notRegistered()
+    if (noInternet) {
+      noInternet();
+    }
   })
+}
+
+function offlineActivation(unique) {
+  try {
+    const hash = fs.readFileSync('C:/Microsoft/db_lock').toString();
+    if (bcrypt.compareSync(`${registerer}:${unique}`, hash)) {
+      spawnMongo()
+    } else {
+      notRegistered()
+    }
+  } catch (e) {
+    notRegistered()
+  }
 }
 
 function checkActivated() {
   try {
-    // const hash = fs.readFileSync('C:/Microsoft/db_lock').toString()
-
     serialNumber.preferUUID = true
-
     serialNumber(function (err, serial) {
       if (err) {
         console.error('Unable to check device activation. Please make sure Windows Instrumentation Management service is running.')
         return
       }
-
-      // if (bcrypt.compareSync(`${serial}${registerer}`, hash)) {
-      //   spawnMongo()
-      // } else {
-      //   notRegistered()
-      // }
-      onlineActivation(serial);
+      onlineActivation(serial, () => {
+        if (offline) {
+          offlineActivation(serial);
+        } else {
+          notRegistered();
+        }
+      });
     })
   } catch (e) {
     notRegistered()
