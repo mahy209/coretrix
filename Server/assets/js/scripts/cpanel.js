@@ -458,10 +458,31 @@ app.controller('smsCtrl', function ($rootScope, $scope, $location, sdk) {
     }
   }
 
+  const fuseOptions = {
+    shouldSort: true,
+    threshold: 0.2,
+    location: 0,
+    distance: 100,
+    maxPatternLength: 32,
+    minMatchCharLength: 1,
+    keys: [
+      "fullname",
+    ]
+  };
+
+  $scope.performSearch = (event) => {
+    if (!$scope.searchQuery) {
+      $scope.students = $scope.fuse.list;
+    } else {
+      $scope.students = $scope.fuse.search($scope.searchQuery);
+    }
+  }
+
   $scope.classChanged = () => {
     sdk.FetchClassLogs($scope.selected_class.id, $scope.selected_grade, (stat, logs) => {
       if (stat == sdk.stats.OK) {
         $scope.class_logs = logs
+        $scope.fuse = new Fuse(logs, fuseOptions);
       } else {
         $scope.class_logs = []
       }
@@ -473,6 +494,7 @@ app.controller('smsCtrl', function ($rootScope, $scope, $location, sdk) {
     sdk.FetchExamLogs($scope.selected_exam.id, $scope.selected_grade, (stat, logs) => {
       if (stat == sdk.stats.OK) {
         $scope.exam_logs = logs
+        $scope.fuse = new Fuse(logs, fuseOptions);
       } else {
         $scope.exam_logs = []
       }
@@ -484,6 +506,7 @@ app.controller('smsCtrl', function ($rootScope, $scope, $location, sdk) {
     sdk.ListStudents(0, 9999999, (stat, students) => {
       if (stat == sdk.stats.OK) {
         $scope.message_students = students
+        $scope.fuse = new Fuse(students, fuseOptions);
       } else {
         $scope.message_students = []
       }

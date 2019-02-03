@@ -1261,6 +1261,11 @@
               </div>
 
               <div>
+                <div class="col s12 responsive_search">
+                  <input class="searchitem" style="padding-right: 1%" placeholder="ابحث عن طالب" id="searchStudents"
+                    ng-model="searchQuery" type="search" ng-change="performSearch($event)" required>
+                </div>
+
                 <div class="logs containers" ng-show="selected_type == 'lesson'">
                   <table>
                     <tr>
@@ -1277,7 +1282,7 @@
                         هاتف
                       </th>
                     </tr>
-                    <tr ng-repeat="n in class_logs" ng-show="(!selected_group || n.group == selected_group.id) && (!filterAttendance || !n.log.attendant)">
+                    <tr ng-repeat="n in students" ng-show="(!selected_group || n.group == selected_group.id) && (!filterAttendance || !n.log.attendant)">
                       <td>
                         <!-- TODO: fix css -->
                         <input type="checkbox" ng-model="n.selected" id="cid{{n.studentid}}" class="checkbox" />
@@ -1320,7 +1325,7 @@
                         هاتف
                       </th>
                     </tr>
-                    <tr ng-repeat="n in exam_logs" ng-show="(!selected_group || n.group == selected_group.id) && (!filterAttendance || !n.log.attendant)">
+                    <tr ng-repeat="n in students" ng-show="(!selected_group || n.group == selected_group.id) && (!filterAttendance || !n.log.attendant)">
                       <td>
                         <!-- TODO: fix css -->
                         <input type="checkbox" ng-model="n.selected" id="cid{{n.studentid}}" class="checkbox" />
@@ -1355,7 +1360,7 @@
                         هاتف
                       </th>
                     </tr>
-                    <tr ng-repeat="n in message_students" ng-show="!selected_group || n.group == selected_group.id">
+                    <tr ng-repeat="n in students" ng-show="!selected_group || n.group == selected_group.id">
                       <td>
                         <!-- TODO: fix css -->
                         <input type="checkbox" ng-model="n.selected" id="cid{{n.studentid}}" class="checkbox" />
