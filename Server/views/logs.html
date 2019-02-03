@@ -235,115 +235,120 @@
               <input ng-model="barcodeAttendanceCheck" type="checkbox" id="barcodeAttendanceCheck" />
               <label for="barcodeAttendanceCheck"">تسجيل الغياب بالباركود</label>
             </div>
+            <div class="
+                col" style="float: right;">
+                <input ng-model="filterAttendance" type="checkbox" id="filterAttendance" />
+                <label for="filterAttendance"">لم يحضر</label>
+            </div>
           </div>
         </div>
       </div>
       <div class="
-                container">
-                <div class="row">
-                  <div class="logs logs-noblur">
-                    <table class="animated slideInUp hide_on_mobile" style="margin-top: 0">
-                      <tr>
-                        <th>
-                          اسم الطالب
-                        </th>
-                        <th>
-                          المجموعه
-                        </th>
-                        <th class="hideonprint">
-                          نوع سجل التسميع
-                        </th>
-                        <th>
-                          درجة التسميع
-                        </th>
-                        <th class="hideonprint">
-                          نوع سجل الواجب
-                        </th>
-                        <th>
-                          درجة الواجب
-                        </th>
-                      </tr>
-                      <!-- <div ng-show="table.show"> -->
-                      <!-- groups filter -->
-                      <!-- (selected_group != null ? n.log.groupid==selected_group.id : true) -->
-                      <!-- homework type filter -->
-                      <!-- (filterHomeworkType != 'all' ? n.log.homework.type==filterHomeworkType : true)-->
-                      <!-- homework general filter -->
-                      <!-- ((filterHomeworkType == 'general' && n.log.homework.type == 'general') ? (filterHomeworkOption == 'all' ? true : filterHomeworkOption==n.log.homework.option) : true)-->
-                      <!-- homework marks filter -->
-                      <!-- ((filterHomeworkType == 'marks' && n.log.homework.type == 'marks') ? compare(n.log.homework.mark, filterHomeworkMark, homeworkMarkSelector) : true)-->
-                      <!-- quiz type filter -->
-                      <!-- (filterQuizType != 'all' ? n.log.quiz.type==filterQuizType : true)-->
-                      <!-- quiz general filter -->
-                      <!-- ((filterQuizType == 'general' && n.log.quiz.type == 'general') ? (filterQuizOption == 'all' ? true : filterQuizOption==n.log.quiz.option) : true)-->
-                      <!-- quiz marks filter -->
-                      <!-- ((filterQuizType == 'marks' && n.log.quiz.type == 'marks') ? compare(n.log.quiz.mark, filterQuizMark, quizMarkSelector) : true)-->
-                      <tr ng-repeat="n in logs" ng-show="(selected_group != null ? n.log.groupid==selected_group.id : true) && (filterHomeworkType != 'all' ? n.log.homework.type==filterHomeworkType : true) && ((filterHomeworkType == 'general' && n.log.homework.type == 'general') ? (filterHomeworkOption == 'all' ? true : filterHomeworkOption==n.log.homework.option) : true) && ((filterHomeworkType == 'marks' && n.log.homework.type == 'marks') ? compare(n.log.homework.mark, filterHomeworkMark, homeworkMarkSelector) : true) && (filterQuizType != 'all' ? n.log.quiz.type==filterQuizType : true) && ((filterQuizType == 'general' && n.log.quiz.type == 'general') ? (filterQuizOption == 'all' ? true : filterQuizOption==n.log.quiz.option) : true) && ((filterQuizType == 'marks' && n.log.quiz.type == 'marks') ? compare(n.log.quiz.mark, filterQuizMark, quizMarkSelector) : true)">
-                        <td style="width: 25%">
-                          <p style="display:inline;">
-                            <input type="checkbox" ng-model="n.log.attendant" ng-change="studentAttendanceChanged(n)"
-                              id="cid{{n.studentid}}" class="checkbox" />
-                            <label for="cid{{n.studentid}}">{{n.codeName}}</label>
-                            <i style="margin-right:3%">{{n.fullname}}</i>
-                          </p>
-                        </td>
-                        <td style="width: 20%">
-                          <p class="showonprint">{{groupsNames[n.log.groupid]}}</p>
-                          <select class="hideonprint" class="browser-default hideonprint" ng-options="i as groupsNames[i] for i in groupsIds"
-                            ng-model="n.log.groupid" ng-change="studentGroupChanged(n)">
-                            <option value="" disabled selected>المجموعة التى حضر بها الطالب</option>
-                          </select>
-                        </td>
-                        <td style="width: 10%" class="hideonprint">
-                          <select class="browser-default" ng-options="i as {'marks': 'درجات', 'general': 'عام'}[i] for i in ['general', 'marks']"
-                            ng-model="n.log.quiz.type" ng-change="quizChanged(n)">
-                            <option value="" disabled selected>إختر</odption>
-                          </select>
-                        </td>
-                        <td style="width: 10%">
-                          <div ng-show="n.log.quiz.type == 'marks'">
-                            <p class="showonprint">{{n.log.quiz.mark + ' / ' + n.log.quiz.max }}</p>
-                            <div class="hideonprint" style="display: inline-flex">
-                              <input type="number" value="20" ng-model="n.log.quiz.mark" min="0" ng-blur="quizChanged(n)">
-                              <i style="padding: 10%">من</i>
-                              <input type="number" value="20" ng-model="n.log.quiz.max" min="1" ng-blur="quizChanged(n)">
+                  container">
+                  <div class="row">
+                    <div class="logs logs-noblur">
+                      <table class="animated slideInUp hide_on_mobile" style="margin-top: 0">
+                        <tr>
+                          <th>
+                            اسم الطالب
+                          </th>
+                          <th>
+                            المجموعه
+                          </th>
+                          <th class="hideonprint">
+                            نوع سجل التسميع
+                          </th>
+                          <th>
+                            درجة التسميع
+                          </th>
+                          <th class="hideonprint">
+                            نوع سجل الواجب
+                          </th>
+                          <th>
+                            درجة الواجب
+                          </th>
+                        </tr>
+                        <!-- <div ng-show="table.show"> -->
+                        <!-- groups filter -->
+                        <!-- (selected_group != null ? n.log.groupid==selected_group.id : true) -->
+                        <!-- homework type filter -->
+                        <!-- (filterHomeworkType != 'all' ? n.log.homework.type==filterHomeworkType : true)-->
+                        <!-- homework general filter -->
+                        <!-- ((filterHomeworkType == 'general' && n.log.homework.type == 'general') ? (filterHomeworkOption == 'all' ? true : filterHomeworkOption==n.log.homework.option) : true)-->
+                        <!-- homework marks filter -->
+                        <!-- ((filterHomeworkType == 'marks' && n.log.homework.type == 'marks') ? compare(n.log.homework.mark, filterHomeworkMark, homeworkMarkSelector) : true)-->
+                        <!-- quiz type filter -->
+                        <!-- (filterQuizType != 'all' ? n.log.quiz.type==filterQuizType : true)-->
+                        <!-- quiz general filter -->
+                        <!-- ((filterQuizType == 'general' && n.log.quiz.type == 'general') ? (filterQuizOption == 'all' ? true : filterQuizOption==n.log.quiz.option) : true)-->
+                        <!-- quiz marks filter -->
+                        <!-- ((filterQuizType == 'marks' && n.log.quiz.type == 'marks') ? compare(n.log.quiz.mark, filterQuizMark, quizMarkSelector) : true)-->
+                        <tr ng-repeat="n in logs" ng-show="(!filterAttendance || (filterAttendance && !n.log.attendant)) && (selected_group != null ? n.log.groupid==selected_group.id : true) && (filterHomeworkType != 'all' ? n.log.homework.type==filterHomeworkType : true) && ((filterHomeworkType == 'general' && n.log.homework.type == 'general') ? (filterHomeworkOption == 'all' ? true : filterHomeworkOption==n.log.homework.option) : true) && ((filterHomeworkType == 'marks' && n.log.homework.type == 'marks') ? compare(n.log.homework.mark, filterHomeworkMark, homeworkMarkSelector) : true) && (filterQuizType != 'all' ? n.log.quiz.type==filterQuizType : true) && ((filterQuizType == 'general' && n.log.quiz.type == 'general') ? (filterQuizOption == 'all' ? true : filterQuizOption==n.log.quiz.option) : true) && ((filterQuizType == 'marks' && n.log.quiz.type == 'marks') ? compare(n.log.quiz.mark, filterQuizMark, quizMarkSelector) : true)">
+                          <td style="width: 25%">
+                            <p style="display:inline;">
+                              <input type="checkbox" ng-model="n.log.attendant" ng-change="studentAttendanceChanged(n)"
+                                id="cid{{n.studentid}}" class="checkbox" />
+                              <label for="cid{{n.studentid}}">{{n.codeName}}</label>
+                              <i style="margin-right:3%">{{n.fullname}}</i>
+                            </p>
+                          </td>
+                          <td style="width: 20%">
+                            <p class="showonprint">{{groupsNames[n.log.groupid]}}</p>
+                            <select class="hideonprint" class="browser-default hideonprint" ng-options="i as groupsNames[i] for i in groupsIds"
+                              ng-model="n.log.groupid" ng-change="studentGroupChanged(n)">
+                              <option value="" disabled selected>المجموعة التى حضر بها الطالب</option>
+                            </select>
+                          </td>
+                          <td style="width: 10%" class="hideonprint">
+                            <select class="browser-default" ng-options="i as {'marks': 'درجات', 'general': 'عام'}[i] for i in ['general', 'marks']"
+                              ng-model="n.log.quiz.type" ng-change="quizChanged(n)">
+                              <option value="" disabled selected>إختر</odption>
+                            </select>
+                          </td>
+                          <td style="width: 10%">
+                            <div ng-show="n.log.quiz.type == 'marks'">
+                              <p class="showonprint">{{n.log.quiz.mark + ' / ' + n.log.quiz.max }}</p>
+                              <div class="hideonprint" style="display: inline-flex">
+                                <input type="number" value="20" ng-model="n.log.quiz.mark" min="0" ng-blur="quizChanged(n)">
+                                <i style="padding: 10%">من</i>
+                                <input type="number" value="20" ng-model="n.log.quiz.max" min="1" ng-blur="quizChanged(n)">
+                              </div>
                             </div>
-                          </div>
-                          <div ng-show="n.log.quiz.type == 'general'">
-                            <p class="showonprint">{{{'absent': 'لم يسمّع', 'done': 'سمّع'}[n.log.quiz.option]}}</p>
-                            <select class="hideonprint" class="browser-default" ng-options="i as {'absent': 'لم يسمّع', 'done': 'سمّع'}[i] for i in ['done', 'absent']"
-                              ng-model="n.log.quiz.option" ng-change="quizChanged(n)">
+                            <div ng-show="n.log.quiz.type == 'general'">
+                              <p class="showonprint">{{{'absent': 'لم يسمّع', 'done': 'سمّع'}[n.log.quiz.option]}}</p>
+                              <select class="hideonprint" class="browser-default" ng-options="i as {'absent': 'لم يسمّع', 'done': 'سمّع'}[i] for i in ['done', 'absent']"
+                                ng-model="n.log.quiz.option" ng-change="quizChanged(n)">
+                                <option value="" disabled selected>إختر</option>
+                              </select>
+                            </div>
+                          </td>
+                          <td style="width: 10%" class="hideonprint">
+                            <select class="browser-default" ng-options="i as {'marks': 'درجات', 'general': 'عام'}[i] for i in ['general', 'marks']"
+                              ng-model="n.log.homework.type" ng-change="homeworkChanged(n)">
                               <option value="" disabled selected>إختر</option>
                             </select>
-                          </div>
-                        </td>
-                        <td style="width: 10%" class="hideonprint">
-                          <select class="browser-default" ng-options="i as {'marks': 'درجات', 'general': 'عام'}[i] for i in ['general', 'marks']"
-                            ng-model="n.log.homework.type" ng-change="homeworkChanged(n)">
-                            <option value="" disabled selected>إختر</option>
-                          </select>
-                        </td>
-                        <td style="width: 10%">
-                          <div style="display: inline-flex" ng-show="n.log.homework.type == 'marks'">
-                            <input type="number" value="20" min="0" ng-model="n.log.homework.mark" ng-blur="homeworkChanged(n)">
-                            <i style="padding: 10%">من</i>
-                            <input type="number" value="20" min="1" ng-model="n.log.homework.max" ng-blur="homeworkChanged(n)">
-                          </div>
-                          <div ng-show="n.log.homework.type == 'general'">
-                            <p class="showonprint">{{{'incomplete': 'غير مكتمل', 'complete':
-                              'كامل'}[n.log.homework.option]}}</p>
-                            <select class="hideonprint browser-default" ng-show="n.log.homework.type == 'general'"
-                              class="browser-default" ng-options="i as {'incomplete': 'غير مكتمل', 'complete': 'كامل'}[i] for i in ['incomplete', 'complete']"
-                              ng-model="n.log.homework.option" ng-change="homeworkChanged(n)">
-                              <option value="" disabled selected>إختر</option>
-                            </select>
-                          </div>
-                        </td>
-                      </tr>
-                      <!-- </div> -->
-                    </table>
+                          </td>
+                          <td style="width: 10%">
+                            <div style="display: inline-flex" ng-show="n.log.homework.type == 'marks'">
+                              <input type="number" value="20" min="0" ng-model="n.log.homework.mark" ng-blur="homeworkChanged(n)">
+                              <i style="padding: 10%">من</i>
+                              <input type="number" value="20" min="1" ng-model="n.log.homework.max" ng-blur="homeworkChanged(n)">
+                            </div>
+                            <div ng-show="n.log.homework.type == 'general'">
+                              <p class="showonprint">{{{'incomplete': 'غير مكتمل', 'complete':
+                                'كامل'}[n.log.homework.option]}}</p>
+                              <select class="hideonprint browser-default" ng-show="n.log.homework.type == 'general'"
+                                class="browser-default" ng-options="i as {'incomplete': 'غير مكتمل', 'complete': 'كامل'}[i] for i in ['incomplete', 'complete']"
+                                ng-model="n.log.homework.option" ng-change="homeworkChanged(n)">
+                                <option value="" disabled selected>إختر</option>
+                              </select>
+                            </div>
+                          </td>
+                        </tr>
+                        <!-- </div> -->
+                      </table>
+                    </div>
                   </div>
-                </div>
             </div>
             <!--Import jQuery before materialize.js-->
             <script type="text/javascript" src="/assets/js/libs/jquery-3.2.1.min.js"></script>
