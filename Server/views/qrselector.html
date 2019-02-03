@@ -9,9 +9,8 @@
   <link type="text/css" rel="stylesheet" href="/assets/css/font-awesome.min.css" />
   <script type="text/javascript" src="/assets/js/libs/angular/angular.min.js"></script>
   <script type="text/javascript" src="/assets/js/libs/js.cookie.js"></script>
-
+  <script type="text/javascript" src="/assets/js/libs/fuse.min.js"></script>
   <script type="text/JavaScript" src="/assets/js/libs/qrious.js" />
-
   <script type="text/javascript" src="/assets/js/libs/library.js"></script>
   <script type="text/javascript" src="/assets/js/scripts/helpers.js"></script>
   <link type="text/css" rel="stylesheet" href="/assets/css/style.css">
@@ -56,6 +55,10 @@
       <div class="animated slideInLeft" style="margin-right:5%;">
         <input type="checkbox" ng-model="selectall" id="selectall" ng-change="toggleSelectAll()" />
         <label for="selectall">حدد الكل</label>
+      </div>
+      <div class="col l6 s12 responsive_search">
+        <input class="searchitem" style="padding-right: 1%" placeholder="ابحث عن طالب"
+          id="searchStudents" ng-model="searchQuery" type="search" ng-change="performSearch($event)" required>
       </div>
       <!-- logs is there to avoid interfering with external libraries -->
       <table class="animated slideInUp logs logs-noblur">

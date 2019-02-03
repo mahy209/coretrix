@@ -129,6 +129,14 @@ app.controller("mainCtrl", function ($rootScope, $scope, sdk) {
     });
   };
 
+  $scope.performSearch = (event) => {
+    if (!$scope.searchQuery) {
+      $scope.students = $scope.fuse.list;
+    } else {
+      $scope.students = $scope.fuse.search($scope.searchQuery);
+    }
+  }
+
   $scope.grade_changed = (callback) => {
     if (!isNaN($scope.selected_grade)) {
       sdk.ListGroups(parseInt($scope.selected_grade), (stat, groups) => {
@@ -138,11 +146,24 @@ app.controller("mainCtrl", function ($rootScope, $scope, sdk) {
             sdk.QRListStudents($scope.selected_grade, null, (stat, result) => {
               switch (stat) {
                 case sdk.stats.OK:
-                  $scope.students = result.sort((a, b) => {
+                  result = result.sort((a, b) => {
                     if (a.fullname > b.fullname) return 1;
                     if (a.fullname < b.fullname) return -1;
                     return 0;
                   });
+                  $scope.students = result;
+                  var options = {
+                    shouldSort: true,
+                    threshold: 0.2,
+                    location: 0,
+                    distance: 100,
+                    maxPatternLength: 32,
+                    minMatchCharLength: 1,
+                    keys: [
+                      "fullname",
+                    ]
+                  };
+                  $scope.fuse = new Fuse(result, options);
                   break;
                 default:
 

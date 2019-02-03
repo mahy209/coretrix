@@ -14,7 +14,7 @@ function notRegistered() {
 }
 
 const registerer = 'karimgaber';
-const offline = false;
+const offline = true;
 
 function writeOfflineActivation(hash) {
   try {
