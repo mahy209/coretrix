@@ -549,7 +549,7 @@ app.controller('smsCtrl', function ($rootScope, $scope, $location, sdk) {
 
     const formatExam = (log) => {
       return formatExamReport(
-        $scope.profile, log, $scope.selected_exam.max_mark, $scope.exams.indexOf($scope.selected_exam) + 1, undefined, $rootScope.grades_names, $scope.gradings)
+        $scope.profile, log, $scope.selected_exam.max_mark, $scope.selected_exam.name, undefined, $rootScope.grades_names, $scope.gradings)
     }
 
     const formatMessage = () => {

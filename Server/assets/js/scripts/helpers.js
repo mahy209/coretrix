@@ -67,16 +67,15 @@ function gradeMark(mark, max, gradings) {
   }
 }
 
-function formatExamReport(profile, log, max_mark, examIndex, nointro, grades_names, gradings) {
+function formatExamReport(profile, log, max_mark, examName, nointro, grades_names, gradings) {
   const grade = grades_names[log.grade];
   if (!log.log) log.log = {};
   const student = log.firstname;
   const attendant = log.log.attendant;
   const mark = log.log.mark;
-  const option_attendant = attendant ? 'حضر' : 'لم يحضر';
-  const option_mark = mark ? ('درجته ' + mark + '/' + max_mark) : 'لم يحضر';
+  const option_mark = mark ? (mark + '/' + max_mark) : 'لم يحضر';
   const option_grading = gradeMark(mark, max_mark, gradings);
-  return `درجة اختبار ${examIndex} ${grade} للطالب ${student} ${option_mark} (${attendant ? option_grading : ''})` + (nointro ? '' : ` ${formatSignature(profile)}`);
+  return `درجة اختبار ${examName} للطالب ${student} ${option_mark} ${attendant && option_grading ? `(${option_grading}) ` : ''}` + (nointro ? '' : formatSignature(profile));
 }
 
 function formatClassReport(profile, log, options, classDay, nointro, grades_names) {
@@ -94,8 +93,8 @@ function formatClassReport(profile, log, options, classDay, nointro, grades_name
   let options_string = '';
   options_string =
     (options.attendant ? option_attendant : '') +
-    (options.homework ? ' و' + option_homework : '') +
-    (options.quiz ? ' و' + option_quiz : '');
+    (options.homework && option_homework ? ' و' + option_homework : '') +
+    (options.quiz && option_quiz ? ' و' + option_quiz : '');
   return ((nointro ? '' : `${intro} ${student} `) + `${options_string}` + (nointro ? '' : ` - ${grade} ${formatSignature(profile)}`)).replace('  ', ' ').trim();
 }
 
