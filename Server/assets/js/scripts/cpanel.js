@@ -1790,6 +1790,20 @@ app.controller('mainCtrl', function ($rootScope, $scope, sdk) {
   }
   $rootScope.variableListeners.push(init)
   $rootScope.reloadVariables()
+  $scope.allGradesExamsChange = (event) => {
+    if ($scope.allGradesExams) {
+      sdk.ListExams(undefined, (stat, exams) => {
+        switch (stat) {
+          case sdk.stats.OK:
+            $scope.exams = exams
+            break
+          default:
+        }
+      })
+    } else {
+      $scope.grade_changed(false, true, false, false)
+    }
+  };
   arrayKeyToArray = (obj, key) => {
     let returner = []
     obj.forEach(element => {

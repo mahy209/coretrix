@@ -371,8 +371,12 @@
             </div>
             <div id="examSelector" class="col s12">
               <div class="card-panel animated fadeIn">
-                <label>السنه الدراسيه</label>
-                <select class="browser-default" ng-options="i as grades_names[i] for i in grades" ng-change="grade_changed(false, true, false, false)"
+                <div>
+                  <input type="checkbox" id="allGradesExams" ng-model="allGradesExams" ng-change="allGradesExamsChange()" />
+                  <label for="allGradesExams">كل السنين</label>
+                </div>
+                <label ng-hide="allGradesExams">السنه الدراسيه</label>
+                <select ng-hide="allGradesExams" class="browser-default" ng-options="i as grades_names[i] for i in grades" ng-change="grade_changed(false, true, false, false)"
                   ng-model="selected_grade">
                   <option value="" disabled selected>السنه</option>
                 </select>
