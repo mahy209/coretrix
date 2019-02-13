@@ -2072,6 +2072,9 @@ app.controller('mainCtrl', function ($rootScope, $scope, sdk) {
         $scope.last_exams = result.exams
         $scope.last_classes = result.classes
         $scope.subscriptions = result.subscriptions.map(subscription => {
+          if (!subscription.item) {
+            return subscription;
+          }
           const log = formatPayClass(subscription.log, subscription.item.price);
           return {
             ...subscription,
@@ -2079,7 +2082,7 @@ app.controller('mainCtrl', function ($rootScope, $scope, sdk) {
           }
         });
         // BEEPS LOGIC
-        let beep_exams = true;
+        let beep_exams = result.exams && result.exams.length ? true : false;
         for (let i = 0; i < result.exams.length; i++) {
           const {
             log,
@@ -2089,7 +2092,7 @@ app.controller('mainCtrl', function ($rootScope, $scope, sdk) {
             beep_exams = false;
           }
         }
-        let beep_classes = true;
+        let beep_classes = result.classes && result.classes.length ? true : false;
         for (let i = 0; i < result.classes.length; i++) {
           const {
             log
@@ -2102,17 +2105,24 @@ app.controller('mainCtrl', function ($rootScope, $scope, sdk) {
           .find(sub => sub.month == Number(moment().format('M')) && sub.year == Number(moment().format('Y')));
         const beepDayOfMonth = parseInt(localStorage.getItem('beepDayOfMonth'));
         const currentDay = new Date().getDate();
-        const beep_subscription = currentDay >= beepDayOfMonth && (!currentSubscription.log || (((currentSubscription.log.payed - currentSubscription.log.discount) != currentSubscription.item.price)));
+        const beep_subscription = currentSubscription && currentSubscription.item ? currentDay >= beepDayOfMonth && (!currentSubscription.log || (((currentSubscription.log.payed - currentSubscription.log.discount) != currentSubscription.item.price))) : false;
         let beep_passed_subscriptions = false;
         for (const sub of result.subscriptions) {
           if (sub == currentSubscription) {
             continue;
           }
-          const beep = !sub.log || ((sub.log.payed - sub.log.discount) != sub.item.price);
+          const beep = sub && sub.item ? !sub.log || ((sub.log.payed - sub.log.discount) != sub.item.price) : false;
           if (beep) {
             beep_passed_subscriptions = beep;
           }
         }
+        console.log({
+          currentSubscription,
+          beep_exams,
+          beep_classes,
+          beep_subscription,
+          beep_passed_subscriptions
+        });
         if (beep_exams || beep_classes ||
           (beep_subscription && $scope.beeps.currentSubscription) ||
           (beep_passed_subscriptions && $scope.beeps.passedSubscriptions)) {

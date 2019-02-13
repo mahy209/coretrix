@@ -254,12 +254,14 @@
             <div class="col l12 s12">
               <div class="card-panel" style="transition: all 0.2s">
                 <div class="row">
-                  <div class="col s4 float-right" ng-repeat="sub in subscriptions">
-                    <h6 class="center-align flow-text">{{ sub.item.name }}</h6>
-                    <div ng-class="sub.log.cardClass" class="card-panel white-text">
-                      {{ sub.log.payText }}
+                  <ng-template ng-repeat="sub in subscriptions">
+                    <div class="col s4 float-right" ng-show="sub.item">
+                      <h6 class="center-align flow-text">{{ sub.item.name }}</h6>
+                      <div ng-class="sub.log.cardClass" class="card-panel white-text">
+                        {{ sub.log.payText }}
+                      </div>
                     </div>
-                  </div>
+                  </ng-template>
                 </div>
               </div>
             </div>
@@ -376,8 +378,8 @@
                   <label for="allGradesExams">كل السنين</label>
                 </div>
                 <label ng-hide="allGradesExams">السنه الدراسيه</label>
-                <select ng-hide="allGradesExams" class="browser-default" ng-options="i as grades_names[i] for i in grades" ng-change="grade_changed(false, true, false, false)"
-                  ng-model="selected_grade">
+                <select ng-hide="allGradesExams" class="browser-default" ng-options="i as grades_names[i] for i in grades"
+                  ng-change="grade_changed(false, true, false, false)" ng-model="selected_grade">
                   <option value="" disabled selected>السنه</option>
                 </select>
                 <label>الامتحان</label>
