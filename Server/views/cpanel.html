@@ -1286,7 +1286,7 @@
                         هاتف
                       </th>
                     </tr>
-                    <tr ng-repeat="n in students" ng-show="(!selected_group || n.group == selected_group.id) && (!filterAttendance || !n.log.attendant)">
+                    <tr ng-repeat="n in class_logs | fuse : searchQuery" ng-show="(!selected_group || n.group == selected_group.id) && (!filterAttendance || !n.log.attendant)">
                       <td>
                         <!-- TODO: fix css -->
                         <input type="checkbox" ng-model="n.selected" id="cid{{n.studentid}}" class="checkbox" />
@@ -1329,7 +1329,7 @@
                         هاتف
                       </th>
                     </tr>
-                    <tr ng-repeat="n in students" ng-show="(!selected_group || n.group == selected_group.id) && (!filterAttendance || !n.log.attendant)">
+                    <tr ng-repeat="n in exam_logs | fuse : searchQuery" ng-show="(!selected_group || n.group == selected_group.id) && (!filterAttendance || !n.log.attendant)">
                       <td>
                         <!-- TODO: fix css -->
                         <input type="checkbox" ng-model="n.selected" id="cid{{n.studentid}}" class="checkbox" />
@@ -1364,7 +1364,7 @@
                         هاتف
                       </th>
                     </tr>
-                    <tr ng-repeat="n in students" ng-show="!selected_group || n.group == selected_group.id">
+                    <tr ng-repeat="n in message_students | fuse : searchQuery" ng-show="!selected_group || n.group == selected_group.id">
                       <td>
                         <!-- TODO: fix css -->
                         <input type="checkbox" ng-model="n.selected" id="cid{{n.studentid}}" class="checkbox" />

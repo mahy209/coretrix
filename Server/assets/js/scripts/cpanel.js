@@ -1,6 +1,30 @@
 // var app = angular.module("coretrix", ['coretrix.sdk', 'coretrix.languages', 'ngRoute'])
 var app = angular.module('coretrix', ['coretrix.sdk', 'dndLists', 'sf.virtualScroll'])
 
+app.filter('fuse', () => {
+  const fuseOptions = {
+    shouldSort: true,
+    threshold: 0.2,
+    location: 0,
+    distance: 100,
+    maxPatternLength: 32,
+    minMatchCharLength: 1,
+    keys: [
+      "fullname",
+    ]
+  };
+  return (array, searchQuery) => {
+    if (!array) {
+      return;
+    }
+    if (!searchQuery) {
+      return array;
+    }
+    const fuse = new Fuse(array, fuseOptions);
+    return fuse.search(searchQuery);
+  }
+})
+
 app.run(function ($rootScope, $window, $location, sdk) {
   angular.element(document).ready(function () {
     $('.modal').modal()
@@ -311,7 +335,7 @@ app.controller('paylogsCtrl', function ($scope, sdk) {
   };
 });
 
-app.controller('smsCtrl', function ($rootScope, $scope, $location, sdk) {
+app.controller('smsCtrl', function ($rootScope, $scope, $location, sdk, fuseFilter) {
   $scope.sendingSMS = false
   $scope.select_all = true
   $scope.selected_protocol = 'legacy';
@@ -441,17 +465,22 @@ app.controller('smsCtrl', function ($rootScope, $scope, $location, sdk) {
   $scope.assertSelectAll = () => {
     switch ($scope.selected_type) {
       case 'lesson':
-        for (let i = 0; i < $scope.class_logs.length; i++) {
-          $scope.class_logs[i].selected = $scope.select_all
+        const logs = fuseFilter($scope.class_logs, $scope.searchQuery)
+          .filter(n => !$scope.filterAttendance || !n.log.attendant);
+        for (let i = 0; i < logs.length; i++) {
+          logs[i].selected = $scope.select_all;
         }
         break
       case 'exam':
-        for (let i = 0; i < $scope.exam_logs.length; i++) {
-          $scope.exam_logs[i].selected = $scope.select_all
+        const exam_logs = fuseFilter($scope.exam_logs, $scope.searchQuery)
+          .filter(n => !$scope.filterAttendance || !n.log.attendant);
+        for (let i = 0; i < exam_logs.length; i++) {
+          exam_logs[i].selected = $scope.select_all;
         }
       case 'message':
-        for (let i = 0; i < $scope.message_students.length; i++) {
-          $scope.message_students[i].selected = $scope.select_all
+        const message_students = fuseFilter($scope.message_students, $scope.searchQuery);
+        for (let i = 0; i < message_students.length; i++) {
+          message_students[i].selected = $scope.select_all;
         }
       default:
         break

@@ -13,7 +13,7 @@ function notRegistered() {
   process.exit()
 }
 
-const registerer = 'karimgaber';
+const registerer = 'karimgaber2';
 const offline = true;
 
 function writeOfflineActivation(hash) {
