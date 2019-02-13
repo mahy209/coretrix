@@ -2116,13 +2116,13 @@ app.controller('mainCtrl', function ($rootScope, $scope, sdk) {
             beep_passed_subscriptions = beep;
           }
         }
-        console.log({
-          currentSubscription,
-          beep_exams,
-          beep_classes,
-          beep_subscription,
-          beep_passed_subscriptions
-        });
+        // console.log({
+        //   currentSubscription,
+        //   beep_exams,
+        //   beep_classes,
+        //   beep_subscription,
+        //   beep_passed_subscriptions
+        // });
         if (beep_exams || beep_classes ||
           (beep_subscription && $scope.beeps.currentSubscription) ||
           (beep_passed_subscriptions && $scope.beeps.passedSubscriptions)) {
