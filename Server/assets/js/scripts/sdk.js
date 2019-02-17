@@ -1174,8 +1174,8 @@ sdk.factory('sdk', ['$http', function ($http) {
         console.log(${barcodeHeight});
         console.log(${id});
         setTimeout(() => {
-          // window.print();
-          // window.close();
+          window.print();
+          window.close();
         }, 1000);
       })
       </script>

@@ -251,7 +251,7 @@ app.controller('paylogsCtrl', function ($scope, sdk) {
             $scope.totalOutcome = totals.totalOutcome;
             $scope.totalAmount = totals.totalAmount;
             $scope.paylogs = paylogs;
-            $scope.paylogs = [];
+            // $scope.paylogs = [];
             break;
           default:
             break;
@@ -340,6 +340,10 @@ app.controller('smsCtrl', function ($rootScope, $scope, $location, sdk, fuseFilt
   $scope.sendingSMS = false
   $scope.select_all = true
   $scope.selected_protocol = 'legacy';
+
+  $scope.print = () => {
+    window.print();
+  };
 
   sdk.GetGradings((stat, result) => {
     if (stat == sdk.stats.OK) {
