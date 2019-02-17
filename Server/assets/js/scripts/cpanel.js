@@ -1,4 +1,5 @@
 // var app = angular.module("coretrix", ['coretrix.sdk', 'coretrix.languages', 'ngRoute'])
+
 var app = angular.module('coretrix', ['coretrix.sdk', 'dndLists', 'sf.virtualScroll'])
 
 app.filter('fuse', () => {
@@ -1874,6 +1875,9 @@ app.controller('mainCtrl', function ($rootScope, $scope, sdk) {
       })
     }
   }
+  $scope.exam_changed = () => {
+    $scope.selected_grade = $scope.selected_exam.grade;
+  };
   $scope.addExam = () => {
     if ($scope.newExam_name == null) return toast('من فضلك قم بإدخال اسم الإمتحان', gradients.error)
     if ($scope.addExam_selectedGrade == null) return toast('من فضلك قم بإختيار السنة', gradients.error)

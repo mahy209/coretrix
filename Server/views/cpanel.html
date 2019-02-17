@@ -383,7 +383,7 @@
                   <option value="" disabled selected>السنه</option>
                 </select>
                 <label>الامتحان</label>
-                <select class="browser-default" ng-options="e as e.name for e in exams" ng-model="selected_exam">
+                <select class="browser-default" ng-options="e as e.name for e in exams" ng-model="selected_exam" ng-change="exam_changed()">
                   <option value="" disabled selected>اختر الامتحان</option>
                 </select>
                 <div class="row" style="margin-top:3%;">
