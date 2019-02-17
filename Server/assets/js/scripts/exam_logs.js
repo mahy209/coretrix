@@ -37,7 +37,7 @@ function confirm(rootscope, sdk, name) {
 
 app.controller("mainCtrl", function ($rootScope, $scope, sdk) {
   $scope.newExam_max = 30;
-  $scope.newExam_redline = 25;
+  $scope.newExam_redline = 0;
   $scope.filterLogs = false;
   $scope.filterMark = 25;
   $scope.filterMarkSelector = 'lt';
@@ -197,7 +197,7 @@ app.controller("mainCtrl", function ($rootScope, $scope, sdk) {
   $scope.editExam = () => {
     if (!$scope.editExam_name) return toast('برجاء كتابة اسم الإمتحان!', gradients.error);
     if (!$scope.editExam_max) return toast('برجاء إدخال أعلى درجة للإمتحان!', gradients.error);
-    if (!$scope.editExam_redline) return toast('برجاء إدخال الخط الأحمر للدرجات!', gradients.error);
+    if (!($scope.editExam_redline >= 0)) return toast('برجاء إدخال الخط الأحمر للدرجات!', gradients.error);
     sdk.EditExam($scope.loadedExamId, $scope.editExam_name, $scope.editExam_max, $scope.editExam_redline, (stat) => {
       if (stat == sdk.stats.OK) {
         $scope.grade_changed();

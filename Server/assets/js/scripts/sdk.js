@@ -455,7 +455,7 @@ sdk.factory('sdk', ['$http', function ($http) {
       token: token
     };
     if (name) query.ig_name = name;
-    if (redline) query.ig_redline = redline;
+    if (redline >= 0) query.ig_redline = redline;
     if (max) query.ig_max = max;
     post("api/teacher/exams/edit", query, callback);
   }

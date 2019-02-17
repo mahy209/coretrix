@@ -124,7 +124,7 @@ app.run(function ($rootScope, $window, $location, sdk) {
 
 app.controller('examsCtrl', function ($rootScope, $scope, sdk) {
 
-  $scope.newExam_redline = 25
+  $scope.newExam_redline = 0
   $scope.newExam_max = 30
   $scope.openExamLogs = (e) => {
     if (e) window.open('/exam_logs/' + e.id, '_blank')
@@ -182,7 +182,7 @@ app.controller('examsCtrl', function ($rootScope, $scope, sdk) {
   $scope.editExam = () => {
     if (!$scope.editExam_name) return toast('برجاء كتابة اسم الإمتحان!', gradients.error)
     if (!$scope.editExam_max) return toast('برجاء إدخال أعلى درجة للإمتحان!', gradients.error)
-    if (!$scope.editExam_redline) return toast('برجاء إدخال الخط الأحمر للدرجات!', gradients.error)
+    if (!($scope.editExam_redline >= 0)) return toast('برجاء إدخال الخط الأحمر للدرجات!', gradients.error)
     sdk.EditExam($scope.loadedExamId, $scope.editExam_name, $scope.editExam_max, $scope.editExam_redline, (stat) => {
       if (stat == sdk.stats.OK) {
         $rootScope.reloadVariables('exams')
@@ -1896,7 +1896,7 @@ app.controller('mainCtrl', function ($rootScope, $scope, sdk) {
   $scope.editExam = () => {
     if (!$scope.editExam_name) return toast('برجاء كتابة اسم الإمتحان!', gradients.error)
     if (!$scope.editExam_max) return toast('برجاء إدخال أعلى درجة للإمتحان!', gradients.error)
-    if (!$scope.editExam_redline) return toast('برجاء إدخال الخط الأحمر للدرجات!', gradients.error)
+    if (!($scope.editExam_redline >= 0)) return toast('برجاء إدخال الخط الأحمر للدرجات!', gradients.error)
     sdk.EditExam($scope.loadedExamId, $scope.editExam_name, $scope.editExam_max, $scope.editExam_redline, (stat) => {
       if (stat == sdk.stats.OK) {
         $rootScope.reloadVariables('exams')

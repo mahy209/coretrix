@@ -2571,7 +2571,7 @@ function editExam(args, callback) {
   if (!isTeacherRep(args.userDoc)) return callback(null, stats.IncapableUserType);
   var query = {};
   if (args.ig_name) query.name = args.ig_name;
-  if (args.ig_redline) query.redline = args.ig_redline;
+  if (args.ig_redline >= 0) query.redline = args.ig_redline;
   if (args.ig_max) query.max_mark = args.ig_max;
   if (Object.keys(query).length < 0) return callback(null, stats.OK);
   db.collection("exams").updateOne({
