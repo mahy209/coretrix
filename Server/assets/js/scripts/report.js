@@ -19,6 +19,7 @@ app.run(function ($rootScope, $window, $location, sdk) {
       default:
     }
   })
+  $rootScope.quizNames = quizNames;
   confirm($rootScope, sdk);
 });
 

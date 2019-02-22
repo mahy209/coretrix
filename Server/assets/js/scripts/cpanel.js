@@ -47,6 +47,7 @@ app.run(function ($rootScope, $window, $location, sdk) {
     'الخميس',
     'الجمعه'
   ]
+  $rootScope.quizNames = quizNames;
   $rootScope.NumericOrderStrings = [
     'الأولى',
     'الثانية',
@@ -646,99 +647,99 @@ app.controller('smsCtrl', function ($rootScope, $scope, $location, sdk, fuseFilt
         process($scope.message_students.filter(log => log.selected), formatMessage)
         break
       case 'report':
-        if (!$scope.selected_month) return toast('برجاء اختيار الشهر')
+        // if (!$scope.selected_month) return toast('برجاء اختيار الشهر')
 
-        let students = $scope.students
+        // let students = $scope.students
 
-        const startDate = new Date($scope.selected_month.year, $scope.selected_month.month)
-        let endDate = date.addMonths(startDate, 1)
-        endDate = date.addDays(endDate, -1)
+        // const startDate = new Date($scope.selected_month.year, $scope.selected_month.month)
+        // let endDate = date.addMonths(startDate, 1)
+        // endDate = date.addDays(endDate, -1)
 
-        let i = 0
+        // let i = 0
 
-        const sendLogsSMS = (student) => {
+        // const sendLogsSMS = (student) => {
 
-          if (students.length <= i) return
+        //   if (students.length <= i) return
 
-          $scope.sendingSMS = true
+        //   $scope.sendingSMS = true
 
-          sdk.FetchLogs(student.id, $scope.selected_grade, {
-            start: startDate,
-            end: endDate
-          }, (stat, logs) => {
-            switch (stat) {
-              case sdk.stats.OK:
-                const notifs = []
+        //   sdk.FetchLogs(student.id, $scope.selected_grade, {
+        //     start: startDate,
+        //     end: endDate
+        //   }, (stat, logs) => {
+        //     switch (stat) {
+        //       case sdk.stats.OK:
+        //         const notifs = []
 
-                let unattClasses = 0
-                let unattExams = 0
+        //         let unattClasses = 0
+        //         let unattExams = 0
 
-                notifs.push(intro + ' ' + student.fullname)
+        //         notifs.push(intro + ' ' + student.fullname)
 
-                const separator = '-----------'
+        //         const separator = '-----------'
 
-                notifs.push(separator)
-                notifs.push('الحصص')
-                notifs.push(separator)
+        //         notifs.push(separator)
+        //         notifs.push('الحصص')
+        //         notifs.push(separator)
 
-                logs.classes.forEach(classLog => {
-                  if (!classLog.log || !classLog.log.attendant) unattClasses++
-                  classLog.fullname = student.fullname
-                  if (classLog.links) classLog.linksString = classesLinksToDayString(classLog.links)
-                  classLog.date = simpleDate(classLog.date)
-                  notifs.push(formatClassReport($scope.profile, classLog, {
-                    attendant: true,
-                    quiz: true,
-                    homework: true
-                  }, formatClassDay(classLog), true, $rootScope.grades_names))
-                })
+        //         logs.classes.forEach(classLog => {
+        //           if (!classLog.log || !classLog.log.attendant) unattClasses++
+        //           classLog.fullname = student.fullname
+        //           if (classLog.links) classLog.linksString = classesLinksToDayString(classLog.links)
+        //           classLog.date = simpleDate(classLog.date)
+        //           notifs.push(formatClassReport($scope.profile, classLog, {
+        //             attendant: true,
+        //             quiz: true,
+        //             homework: true
+        //           }, formatClassDay(classLog), true, $rootScope.grades_names))
+        //         })
 
-                notifs.push(separator)
-                notifs.push('الامتحانات')
-                notifs.push(separator)
+        //         notifs.push(separator)
+        //         notifs.push('الامتحانات')
+        //         notifs.push(separator)
 
-                logs.exams.forEach(examLog => {
-                  if (!examLog.log || !examLog.log.attendant) unattExams++
-                  examLog.fullname = student.fullname
-                  notifs.push(formatExamReport(
-                    $scope.profile, examLog, examLog.max_mark, examLog.name, true, $rootScope.grades_names, $scope.gradings))
-                })
+        //         logs.exams.forEach(examLog => {
+        //           if (!examLog.log || !examLog.log.attendant) unattExams++
+        //           examLog.fullname = student.fullname
+        //           notifs.push(formatExamReport(
+        //             $scope.profile, examLog, examLog.max_mark, examLog.name, true, $rootScope.grades_names, $scope.gradings))
+        //         })
 
-                notifs.push(separator)
+        //         notifs.push(separator)
 
-                notifs.push('مجموع الحصص التى لم يحضرها: ' + unattClasses)
-                notifs.push('مجموع الامتحانات التى لم يحضرها: ' + unattExams)
+        //         notifs.push('مجموع الحصص التى لم يحضرها: ' + unattClasses)
+        //         notifs.push('مجموع الامتحانات التى لم يحضرها: ' + unattExams)
 
-                notifs.push(separator)
-                notifs.push(formatSignature($scope.profile))
+        //         notifs.push(separator)
+        //         notifs.push(formatSignature($scope.profile))
 
-                let smsMessage = notifs.join('\n ')
+        //         let smsMessage = notifs.join('\n ')
 
-                let num = prioritizeNumber(student.contacts)
+        //         let num = prioritizeNumber(student.contacts)
 
-                $scope.smsStudent = student.fullname
-                $scope.smsProgress = ((i + 1) / students.length) * 100
+        //         $scope.smsStudent = student.fullname
+        //         $scope.smsProgress = ((i + 1) / students.length) * 100
 
-                sdk.ADBSendSMS($scope.selected_device.id, num, smsMessage, (stat) => {
-                  switch (stat) {
-                    case sdk.stats.OK:
-                      sendLogsSMS(students[++i])
-                      break
-                    default:
-                      $scope.smsFailed = true
-                      $scope.smsStudent = 'حدث خطأ ما أثناء ارسال الرسائل'
-                      break
-                  }
-                })
-                break
+        //         sdk.ADBSendSMS($scope.selected_device.id, num, smsMessage, (stat) => {
+        //           switch (stat) {
+        //             case sdk.stats.OK:
+        //               sendLogsSMS(students[++i])
+        //               break
+        //             default:
+        //               $scope.smsFailed = true
+        //               $scope.smsStudent = 'حدث خطأ ما أثناء ارسال الرسائل'
+        //               break
+        //           }
+        //         })
+        //         break
 
-              default:
-                break
-            }
-          })
-        }
+        //       default:
+        //         break
+        //     }
+        //   })
+        // }
 
-        sendLogsSMS(students[0])
+        // sendLogsSMS(students[0])
         break
     }
   }
@@ -2091,7 +2092,7 @@ app.controller('mainCtrl', function ($rootScope, $scope, sdk) {
         });
         // BEEPS LOGIC
         let beep_exams = result.exams && result.exams.length ? true : false;
-        for (let i = 0; i < result.exams.length; i++) {
+        for (let i = 0; i < $scope.beeps.exams; i++) {
           const {
             log,
             redline
@@ -2101,11 +2102,11 @@ app.controller('mainCtrl', function ($rootScope, $scope, sdk) {
           }
         }
         let beep_classes = result.classes && result.classes.length ? true : false;
-        for (let i = 0; i < result.classes.length; i++) {
+        for (let i = 0; i < $scope.beeps.classes; i++) {
           const {
             log
           } = result.classes[i];
-          if (log[0] && log[0].attendant) {
+          if (log[0] && log[0].attendant && !(log[0].quiz && log[0].quiz.type == 'general' && (log[0].quiz.option == 'wrong' || log[0].quiz.option == 'absent'))) {
             beep_classes = false;
           }
         }
@@ -2124,13 +2125,13 @@ app.controller('mainCtrl', function ($rootScope, $scope, sdk) {
             beep_passed_subscriptions = beep;
           }
         }
-        // console.log({
-        //   currentSubscription,
-        //   beep_exams,
-        //   beep_classes,
-        //   beep_subscription,
-        //   beep_passed_subscriptions
-        // });
+        console.log({
+          currentSubscription,
+          beep_exams,
+          beep_classes,
+          beep_subscription,
+          beep_passed_subscriptions
+        });
         if (beep_exams || beep_classes ||
           (beep_subscription && $scope.beeps.currentSubscription) ||
           (beep_passed_subscriptions && $scope.beeps.passedSubscriptions)) {

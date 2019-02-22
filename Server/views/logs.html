@@ -69,7 +69,7 @@
                   </div>
                   <div ng-show="filterQuizType!='all'" class="col l6 s12" style="float:right;">
                     <label>القيمة</label>
-                    <select ng-show="filterQuizType=='general'" class="browser-default" ng-options="i as {'absent': 'لم يسمّع', 'done': 'سمّع', 'all':'الكل'}[i] for i in ['all','done', 'absent']"
+                    <select ng-show="filterQuizType=='general'" class="browser-default" ng-options="i as quizNames[i] for i in ['all','done', 'absent','right','wrong']"
                       ng-model="filterQuizOption">
                       <option value="" disabled selected>إختر</option>
                     </select>
@@ -167,7 +167,7 @@
               </div>
               <div ng-show="globalQuizType == 'general'">
                 <label>التسميع</label>
-                <select class="browser-default" ng-options="i as {'absent': 'لم يسمّع', 'done': 'سمّع', 'none':'لا تعدله'}[i] for i in ['none','done', 'absent']"
+                <select class="browser-default" ng-options="i as quizNames[i] for i in ['none','done', 'absent','right','wrong']"
                   ng-model="globalQuizOption">
                   <option value="" disabled selected>إختر</option>
                 </select>
@@ -315,8 +315,8 @@
                               </div>
                             </div>
                             <div ng-show="n.log.quiz.type == 'general'">
-                              <p class="showonprint">{{{'absent': 'لم يسمّع', 'done': 'سمّع'}[n.log.quiz.option]}}</p>
-                              <select class="hideonprint" class="browser-default" ng-options="i as {'absent': 'لم يسمّع', 'done': 'سمّع'}[i] for i in ['done', 'absent']"
+                              <p class="showonprint">{{quizNames[n.log.quiz.option]}}</p>
+                              <select class="hideonprint" class="browser-default" ng-options="i as quizNames[i] for i in ['done', 'absent','right','wrong']"
                                 ng-model="n.log.quiz.option" ng-change="quizChanged(n)">
                                 <option value="" disabled selected>إختر</option>
                               </select>

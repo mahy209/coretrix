@@ -223,10 +223,9 @@
                   </div>
                   <div class="col m3 l3 s12">
                     <h6 class="center-align flow-text">تسميع</h6>
-                    <div ng-repeat="l in last_classes" class="card-panel white-text" ng-class="l.log[0].quiz.option =='absent' ? 'red' : 'green'">
+                    <div ng-repeat="l in last_classes" class="card-panel white-text" ng-class="(l.log[0].quiz.option =='absent' || l.log[0].quiz.option == 'wrong') ? 'red' : 'green'">
                       {{l.log[0].quiz ? (l.log[0].quiz.type == 'marks' ? l.log[0].quiz.mark + '/' + l.log[0].quiz.max :
-                      (l.log[0].quiz.option ==
-                      'absent' ? 'لم يسمّع' : 'سمّع')) : 'لم تسجل درجة تسميع'}}
+                      (quizNames[l.log[0].quiz.option])) : 'لم تسجل درجة تسميع'}}
                     </div>
                   </div>
                   <!-- 
@@ -317,8 +316,8 @@
                     <p ng-class="currentClass.log[0].quiz.option == 'absert' ? 'red-mark' : ''">{{currentClass.log[0].quiz
                       ?
                       (currentClass.log[0].quiz.type == 'marks' ? currentClass.log[0].quiz.mark
-                      + '/' + currentClass.log[0].quiz.max : (currentClass.log[0].quiz.option == 'absent'
-                      ? 'لم يسمّع' : 'سمّع')) : 'لم تسجل درجة تسميع'}}</p>
+                      + '/' + currentClass.log[0].quiz.max : (quizNames[currentClass.log[0].quiz.option])) : 'لم تسجل
+                      درجة تسميع'}}</p>
                   </div>
                 </div>
                 <div ng-show "currentClass">
@@ -1309,8 +1308,7 @@
                       </td>
                       <td ng-show="smsQuiz">{{n.log.quiz ? (n.log.quiz.type == 'marks' ? n.log.quiz.mark + ' / ' +
                         n.log.quiz.max :
-                        (n.log.quiz.option
-                        == 'absent' ? 'لم يسمّع' : 'سمّع')) : 'لم يسجل تسميع الطالب'}}</td>
+                        (quizNames[n.log.quiz.option])) : 'لم يسجل تسميع الطالب'}}</td>
                       <td ng-show="smsHomework">{{n.log.homework ? (n.log.homework.type == 'marks' ?
                         n.log.homework.mark + '/' +
                         n.log.homework.max

@@ -156,7 +156,7 @@ function initialize() {
     if (!quiz) return false;
     if (!quiz.type) return false;
     if (quiz.type == "general") {
-      if (quiz.option == "done" || quiz.option == "absent") return true;
+      if (quiz.option == "done" || quiz.option == "absent" || quiz.option == "right" || quiz.option == "wrong") return true;
     }
     if (quiz.type == "marks") {
       if (typeof quiz.mark == 'number' && typeof quiz.max == 'number' && quiz.mark <= quiz.max) return true;

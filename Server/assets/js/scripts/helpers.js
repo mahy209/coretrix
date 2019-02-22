@@ -1,3 +1,12 @@
+var quizNames = {
+  absent: 'لم يسمّع',
+  done: 'سمّع',
+  right: 'سمّع صحيح',
+  wrong: 'سمّع خطأ',
+  all: 'الكل',
+  none: 'لا تعدله',
+};
+
 function prioritizeNumber(contacts, goFor = "parent") {
   let indexes = {}
   for (let i = 0; i < contacts.length; i++) {
@@ -88,8 +97,7 @@ function formatClassReport(profile, log, options, classDay, nointro, grades_name
   let option_attendant = attendant ? 'حضر' : 'لم يحضر';
   let option_homework = (homework ? (homework.type == 'marks' ? ' الواجب' + homework.mark + '/' + homework.max :
     (homework.option == 'incomplete' ? 'الواجب غير مكتمل' : 'الواجب كامل')) : '');
-  let option_quiz = (quiz ? (quiz.type == 'marks' ? ' التسميع' + quiz.mark + '/' + quiz.max : (quiz.option ==
-    'absent' ? 'لم يسمع' : 'سمع')) : '');
+  let option_quiz = (quiz ? (quiz.type == 'marks' ? ' التسميع' + quiz.mark + '/' + quiz.max : (quizNames[quiz.option])) : '');
   let options_string = '';
   options_string =
     (options.attendant ? option_attendant : '') +

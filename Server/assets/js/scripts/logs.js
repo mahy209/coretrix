@@ -2,6 +2,7 @@ var app = angular.module("coretrix", ['coretrix.sdk'])
 
 app.run(function ($rootScope, $window, $location, sdk) {
   $rootScope.title = "Coretrix";
+  $rootScope.quizNames = quizNames;
   $rootScope.weekdays = [
     'السبت',
     'الاحد',

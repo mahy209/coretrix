@@ -224,8 +224,7 @@
             <td>{{c.log.attendant ? 'حضر' : 'لم يحضر'}}</td>
             <!--td>{{l.group_data[0].name}}</td-->
             <td>{{c.log.quiz ? (c.log.quiz.type == 'marks' ? c.log.quiz.mark + ' / ' + c.log.quiz.max :
-              (c.log.quiz.option
-              == 'absent' ? 'لم يسمّع' : 'سمّع')) : 'لم يسجل تسميع الطالب'}}</td>
+              (quizNames[c.log.quiz.option])) : 'لم يسجل تسميع الطالب'}}</td>
             <td>{{c.log.homework ? (c.log.homework.type == 'marks' ? c.log.homework.mark + '/' + c.log.homework.max
               : (c.log.homework.option == 'incomplete' ? 'غير مكتمل' : 'كامل')) : 'لم يسجل واجب الطالب'}}</td>
           </tr>
