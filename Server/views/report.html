@@ -124,8 +124,9 @@
           ng-show="viewer=='parent'"
           class="center-align">{{name}}</h4>
         <h4 ng-show="viewer=='teacher'"
-          class="center-align">بيانات الطالب</h4>
-        <table>
+          class="center-align" style="margin-bottom: 0">بيانات الطالب</h4>
+          <span class="center-align" style="width: 100%; margin-bottom: 18px; display: block">{{profile.name}}</span>
+        <table style="margin-top: 0">
           <tr ng-show="viewer=='teacher'">
             <td width="50%">الاسم
               <span>:</span>

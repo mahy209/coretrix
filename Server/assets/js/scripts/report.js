@@ -73,6 +73,10 @@ app.controller("mainCtrl", function ($rootScope, $scope, sdk) {
     return str;
   }
 
+  sdk.GetNameAndSubject((stat, result) => {
+    $scope.profile = result
+  })
+
   sdk.GetGradings((stat, result) => {
     if (stat == sdk.stats.OK) {
       $scope.gradings = result.gradings;
