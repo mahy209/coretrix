@@ -189,7 +189,7 @@
               <div class="card-panel blue-grey ">
                 <video id="preview" width="100%;"></video>
               </div>
-              <div class="card-panel  center-align" style="direction:ltr;">
+              <div class="card-panel center-align" style="direction:ltr;">
                 <h6>الكاميرا</h6>
                 <select style="margin-bottom:2%" class="browser-default" ng-options="c as c.name for c in cameras"
                   ng-change="camera_changed()" ng-model="selected_camera">
@@ -204,11 +204,27 @@
                     ايقاف
                   </label>
                 </div>
-
               </div>
             </div>
           </div>
           <div class="row">
+            <div class="col l12 s12">
+              <!-- current exam -->
+              <div class="card-panel " style="transition: all 0.2s">
+                <div style="display: inline-block; margin-right: 6px;">
+                  <input type="checkbox" id="classAttendanceAlert" ng-model="enabledAlerts.classAttendance" />
+                  <label for="classAttendanceAlert">حضور الحصص</label>
+                </div>
+                <div style="display: inline-block; margin-right: 6px;">
+                  <input type="checkbox" id="classQuizAlert" ng-model="enabledAlerts.classQuiz" />
+                  <label for="classQuizAlert">التسميع</label>
+                </div>
+                <div style="display: inline-block; margin-right: 6px;">
+                  <input type="checkbox" id="examsAlert" ng-model="enabledAlerts.exams" />
+                  <label for="examsAlert">الامتحانات</label>
+                </div>
+              </div>
+            </div>
             <div class="col l12 s12">
               <div class="card-panel" style="transition: all 0.2s">
                 <div class="row">
@@ -319,8 +335,6 @@
                       + '/' + currentClass.log[0].quiz.max : (quizNames[currentClass.log[0].quiz.option])) : 'لم تسجل
                       درجة تسميع'}}</p>
                   </div>
-                </div>
-                <div ng-show "currentClass">
                 </div>
               </div>
             </div>

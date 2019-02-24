@@ -1812,6 +1812,11 @@ function confirm(rootscope, sdk, name) {
 app.controller('mainCtrl', function ($rootScope, $scope, sdk) {
   $scope.tolog_name = 'اسم الطالب'
   $scope.toLogGroup = 'مجموعة الطالب'
+  $scope.enabledAlerts = {
+    exams: true,
+    classAttendance: true,
+    classQuiz: true,
+  };
   confirm($rootScope, sdk);
   let first = true
   var init = (refreshing, result, type) => {
@@ -2101,14 +2106,30 @@ app.controller('mainCtrl', function ($rootScope, $scope, sdk) {
             beep_exams = false;
           }
         }
-        let beep_classes = result.classes && result.classes.length ? true : false;
+        let beep_classes = false;
+        let beepClassesBecauseOfAttendance = result.classes && result.classes.length ? true : false;
+        let beepClassesBecauseOfQuiz = result.classes && result.classes.length ? true : false;
         for (let i = 0; i < $scope.beeps.classes; i++) {
           const {
             log
           } = result.classes[i];
-          if (log[0] && log[0].attendant && !(log[0].quiz && log[0].quiz.type == 'general' && (log[0].quiz.option == 'wrong' || log[0].quiz.option == 'absent'))) {
-            beep_classes = false;
+          if (log[0] && log[0].attendant) {
+            beepClassesBecauseOfAttendance = false;
           }
+          if (!(log[0].quiz && log[0].quiz.type == 'general' && (log[0].quiz.option == 'wrong' || log[0].quiz.option == 'absent'))) {
+            beepClassesBecauseOfQuiz = false;
+          }
+        }
+        console.log({
+          beepClassesBecauseOfAttendance,
+          beepClassesBecauseOfQuiz,
+          enabledAlerts: $scope.enabledAlerts,
+        });
+        if (beepClassesBecauseOfAttendance && $scope.enabledAlerts.classAttendance) {
+          beep_classes = true;
+        }
+        if (beepClassesBecauseOfQuiz && $scope.enabledAlerts.classQuiz) {
+          beep_classes = true;
         }
         const currentSubscription = result.subscriptions
           .find(sub => sub.month == Number(moment().format('M')) && sub.year == Number(moment().format('Y')));
@@ -2132,7 +2153,7 @@ app.controller('mainCtrl', function ($rootScope, $scope, sdk) {
           beep_subscription,
           beep_passed_subscriptions
         });
-        if (beep_exams || beep_classes ||
+        if (beep_exams && $scope.enabledAlerts.exams || beep_classes ||
           (beep_subscription && $scope.beeps.currentSubscription) ||
           (beep_passed_subscriptions && $scope.beeps.passedSubscriptions)) {
           new Audio('assets/sound/error.wav').play();
