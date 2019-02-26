@@ -2977,7 +2977,8 @@ function initializeClass(args, callback) {
     if (!isNaN(parseInt(args.ig_classnum))) {
       query.classnum = args.ig_classnum;
       db.collection("groupslinks").findOne({
-        classnum: args.ig_classnum
+        classnum: args.ig_classnum,
+        grade: args.grade,
       }, {
         _id: 0,
         links: 1
