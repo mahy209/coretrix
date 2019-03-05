@@ -24,6 +24,8 @@ registerSimplePage('/payments/*', 'payinglogs.html');
 registerSimplePage('/app', 'app.html');
 registerSimplePage('/qrselector', 'qrselector.html');
 registerSimplePage('/printer', 'printer.html');
+registerSimplePage('/batch', 'batch.html');
+registerSimplePage('/batch/*', 'batch.html');
 
 
 module.exports = router;
