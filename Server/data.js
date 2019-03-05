@@ -3755,7 +3755,12 @@ function fetchLogs(args, callback) {
         }
         db.collection('items').find({
           [teacherForeignIdentifier]: teacherRep(args.userDoc),
-          grade: args.grade
+          grade: args.grade,
+          ...args.ig_items && {
+            id: {
+              $in: args.ig_items
+            }
+          },
         }, {
           _id: 0,
           name: 1,

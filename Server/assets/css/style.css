@@ -543,3 +543,8 @@ ul[dnd-list] .dndPlaceholder {
 .float-right {
   float: right !important;
 }
+
+.margin-none {
+  margin: 0;
+  padding: 0;
+}

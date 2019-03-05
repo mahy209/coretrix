@@ -4,128 +4,146 @@
 <head>
   <meta charset="utf-8">
 
-  <meta name="viewport"
-    content="width=device-width, initial-scale=1.0" />
-  <link type="text/css"
-    rel="stylesheet"
-    href="/assets/css/materialize.min.css"
-    media="all" />
-  <link media="all"
-    type="text/css"
-    rel="stylesheet"
-    href="/assets/css/report-page.css">
-  <link type="text/css"
-    rel="stylesheet"
-    href="/assets/css/animate.min.css" />
-  <link type="text/css"
-    rel="stylesheet"
-    href="/assets/css/bootstrap-datepicker.standalone.min.css" />
-  <link type="text/css"
-    rel="stylesheet"
-    href="/assets/css/font-awesome.min.css" />
-  <script type="text/javascript"
-    src="/assets/js/libs/js.cookie.js"></script>
-  <script type="text/javascript"
-    src="/assets/js/libs/angular/angular.min.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link type="text/css" rel="stylesheet" href="/assets/css/materialize.min.css" media="all" />
+  <link media="all" type="text/css" rel="stylesheet" href="/assets/css/report-page.css">
+  <link type="text/css" rel="stylesheet" href="/assets/css/animate.min.css" />
+  <link type="text/css" rel="stylesheet" href="/assets/css/bootstrap-datepicker.standalone.min.css" />
+  <link type="text/css" rel="stylesheet" href="/assets/css/font-awesome.min.css" />
+  <script type="text/javascript" src="/assets/js/libs/js.cookie.js"></script>
+  <script type="text/javascript" src="/assets/js/libs/angular/angular.min.js"></script>
 
-  <script type="text/javascript"
-    src="/assets/js/libs/library.js"></script>
-  <link media="all"
-    type="text/css"
-    rel="stylesheet"
-    href="/assets/css/style.css">
-  <link type="text/css"
-    rel="stylesheet"
-    href="/assets/css/responsive-shit.css" />
-  <script type="text/javascript"
-    src="/assets/js/scripts/helpers.js"></script>
-  <script type="text/javascript"
-    src="/assets/js/scripts/liveorlocal.js"></script>
-  <script type="text/javascript"
-    src="/assets/js/scripts/sdk.js"></script>
-  <script type="text/javascript"
-    src="/assets/js/scripts/report.js"></script>
+  <script type="text/javascript" src="/assets/js/libs/library.js"></script>
+  <link media="all" type="text/css" rel="stylesheet" href="/assets/css/style.css">
+  <link type="text/css" rel="stylesheet" href="/assets/css/responsive-shit.css" />
+  <script type="text/javascript" src="/assets/js/scripts/helpers.js"></script>
+  <script type="text/javascript" src="/assets/js/scripts/liveorlocal.js"></script>
+  <script type="text/javascript" src="/assets/js/scripts/sdk.js"></script>
+  <script type="text/javascript" src="/assets/js/scripts/report.js"></script>
 </head>
 
-<body ng-app="coretrix"
-  class="grey lighten-2"
-  style="direction: rtl;">
+<body ng-app="coretrix" class="grey lighten-2" style="direction: rtl;">
 
   <head>
     <title>{{title}}</title>
   </head>
   <div class="container logs logs-noblur">
-    <div class="row"
-      ng-controller="mainCtrl">
-      <div class="col s12"
-        style="margin-top:5%;">
+    <div class="row" ng-controller="mainCtrl">
+      <div class="col s12" style="margin-top:5%;">
         <div class="card-panel hideonprint animated slideInDown">
           <h4 class="center-align">إختيار الفتره الزمنية والسنة</h4>
           <div class="row">
             <div class="col s12">
               <label>السنه الدراسيه</label>
-              <select class="browser-default"
-                ng-options="l as grades_names[l.grade] for l in links"
-                ng-model="selected_link">
-                <option value=""
-                  disabled
-                  selected>السنة الدراسية</option>
+              <select class="browser-default" ng-options="l as grades_names[l.grade] for l in links" ng-model="selected_link"
+                ng-change="grade_changed()">
+                <option value="" disabled selected>السنة الدراسية</option>
             </div>
             <div class="col s12">
               <label>الفتره الزمنية</label>
-              <select class="browser-default"
-                ng-change="calcDates()"
-                ng-options="i as {'lastweek': 'آخر اسبوع', 'lastmonth': 'آخر شهر', 'all': 'كل الوقت'}[i] for i in ['lastweek', 'lastmonth', 'all']"
+              <select class="browser-default" ng-change="calcDates()" ng-options="i as {'lastweek': 'آخر اسبوع', 'lastmonth': 'آخر شهر', 'all': 'كل الوقت'}[i] for i in ['lastweek', 'lastmonth', 'all']"
                 ng-model="selected_timeSelector">
-                <option value=""
-                  disabled
-                  selected>اختر الفتره الزمنية</option>
+                <option value="" disabled selected>اختر الفتره الزمنية</option>
               </select>
             </div>
           </div>
           <div class="row">
             <div class="col s12 m6 l6">
-              <input id="end_date"
-                type="text"
-                class="datepicker"
-                style="text-align: right; cursor:pointer"
-                placeholder="تاريخ النهاية"
+              <input id="end_date" type="text" class="datepicker" style="text-align: right; cursor:pointer" placeholder="تاريخ النهاية"
                 readonly>
             </div>
             <div class="col s12 m6 l6">
-              <input id="start_date"
-                type="text"
-                class="datepicker"
-                style="text-align: right; cursor:pointer"
-                placeholder="تاريخ البداية"
-                readonly>
+              <input id="start_date" type="text" class="datepicker" style="text-align: right; cursor:pointer"
+                placeholder="تاريخ البداية" readonly>
             </div>
           </div>
           <div class="row">
             <div class="col s12">
-              <button ng-click="printPage()"
-                class="btn gradient2">إطبع</button>
-              <button ng-click="reload()"
-                style="margin-right:0.5%"
-                class="btn gradient2">حمل البيانات</button>
+              <button ng-click="printPage()" class="btn gradient2">إطبع</button>
+              <button ng-click="reload()" style="margin-right:0.5%" class="btn gradient2">حمل البيانات</button>
               <div style="display:inline-block;margin-right:1%">
-                <input ng-model="onlyUnattendedClasses"
-                  type="checkbox"
-                  id="onlyUnattendedClasses" />
+                <input ng-model="onlyUnattendedClasses" type="checkbox" id="onlyUnattendedClasses" />
                 <label for="onlyUnattendedClasses">الحصص التى لم يحضرها فقط</label>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <div class="col s12"
-        ng-show="loaded">
-        <h4 style="margin-bottom:3%"
-          ng-show="viewer=='parent'"
-          class="center-align">{{name}}</h4>
-        <h4 ng-show="viewer=='teacher'"
-          class="center-align" style="margin-bottom: 0">بيانات الطالب</h4>
-          <span class="center-align" style="width: 100%; margin-bottom: 18px; display: block">{{profile.name}}</span>
+      <ul class="collapsible" data-collapsible="accordion">
+        <li>
+          <div class="collapsible-header">اظهار واخفاء</div>
+          <div class="collapsible-body">
+            <div>
+              <label>بيانات الطالب</label>
+              <br>
+              <div style="display:inline-block;margin-right:1%">
+                <input ng-model="showOptions.showGrade" ng-change="saveShowOptions()" type="checkbox" id="showGrade" />
+                <label for="showGrade">الصف</label>
+              </div>
+              <div style="display:inline-block;margin-right:1%">
+                <input ng-model="showOptions.showGroup" ng-change="saveShowOptions()" type="checkbox" id="showGroup" />
+                <label for="showGroup">المجموعة</label>
+              </div>
+              <div style="display:inline-block;margin-right:1%">
+                <input ng-model="showOptions.showAddDate" ng-change="saveShowOptions()" type="checkbox" id="showAddDate" />
+                <label for="showAddDate">تاريخ الاضافة</label>
+              </div>
+              <div style="display:inline-block;margin-right:1%">
+                <input ng-model="showOptions.showNotes" ng-change="saveShowOptions()" type="checkbox" id="showNotes" />
+                <label for="showNotes">ملاحظات</label>
+              </div>
+              <div style="display:inline-block;margin-right:1%">
+                <input ng-model="showOptions.showUnattendedClasses" ng-change="saveShowOptions()" type="checkbox" id="showUnattendedClasses" />
+                <label for="showUnattendedClasses">عدد الحصص التى لم يحضرها</label>
+              </div>
+              <div style="display:inline-block;margin-right:1%">
+                <input ng-model="showOptions.showUnattendedExams" ng-change="saveShowOptions()" type="checkbox" id="showUnattendedExams" />
+                <label for="showUnattendedExams">عدد الامتحانات التى لم يحضرها</label>
+              </div>
+              <div style="display:inline-block;margin-right:1%">
+                <input ng-model="showOptions.showPercentage" ng-change="saveShowOptions()" type="checkbox" id="showPercentage" />
+                <label for="showPercentage">النسبة المئوية</label>
+              </div>
+            </div>
+            <div>
+              <label>الدفع</label>
+              <br>
+              <div style="display:inline-block;margin-right:1%" ng-repeat="item in items">
+                <input ng-model="selected_items[item.id]" type="checkbox" id="item{{item.id}}" />
+                <label for="item{{item.id}}">{{ item.name }}</label>
+              </div>
+            </div>
+            <div>
+              <label>الامتحانات</label>
+              <br>
+              <div style="display:inline-block;margin-right:1%">
+                <input ng-model="showOptions.showExamMark" ng-change="saveShowOptions()" type="checkbox" id="showExamMark" />
+                <label for="showExamMark">درجة الامتحان</label>
+              </div>
+              <div style="display:inline-block;margin-right:1%">
+                <input ng-model="showOptions.showExamGrading" ng-change="saveShowOptions()" type="checkbox" id="showExamGrading" />
+                <label for="showExamGrading">تقدير الامتحانات</label>
+              </div>
+            </div>
+            <div>
+              <label>الحصص</label>
+              <br>
+              <div style="display:inline-block;margin-right:1%">
+                <input ng-model="showOptions.showClassHomework" ng-change="saveShowOptions()" type="checkbox" id="showClassHomework" />
+                <label for="showClassHomework">الواجب</label>
+              </div>
+              <div style="display:inline-block;margin-right:1%">
+                <input ng-model="showOptions.showClassQuiz" ng-change="saveShowOptions()" type="checkbox" id="showClassQuiz" />
+                <label for="showClassQuiz">التسميع</label>
+              </div>
+            </div>
+          </div>
+        </li>
+      </ul>
+      <div class="col s12" ng-show="loaded">
+        <h4 style="margin-bottom:3%" ng-show="viewer=='parent'" class="center-align">{{name}}</h4>
+        <h4 ng-show="viewer=='teacher'" class="center-align" style="margin-bottom: 0">بيانات الطالب</h4>
+        <span class="center-align" style="width: 100%; margin-bottom: 18px; display: block">{{profile.name}}</span>
         <table style="margin-top: 0">
           <tr ng-show="viewer=='teacher'">
             <td width="50%">الاسم
@@ -133,44 +151,44 @@
             </td>
             <td>{{name}}</td>
           </tr>
-          <tr ng-show="viewer=='teacher'">
+          <tr ng-show="viewer=='teacher' && showOptions.showGroup">
             <td>المجموعه
               <span>:</span>
             </td>
             <td>
               {{ selected_link.group_data[0].name }}</td>
           </tr>
-          <tr>
+          <tr ng-show="showOptions.showGrade">
             <td>الصف
               <span>:</span>
             </td>
             <td>{{grades_names[selected_link.grade]}}</td>
           </tr>
-          <tr>
+          <tr ng-show="showOptions.showAddDate">
             <td>تاريخ الاضافة
               <span>:</span>
             </td>
             <td>{{ date_created }}</td>
           </tr>
-          <tr ng-show="notes">
+          <tr ng-show="notes && showNotes">
             <td>ملاحظات
               <span>:</span>
             </td>
             <td>{{notes}}</td>
           </tr>
-          <tr>
+          <tr ng-show="showOptions.showUnattendedClasses">
             <td>عدد الحصص التى لم يحضرها
               <span>:</span>
             </td>
             <td>{{unattendedClassesCount || 0}}</td>
           </tr>
-          <tr>
+          <tr ng-show="showOptions.showUnattendedExams">
             <td>عدد الامتحانات التى لم يحضرها
               <span>:</span>
             </td>
             <td>{{unattendedExamsCount || 0}}</td>
           </tr>
-          <tr>
+          <tr ng-show="showOptions.showPercentage">
             <td>النسبة المئوية
               <span>:</span>
             </td>
@@ -178,15 +196,13 @@
               {{examsAverage || 0}}% {{gradeMark(examsAverage, 100)}}
             </td>
           </tr>
-          <tr ng-repeat="p in items">
+          <tr ng-repeat="p in items" ng-show="selected_items[p.id]">
             <td>{{p.name}}
               <span>:</span>
             </td>
             <td>
-              <p style="margin: inherit"
-                ng-class="p.payClass">{{p.payText}}
-                <i class="fa fa-info-circle"
-                  style="margin-right: 1%"></i>
+              <p style="margin: inherit" ng-class="p.payClass">{{p.payText}}
+                <i class="fa fa-info-circle" style="margin-right: 1%"></i>
               </p>
             </td>
           </tr>
@@ -198,16 +214,17 @@
               الامتحان
             </th>
             <th>الحضور</th>
-            <th>الدرجه</th>
-            <th>التقدير</th>
+            <th ng-show="showOptions.showExamMark">الدرجه</th>
+            <th ng-show="showOptions.showExamGrading">التقدير</th>
           </tr>
           <tr ng-repeat="e in exams">
             <td>
               {{e.name}}
             </td>
             <td>{{e.log.attendant ? 'حضر' : 'لم يحضر'}}</td>
-            <td>{{e.log.mark >= 0 ? (e.log.mark + ' / ' + e.max_mark) : 'لم تسجل درجة للطالب'}}</td>
-            <td>{{ gradeMark(e.log.mark, e.max_mark) || '---' }}</td>
+            <td ng-show="showOptions.showExamMark">{{e.log.mark >= 0 ? (e.log.mark + ' / ' + e.max_mark) : 'لم تسجل
+              درجة للطالب'}}</td>
+            <td ng-show="showOptions.showExamGrading">{{ gradeMark(e.log.mark, e.max_mark) || '---' }}</td>
           </tr>
         </table>
         <table>
@@ -215,18 +232,17 @@
           <tr>
             <th>اليوم</th>
             <th>الحضور</th>
-            <!--th>المجموعه</th-->
-            <th>درجه التسميع</th>
-            <th>الواجب</th>
+            <th ng-show="showOptions.showClassQuiz">درجه التسميع</th>
+            <th ng-show="showOptions.showClassHomework">الواجب</th>
           </tr>
-          <tr ng-repeat="c in classes"
-            ng-show="!onlyUnattendedClasses || !c.log.attendant">
+          <tr ng-repeat="c in classes" ng-show="!onlyUnattendedClasses || !c.log.attendant">
             <td>{{sd(c.date)}}</td>
             <td>{{c.log.attendant ? 'حضر' : 'لم يحضر'}}</td>
-            <!--td>{{l.group_data[0].name}}</td-->
-            <td>{{c.log.quiz ? (c.log.quiz.type == 'marks' ? c.log.quiz.mark + ' / ' + c.log.quiz.max :
+            <td ng-show="showOptions.showClassQuiz">{{c.log.quiz ? (c.log.quiz.type == 'marks' ? c.log.quiz.mark + ' /
+              ' + c.log.quiz.max :
               (quizNames[c.log.quiz.option])) : 'لم يسجل تسميع الطالب'}}</td>
-            <td>{{c.log.homework ? (c.log.homework.type == 'marks' ? c.log.homework.mark + '/' + c.log.homework.max
+            <td ng-show="showOptions.showClassHomework">{{c.log.homework ? (c.log.homework.type == 'marks' ?
+              c.log.homework.mark + '/' + c.log.homework.max
               : (c.log.homework.option == 'incomplete' ? 'غير مكتمل' : 'كامل')) : 'لم يسجل واجب الطالب'}}</td>
           </tr>
         </table>
@@ -235,12 +251,9 @@
   </div>
   <pre id="log"></pre>
   <!--Import jQuery before materialize.js-->
-  <script type="text/javascript"
-    src="/assets/js/libs/jquery-3.2.1.min.js"></script>
-  <script type="text/javascript"
-    src="/assets/js/libs/bootstrap-datepicker.min.js"></script>
-  <script type="text/javascript"
-    src="/assets/js/libs/materialize.min.js"></script>
+  <script type="text/javascript" src="/assets/js/libs/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/assets/js/libs/bootstrap-datepicker.min.js"></script>
+  <script type="text/javascript" src="/assets/js/libs/materialize.min.js"></script>
   <script type="text/javascript">
     $(document).ready(function () {
       $('.datepicker').datepicker({

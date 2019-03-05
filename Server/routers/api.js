@@ -291,6 +291,7 @@ var inputvalidators = {
   month: validators.ValidateOrIgnoreNumber,
   year: validators.ValidateOrIgnoreNumber,
   beeps: validators.Pass,
+  ig_items: validators.ValidateOrIgnoreNumberArray,
 }
 
 // REG CALLS
@@ -345,7 +346,7 @@ registerApiCall("/admin/teachers/register", ["username", "name", "subjects", "ke
 registerApiCall("/alive", ["token"], userDocDefault, data.isAlive);
 //TODO make it 2 seconds : 2000ms
 registerApiCall("/authorize", ["login", "password", "model", "device"], null, data.Authorize, false, false, 0);
-registerApiCall("/password/change", ["password", "oldpassword", "username","token"], null, data.ChangePassword);
+registerApiCall("/password/change", ["password", "oldpassword", "username", "token"], null, data.ChangePassword);
 registerApiCall("/search/students", ["token", "name", "search_limit", "startid", "ig_grades"], null, data.SearchStudents);
 
 registerApiCall("/phones/set", ["token", "targetuser", "phonecode", "number", "phonetype", "delete"], userDocDefault, data.SetPhone);
@@ -458,7 +459,7 @@ registerApiCall("/teacher/classes/init", ["token", "grade", "date", "ig_addedCla
 registerApiCall("/teacher/classes/list", ["token", "grade"], userDocDefault, data.ListClasses);
 registerApiCall("/teacher/classes/get", ["token", "classid"], userDocDefault, data.GetClass);
 registerApiCall("/teacher/classes/delete", ["token", "classid"], userDocDefault, data.DeleteClass);
-registerApiCall("/teacher/classes/fetchlogs", ["token", "classid", "grade", "ig_getcontacts"], userDocDefault, data.FetchClassLogs);
+registerApiCall("/teacher/classes/fetchlogs", ["token", "classid", "grade", "ig_getcontacts", "ig_items"], userDocDefault, data.FetchClassLogs);
 registerApiCall("/teacher/classes/log", ["token", "ig_groupid", "student", "classid", "ig_attendant", "homework", "quiz"], userDocDefault, data.AddClassLog);
 
 registerApiCall("/teacher/classes/groups/links", ["token", "grade"], userDocDefault, data.ListGroupClassesLinks);

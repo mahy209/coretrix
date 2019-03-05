@@ -87,6 +87,42 @@ app.controller("mainCtrl", function ($rootScope, $scope, sdk) {
     return gradeMark(mark, max, $scope.gradings);
   }
 
+  $scope.selected_items = {};
+  $scope.items = [];
+
+  $scope.grade_changed = () => {
+    sdk.ListItems($scope.selected_grade, (stat, result) => {
+      if (stat == sdk.stats.OK) {
+        $scope.items = result;
+      }
+    });
+  };
+
+  $scope.showOptions = {};
+
+  $scope.saveShowOptions = () => {
+    localStorage.setItem('showOptions', JSON.stringify($scope.showOptions));
+  }
+
+  function loadShowOptions() {
+    const showOptions = JSON.parse(localStorage.getItem('showOptions'));
+    if (showOptions) {
+      $scope.showOptions = showOptions;
+    } else {
+      $scope.showOptions = {
+        showGrade: true,
+        showGroup: true,
+        showAddDate: true,
+        showExamMark: true,
+        showExamGrading: true,
+        showExamQuiz: true,
+      };
+      $scope.saveShowOptions();
+    }
+  }
+
+  loadShowOptions();
+
   $scope.refetchLogs = () => {
     var datePeriod;
     let sdate = $('#start_date').val();
