@@ -1,5 +1,29 @@
 var app = angular.module("coretrix", ['coretrix.sdk'])
 
+app.filter('fuse', () => {
+  const fuseOptions = {
+    shouldSort: true,
+    threshold: 0.2,
+    location: 0,
+    distance: 100,
+    maxPatternLength: 32,
+    minMatchCharLength: 1,
+    keys: [
+      "fullname",
+    ]
+  };
+  return (array, searchQuery) => {
+    if (!array) {
+      return;
+    }
+    if (!searchQuery) {
+      return array;
+    }
+    const fuse = new Fuse(array, fuseOptions);
+    return fuse.search(searchQuery);
+  }
+})
+
 app.run(function ($rootScope, $window, $location, sdk) {
   $rootScope.title = "Coretrix";
   $rootScope.navigate = (link) => {
@@ -19,6 +43,8 @@ app.run(function ($rootScope, $window, $location, sdk) {
       default:
     }
   })
+  $rootScope.barcodeObservers = [];
+  barcodeScanner((code) => $rootScope.barcodeObservers.forEach(observer => observer(code)));
   $rootScope.quizNames = quizNames;
   confirm($rootScope, sdk);
 });
@@ -87,15 +113,25 @@ app.controller("mainCtrl", function ($rootScope, $scope, sdk) {
     return gradeMark(mark, max, $scope.gradings);
   }
 
+  $rootScope.barcodeObservers.push((id) => {
+    $scope.$apply(() => {
+      const student = $scope.students.find(student => student.studentid == parseInt(id));
+      $scope.searchQuery = student.fullname;
+    })
+  });
+
   $scope.selected_items = {};
-  $scope.items = [];
+
+  sdk.GetGrades((stat, grades) => {
+    $scope.grades = grades;
+  });
 
   $scope.grade_changed = () => {
-    sdk.ListItems($scope.selected_grade, (stat, result) => {
+    sdk.ListStudents(0, 999999999, (stat, result) => {
       if (stat == sdk.stats.OK) {
-        $scope.items = result;
+        $scope.students = result;
       }
-    });
+    }, $scope.selected_grade, undefined);
   };
 
   $scope.showOptions = {};

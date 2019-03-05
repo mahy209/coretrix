@@ -12,14 +12,15 @@
   <link type="text/css" rel="stylesheet" href="/assets/css/font-awesome.min.css" />
   <script type="text/javascript" src="/assets/js/libs/js.cookie.js"></script>
   <script type="text/javascript" src="/assets/js/libs/angular/angular.min.js"></script>
-
+  <script type="text/javascript" src="/assets/js/libs/fuse.min.js"></script>
+  <script type="text/javascript" src="/assets/js/libs/barcode-scanner.js"></script>
   <script type="text/javascript" src="/assets/js/libs/library.js"></script>
   <link media="all" type="text/css" rel="stylesheet" href="/assets/css/style.css">
   <link type="text/css" rel="stylesheet" href="/assets/css/responsive-shit.css" />
   <script type="text/javascript" src="/assets/js/scripts/helpers.js"></script>
   <script type="text/javascript" src="/assets/js/scripts/liveorlocal.js"></script>
   <script type="text/javascript" src="/assets/js/scripts/sdk.js"></script>
-  <script type="text/javascript" src="/assets/js/scripts/report.js"></script>
+  <script type="text/javascript" src="/assets/js/scripts/batch.js"></script>
 </head>
 
 <body ng-app="coretrix" class="grey lighten-2" style="direction: rtl;">
@@ -35,7 +36,7 @@
           <div class="row">
             <div class="col s12">
               <label>السنه الدراسيه</label>
-              <select class="browser-default" ng-options="l as grades_names[l.grade] for l in links" ng-model="selected_link"
+              <select class="browser-default" ng-options="i as grades_names[i] for i in grades" ng-model="selected_grade"
                 ng-change="grade_changed()">
                 <option value="" disabled selected>السنة الدراسية</option>
             </div>
@@ -137,6 +138,31 @@
                   <input ng-model="showOptions.showClassQuiz" ng-change="saveShowOptions()" type="checkbox" id="showClassQuiz" />
                   <label for="showClassQuiz">التسميع</label>
                 </div>
+              </div>
+            </div>
+          </li>
+          <li>
+            <div class="collapsible-header">الطلاب</div>
+            <div class="collapsible-body">
+              <div class="col s12 responsive_search hideonprint">
+                <input placeholder="ابحث عن طالب" ng-model="searchQuery" type="search" required>
+              </div>
+
+              <div class="logs">
+                <table>
+                  <tr>
+                    <th>
+                      اسم الطالب
+                    </th>
+                  </tr>
+                  <tr ng-repeat="n in students | fuse : searchQuery">
+                    <td>
+                      <input type="checkbox" ng-model="n.selected" id="cid{{n.studentid}}" class="checkbox" />
+                      <label for="cid{{n.studentid}}"> </label>
+                      {{n.fullname}}
+                    </td>
+                  </tr>
+                </table>
               </div>
             </div>
           </li>
