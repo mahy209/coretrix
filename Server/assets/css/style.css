@@ -75,8 +75,10 @@
 
 /*   main rules */
 
-html {
+html,
+body {
   font-family: 'Cairo', sans-serif;
+  background: #e0e0e0 !important;
 }
 
 body * {
@@ -536,7 +538,8 @@ ul[dnd-list] .dndPlaceholder {
   float: right;
 }
 
-.rtl, .rtl * {
+.rtl,
+.rtl * {
   text-align: right;
 }
 
@@ -547,4 +550,8 @@ ul[dnd-list] .dndPlaceholder {
 .margin-none {
   margin: 0;
   padding: 0;
+}
+
+.pagebreak {
+  page-break-before: always;
 }

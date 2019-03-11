@@ -29,7 +29,7 @@
     <title>{{title}}</title>
   </head>
   <div class="container logs logs-noblur">
-    <div class="row" ng-controller="mainCtrl">
+    <div ng-controller="mainCtrl">
       <div class="col s12 hideonprint" style="margin-top:3%;">
         <div class="card-panel animated slideInDown">
           <h4 class="center-align">إختيار الفتره الزمنية والسنة</h4>
@@ -168,64 +168,64 @@
           </li>
         </ul>
       </div>
-      <div class="col s12" ng-show="loaded">
-        <h4 style="margin-bottom:3%" ng-show="viewer=='parent'" class="center-align">{{name}}</h4>
-        <h4 ng-show="viewer=='teacher'" class="center-align" style="margin-bottom: 0">بيانات الطالب</h4>
+      <div class="col s12" ng-repeat="report in reports">
+        <h4 class="center-align" style="margin: 0; padding-top: 20px;">بيانات الطالب</h4>
         <span class="center-align" style="width: 100%; margin-bottom: 18px; display: block">{{profile.name}}</span>
         <table style="margin-top: 0">
-          <tr ng-show="viewer=='teacher'">
+          <tr>
             <td width="50%">الاسم
               <span>:</span>
             </td>
-            <td>{{name}}</td>
+            <td>{{ report.student.fullname }}</td>
           </tr>
-          <tr ng-show="viewer=='teacher' && showOptions.showGroup">
+          <tr ng-show="showOptions.showGroup">
             <td>المجموعه
               <span>:</span>
             </td>
             <td>
-              {{ selected_link.group_data[0].name }}</td>
+              {{ report.student.groupinfo[0].name }}</td>
           </tr>
           <tr ng-show="showOptions.showGrade">
             <td>الصف
               <span>:</span>
             </td>
-            <td>{{grades_names[selected_link.grade]}}</td>
+            <td>{{ grades_names[report.student.grade] }}</td>
           </tr>
           <tr ng-show="showOptions.showAddDate">
             <td>تاريخ الاضافة
               <span>:</span>
             </td>
-            <td>{{ date_created }}</td>
+            <td>{{ report.student.date_created }}</td>
           </tr>
           <tr ng-show="notes && showNotes">
             <td>ملاحظات
               <span>:</span>
             </td>
-            <td>{{notes}}</td>
+            <td>{{ report.student.notes }}</td>
           </tr>
           <tr ng-show="showOptions.showUnattendedClasses">
             <td>عدد الحصص التى لم يحضرها
               <span>:</span>
             </td>
-            <td>{{unattendedClassesCount || 0}}</td>
+            <td>{{ report.unattendedClassesCount || 0 }}</td>
           </tr>
           <tr ng-show="showOptions.showUnattendedExams">
             <td>عدد الامتحانات التى لم يحضرها
               <span>:</span>
             </td>
-            <td>{{unattendedExamsCount || 0}}</td>
+            <td>{{ report.unattendedExamsCount || 0 }}</td>
           </tr>
           <tr ng-show="showOptions.showPercentage">
             <td>النسبة المئوية
               <span>:</span>
             </td>
             <td>
-              {{examsAverage || 0}}% {{gradeMark(examsAverage, 100)}}
+              {{ report.examsAverage || 0 }}% {{ gradeMark(report.examsAverage, 100) }}
             </td>
           </tr>
-          <tr ng-repeat="p in items" ng-show="selected_items[p.id]">
-            <td>{{p.name}}
+          <tr ng-repeat="p in report.items" ng-show="selected_items[p.id]">
+            <td>
+              {{ p.name }}
               <span>:</span>
             </td>
             <td>
@@ -245,7 +245,7 @@
             <th ng-show="showOptions.showExamMark">الدرجه</th>
             <th ng-show="showOptions.showExamGrading">التقدير</th>
           </tr>
-          <tr ng-repeat="e in exams">
+          <tr ng-repeat="e in report.exams">
             <td>
               {{e.name}}
             </td>
@@ -263,7 +263,7 @@
             <th ng-show="showOptions.showClassQuiz">درجه التسميع</th>
             <th ng-show="showOptions.showClassHomework">الواجب</th>
           </tr>
-          <tr ng-repeat="c in classes" ng-show="!onlyUnattendedClasses || !c.log.attendant">
+          <tr ng-repeat="c in report.classes" ng-show="!onlyUnattendedClasses || !c.log.attendant">
             <td>{{sd(c.date)}}</td>
             <td>{{c.log.attendant ? 'حضر' : 'لم يحضر'}}</td>
             <td ng-show="showOptions.showClassQuiz">{{c.log.quiz ? (c.log.quiz.type == 'marks' ? c.log.quiz.mark + ' /
@@ -274,6 +274,7 @@
               : (c.log.homework.option == 'incomplete' ? 'غير مكتمل' : 'كامل')) : 'لم يسجل واجب الطالب'}}</td>
           </tr>
         </table>
+        <div class="pagebreak"></div>
       </div>
     </div>
   </div>

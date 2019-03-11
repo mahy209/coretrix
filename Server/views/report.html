@@ -28,7 +28,7 @@
     <title>{{title}}</title>
   </head>
   <div class="container logs logs-noblur">
-    <div class="row" ng-controller="mainCtrl">
+    <div ng-controller="mainCtrl">
       <div class="col s12 hideonprint" style="margin-top:3%;">
         <div class="card-panel animated slideInDown">
           <h4 class="center-align">إختيار الفتره الزمنية والسنة</h4>
@@ -144,7 +144,7 @@
       </div>
       <div class="col s12" ng-show="loaded">
         <h4 style="margin-bottom:3%" ng-show="viewer=='parent'" class="center-align">{{name}}</h4>
-        <h4 ng-show="viewer=='teacher'" class="center-align" style="margin-bottom: 0">بيانات الطالب</h4>
+        <h4 ng-show="viewer=='teacher'" class="center-align" style="margin: 0; padding-top: 20px;">بيانات الطالب</h4>
         <span class="center-align" style="width: 100%; margin-bottom: 18px; display: block">{{profile.name}}</span>
         <table style="margin-top: 0">
           <tr ng-show="viewer=='teacher'">
