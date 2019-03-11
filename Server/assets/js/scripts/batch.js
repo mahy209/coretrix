@@ -98,6 +98,12 @@ app.controller("mainCtrl", function ($rootScope, $scope, sdk) {
     return str;
   }
 
+  $scope.selectAll = false;
+
+  $scope.ensureSelectAll = () => {
+    $scope.students.map(student => student.selected = $scope.selectAll);
+  };
+
   sdk.GetNameAndSubject((stat, result) => {
     $scope.profile = result
   })

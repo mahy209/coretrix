@@ -1098,6 +1098,10 @@ app.controller('studentsCtrl', function ($rootScope, $scope, sdk) {
     if (type == 'groups') $scope.load_optGroups()
   }
 
+  $scope.openBatchReports = () => {
+    window.open('/batch', '_blank');
+  }
+
   $rootScope.variableListeners.push(init)
   initLoadMode = () => {
     sdk.CountStudents((stat, count) => {

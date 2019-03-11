@@ -148,21 +148,27 @@
                 <input placeholder="ابحث عن طالب" ng-model="searchQuery" type="search" required>
               </div>
 
-              <div class="logs">
-                <table>
-                  <tr>
-                    <th>
-                      اسم الطالب
-                    </th>
-                  </tr>
-                  <tr ng-repeat="n in students | fuse : searchQuery">
-                    <td>
-                      <input type="checkbox" ng-model="n.selected" id="cid{{n.studentid}}" class="checkbox" />
-                      <label for="cid{{n.studentid}}"> </label>
-                      {{n.fullname}}
-                    </td>
-                  </tr>
-                </table>
+              <div class="col" style="float: right; padding-bottom: 12px">
+                <input ng-model="selectAll" type="checkbox" id="selectAll" ng-change="ensureSelectAll()" />
+                <label for="selectAll">تحديد الكل</label>
+              </div>
+
+              <div class="
+                  logs">
+                  <table>
+                    <tr>
+                      <th>
+                        اسم الطالب
+                      </th>
+                    </tr>
+                    <tr ng-repeat="n in students | fuse : searchQuery">
+                      <td>
+                        <input type="checkbox" ng-model="n.selected" id="cid{{n.studentid}}" class="checkbox" />
+                        <label for="cid{{n.studentid}}"> </label>
+                        {{n.fullname}}
+                      </td>
+                    </tr>
+                  </table>
               </div>
             </div>
           </li>
