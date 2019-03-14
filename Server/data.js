@@ -4175,7 +4175,6 @@ var client = adb.createClient();
 const spawn = require('await-spawn')
 
 async function sendSMS(args, callback) {
-  args.message += "\ns";
   try {
     switch (args.adb_protocol) {
       case 'shellms':
@@ -4196,6 +4195,7 @@ async function sendSMS(args, callback) {
         ])
         break;
       case 'legacy':
+        args.message += "\ns";
         await spawn('adb', [
           '-s',
           args.serial,

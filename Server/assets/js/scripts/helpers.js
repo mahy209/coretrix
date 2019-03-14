@@ -84,7 +84,7 @@ function formatExamReport(profile, log, max_mark, examName, nointro, grades_name
   const mark = log.log.mark;
   const option_mark = mark ? (mark + '/' + max_mark) : 'لم يحضر';
   const option_grading = gradeMark(mark, max_mark, gradings);
-  return `درجة اختبار ${examName} للطالب ${student} ${option_mark} ${attendant && option_grading ? `(${option_grading}) ` : ''}` + (nointro ? '' : formatSignature(profile));
+  return `درجة اختبار ${examName} للطالب ${student} ${option_mark} ${attendant && option_grading ? `(${option_grading}) ` : ''}` + (nointro ? '' : formatSignature(profile) + ' ' + grade);
 }
 
 function formatClassReport(profile, log, options, classDay, nointro, grades_names) {
