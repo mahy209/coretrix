@@ -1,5 +1,9 @@
 const path = require('path')
 const fs = require('fs')
+const {
+  registerer,
+  offline
+} = require('build.config.json');
 const bcrypt = require('bcryptjs')
 const serialNumber = require('serial-number')
 const isWindows = require('os').type() != 'Linux'
@@ -12,9 +16,6 @@ function notRegistered() {
   console.log('machine is not registered')
   process.exit()
 }
-
-const registerer = 'mostafasalem';
-const offline = true;
 
 function writeOfflineActivation(hash) {
   try {

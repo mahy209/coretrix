@@ -8,9 +8,8 @@
 	},
 	"scripts": {
 		"start": "node main.js",
-		"compile": "pkg . --targets node8",
-		"rebuild-x32": "node-gyp clean configure build --verbose --arch=ia32",
-		"compile-x32": "pkg . --targets node8-win-x86 --no-bytecode"
+		"compile": "pkg . --targets node8 --output ../dist",
+		"compile-x32": "pkg . --targets node8-win-x86 --no-bytecode --output ../dist/karimgaber/coretrix.exe"
 	},
 	"license": "MIT",
 	"dependencies": {
