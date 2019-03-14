@@ -90,7 +90,7 @@ const replaceLabel = (data, label, value) => {
 const rebuildHTML = async (copy) => {
   try {
     console.log('Rebuilding `cpanel.html`');
-    const filename = 'views/cpanel.html.backup';
+    const filename = 'views/cpanel.html';
     let cpanel = fs.readFileSync(filename).toString();
     cpanel = replaceLabel(cpanel, 'اسم المشترى', copy.name);
     cpanel = replaceLabel(cpanel, 'النسخه', version);
