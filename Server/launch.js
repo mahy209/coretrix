@@ -3,7 +3,7 @@ const fs = require('fs')
 const {
   registerer,
   offline
-} = require('build.config.json');
+} = require(path.join(__dirname, 'build.config.json'));
 const bcrypt = require('bcryptjs')
 const serialNumber = require('serial-number')
 const isWindows = require('os').type() != 'Linux'
