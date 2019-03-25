@@ -22,18 +22,18 @@
   <script type="text/javascript" src="/assets/js/scripts/payinglogs.js"></script>
 </head>
 
-<body ng-app="coretrix" class="grey lighten-2" style="direction: rtl;">
+<body ng-app="coretrix" style="direction: rtl;">
 
   <head>
     <title>{{title}}</title>
   </head>
   <div class="container" ng-controller="mainCtrl">
     <div class="showonprint">
-      <h2 class="center-align">الحسابات</h2>
+      <h2 class="center-align heading">الحسابات</h2>
       <h6 class="center-align">{{'الصف ' + grades_names[selected_grade]}}</h6>
       <h6 class="center-align">{{selected_item.name}}</h6>
     </div>
-    <div class="row" style="margin-top: 3%;">
+    <div class="row hideonprint" style="margin-top: 3%;">
       <div class="col s12 l8" style="float:right;">
         <div class="card-panel hide_on_mobile hideonprint animated slideInDown">
           <h4 class="center-align">إختيار الوحدة</h4>
@@ -44,7 +44,8 @@
           </select>
           <label>المجموعة</label>
           <div style="display: flex; align-items: baseline;">
-            <select class="browser-default" style="margin-left: 12px" ng-options="i as i.name for i in groups" ng-model="selected_group">
+            <select class="browser-default" style="margin-left: 12px" ng-options="i as i.name for i in groups"
+              ng-model="selected_group">
               <option value="" disabled selected>المجموعة</option>
             </select>
             <button ng-click="selected_group = null" class="waves-effect waves-light blue-grey btn">
@@ -52,12 +53,13 @@
             </button>
           </div>
           <label>النوع</label>
-          <select class="browser-default" ng-options="i as itemCategoryNames[i] for i in categories" ng-model="selected_category">
+          <select class="browser-default" ng-options="i as itemCategoryNames[i] for i in categories"
+            ng-model="selected_category">
             <option value="" disabled selected>اختر النوع</option>
           </select>
           <label>الوحدة</label>
-          <select class="browser-default" ng-change="reload()" ng-options="i as i.name for i in items[selected_category]"
-            ng-model="selected_item">
+          <select class="browser-default" ng-change="reload()"
+            ng-options="i as i.name for i in items[selected_category]" ng-model="selected_item">
             <option value="" disabled selected>اختر الوحدة</option>
           </select>
           <label>السعر</label>
@@ -79,7 +81,8 @@
         <div class="card-panel hide_on_mobile hideonprint animated slideInDown">
           <h4 class="center-align">تصفية</h4>
           <label>المبلغ المدفوع</label>
-          <select class="browser-default" ng-options="i as {all:'الكل',payed: 'دفع', notpayed: 'لم يدفع', payedmore: 'دفع أكثر من سعرها', payedless: 'دفع أقل من سعرها'}[i] for i in ['all','payed', 'notpayed', 'payedless','payedmore']"
+          <select class="browser-default"
+            ng-options="i as {all:'الكل',payed: 'دفع', notpayed: 'لم يدفع', payedmore: 'دفع أكثر من سعرها', payedless: 'دفع أقل من سعرها'}[i] for i in ['all','payed', 'notpayed', 'payedless','payedmore']"
             ng-model="selectedFilter">
           </select>
         </div>
@@ -105,13 +108,15 @@
             </div>
             <div class="col s12">
               <label>اختر السنه</label>
-              <select class="browser-default" ng-options="i as grades_names[i] for i in grades" ng-model="add_selected_grade">
+              <select class="browser-default" ng-options="i as grades_names[i] for i in grades"
+                ng-model="add_selected_grade">
                 <option value="" disabled selected>السنه</option>
               </select>
             </div>
             <div class="col s12">
               <label>النوع</label>
-              <select class="browser-default" ng-options="i as itemCategoryNames[i] for i in itemCategories" ng-model="selected_category">
+              <select class="browser-default" ng-options="i as itemCategoryNames[i] for i in itemCategories"
+                ng-model="selected_category">
                 <option value="" disabled selected>النوع</option>
               </select>
             </div>
@@ -129,65 +134,69 @@
     </div>
     <div class="col s7 offset-s3 animated slideInUp hideonprint">
       <div class="col s12">
-        <input ng-model="searchText" ng-keypress="logSearchedPayment($event)" ng-change="search()" class="autocomplete searchitem"
-          style="padding-right: 1%; /* for the text */" placeholder="ابحث عن طالب" id="searchStudents" type="search"
-          required>
+        <input ng-model="searchText" ng-keypress="logSearchedPayment($event)" ng-change="search()"
+          class="autocomplete searchitem" style="padding-right: 1%; /* for the text */" placeholder="ابحث عن طالب"
+          id="searchStudents" type="search" required>
       </div>
       <div class="col s12">
         <input ng-model="barcodePayCheck" type="checkbox" id="barcodePayCheck" />
         <label for="barcodePayCheck"">الدفع بالباركود</label>
       </div>
     </div>
-    <div class=" logs
-          logs-noblur">
+    <div class=" logs logs-noblur">
           <table class="animated slideInUp">
-            <tr>
-              <th>
-                اسم الطالب
-              </th>
-              <th>
-                المبلغ المدفوع
-              </th>
-              <th>
-                التخفيض
-              </th>
-              <th>
-                تاريخ الدفع
-              </th>
-              <th>
-                اجراءات
-              </th>
-            </tr>
-            <tr ng-repeat="n in logs" ng-show="(selected_group ? n.group == selected_group.id : true) && ((selectedFilter=='all')  || (selectedFilter=='payed' && (n.log.payed + n.log.discount == selected_item.price)) || (selectedFilter=='notpayed' && (!n.log.payed) && (n.log.payed + n.log.discount != selected_item.price)) || (selectedFilter=='payedmore' && (n.log.payed + n.log.discount > selected_item.price)) || (selectedFilter=='payedless' && (n.log.payed + n.log.discount < selected_item.price) && (n.log.payed + n.log.discount != 0)))">
-              <td>
-                <label>{{n.codeName}}</label>
-                <i style="margin-right:3%; margin-left: 3%">{{n.fullname}}</i>
-                <!--i class="hideonprint" ng-class="n.payClass">{{n.payText}}</i>
+            <thead>
+              <tr>
+                <th>
+                  اسم الطالب
+                </th>
+                <th>
+                  المبلغ المدفوع
+                </th>
+                <th>
+                  التخفيض
+                </th>
+                <th>
+                  تاريخ الدفع
+                </th>
+                <th class="hideonprint">
+                  اجراءات
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="n in logs"
+                ng-show="(selected_group ? n.group == selected_group.id : true) && ((selectedFilter=='all')  || (selectedFilter=='payed' && (n.log.payed + n.log.discount == selected_item.price)) || (selectedFilter=='notpayed' && (!n.log.payed) && (n.log.payed + n.log.discount != selected_item.price)) || (selectedFilter=='payedmore' && (n.log.payed + n.log.discount > selected_item.price)) || (selectedFilter=='payedless' && (n.log.payed + n.log.discount < selected_item.price) && (n.log.payed + n.log.discount != 0)))">
+                <td>
+                  <label>{{n.codeName}}</label>
+                  <i style="margin-right:3%; margin-left: 3%">{{n.fullname}}</i>
+                  <!--i class="hideonprint" ng-class="n.payClass">{{n.payText}}</i>
                         <i ng-class="n.payClass" class="fa fa-info-circle hideonprint" style="margin-right: 1%" ng-show="n.payClass"></i-->
-              </td>
-              <td>
-                <div>
-                  <div class="hideonprint">
-                    <input type="number" ng-model="n.log.payed" ng-blur="payedAmountChanged(n)">
+                </td>
+                <td>
+                  <div>
+                    <div class="hideonprint">
+                      <input type="number" ng-model="n.log.payed" ng-blur="payedAmountChanged(n)">
+                    </div>
+                    <p class="showonprint" ng-class="n.payClass">{{n.payText}}
+                      <i class="fa fa-info-circle" style="margin-right: 1%" ng-show="n.payClass"></i>
+                    </p>
                   </div>
-                  <p class="showonprint" ng-class="n.payClass">{{n.payText}}
-                    <i class="fa fa-info-circle" style="margin-right: 1%" ng-show="n.payClass"></i>
-                  </p>
-                </div>
-              </td>
-              <td>
-                <p class="showonprint">{{n.log.discount}}</p>
-                <input class="hideonprint" type="number" ng-model="n.log.discount" ng-blur="discountChanged(n)">
-              </td>
-              <td>
-                <p>{{n.log.date}}</p>
-              </td>
-              <td>
-                <button ng-click="printLog(n)" class="waves-effect waves-light blue-grey btn">
-                  اطبع
-                </button>
-              </td>
-            </tr>
+                </td>
+                <td>
+                  <p class="showonprint">{{n.log.discount}}</p>
+                  <input class="hideonprint" type="number" ng-model="n.log.discount" ng-blur="discountChanged(n)">
+                </td>
+                <td>
+                  <p>{{n.log.date}}</p>
+                </td>
+                <td class="hideonprint">
+                  <button ng-click="printLog(n)" class="waves-effect waves-light blue-grey btn">
+                    اطبع
+                  </button>
+                </td>
+              </tr>
+            </tbody>
           </table>
       </div>
       <!--Import jQuery before materialize.js-->

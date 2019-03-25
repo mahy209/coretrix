@@ -23,7 +23,7 @@
   <script type="text/javascript" src="/assets/js/scripts/batch.js"></script>
 </head>
 
-<body ng-app="coretrix" class="grey lighten-2" style="direction: rtl;">
+<body ng-app="coretrix" style="direction: rtl;">
 
   <head>
     <title>{{title}}</title>
@@ -175,7 +175,7 @@
         </ul>
       </div>
       <div class="col s12" ng-repeat="report in reports">
-        <h4 class="center-align" style="margin: 0; padding-top: 20px;">بيانات الطالب</h4>
+        <h5 class="center-align" style="margin: 0; padding-top: 20px;">بيانات الطالب</h5>
         <span class="center-align" style="width: 100%; margin-bottom: 18px; display: block">{{profile.name}}</span>
         <table style="margin-top: 0">
           <tr>
@@ -243,42 +243,50 @@
         </table>
         <table>
           <h5 class="center-align">الامتحانات</h5>
-          <tr>
-            <th>
-              الامتحان
-            </th>
-            <th>الحضور</th>
-            <th ng-show="showOptions.showExamMark">الدرجه</th>
-            <th ng-show="showOptions.showExamGrading">التقدير</th>
-          </tr>
-          <tr ng-repeat="e in report.exams">
-            <td>
-              {{e.name}}
-            </td>
-            <td>{{e.log.attendant ? 'حضر' : 'لم يحضر'}}</td>
-            <td ng-show="showOptions.showExamMark">{{e.log.mark >= 0 ? (e.log.mark + ' / ' + e.max_mark) : 'لم تسجل
-              درجة للطالب'}}</td>
-            <td ng-show="showOptions.showExamGrading">{{ gradeMark(e.log.mark, e.max_mark) || '---' }}</td>
-          </tr>
+          <thead>
+            <tr>
+              <th>
+                الامتحان
+              </th>
+              <th>الحضور</th>
+              <th ng-show="showOptions.showExamMark">الدرجه</th>
+              <th ng-show="showOptions.showExamGrading">التقدير</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="e in report.exams">
+              <td>
+                {{e.name}}
+              </td>
+              <td>{{e.log.attendant ? 'حضر' : 'لم يحضر'}}</td>
+              <td ng-show="showOptions.showExamMark">{{e.log.mark >= 0 ? (e.log.mark + ' / ' + e.max_mark) : 'لم تسجل
+                درجة للطالب'}}</td>
+              <td ng-show="showOptions.showExamGrading">{{ gradeMark(e.log.mark, e.max_mark) || '---' }}</td>
+            </tr>
+          </tbody>
         </table>
         <table>
           <h5 class="center-align">الغياب</h5>
-          <tr>
-            <th>اليوم</th>
-            <th>الحضور</th>
-            <th ng-show="showOptions.showClassQuiz">درجه التسميع</th>
-            <th ng-show="showOptions.showClassHomework">الواجب</th>
-          </tr>
-          <tr ng-repeat="c in report.classes" ng-show="!onlyUnattendedClasses || !c.log.attendant">
-            <td>{{sd(c.date)}}</td>
-            <td>{{c.log.attendant ? 'حضر' : 'لم يحضر'}}</td>
-            <td ng-show="showOptions.showClassQuiz">{{c.log.quiz ? (c.log.quiz.type == 'marks' ? c.log.quiz.mark + ' /
-              ' + c.log.quiz.max :
-              (quizNames[c.log.quiz.option])) : 'لم يسجل تسميع الطالب'}}</td>
-            <td ng-show="showOptions.showClassHomework">{{c.log.homework ? (c.log.homework.type == 'marks' ?
-              c.log.homework.mark + '/' + c.log.homework.max
-              : (c.log.homework.option == 'incomplete' ? 'غير مكتمل' : 'كامل')) : 'لم يسجل واجب الطالب'}}</td>
-          </tr>
+          <thead>
+            <tr>
+              <th>اليوم</th>
+              <th>الحضور</th>
+              <th ng-show="showOptions.showClassQuiz">درجه التسميع</th>
+              <th ng-show="showOptions.showClassHomework">الواجب</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="c in report.classes" ng-show="!onlyUnattendedClasses || !c.log.attendant">
+              <td>{{sd(c.date)}}</td>
+              <td>{{c.log.attendant ? 'حضر' : 'لم يحضر'}}</td>
+              <td ng-show="showOptions.showClassQuiz">{{c.log.quiz ? (c.log.quiz.type == 'marks' ? c.log.quiz.mark + ' /
+                ' + c.log.quiz.max :
+                (quizNames[c.log.quiz.option])) : 'لم يسجل تسميع الطالب'}}</td>
+              <td ng-show="showOptions.showClassHomework">{{c.log.homework ? (c.log.homework.type == 'marks' ?
+                c.log.homework.mark + '/' + c.log.homework.max
+                : (c.log.homework.option == 'incomplete' ? 'غير مكتمل' : 'كامل')) : 'لم يسجل واجب الطالب'}}</td>
+            </tr>
+          </tbody>
         </table>
         <div class="pagebreak"></div>
       </div>
