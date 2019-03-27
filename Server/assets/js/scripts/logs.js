@@ -107,15 +107,15 @@ app.controller("mainCtrl", function ($rootScope, $scope, sdk) {
   $scope.barcodeAttendanceCheck = false;
   barcodeScanner((code) => {
     $scope.$apply(() => {
-      $scope.searchText = code;
-      $scope.search(code);
+      $scope.searchText = code
+      const found = $scope.search(code)
       if ($scope.barcodeAttendanceCheck) {
         setTimeout(() => {
-          $scope.logSearchedAttendance(null, true);
-        }, 100);
+          if (found) { $scope.logSearchedAttendance(null, true); }
+        }, 100)
       }
-    });
-  });
+    })
+  })
 
   $scope.compare = (a, b, option) => {
     switch (option) {
@@ -175,14 +175,15 @@ app.controller("mainCtrl", function ($rootScope, $scope, sdk) {
   }
   $scope.search = (query) => {
     if (query) {
-      let result = $scope.loadedLogs.find(log => log.studentid == query);
-      $scope.searchText = result.fullname;
-      $scope.logs = [result];
+      let result = $scope.loadedLogs.find(log => log.studentid == query)
+      $scope.searchText = result.fullname
+      $scope.logs = [result]
+      return true
     } else if ($scope.searchText) {
-      let result = $scope.fuse.search($scope.searchText);
-      $scope.logs = result;
+      let result = $scope.fuse.search($scope.searchText)
+      $scope.logs = result
     } else {
-      $scope.logs = $scope.loadedLogs;
+      $scope.logs = $scope.loadedLogs
     }
   }
   $scope.setSettings = () => {

@@ -114,6 +114,7 @@ app.controller("mainCtrl", function ($rootScope, $scope, sdk) {
       let result = $scope.loadedLogs.find(log => log.studentid == query);
       $scope.searchText = result.fullname;
       $scope.logs = [result];
+      return true;
     } else if ($scope.searchText) {
       let result = $scope.fuse.search($scope.searchText);
       $scope.logs = result;
@@ -125,10 +126,12 @@ app.controller("mainCtrl", function ($rootScope, $scope, sdk) {
   barcodeScanner((code) => {
     $scope.$apply(() => {
       $scope.searchText = code;
-      $scope.search(code);
+      const found = $scope.search(code);
       if ($scope.barcodePayCheck) {
         setTimeout(() => {
-          $scope.logSearchedPayment(null, true);
+          if (found) {
+            $scope.logSearchedPayment(null, true);
+          }
         }, 100);
       }
     });
