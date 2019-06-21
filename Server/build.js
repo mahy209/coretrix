@@ -116,11 +116,32 @@ const compile = async (copy) => {
   }
 };
 
+const names = process.argv.slice(2);
+
+/**
+ * Filter copes based on passed arguments
+ * @param  {Copy[]} copies - Copy configurations
+ */
+const filterCopies = (copies) => {
+  return copies.filter((copy) => {
+    // Pass copy if none specified
+    if (names.length <= 0) {
+      return true;
+    }
+    // Pass copy if registerer name is the same
+    if (names.indexOf(copy.registerer) > -1) {
+      return true;
+    }
+    // Do not pass copy
+    return false;
+  });
+}
+
 const main = async () => {
   console.time(`Completed task in`);
   await clean();
   console.log(`Building ${copies.length} copies versioned ${version}`);
-  for (const copy of copies) {
+  for (const copy of filterCopies(copies)) {
     console.log(`Building for \`${copy.registerer}\` with activation date of \`${copy.date}\``);
     await rebuildConfig(copy);
     await rebuildHTML(copy);
