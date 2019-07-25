@@ -109,9 +109,34 @@
                   <label for="showUnattendedExams">عدد الامتحانات التى لم يحضرها</label>
                 </div>
                 <div style="display:inline-block;margin-right:1%">
+                  <input ng-model="showOptions.showQuizPercentage" ng-change="saveShowOptions()" type="checkbox"
+                    id="showQuizPercentage" />
+                  <label for="showQuizPercentage">النسبة المئوية للتسميع</label>
+                </div>
+                <div style="display:inline-block;margin-right:1%">
+                  <input ng-model="showOptions.showHomeworkPercentage" ng-change="saveShowOptions()" type="checkbox"
+                    id="showHomeworkPercentage" />
+                  <label for="showHomeworkPercentage">النسبة المئوية للواجب</label>
+                </div>
+                <div style="display:inline-block;margin-right:1%">
+                  <input ng-model="showOptions.showClassPercentage" ng-change="saveShowOptions()" type="checkbox"
+                    id="showClassPercentage" />
+                  <label for="showClassPercentage">النسبة المئوية للتسميع والواجب</label>
+                </div>
+                <div style="display:inline-block;margin-right:1%">
+                  <input ng-model="showOptions.showExamPercentage" ng-change="saveShowOptions()" type="checkbox"
+                    id="showExamPercentage" />
+                  <label for="showExamPercentage">النسبة المئوية للامتحانات</label>
+                </div>
+                <div style="display:inline-block;margin-right:1%">
+                  <input ng-model="showOptions.showExamQuizPercentage" ng-change="saveShowOptions()" type="checkbox"
+                    id="showExamQuizPercentage" />
+                  <label for="showExamQuizPercentage">النسبة المئوية للامتحانات</label>
+                </div>
+                <div style="display:inline-block;margin-right:1%">
                   <input ng-model="showOptions.showPercentage" ng-change="saveShowOptions()" type="checkbox"
                     id="showPercentage" />
-                  <label for="showPercentage">النسبة المئوية</label>
+                  <label for="showPercentage">النسبة المئوية للكل</label>
                 </div>
               </div>
               <div>
@@ -202,12 +227,52 @@
             </td>
             <td>{{unattendedExamsCount || 0}}</td>
           </tr>
-          <tr ng-show="showOptions.showPercentage">
-            <td>النسبة المئوية
+          <tr ng-show="showOptions.showQuizPercentage">
+            <td>النسبة المئوية للتسميع
+              <span>:</span>
+            </td>
+            <td>
+              {{quizAverage || 0}}% {{gradeMark(quizAverage, 100)}}
+            </td>
+          </tr>
+          <tr ng-show="showOptions.showHomeworkPercentage">
+            <td>النسبة المئوية للواجب
+              <span>:</span>
+            </td>
+            <td>
+              {{homeworkAverage || 0}}% {{gradeMark(homeworkAverage, 100)}}
+            </td>
+          </tr>
+          <tr ng-show="showOptions.showClassPercentage">
+            <td>النسبة المئوية للتسميع والواجب
+              <span>:</span>
+            </td>
+            <td>
+              {{classAverage || 0}}% {{gradeMark(classAverage, 100)}}
+            </td>
+          </tr>
+          <tr ng-show="showOptions.showExamPercentage">
+            <td>النسبة المئوية للامتحانات
               <span>:</span>
             </td>
             <td>
               {{examsAverage || 0}}% {{gradeMark(examsAverage, 100)}}
+            </td>
+          </tr>
+          <tr ng-show="showOptions.showExamQuizPercentage">
+            <td>النسبة المئوية للامتحانات والتسميعات
+              <span>:</span>
+            </td>
+            <td>
+              {{examQuizAverage || 0}}% {{gradeMark(examQuizAverage, 100)}}
+            </td>
+          </tr>
+          <tr ng-show="showOptions.showPercentage">
+            <td>النسبة المئوية للكل
+              <span>:</span>
+            </td>
+            <td>
+              {{totalAverage || 0}}% {{gradeMark(totalAverage, 100)}}
             </td>
           </tr>
           <tr ng-repeat="p in items" ng-show="selected_items[p.id]">
@@ -263,7 +328,7 @@
                 ' + c.log.quiz.max :
                 (quizNames[c.log.quiz.option])) : 'لم يسجل تسميع الطالب'}}</td>
               <td ng-show="showOptions.showClassHomework">{{c.log.homework ? (c.log.homework.type == 'marks' ?
-                  c.log.homework.mark + '/' + c.log.homework.max
+                  c.log.homework.mark + ' / ' + c.log.homework.max
                   : (c.log.homework.option == 'incomplete' ? 'غير مكتمل' : 'كامل')) : 'لم يسجل واجب الطالب'}}</td>
             </tr>
           </tbody>

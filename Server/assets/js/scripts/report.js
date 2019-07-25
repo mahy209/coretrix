@@ -31,7 +31,7 @@ function confirm(rootscope, sdk, name) {
   function students() {
     rootscope.navigate('app');
   }
-  sdk.CheckToken(students, () => {}, def);
+  sdk.CheckToken(students, () => { }, def);
 }
 
 app.controller("mainCtrl", function ($rootScope, $scope, sdk) {
@@ -110,12 +110,24 @@ app.controller("mainCtrl", function ($rootScope, $scope, sdk) {
       $scope.showOptions = showOptions;
     } else {
       $scope.showOptions = {
+        showAddDate: true,
+        showClassHomework: true,
+        showClassQuiz: true,
+        showExamGrading: true,
+        showExamMark: true,
+        showExamQuiz: true,
         showGrade: true,
         showGroup: true,
-        showAddDate: true,
-        showExamMark: true,
-        showExamGrading: true,
-        showExamQuiz: true,
+        showNotes: false,
+        showPercentage: false,
+        showUnattendedClasses: false,
+        showUnattendedExams: false,
+        // ----------
+        showExamPercentage: false,
+        showQuizPercentage: false,
+        showHomeworkPercentage: false,
+        showClassPercentage: false,
+        showExamQuizPercentage: false,
       };
       $scope.saveShowOptions();
     }
@@ -155,11 +167,32 @@ app.controller("mainCtrl", function ($rootScope, $scope, sdk) {
 
           $scope.classes = result.classes;
           $scope.unattendedClassesCount = 0;
-          $scope.classes.forEach(classLog => {
+
+          let quizMarksTotal = 0;
+          let quizMaxTotal = 0;
+          let homeworkMarksTotal = 0;
+          let homeworkMaxTotal = 0;
+
+          for (const classLog of $scope.classes) {
             if (!classLog.log || !classLog.log.attendant) {
               $scope.unattendedClassesCount++;
             }
-          });
+            if (classLog.log && classLog.log.quiz && classLog.log.quiz.type == 'marks') {
+              quizMarksTotal += classLog.log.quiz.mark;
+              quizMaxTotal += classLog.log.quiz.max;
+            }
+            if (classLog.log && classLog.log.homework && classLog.log.homework.type == 'marks') {
+              homeworkMarksTotal += classLog.log.homework.mark;
+              homeworkMaxTotal += classLog.log.homework.max;
+            }
+          }
+
+          $scope.quizAverage = Math.round((quizMarksTotal / quizMaxTotal) * 100);
+          $scope.homeworkAverage = Math.round((homeworkMarksTotal / homeworkMaxTotal) * 100);
+          $scope.classAverage = Math.round(((quizMarksTotal + homeworkMarksTotal) / (quizMaxTotal + homeworkMaxTotal)) * 100);
+          $scope.examQuizAverage = Math.round(((quizMarksTotal + examsMarksTotal) / (quizMaxTotal + examsMaxTotal)) * 100);
+          $scope.totalAverage = Math.round(((quizMarksTotal + homeworkMarksTotal + examsMarksTotal) / (quizMaxTotal + homeworkMaxTotal + examsMaxTotal)) * 100);
+
           for (let i = 0; i < result.items.length; i++) {
             const item = result.items[i];
             const payment = item.log || {};
@@ -264,7 +297,7 @@ app.controller("mainCtrl", function ($rootScope, $scope, sdk) {
           $scope.links = result.links;
           $scope.reload();
           break;
-          //TODO invalid data means token is not 64 chars long
+        //TODO invalid data means token is not 64 chars long
         case sdk.stats.InvalidData:
         case sdk.stats.InvalidToken:
           $rootScope.navigate('parent');
