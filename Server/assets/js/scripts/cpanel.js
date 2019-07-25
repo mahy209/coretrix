@@ -1364,6 +1364,8 @@ app.controller('studentsCtrl', function ($rootScope, $scope, sdk) {
                   $scope.changePage(c + 1)
               }
             })
+            $scope.deleted = false;
+            $scope.linkingStudent = false;
             $('#addStudent_modal')[0].M_Modal.close()
             toast('تم اضافه الطالب!')
             var phones = []

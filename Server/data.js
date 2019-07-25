@@ -2527,6 +2527,7 @@ function linkStudent(args, callback) {
           grade: args.grade,
           group: args.group,
         }, function (err, result) {
+          db.collection("users").updateOne({ id: args.student }, { $set: { deleted: false } }, () => { });
           ErrorAndCount(callback, err, result, fields.insertedCount, stats.Error)
         });
       });
