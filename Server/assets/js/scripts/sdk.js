@@ -1,5 +1,5 @@
 var sdk = angular.module('coretrix.sdk', [])
-const host = "127.0.0.1";
+const host = localStorage.getItem('host') || "127.0.0.1";
 const port = 8080;
 const local_url = "http://" + host + ":" + port + "/";
 const live_url = 'http://80.211.107.128:8080/';
@@ -348,7 +348,7 @@ sdk.factory('sdk', ['$http', function ($http) {
     var token = sessionStorage.getItem('token');
     post("api/teacher/students/get", {
       targetuser: parseInt(targetuser),
-      getpayments: getpayments ? true : false /* can be undefined and I'm too lazy to check if that's okay with the server's validator */ ,
+      getpayments: getpayments ? true : false /* can be undefined and I'm too lazy to check if that's okay with the server's validator */,
       token: token
     }, callback);
   }
@@ -743,7 +743,7 @@ sdk.factory('sdk', ['$http', function ($http) {
     post("api/teacher/classes/fetchlogs", query, callback);
   }
 
-  function BriefLog(student, callback, /*current_classid, current_examid*/ ) {
+  function BriefLog(student, callback, /*current_classid, current_examid*/) {
     var token = sessionStorage.getItem('token');
     var query = {
       targetuser: parseInt(student),
@@ -1069,7 +1069,7 @@ sdk.factory('sdk', ['$http', function ($http) {
       <script>
       $(document).ready(() => {
         ${users.map(user => {
-          return `
+        return `
           JsBarcode('#barcode${user.id}', '${user.id}', {
             displayValue: false,
             height: ${height},
@@ -1077,7 +1077,7 @@ sdk.factory('sdk', ['$http', function ($http) {
             marginTop: 0,
           });
           `;
-        }).join('')}
+      }).join('')}
         setTimeout(() => {
           window.print();
           window.close();
@@ -1089,7 +1089,7 @@ sdk.factory('sdk', ['$http', function ($http) {
     <body>
       <div class="row">
         ${users.map(user => {
-          return  `
+        return `
           <div class="${A4 ? 'col s3' : ''} text-center" style="margin-bottom: ${margin}px">
             <p class="no-margin" style="margin-bottom: 3px">
               ${profile.name}
@@ -1100,7 +1100,7 @@ sdk.factory('sdk', ['$http', function ($http) {
             </p>
           </div>
           `;
-        }).join('')}
+      }).join('')}
       </div>
     </body>
     
@@ -1118,7 +1118,7 @@ sdk.factory('sdk', ['$http', function ($http) {
       item,
       grade
     } = data;
-    console.log({data});
+    console.log({ data });
     return `
     <html>
 
@@ -1219,7 +1219,6 @@ sdk.factory('sdk', ['$http', function ($http) {
         </div>
         <div class="col s12 text-center">
           <small>Gray team</small>
-          <small>01096707442</small>
         </div>
       </div>
     </body>

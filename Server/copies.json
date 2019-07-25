@@ -22,5 +22,23 @@
     "offline": false,
     "name": "مهاب اكرم",
     "date": "21-6-2019"
+  },
+  {
+    "registerer": "mohamedmorad",
+    "offline": true,
+    "name": "محمد مراد",
+    "date": "21-7-2019"
+  },
+  {
+    "registerer": "ahmedfadl",
+    "offline": true,
+    "name": "أحمد فضل",
+    "date": "21-7-2019"
+  },
+  {
+    "registerer": "karimelaraby",
+    "offline": true,
+    "name": "كريم العربى",
+    "date": "24-7-2019"
   }
 ]

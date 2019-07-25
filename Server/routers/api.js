@@ -114,7 +114,7 @@ var inputvalidators = {
   // changepassword
   "oldpassword": validators.ValidatePassword,
   // register for students
-  "username": validators.ValidateUsername,
+  "username": validators.ValidateString,
   "email": validators.ValidateEmail,
   "password": validators.ValidatePassword,
   "fullname": validators.ValidateFullName,
