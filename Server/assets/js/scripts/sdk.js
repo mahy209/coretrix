@@ -1082,8 +1082,8 @@ sdk.factory('sdk', ['$http', function ($http) {
           if (localStorage.testPrint) {
             return;
           }
-          // window.print();
-          // window.close();
+          window.print();
+          window.close();
         }, 1000)
       });
       </script>

@@ -2118,7 +2118,7 @@ app.controller('mainCtrl', function ($rootScope, $scope, sdk) {
         let beepClassesBecauseOfAttendance = result.classes && result.classes.length ? true : false;
         let beepClassesBecauseOfQuiz = result.classes && result.classes.length ? true : false;
         for (let i = 0; i < $scope.beeps.classes; i++) {
-          if (!result.exams[i]) { break; };
+          if (!result.classes[i]) { break; };
           const {
             log
           } = result.classes[i];
