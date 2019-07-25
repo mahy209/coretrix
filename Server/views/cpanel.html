@@ -184,7 +184,8 @@
               <div class="card-panel " ng-class="tolog_name == 'اسم الطالب' ? 'grey-text' : ''">
                 <h5>{{tolog_name}}</h5>
               </div>
-              <div class="card-panel " ng-class="toLogGroup == 'مجموعة الطالب' ? 'grey-text' : (beep_grade_group ? 'white-text red' : '')">
+              <div class="card-panel "
+                ng-class="toLogGroup == 'مجموعة الطالب' ? 'grey-text' : (beep_grade_group ? 'white-text red' : '')">
                 <h5>{{toLogGroup}}</h5>
               </div>
             </div>
@@ -637,6 +638,9 @@
                           <i class="fa fa-times" aria-hidden="true"></i>
                         </button>
                       </div>
+                      <span class="red-text" ng-show="deleted && linkingStudent">هذا الطالب قد تم مسحه من قبل
+                        <i class="fa fa-info-circle"></i>
+                      </span>
                     </div>
                     <div>
                       <label>السنه الدراسيه</label>
@@ -1360,7 +1364,8 @@
                         ng-show="(!selected_group || n.group == selected_group.id) && (!filterAttendance || !n.log.attendant)">
                         <td>
                           <!-- TODO: fix css -->
-                          <input type="checkbox" ng-model="n.selected" id="cid{{n.studentid}}" class="checkbox hideonprint" />
+                          <input type="checkbox" ng-model="n.selected" id="cid{{n.studentid}}"
+                            class="checkbox hideonprint" />
                           <label class="hideonprint" for="cid{{n.studentid}}"></label>
                           <span class="green-text" ng-show="n.log.attendant">حضر</span>
                           <span class="red-text" ng-show="!n.log.attendant">لم يحضر</span>
@@ -1410,7 +1415,8 @@
                         ng-show="(!selected_group || n.group == selected_group.id) && (!filterAttendance || !n.log.attendant)">
                         <td>
                           <!-- TODO: fix css -->
-                          <input type="checkbox" ng-model="n.selected" id="cid{{n.studentid}}" class="checkbox hideonprint" />
+                          <input type="checkbox" ng-model="n.selected" id="cid{{n.studentid}}"
+                            class="checkbox hideonprint" />
                           <label class="hideonprint" for="cid{{n.studentid}}"></label>
                           <span class="green-text" ng-show="n.log.attendant">حضر</span>
                           <span class="red-text" ng-show="!n.log.attendant">لم يحضر</span>
@@ -1450,7 +1456,8 @@
                         ng-show="!selected_group || n.group == selected_group.id">
                         <td>
                           <!-- TODO: fix css -->
-                          <input type="checkbox" ng-model="n.selected" id="cid{{n.studentid}}" class="checkbox hideonprint" />
+                          <input type="checkbox" ng-model="n.selected" id="cid{{n.studentid}}"
+                            class="checkbox hideonprint" />
                           <label class="hideonprint" for="cid{{n.studentid}}"></label>
                           {{n.fullname}}
                         </td>

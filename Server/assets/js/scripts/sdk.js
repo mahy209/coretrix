@@ -348,7 +348,7 @@ sdk.factory('sdk', ['$http', function ($http) {
     var token = sessionStorage.getItem('token');
     post("api/teacher/students/get", {
       targetuser: parseInt(targetuser),
-      getpayments: getpayments ? true : false /* can be undefined and I'm too lazy to check if that's okay with the server's validator */,
+      getpayments: getpayments ? true : false, // can be undefined and I'm too lazy to check if that's okay with the server's validator
       token: token
     }, callback);
   }

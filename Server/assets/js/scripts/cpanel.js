@@ -1235,6 +1235,7 @@ app.controller('studentsCtrl', function ($rootScope, $scope, sdk) {
                   if (stat === sdk.stats.OK) {
                     $scope.studentNotes = data.notes;
                     $scope.studentDiscount = data.discount;
+                    $scope.deleted = data.deleted;
                   }
                 });
                 sdk.ListPhones((stat, data) => {
