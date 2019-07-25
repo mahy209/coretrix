@@ -1079,8 +1079,11 @@ sdk.factory('sdk', ['$http', function ($http) {
           `;
       }).join('')}
         setTimeout(() => {
-          window.print();
-          window.close();
+          if (localStorage.testPrint) {
+            return;
+          }
+          // window.print();
+          // window.close();
         }, 1000)
       });
       </script>
