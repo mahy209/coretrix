@@ -217,7 +217,7 @@ app.controller('paylogsCtrl', function ($scope, sdk) {
 
   $scope.paylogs = [];
 
-  $scope.initMessage = (item) => {}
+  $scope.initMessage = (item) => { }
   $scope.refreshLogs = () => {
     const calculate = (paylogs) => {
       let totalAmount = 0;
@@ -783,18 +783,18 @@ app.controller('paymentsCtrl', function ($rootScope, $scope, sdk) {
     basket.animate({
       bottom: '0'
     }, {
-      duration: 300
-    })
+        duration: 300
+      })
   }
   $scope.hidebasket = () => {
     $('#basket').animate({
       bottom: '-22%'
     }, {
-      duration: 300,
-      complete: () => {
-        $('#basket').css('display', 'none')
-      }
-    })
+        duration: 300,
+        complete: () => {
+          $('#basket').css('display', 'none')
+        }
+      })
   }
   $scope.deleteItems = () => {
     for (let i = 0; i < $scope.trash.length; i++) {
@@ -894,18 +894,18 @@ app.controller('groupsCtrl', function ($rootScope, $scope, sdk) {
     basket.animate({
       bottom: '0'
     }, {
-      duration: 300
-    })
+        duration: 300
+      })
   }
   $scope.hidebasket = () => {
     $('#basket_groupclasses').animate({
       bottom: '-22%'
     }, {
-      duration: 300,
-      complete: () => {
-        $('#basket_groupclasses').css('display', 'none')
-      }
-    })
+        duration: 300,
+        complete: () => {
+          $('#basket_groupclasses').css('display', 'none')
+        }
+      })
   }
   $scope.deleteGroupClasses = () => {
     for (let i = 0; i < $scope.trash.length; i++) {
@@ -963,40 +963,40 @@ app.controller('groupsCtrl', function ($rootScope, $scope, sdk) {
   }
 
   var selected_days_template = [{
-      id: 0,
-      name: 'السبت',
-      selected: false
-    },
-    {
-      id: 1,
-      name: 'الاحد',
-      selected: false
-    },
-    {
-      id: 2,
-      name: 'الاثنين',
-      selected: false
-    },
-    {
-      id: 3,
-      name: 'الثلاثاء',
-      selected: false
-    },
-    {
-      id: 4,
-      name: 'الاربعاء',
-      selected: false
-    },
-    {
-      id: 5,
-      name: 'الخميس',
-      selected: false
-    },
-    {
-      id: 6,
-      name: 'الجمعه',
-      selected: false
-    }
+    id: 0,
+    name: 'السبت',
+    selected: false
+  },
+  {
+    id: 1,
+    name: 'الاحد',
+    selected: false
+  },
+  {
+    id: 2,
+    name: 'الاثنين',
+    selected: false
+  },
+  {
+    id: 3,
+    name: 'الثلاثاء',
+    selected: false
+  },
+  {
+    id: 4,
+    name: 'الاربعاء',
+    selected: false
+  },
+  {
+    id: 5,
+    name: 'الخميس',
+    selected: false
+  },
+  {
+    id: 6,
+    name: 'الجمعه',
+    selected: false
+  }
   ]
   $scope.selected_days = selected_days_template
   $scope.edit_selected_days = selected_days_template
@@ -1130,7 +1130,7 @@ app.controller('studentsCtrl', function ($rootScope, $scope, sdk) {
       $scope.students = $rootScope.studentsIndexer.search($scope.searching_name);
     }
   }
-  $scope.$watch('selectedPage_num', (n) => {})
+  $scope.$watch('selectedPage_num', (n) => { })
   $scope.changePage = (num) => {
     if (typeof num != 'number' || num < 1) num = 1
     if ($scope.pages.length > 0) {
@@ -1810,7 +1810,7 @@ function confirm(rootscope, sdk, name) {
   function students() {
     rootscope.navigate('app')
   }
-  sdk.CheckToken(students, () => {}, def)
+  sdk.CheckToken(students, () => { }, def)
 }
 
 app.controller('mainCtrl', function ($rootScope, $scope, sdk) {
@@ -1939,7 +1939,7 @@ app.controller('mainCtrl', function ($rootScope, $scope, sdk) {
   $scope.refreshClasses = () => {
     var now = Date.now()
     var dif = Math.floor((now - lastrefresh) / 1000)
-    if (lastrefresh != null && dif < 5 /* 5 seconds threshold */ ) return toast('برجاء الانتظار ' + dif + ' ثوانى قبل الضغظ مرة اخرى', gradients.error)
+    if (lastrefresh != null && dif < 5 /* 5 seconds threshold */) return toast('برجاء الانتظار ' + dif + ' ثوانى قبل الضغظ مرة اخرى', gradients.error)
     sdk.RefreshClaases((stat) => {
       switch (stat) {
         case stats.OK:
@@ -2100,14 +2100,15 @@ app.controller('mainCtrl', function ($rootScope, $scope, sdk) {
           }
         });
         // BEEPS LOGIC
-        let beep_exams = result.exams && result.exams.length ? true : false;
+        let beep_exams = false;
         for (let i = 0; i < $scope.beeps.exams; i++) {
+          if (!result.exams[i]) { break; };
           const {
             log,
             redline
           } = result.exams[i];
-          if (log[0] && log[0].attendant && log[0].mark && log[0].mark >= redline) {
-            beep_exams = false;
+          if (!log[0] || !log[0].attendant || !log[0].mark || log[0].mark < redline) {
+            beep_exams = true;
           }
         }
         let beep_classes = false;
@@ -2150,14 +2151,19 @@ app.controller('mainCtrl', function ($rootScope, $scope, sdk) {
             beep_passed_subscriptions = beep;
           }
         }
+        $scope.beep_grade_group = false;
+        if (result.data.group_id != $scope.selected_group.id && $scope.beeps.differentGradeGroup) {
+          $scope.beep_grade_group = true;
+        }
         console.log({
           currentSubscription,
           beep_exams,
           beep_classes,
           beep_subscription,
-          beep_passed_subscriptions
+          beep_passed_subscriptions,
+          beep_grade_group: $scope.beep_grade_group,
         });
-        if (beep_exams && $scope.enabledAlerts.exams || beep_classes ||
+        if (beep_exams && $scope.enabledAlerts.exams || beep_classes || $scope.beep_grade_group ||
           (beep_subscription && $scope.beeps.currentSubscription) ||
           (beep_passed_subscriptions && $scope.beeps.passedSubscriptions)) {
           new Audio('assets/sound/error.wav').play();
@@ -2308,19 +2314,16 @@ app.controller('settingsCtrl', function ($rootScope, $scope, sdk) {
         classes: 2,
         currentSubscription: false,
         passedSubscriptions: true,
+        differentGradeGroup: false,
       };
       $scope.updateBeeps(beeps);
     }
-    const {
-      exams,
-      classes,
-      currentSubscription,
-      passedSubscriptions,
-    } = beeps;
+    const { exams, classes, currentSubscription, passedSubscriptions, differentGradeGroup } = beeps;
     $scope.currentSubscription = currentSubscription;
     $scope.passedSubscriptions = passedSubscriptions;
     $scope.classesBeep = classes;
     $scope.examsBeep = exams;
+    $scope.differentGradeGroup = differentGradeGroup;
   });
   $scope.updateBeeps = (beeps) => {
     localStorage.setItem('beepDayOfMonth', $scope.beepDayOfMonth);
@@ -2329,6 +2332,7 @@ app.controller('settingsCtrl', function ($rootScope, $scope, sdk) {
       classes: $scope.classesBeep,
       currentSubscription: $scope.currentSubscription,
       passedSubscriptions: $scope.passedSubscriptions,
+      differentGradeGroup: $scope.differentGradeGroup,
     }, (err, result) => {
       if (!err) {
         toast("تم حفظ البيانات");

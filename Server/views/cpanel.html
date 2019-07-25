@@ -134,7 +134,7 @@
                 <h5>{{studentid ? selected_class.date : 'الحصة'}}</h5>
               </div>
               <div class="center-align">
-                <h5 class="center-align">{{studentid ? toLogGroup : 'المجموعة'}}</h5>
+                <h5 class="center-align">{{studentid ? selected_group.name : 'المجموعة'}}</h5>
               </div>
               <div class="center-align">
                 <h5>{{studentid ? 'الصف ' + grades_names[toLogGrade] : 'الصف'}}</h5>
@@ -184,7 +184,7 @@
               <div class="card-panel " ng-class="tolog_name == 'اسم الطالب' ? 'grey-text' : ''">
                 <h5>{{tolog_name}}</h5>
               </div>
-              <div class="card-panel " ng-class="toLogGroup == 'مجموعة الطالب' ? 'grey-text' : ''">
+              <div class="card-panel " ng-class="toLogGroup == 'مجموعة الطالب' ? 'grey-text' : (beep_grade_group ? 'white-text red' : '')">
                 <h5>{{toLogGroup}}</h5>
               </div>
             </div>
@@ -1696,12 +1696,14 @@
                     <label>عدد الامتحانات</label>
                     <input type="number" min="0" max="3" class="validate" ng-model="examsBeep">
                     <label>إنذار الشهر الحالى بعد يوم</label>
-                    <input type="number" min="1" max="31" class="validate" ng-model="beepDayOfMonth">
+                    <input type="number" min="1" max="30" class="validate" ng-model="beepDayOfMonth">
                     <div>
                       <input type="checkbox" ng-model="currentSubscription" id="currentSubscription" />
                       <label for="currentSubscription">الشهر الحالي</label>
                       <input type="checkbox" ng-model="passedSubscriptions" id="passedSubscriptions" />
                       <label for="passedSubscriptions">الشهور السابقة</label>
+                      <input type="checkbox" ng-model="differentGradeGroup" id="differentGradeGroup" />
+                      <label for="differentGradeGroup">مجموعة مختلفة</label>
                     </div>
                     <button style="margin-top: 20px;" ng-click="updateBeeps()"
                       class="btn blue-grey-background">حفظ</button>
