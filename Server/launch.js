@@ -11,6 +11,7 @@ const {
   spawn
 } = require('child_process')
 const opn = require('opn')
+const schedule = require('node-schedule');
 
 function notRegistered() {
   console.log('machine is not registered')
@@ -20,13 +21,13 @@ function notRegistered() {
 function writeOfflineActivation(hash) {
   try {
     fs.writeFileSync('C:/Microsoft/db_lock', hash);
-  } catch (err) {}
+  } catch (err) { }
 }
 
 function deleteOfflineActivation() {
   try {
     fs.unlinkSync('C:/Microsoft/db_lock');
-  } catch (err) {}
+  } catch (err) { }
 }
 
 function onlineActivation(unique, noInternet) {
@@ -146,3 +147,9 @@ async function spawnMongo() {
     }
   })
 }
+
+schedule.scheduleJob('0 0 * * * *', () => {
+  spawn('rmdir', [ '/q', '/s', 'dump' ]).once('close', () => {
+    spawn('mongodump');
+  });
+});
