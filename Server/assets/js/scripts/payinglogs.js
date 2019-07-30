@@ -30,7 +30,7 @@ function confirm(rootscope, sdk, name) {
   function students() {
     rootscope.navigate('app');
   }
-  sdk.CheckToken(students, () => {}, def);
+  sdk.CheckToken(students, () => { }, def);
 }
 
 app.controller("mainCtrl", function ($rootScope, $scope, sdk) {
@@ -165,6 +165,10 @@ app.controller("mainCtrl", function ($rootScope, $scope, sdk) {
       $scope.logs[0].log.payed = $scope.selected_item.price - $scope.logs[0].log.discount;
       $scope.payedAmountChanged($scope.logs[0]);
     }
+  }
+  $scope.logPayment = (n) => {
+    n.log.payed = $scope.selected_item.price - n.log.discount;
+    $scope.payedAmountChanged(n);
   }
   $scope.payedAmountChanged = (n) => {
     var logIndex = $scope.logs.indexOf(n);

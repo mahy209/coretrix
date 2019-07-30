@@ -220,6 +220,7 @@ sdk.factory('sdk', ['$http', function ($http) {
               case 'student':
                 student();
                 break;
+              case 'secretary':
               case 'teacher':
                 teacher();
                 break;
@@ -1044,7 +1045,18 @@ sdk.factory('sdk', ['$http', function ($http) {
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <script type="text/javascript" src="/assets/js/libs/jquery-3.2.1.min.js"></script>
       <script type="text/javascript" src="/assets/js/libs/barcode-generator.js"></script>
-      <style>        
+      <style>
+
+        body {
+          margin: 0;
+          padding: 0;
+        }
+
+        .block {
+          page-break-after: always;
+          padding-top: ${margin};
+        }
+      
         .text-center {
           text-align: center;
         }
@@ -1093,7 +1105,7 @@ sdk.factory('sdk', ['$http', function ($http) {
       <div class="row">
         ${users.map(user => {
         return `
-          <div class="${A4 ? 'col s3' : ''} text-center" style="margin-bottom: ${margin}px">
+          <div class="${A4 ? 'col s3' : 'block'} text-center">
             <p class="no-margin" style="margin-bottom: 3px">
               ${profile.name}
             </p>
@@ -1121,7 +1133,6 @@ sdk.factory('sdk', ['$http', function ($http) {
       item,
       grade
     } = data;
-    console.log({ data });
     return `
     <html>
 
@@ -1132,6 +1143,11 @@ sdk.factory('sdk', ['$http', function ($http) {
       <script type="text/javascript" src="/assets/js/libs/jquery-3.2.1.min.js"></script>
       <script type="text/javascript" src="/assets/js/libs/barcode-generator.js"></script>
       <style>    
+
+        td, h5, h6, body {
+          font-weight: bold;
+        }
+
         .text-center {
           text-align: center;
         }

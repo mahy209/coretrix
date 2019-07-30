@@ -793,20 +793,16 @@ function createSecretary(args, callback) {
     if (result) {
       callback(null, stats.Exists);
     } else {
-      var password = genPass.generate({
-        length: 8,
-        numbers: true
-      });
       mongoh.GetNextSequence(db, 'users', {}, identifier, lib.IntIncrementer, function (newid) {
         db.collection("users").insertOne({
           [identifier]: newid,
           username: args.username,
           displayname: args.name,
-          [foreignIdentifier]: teacher(args.userDoc),
-          password: hash(password),
+          [teacherForeignIdentifier]: teacher(args.userDoc),
+          password: hash(args.password),
           usertype: 'secretary'
         }, function (err, result) {
-          ErrorAndCount(callback, err, result, fields.insertedCount, stats.Error, password);
+          ErrorAndCount(callback, err, result, fields.insertedCount, stats.Error);
         });
       });
     }
@@ -816,7 +812,7 @@ function createSecretary(args, callback) {
 function listSecretaries(args, callback) {
   if (!isTeacher(args.userDoc)) return callback(null, stats.IncapableUserType);
   db.collection("users").find({
-    [foreignIdentifier]: teacher(args.userDoc),
+    [teacherForeignIdentifier]: teacher(args.userDoc),
     usertype: 'secretary'
   }, {
       [identifier]: 1,
@@ -829,17 +825,13 @@ function listSecretaries(args, callback) {
 
 function removeSecretary(args, callback) {
   if (!isTeacher(args.userDoc)) return callback(null, stats.IncapableUserType);
-  db.collection("users").updateOne({
-    [identifier]: args[identifier],
-    teacher: teacher(userDoc),
+  db.collection("users").deleteOne({
+    [identifier]: args.targetuser,
+    teacherid: teacher(args.userDoc),
     usertype: 'secretary'
-  }, {
-      $set: {
-        "disabled": true
-      }
-    }, function (err, result) {
-      ErrorAndCount(callback, err, result, fields.modifiedCount, stats.NonExisting);
-    });
+  }, function (err, result) {
+    ErrorAndCount(callback, err, result, fields.deletedCount, stats.NonExisting);
+  });
 }
 
 // EREG USER_MANAGEMENT
@@ -1454,7 +1446,7 @@ function editBio(args, callback) {
 function getGrades(args, callback) {
   if (isTeacher(args.userDoc) && !args.targetuser) return callback(null, stats.OK, args.userDoc.grades.sort());
   var ids = db.collection("users").findOne({
-    [identifier]: args.targetuser
+    [identifier]: args.targetuser || teacherRep(args.userDoc)
   }, {
       grades: 1,
     }, function (err, result) {
@@ -3272,8 +3264,15 @@ function setPayment(args, callback) {
         foreignField: 'id',
         as: 'item',
       }
-    }
-    ], (err, payment) => {
+    },
+    {
+      $lookup: {
+        from: 'grades',
+        localField: 'item.grade',
+        foreignField: 'id',
+        as: 'grade'
+      }
+    }], (err, payment) => {
       if (err) return;
 
 
@@ -3298,9 +3297,10 @@ function setPayment(args, callback) {
 
       message.push(added ? 'دفع' : 'سحب');
       message.push(payment.student.fullname.trim());
-      message.push('فلوس');
-      message.push(itemCategoryNames[payment.item.category]);
+      // message.push('فلوس');
+      // message.push(itemCategoryNames[payment.item.category]);
       message.push(payment.item.name);
+      message.push(payment.grade[0] ? payment.grade[0].name : '');
 
       addPayLog({
         userDoc: args.userDoc,
@@ -4462,6 +4462,7 @@ module.exports = {
   ClearLog: clearLog,
   ListClasses: listClasses,
   CreateSecretary: createSecretary,
+  ListSecretaries: listSecretaries,
   RemoveSecretary: removeSecretary,
   AddItem: addItem,
   ListItems: listItems,

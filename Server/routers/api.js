@@ -430,9 +430,9 @@ registerApiCall("/teacher/students/list", ["token", "fulllist", "ig_grades", "ig
 registerApiCall("/teacher/students/qrlist", ["token", "ig_grades", "ig_groups"], userDocDefault, data.QRListStudents);
 registerApiCall("/teacher/students/count", ["token", "ig_grades", "ig_groups", "startid"], userDocDefault, data.CountStudents);
 registerApiCall("/teacher/students/get", ["token", "targetuser"], userDocDefault, data.GetStudent);
-registerApiCall("/teacher/secretaries/create", ["token", "name", "username"], userDocDefault, data.CreateSecretary);
-/*registerApiCall("/teacher/secretaries/list", ["token", "ig_grades"], userDocRestricts.ListGroups, data.ListGroups);
-registerApiCall("/teacher/secretaries/remove", ["token", "groupid"], userDocDefault, data.RemoveGroup);*/
+registerApiCall("/teacher/secretaries/create", ["token", "name", "username", "password"], userDocDefault, data.CreateSecretary);
+registerApiCall("/teacher/secretaries/list", ["token"], userDocRestricts.ListGroups, data.ListSecretaries);
+registerApiCall("/teacher/secretaries/remove", ["token", "targetuser"], userDocDefault, data.RemoveSecretary);
 registerApiCall("/teacher/contacts/list", ["token"], userDocDefault, data.ListContacts);
 
 registerApiCall("/teacher/items/add", ["token", "name", "grade", "price", "itemCategory", "month", "year"], userDocDefault, data.AddItem);
