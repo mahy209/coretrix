@@ -1806,14 +1806,18 @@ app.controller('studentsCtrl', function ($rootScope, $scope, sdk) {
 });*/
 
 function confirm(rootscope, sdk, name) {
-  function def() {
+  function def(user) {
+    rootscope.current_user = user;
     rootscope.navigate()
   }
 
-  function students() {
+  function students(user) {
+    rootscope.current_user = user;
     rootscope.navigate('app')
   }
-  sdk.CheckToken(students, () => { }, def)
+  sdk.CheckToken(students, (user) => {
+    rootscope.current_user = user;
+  }, def)
 }
 
 app.controller('mainCtrl', function ($rootScope, $scope, sdk) {
@@ -2524,4 +2528,58 @@ app.controller('settingsCtrl', function ($rootScope, $scope, sdk) {
   $scope.removeGrade = (index) => {
     $scope.localSdkGrades.splice(index, 1);
   }
+
+  function secretaryUIToObject() {
+    const roles = ['payments', 'sms', 'accounting', 'statistics']
+      .filter(role => $scope.newSecretary['roles_' + role]);
+    return {
+      name: $scope.newSecretary.name,
+      username: $scope.newSecretary.username,
+      password: $scope.newSecretary.password,
+      roles,
+    };
+  }
+
+  function refreshSecretaries() {
+    sdk.ListSecretaries((stat, result) => {
+      if (!result) { return; }
+      const ar = {
+        'payments': 'الدفع',
+        'sms': 'الرسائل',
+        'accounting': 'الحسابات',
+        'statistics': 'الاحصائيات',
+      }
+      $scope.secretaries = result.map(secretary => ({
+        ...secretary,
+        roles: secretary.roles.map(role => ar[role]).join(' و'),
+      }));
+    });
+  }
+
+  refreshSecretaries();
+
+  $scope.newSecretary = {
+    name: '',
+    username: '',
+    password: '',
+    roles: [],
+    roles_payments: false,
+    roles_sms: false,
+    roles_accounting: false,
+    roles_statistics: false,
+  }
+
+  $scope.addSecretary = () => {
+    sdk.CreateSecretary(secretaryUIToObject(), () => {
+      refreshSecretaries();
+      $('#addSecretary_modal')[0].M_Modal.close()
+    });
+  }
+
+  $scope.removeSecretary = (secretary) => {
+    sdk.RemoveSecretary(secretary.id, () => {
+      refreshSecretaries();
+    });
+  }
+
 })

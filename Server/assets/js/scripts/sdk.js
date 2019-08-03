@@ -1,5 +1,5 @@
 var sdk = angular.module('coretrix.sdk', [])
-const host = localStorage.getItem('host') || "127.0.0.1";
+const host = sessionStorage.getItem('host') || "127.0.0.1";
 const port = 8080;
 const local_url = "http://" + host + ":" + port + "/";
 const live_url = 'http://80.211.107.128:8080/';
@@ -218,11 +218,19 @@ sdk.factory('sdk', ['$http', function ($http) {
           case stats.OK:
             switch (result.usertype) {
               case 'student':
-                student();
+                student(result);
                 break;
               case 'secretary':
               case 'teacher':
-                teacher();
+                console.log(result);
+                result.permissions = {
+                  settings: result.usertype == 'teacher',
+                  payments: result.usertype == 'teacher' || result.usertype == 'secretary' && result.roles.indexOf('payments') > -1,
+                  sms: result.usertype == 'teacher' || result.usertype == 'secretary' && result.roles.indexOf('sms') > -1,
+                  accounting: result.usertype == 'teacher' || result.usertype == 'secretary' && result.roles.indexOf('accounting') > -1,
+                  statistics: result.usertype == 'teacher' || result.usertype == 'secretary' && result.roles.indexOf('statistics') > -1,
+                };
+                teacher(result);
                 break;
               default:
                 def();
@@ -445,6 +453,13 @@ sdk.factory('sdk', ['$http', function ($http) {
       grade: grade,
       max: max,
       redline: redline,
+      token: token
+    }, callback);
+  }
+
+  function ListSecretaries(callback) {
+    var token = sessionStorage.getItem('token');
+    post("api/teacher/secretaries/list", {
       token: token
     }, callback);
   }
@@ -823,6 +838,22 @@ sdk.factory('sdk', ['$http', function ($http) {
     }, callback);
   }
 
+  function CreateSecretary(payload, callback) {
+    const token = sessionStorage.getItem('token');
+    post("api/teacher/secretaries/create", {
+      ...payload,
+      token,
+    }, callback);
+  }
+
+  function RemoveSecretary(targetuser, callback) {
+    const token = sessionStorage.getItem('token');
+    post("api/teacher/secretaries/remove", {
+      targetuser,
+      token,
+    }, callback);
+  }
+
   function GetBeeps(callback) {
     const token = sessionStorage.getItem('token');
     post("api/teacher/beeps", {
@@ -1125,7 +1156,7 @@ sdk.factory('sdk', ['$http', function ($http) {
   }
 
   function GenerateReceipt(data) {
-    const barcodeHeight = Number(localStorage.getItem('barcodeHeight'));
+    const barcodeHeight = Number(sessionStorage.getItem('barcodeHeight'));
     const {
       id,
       fullname,
@@ -1338,5 +1369,8 @@ sdk.factory('sdk', ['$http', function ($http) {
     SetStartDate: SetStartDate,
     CountGroupsLinks: CountGroupsLinks,
     ListContacts,
+    ListSecretaries,
+    CreateSecretary,
+    RemoveSecretary,
   };
 }])

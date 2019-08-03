@@ -682,7 +682,8 @@ function _isAlive(args, callback) {
   callback(null, stats.OK, {
     [identifier]: id(args.userDoc),
     username: args.userDoc.username,
-    usertype: args.userDoc.usertype
+    usertype: args.userDoc.usertype,
+    roles: args.userDoc.roles,
   });
 }
 
@@ -800,7 +801,8 @@ function createSecretary(args, callback) {
           displayname: args.name,
           [teacherForeignIdentifier]: teacher(args.userDoc),
           password: hash(args.password),
-          usertype: 'secretary'
+          usertype: 'secretary',
+          roles: args.roles,
         }, function (err, result) {
           ErrorAndCount(callback, err, result, fields.insertedCount, stats.Error);
         });
@@ -816,7 +818,9 @@ function listSecretaries(args, callback) {
     usertype: 'secretary'
   }, {
       [identifier]: 1,
-      "displayname": 1
+      displayname: 1,
+      username: 1,
+      roles: 1,
     }).toArray(function (err, arr) {
       if (err) return callback(err);
       callback(null, stats.OK, arr);

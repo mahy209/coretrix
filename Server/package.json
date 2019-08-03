@@ -1,6 +1,6 @@
 {
 	"name": "coretrix",
-	"version": "1.7.54",
+	"version": "1.8.56",
 	"main": "launch.js",
 	"bin": "launch.js",
 	"pkg": {

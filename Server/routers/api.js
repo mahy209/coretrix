@@ -292,6 +292,7 @@ var inputvalidators = {
   year: validators.ValidateOrIgnoreNumber,
   beeps: validators.Pass,
   ig_items: validators.ValidateOrIgnoreNumberArray,
+  roles: validators.Pass,
 }
 
 // REG CALLS
@@ -302,7 +303,8 @@ var userDocDefault = {
   ['userDoc.' + data.foreignIdentifier]: 1,
   ['userDoc.' + data.studentForeignIdentifier]: 1,
   ['userDoc.' + data.teacherForeignIdentifier]: 1,
-  "userDoc.usertype": 1
+  "userDoc.usertype": 1,
+  "userDoc.roles": 1
 };
 var userDocRestricts = {
   ChangePassword: lib.OverlayArray(userDocDefault, {
@@ -430,7 +432,7 @@ registerApiCall("/teacher/students/list", ["token", "fulllist", "ig_grades", "ig
 registerApiCall("/teacher/students/qrlist", ["token", "ig_grades", "ig_groups"], userDocDefault, data.QRListStudents);
 registerApiCall("/teacher/students/count", ["token", "ig_grades", "ig_groups", "startid"], userDocDefault, data.CountStudents);
 registerApiCall("/teacher/students/get", ["token", "targetuser"], userDocDefault, data.GetStudent);
-registerApiCall("/teacher/secretaries/create", ["token", "name", "username", "password"], userDocDefault, data.CreateSecretary);
+registerApiCall("/teacher/secretaries/create", ["token", "name", "username", "password", "roles"], userDocDefault, data.CreateSecretary);
 registerApiCall("/teacher/secretaries/list", ["token"], userDocRestricts.ListGroups, data.ListSecretaries);
 registerApiCall("/teacher/secretaries/remove", ["token", "targetuser"], userDocDefault, data.RemoveSecretary);
 registerApiCall("/teacher/contacts/list", ["token"], userDocDefault, data.ListContacts);

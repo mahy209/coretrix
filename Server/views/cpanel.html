@@ -818,7 +818,8 @@
           </div>
         </div>
         <!-- payments tab -->
-        <div class="simpleFadeIn-anim" ng-controller="paymentsCtrl" ng-show="tab=='payment'">
+        <div class="simpleFadeIn-anim" ng-controller="paymentsCtrl"
+          ng-show="tab=='payment' && current_user.permissions.payments">
           <div class="row">
             <div class="col s8 offset-s2">
               <div style="margin-top:0;margin-bottom:5%;">
@@ -903,7 +904,7 @@
             </div>
           </div>
         </div>
-        <div class="simpleFadeIn-anim" ng-controller="paylogsCtrl" ng-show="tab=='paylogs'">
+        <div class="simpleFadeIn-anim" ng-controller="paylogsCtrl" ng-show="tab=='paylogs' && current_user.permissions.accounting">
           <div class="padding-pad">
             <div class="row">
               <div class="card-panel hideonprint">
@@ -949,16 +950,16 @@
               <div class="card-panel hideonprint">
                 <table>
                   <thead>
-                    <th>
+                    <th style="text-align: right;">
                       <span>تاريخ اليوم</span>
                     </th>
-                    <th>
+                    <th style="text-align: right;">
                       <span>اجمالى الايرادات</span>
                     </th>
-                    <th>
+                    <th style="text-align: right;">
                       <span>اجمالى المصروفات</span>
                     </th>
-                    <th>
+                    <th style="text-align: right;">
                       <span>المجموع</span>
                     </th>
                   </thead>
@@ -1060,7 +1061,8 @@
           </div>
 
         </div>
-        <div class="simpleFadeIn-anim" ng-controller="statsCtrl" ng-show="tab=='stats'">
+        <div class="simpleFadeIn-anim" ng-controller="statsCtrl"
+          ng-show="tab=='stats' && current_user.permissions.statistics">
           <div class="padding-pad">
             <div class="row">
               <ul class="collapsible" data-collapsible="accordion">
@@ -1146,7 +1148,7 @@
           </div>
 
         </div>
-        <div class="simpleFadeIn-anim" ng-controller="smsCtrl" ng-show="tab=='sms'">
+        <div class="simpleFadeIn-anim" ng-controller="smsCtrl" ng-show="tab=='sms' && current_user.permissions.sms">
           <div class="padding-pad">
             <div class="row">
               <div class="card-panel hideonprint">
@@ -1622,7 +1624,7 @@
           <div class="padding-pad animated zoomIn">
             <div class="row">
               <ul class="collapsible" data-collapsible="accordion">
-                <li class="active">
+                <li class="active" ng-show="current_user.permissions.settings">
                   <div class="collapsible-header">بيانات المدرس</div>
                   <div class="collapsible-body">
                     <label>اسم المدرس</label>
@@ -1633,7 +1635,83 @@
                       class="btn blue-grey-background">حفظ</button>
                   </div>
                 </li>
-                <li>
+                <li ng-show="current_user.permissions.settings">
+                  <div class="collapsible-header">المستخدمين</div>
+                  <div class="collapsible-body">
+                    <button class="btn blue-grey-background modal-trigger" href="#addSecretary_modal">اضف
+                      مستخدم</button>
+                    <div class="logs">
+                      <table>
+                        <thead>
+                          <th>الاسم</th>
+                          <th>اسم المستخدم</th>
+                          <th>صلاحيات</th>
+                          <th>اجراءات</th>
+                        </thead>
+                        <tbody>
+                          <tr ng-repeat="secretary in secretaries">
+                            <td>
+                              {{secretary.displayname}}
+                            </td>
+                            <td>
+                              {{secretary.username}}
+                            </td>
+                            <td>
+                              {{secretary.roles}}
+                            </td>
+                            <td>
+                              <button ng-click="removeSecretary(secretary)"
+                                class="btn blue-grey-background">حذف</button>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                  <div id="addSecretary_modal" class="modal animated slideInDown">
+                    <div class="modal-content">
+                      <div>
+                        <div class="row">
+                          <div class="col s12">
+                            <label>الاسم</label>
+                            <input type="text" ng-model="newSecretary.name">
+                          </div>
+                          <div class="col s12">
+                            <label>اسم المستخدم</label>
+                            <input type="text" ng-model="newSecretary.username">
+                          </div>
+                          <div class="col s12">
+                            <label>كلمة المرور</label>
+                            <input type="password" ng-model="newSecretary.password">
+                          </div>
+                          <div class="col s12">
+                            <div class="col" style="float: right;">
+                              <input type="checkbox" id="roles_payments" ng-model="newSecretary.roles_payments" />
+                              <label for="roles_payments">الدفع</label>
+                            </div>
+                            <div class="col" style="float: right;">
+                              <input type="checkbox" id="roles_sms" ng-model="newSecretary.roles_sms" />
+                              <label for="roles_sms">الرسائل</label>
+                            </div>
+                            <div class="col" style="float: right;">
+                              <input type="checkbox" id="roles_accounting" ng-model="newSecretary.roles_accounting" />
+                              <label for="roles_accounting">الحسابات</label>
+                            </div>
+                            <div class="col" style="float: right;">
+                              <input type="checkbox" id="roles_statistics" ng-model="newSecretary.roles_statistics" />
+                              <label for="roles_statistics">احصائيات</label>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="modal-footer blue-grey-background">
+                          <a ng-click="addSecretary()" class="waves-effect waves-green btn-flat">اضف</a>
+                          <a class="modal-action modal-close waves-effect waves-red btn-flat">إلغاء</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+                <li ng-show="current_user.permissions.settings">
                   <div class="collapsible-header">نسب التقدير</div>
                   <div class="collapsible-body">
 
@@ -1666,7 +1744,7 @@
                     </div>
                   </div>
                 </li>
-                <li>
+                <li ng-show="current_user.permissions.settings">
                   <div class="collapsible-header">الصفوف</div>
                   <div class="collapsible-body">
 
@@ -1695,7 +1773,7 @@
                     </div>
                   </div>
                 </li>
-                <li class="active">
+                <li class="active" ng-show="current_user.permissions.settings">
                   <div class="collapsible-header">اصوات الانذارات</div>
                   <div class="collapsible-body">
                     <label>عدد الغياب</label>
@@ -1716,12 +1794,11 @@
                       class="btn blue-grey-background">حفظ</button>
                   </div>
                 </li>
-                <!-- not needed -->
                 <li>
                   <div class="collapsible-header">إعادة تعيين كلمة المرور</div>
                   <div class="collapsible-body">
                     <label>اسم المستخدم</label>
-                    <input id="username" type="password" class="validate" ng-model="username">
+                    <input id="username" type="text" class="validate" ng-model="username">
                     <label>كلمة المرور الحالية</label>
                     <input id="oldpassword" type="password" class="validate" ng-model="oldpassword">
                     <label>كلمة المرور الجديدة</label>
@@ -1737,9 +1814,9 @@
               <span style="font-size:1.5em">بيانات التفعيل</span>
               <ul>
                 <!-- build.config.json -->
-                <li>اسم المشترى : زياد الزرقا</li>
+                <li>اسم المشترى : محمد عامر</li>
                 <li>النسخه : 1.7.54</li>
-                <li>تاريخ التفعيل : 30-7-2019</li>
+                <li>تاريخ التفعيل : 31-7-2019</li>
               </ul>
             </div>
           </div>
@@ -1887,7 +1964,7 @@
             </i>
 
           </div>
-          <div ng-click="changeTab('payment')"
+          <div ng-click="changeTab('payment')" ng-show="current_user.permissions.payments"
             ng-class="tab == 'payment' ? 'blue-grey-text text-darken-1' : 'grey-text'" class="center-align">
             <i class="fa fa-credit-card-alt fa-2x" aria-hidden="true">
               <span>الدفع</span>
@@ -1895,21 +1972,21 @@
 
           </div>
 
-          <div ng-click="changeTab('sms')" ng-class="tab == 'sms' ? 'blue-grey-text text-darken-1' : 'grey-text'"
-            class="center-align">
+          <div ng-click="changeTab('sms')" ng-show="current_user.permissions.sms"
+            ng-class="tab == 'sms' ? 'blue-grey-text text-darken-1' : 'grey-text'" class="center-align">
             <i class="fa fa-comment fa-2x" aria-hidden="true">
               <span>الرسائل</span>
             </i>
           </div>
 
           <div ng-click="changeTab('stats')" ng-class="tab == 'stats' ? 'blue-grey-text text-darken-1' : 'grey-text'"
-            class="center-align">
+            ng-show="current_user.permissions.statistics" class="center-align">
             <i class="fa fa-line-chart fa-2x" aria-hidden="true">
               <span>احصائيات</span>
             </i>
           </div>
 
-          <div ng-click="changeTab('paylogs')"
+          <div ng-click="changeTab('paylogs')" ng-show="current_user.permissions.accounting"
             ng-class="tab == 'paylogs' ? 'blue-grey-text text-darken-1' : 'grey-text'" class="center-align">
             <i class="fa fa-dollar fa-2x" aria-hidden="true">
               <span>الحسابات</span>

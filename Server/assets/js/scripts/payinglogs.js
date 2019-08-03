@@ -23,14 +23,19 @@ app.run(function ($rootScope, $window, $location, sdk) {
 });
 
 function confirm(rootscope, sdk, name) {
-  function def() {
+  function def(user) {
     rootscope.navigate();
   }
 
-  function students() {
+  function students(user) {
     rootscope.navigate('app');
   }
-  sdk.CheckToken(students, () => { }, def);
+  sdk.CheckToken(students, (user) => {
+    console.log(user.permissions);
+    if (!user.permissions.payments) {
+      rootscope.navigate();
+    }
+  }, def);
 }
 
 app.controller("mainCtrl", function ($rootScope, $scope, sdk) {
