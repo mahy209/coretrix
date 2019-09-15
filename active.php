@@ -1,13 +1,14 @@
 <?php
 
 // constants
-$database_username = "id4863580_ziadalzarka";
-$database_password = "loVeA6irl";
-$database_name = "id4863580_grayapps";
+$database_host = "sql7.freemysqlhosting.net";
+$database_username = "sql7304554";
+$database_password = "ApkYSlfyRJ";
+$database_name = "sql7304554";
 $database_table = "coretrix";
 
 // database connection
-$db = new mysqli("localhost", $database_username, $database_password, $database_name);
+$db = new mysqli($database_host, $database_username, $database_password, $database_name);
 
 // extract data from request
 $uuid = $_GET["uuid"];
@@ -28,7 +29,7 @@ function deny() {
 }
 
 // query name
-$sql = sprintf("select `uuid` from `%s` where name='%s' and disabled=0", $database_table, $name);
+$sql = sprintf("select * from `%s` where name='%s' and disabled=0", $database_table, $name);
 $rows = $db->query($sql);
 
 // CASE: doesn't exist

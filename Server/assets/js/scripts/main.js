@@ -54,7 +54,7 @@ app.controller('loginCtrl', function ($scope, $rootScope, $window, sdk) {
         loading(false)
         switch (stat) {
           case sdk.stats.OK:
-            sessionStorage.setItem('token', result)
+            loginStorage.setItem('token', result)
             $window.location.href = '/'
             break
           case sdk.stats.UserNonExisting:

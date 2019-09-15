@@ -115,7 +115,7 @@ app.run(function ($rootScope, $window, $location, sdk) {
   $('#view').show()
   $rootScope.showshit = false
   $rootScope.logout = function () {
-    sessionStorage.removeItem('token');
+    loginStorage.removeItem('token');
     $rootScope.navigate();
   }
   /*$('.modal').modal()
@@ -2129,7 +2129,7 @@ app.controller('mainCtrl', function ($rootScope, $scope, sdk) {
           if (log[0] && log[0].attendant) {
             beepClassesBecauseOfAttendance = false;
           }
-          if (!(log[0].quiz && log[0].quiz.type == 'general' && (log[0].quiz.option == 'wrong' || log[0].quiz.option == 'absent'))) {
+          if (log[0] && (!(log[0].quiz && log[0].quiz.type == 'general' && (log[0].quiz.option == 'wrong' || log[0].quiz.option == 'absent')))) {
             beepClassesBecauseOfQuiz = false;
           }
         }
