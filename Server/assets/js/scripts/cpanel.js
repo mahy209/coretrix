@@ -609,10 +609,10 @@ app.controller('smsCtrl', function ($rootScope, $scope, $location, sdk, fuseFilt
     const formatClass = (log) => {
       return formatClassReport(
         $scope.profile, log, {
-          attendant: $scope.smsAttendant,
-          quiz: $scope.smsQuiz,
-          homework: $scope.smsHomework
-        },
+        attendant: $scope.smsAttendant,
+        quiz: $scope.smsQuiz,
+        homework: $scope.smsHomework
+      },
         formatClassDay($scope.selected_class), undefined, $rootScope.grades_names)
     }
 
@@ -783,18 +783,18 @@ app.controller('paymentsCtrl', function ($rootScope, $scope, sdk) {
     basket.animate({
       bottom: '0'
     }, {
-        duration: 300
-      })
+      duration: 300
+    })
   }
   $scope.hidebasket = () => {
     $('#basket').animate({
       bottom: '-22%'
     }, {
-        duration: 300,
-        complete: () => {
-          $('#basket').css('display', 'none')
-        }
-      })
+      duration: 300,
+      complete: () => {
+        $('#basket').css('display', 'none')
+      }
+    })
   }
   $scope.deleteItems = () => {
     for (let i = 0; i < $scope.trash.length; i++) {
@@ -820,8 +820,12 @@ app.controller('paymentsCtrl', function ($rootScope, $scope, sdk) {
     if (!$scope.new_item_price) return toast('برجاء ادخال السعر', gradients.error)
     if (!$scope.selected_category) return toast('برجاء اختيار النوع', gradients.error)
     if ($scope.selected_category != 'subscription') {
-      $scope.new_item_month = null;
-      $scope.new_item_year = null;
+      $scope.new_item_month = undefined;
+      $scope.new_item_year = undefined;
+    } else {
+      if (!$scope.new_item_month || !$scope.new_item_year) {
+        return toast('برجاء ادخال الشهر والسنه', gradients.error);
+      }
     }
     sdk.AddItem($scope.new_item_name, $scope.add_selected_grade, $scope.new_item_price, $scope.selected_category, $scope.new_item_month, $scope.new_item_year, (stat) => {
       if (stat == sdk.stats.OK) {
@@ -894,18 +898,18 @@ app.controller('groupsCtrl', function ($rootScope, $scope, sdk) {
     basket.animate({
       bottom: '0'
     }, {
-        duration: 300
-      })
+      duration: 300
+    })
   }
   $scope.hidebasket = () => {
     $('#basket_groupclasses').animate({
       bottom: '-22%'
     }, {
-        duration: 300,
-        complete: () => {
-          $('#basket_groupclasses').css('display', 'none')
-        }
-      })
+      duration: 300,
+      complete: () => {
+        $('#basket_groupclasses').css('display', 'none')
+      }
+    })
   }
   $scope.deleteGroupClasses = () => {
     for (let i = 0; i < $scope.trash.length; i++) {
