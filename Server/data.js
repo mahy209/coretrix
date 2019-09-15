@@ -2101,9 +2101,9 @@ function getStudent(args, callback) {
           }
           for (var i = 0; i < items.length; i++) {
             var payId = paymentsIds[items[i].id];
-            if (typeof payId == 'number' && !isNaN(payId) && result.payments[i]) {
-              items[i].payed = result.payments[i].payed;
-              items[i].discount = result.payments[i].discount;
+            if (typeof payId == 'number' && !isNaN(payId) && result.payments[payId]) {
+              items[i].payed = result.payments[payId].payed;
+              items[i].discount = result.payments[payId].discount;
             }
           }
           result.payments = items;
