@@ -1124,14 +1124,28 @@ app.controller('studentsCtrl', function ($rootScope, $scope, sdk) {
     initLoadMode()
   }
 
+  let userIsTyping = false;
+  let userIsTypingResetter;
+
+  function setUserIsTyping(cb) {
+    userIsTyping = true;
+    if (userIsTypingResetter) { clearTimeout(userIsTypingResetter); }
+    userIsTypingResetter = setTimeout(() => {
+      userIsTyping = false;
+      $scope.$apply(cb);
+    }, 500);
+  }
+
   $scope.performSearch = (e) => {
     if ($scope.searchStudents_val == undefined) {
       $scope.reload()
     } else {
-      $scope.searching_name = neutralizeName($scope.searchStudents_val, true)
-      $scope.mode = 'search';
-      createPagination(0);
-      $scope.students = $rootScope.studentsIndexer.search($scope.searching_name);
+      setUserIsTyping(() => {
+        $scope.searching_name = neutralizeName($scope.searchStudents_val, true)
+        $scope.mode = 'search';
+        createPagination(0);
+        $scope.students = $rootScope.studentsIndexer.search($scope.searching_name);
+      });
     }
   }
   $scope.$watch('selectedPage_num', (n) => { })
