@@ -57,7 +57,7 @@ function confirm(rootscope, sdk, name) {
   function students() {
     rootscope.navigate('app');
   }
-  sdk.CheckToken(students, () => {}, def);
+  sdk.CheckToken(students, () => { }, def);
 }
 
 app.controller("mainCtrl", function ($rootScope, $scope, sdk) {
@@ -187,7 +187,7 @@ app.controller("mainCtrl", function ($rootScope, $scope, sdk) {
         let examsMarksTotal = 0;
         let examsMaxTotal = 0;
         for (const examLog of report.exams) {
-          if (examLog.log && examLog.log.attendant) {
+          if (examLog.log && examLog.log.attendant && examLog.log.mark) {
             examsMarksTotal += examLog.log.mark;
             examsMaxTotal += examLog.max_mark;
           }
@@ -201,11 +201,32 @@ app.controller("mainCtrl", function ($rootScope, $scope, sdk) {
 
         report.classes = result.classes;
         report.unattendedClassesCount = 0;
-        report.classes.forEach(classLog => {
+
+        let quizMarksTotal = 0;
+        let quizMaxTotal = 0;
+        let homeworkMarksTotal = 0;
+        let homeworkMaxTotal = 0;
+
+        for (const classLog of report.classes) {
           if (!classLog.log || !classLog.log.attendant) {
             report.unattendedClassesCount++;
           }
-        });
+          if (classLog.log && classLog.log.quiz && classLog.log.quiz.type == 'marks') {
+            quizMarksTotal += classLog.log.quiz.mark;
+            quizMaxTotal += classLog.log.quiz.max;
+          }
+          if (classLog.log && classLog.log.homework && classLog.log.homework.type == 'marks') {
+            homeworkMarksTotal += classLog.log.homework.mark;
+            homeworkMaxTotal += classLog.log.homework.max;
+          }
+        }
+
+        report.quizAverage = Math.round((quizMarksTotal / quizMaxTotal) * 100);
+        report.homeworkAverage = Math.round((homeworkMarksTotal / homeworkMaxTotal) * 100);
+        report.classAverage = Math.round(((quizMarksTotal + homeworkMarksTotal) / (quizMaxTotal + homeworkMaxTotal)) * 100);
+        report.examQuizAverage = Math.round(((quizMarksTotal + examsMarksTotal) / (quizMaxTotal + examsMaxTotal)) * 100);
+        report.totalAverage = Math.round(((quizMarksTotal + homeworkMarksTotal + examsMarksTotal) / (quizMaxTotal + homeworkMaxTotal + examsMaxTotal)) * 100);
+
         for (let i = 0; i < result.items.length; i++) {
           const item = result.items[i];
           const payment = item.log || {};
@@ -233,7 +254,6 @@ app.controller("mainCtrl", function ($rootScope, $scope, sdk) {
   }
 
   $scope.loadStudent = (id) => {
-    console.log(id);
     sdk.GetStudent(id, async (stat, data) => {
       console.log({
         stat,

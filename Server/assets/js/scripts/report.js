@@ -153,7 +153,7 @@ app.controller("mainCtrl", function ($rootScope, $scope, sdk) {
           let examsMarksTotal = 0;
           let examsMaxTotal = 0;
           for (const examLog of $scope.exams) {
-            if (examLog.log && examLog.log.attendant) {
+            if (examLog.log && examLog.log.attendant && examLog.log.mark) {
               examsMarksTotal += examLog.log.mark;
               examsMaxTotal += examLog.max_mark;
             }

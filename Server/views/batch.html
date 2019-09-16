@@ -36,13 +36,14 @@
           <div class="row">
             <div class="col s12">
               <label>السنه الدراسيه</label>
-              <select class="browser-default" ng-options="i as grades_names[i] for i in grades" ng-model="selected_grade"
-                ng-change="grade_changed()">
+              <select class="browser-default" ng-options="i as grades_names[i] for i in grades"
+                ng-model="selected_grade" ng-change="grade_changed()">
                 <option value="" disabled selected>السنة الدراسية</option>
             </div>
             <div class="col s12">
               <label>الفتره الزمنية</label>
-              <select class="browser-default" ng-change="calcDates()" ng-options="i as {'lastweek': 'آخر اسبوع', 'lastmonth': 'آخر شهر', 'all': 'كل الوقت'}[i] for i in ['lastweek', 'lastmonth', 'all']"
+              <select class="browser-default" ng-change="calcDates()"
+                ng-options="i as {'lastweek': 'آخر اسبوع', 'lastmonth': 'آخر شهر', 'all': 'كل الوقت'}[i] for i in ['lastweek', 'lastmonth', 'all']"
                 ng-model="selected_timeSelector">
                 <option value="" disabled selected>اختر الفتره الزمنية</option>
               </select>
@@ -50,8 +51,8 @@
           </div>
           <div class="row">
             <div class="col s12 m6 l6">
-              <input id="end_date" type="text" class="datepicker" style="text-align: right; cursor:pointer" placeholder="تاريخ النهاية"
-                readonly>
+              <input id="end_date" type="text" class="datepicker" style="text-align: right; cursor:pointer"
+                placeholder="تاريخ النهاية" readonly>
             </div>
             <div class="col s12 m6 l6">
               <input id="start_date" type="text" class="datepicker" style="text-align: right; cursor:pointer"
@@ -79,32 +80,64 @@
                 <label>بيانات الطالب</label>
                 <br>
                 <div style="display:inline-block;margin-right:1%">
-                  <input ng-model="showOptions.showGrade" ng-change="saveShowOptions()" type="checkbox" id="showGrade" />
+                  <input ng-model="showOptions.showGrade" ng-change="saveShowOptions()" type="checkbox"
+                    id="showGrade" />
                   <label for="showGrade">الصف</label>
                 </div>
                 <div style="display:inline-block;margin-right:1%">
-                  <input ng-model="showOptions.showGroup" ng-change="saveShowOptions()" type="checkbox" id="showGroup" />
+                  <input ng-model="showOptions.showGroup" ng-change="saveShowOptions()" type="checkbox"
+                    id="showGroup" />
                   <label for="showGroup">المجموعة</label>
                 </div>
                 <div style="display:inline-block;margin-right:1%">
-                  <input ng-model="showOptions.showAddDate" ng-change="saveShowOptions()" type="checkbox" id="showAddDate" />
+                  <input ng-model="showOptions.showAddDate" ng-change="saveShowOptions()" type="checkbox"
+                    id="showAddDate" />
                   <label for="showAddDate">تاريخ الاضافة</label>
                 </div>
                 <div style="display:inline-block;margin-right:1%">
-                  <input ng-model="showOptions.showNotes" ng-change="saveShowOptions()" type="checkbox" id="showNotes" />
+                  <input ng-model="showOptions.showNotes" ng-change="saveShowOptions()" type="checkbox"
+                    id="showNotes" />
                   <label for="showNotes">ملاحظات</label>
                 </div>
                 <div style="display:inline-block;margin-right:1%">
-                  <input ng-model="showOptions.showUnattendedClasses" ng-change="saveShowOptions()" type="checkbox" id="showUnattendedClasses" />
+                  <input ng-model="showOptions.showUnattendedClasses" ng-change="saveShowOptions()" type="checkbox"
+                    id="showUnattendedClasses" />
                   <label for="showUnattendedClasses">عدد الحصص التى لم يحضرها</label>
                 </div>
                 <div style="display:inline-block;margin-right:1%">
-                  <input ng-model="showOptions.showUnattendedExams" ng-change="saveShowOptions()" type="checkbox" id="showUnattendedExams" />
+                  <input ng-model="showOptions.showUnattendedExams" ng-change="saveShowOptions()" type="checkbox"
+                    id="showUnattendedExams" />
                   <label for="showUnattendedExams">عدد الامتحانات التى لم يحضرها</label>
                 </div>
                 <div style="display:inline-block;margin-right:1%">
-                  <input ng-model="showOptions.showPercentage" ng-change="saveShowOptions()" type="checkbox" id="showPercentage" />
-                  <label for="showPercentage">النسبة المئوية</label>
+                  <input ng-model="showOptions.showQuizPercentage" ng-change="saveShowOptions()" type="checkbox"
+                    id="showQuizPercentage" />
+                  <label for="showQuizPercentage">النسبة المئوية للتسميع</label>
+                </div>
+                <div style="display:inline-block;margin-right:1%">
+                  <input ng-model="showOptions.showHomeworkPercentage" ng-change="saveShowOptions()" type="checkbox"
+                    id="showHomeworkPercentage" />
+                  <label for="showHomeworkPercentage">النسبة المئوية للواجب</label>
+                </div>
+                <div style="display:inline-block;margin-right:1%">
+                  <input ng-model="showOptions.showClassPercentage" ng-change="saveShowOptions()" type="checkbox"
+                    id="showClassPercentage" />
+                  <label for="showClassPercentage">النسبة المئوية للتسميع والواجب</label>
+                </div>
+                <div style="display:inline-block;margin-right:1%">
+                  <input ng-model="showOptions.showExamPercentage" ng-change="saveShowOptions()" type="checkbox"
+                    id="showExamPercentage" />
+                  <label for="showExamPercentage">النسبة المئوية للامتحانات</label>
+                </div>
+                <div style="display:inline-block;margin-right:1%">
+                  <input ng-model="showOptions.showExamQuizPercentage" ng-change="saveShowOptions()" type="checkbox"
+                    id="showExamQuizPercentage" />
+                  <label for="showExamQuizPercentage">النسبة المئوية للامتحانات</label>
+                </div>
+                <div style="display:inline-block;margin-right:1%">
+                  <input ng-model="showOptions.showPercentage" ng-change="saveShowOptions()" type="checkbox"
+                    id="showPercentage" />
+                  <label for="showPercentage">النسبة المئوية للكل</label>
                 </div>
               </div>
               <div>
@@ -119,11 +152,13 @@
                 <label>الامتحانات</label>
                 <br>
                 <div style="display:inline-block;margin-right:1%">
-                  <input ng-model="showOptions.showExamMark" ng-change="saveShowOptions()" type="checkbox" id="showExamMark" />
+                  <input ng-model="showOptions.showExamMark" ng-change="saveShowOptions()" type="checkbox"
+                    id="showExamMark" />
                   <label for="showExamMark">درجة الامتحان</label>
                 </div>
                 <div style="display:inline-block;margin-right:1%">
-                  <input ng-model="showOptions.showExamGrading" ng-change="saveShowOptions()" type="checkbox" id="showExamGrading" />
+                  <input ng-model="showOptions.showExamGrading" ng-change="saveShowOptions()" type="checkbox"
+                    id="showExamGrading" />
                   <label for="showExamGrading">تقدير الامتحانات</label>
                 </div>
               </div>
@@ -131,11 +166,13 @@
                 <label>الحصص</label>
                 <br>
                 <div style="display:inline-block;margin-right:1%">
-                  <input ng-model="showOptions.showClassHomework" ng-change="saveShowOptions()" type="checkbox" id="showClassHomework" />
+                  <input ng-model="showOptions.showClassHomework" ng-change="saveShowOptions()" type="checkbox"
+                    id="showClassHomework" />
                   <label for="showClassHomework">الواجب</label>
                 </div>
                 <div style="display:inline-block;margin-right:1%">
-                  <input ng-model="showOptions.showClassQuiz" ng-change="saveShowOptions()" type="checkbox" id="showClassQuiz" />
+                  <input ng-model="showOptions.showClassQuiz" ng-change="saveShowOptions()" type="checkbox"
+                    id="showClassQuiz" />
                   <label for="showClassQuiz">التسميع</label>
                 </div>
               </div>
@@ -155,20 +192,20 @@
 
               <div class="
                   logs">
-                  <table>
-                    <tr>
-                      <th>
-                        اسم الطالب
-                      </th>
-                    </tr>
-                    <tr ng-repeat="n in students | fuse : searchQuery">
-                      <td>
-                        <input type="checkbox" ng-model="n.selected" id="cid{{n.studentid}}" class="checkbox" />
-                        <label for="cid{{n.studentid}}"> </label>
-                        {{n.fullname}}
-                      </td>
-                    </tr>
-                  </table>
+                <table>
+                  <tr>
+                    <th>
+                      اسم الطالب
+                    </th>
+                  </tr>
+                  <tr ng-repeat="n in students | fuse : searchQuery">
+                    <td>
+                      <input type="checkbox" ng-model="n.selected" id="cid{{n.studentid}}" class="checkbox" />
+                      <label for="cid{{n.studentid}}"> </label>
+                      {{n.fullname}}
+                    </td>
+                  </tr>
+                </table>
               </div>
             </div>
           </li>
@@ -221,12 +258,52 @@
             </td>
             <td>{{ report.unattendedExamsCount || 0 }}</td>
           </tr>
-          <tr ng-show="showOptions.showPercentage">
-            <td>النسبة المئوية
+          <tr ng-show="showOptions.showQuizPercentage">
+            <td>النسبة المئوية للتسميع
               <span>:</span>
             </td>
             <td>
-              {{ report.examsAverage || 0 }}% {{ gradeMark(report.examsAverage, 100) }}
+              {{report.quizAverage || 0}}% {{gradeMark(quizAverage, 100)}}
+            </td>
+          </tr>
+          <tr ng-show="showOptions.showHomeworkPercentage">
+            <td>النسبة المئوية للواجب
+              <span>:</span>
+            </td>
+            <td>
+              {{report.homeworkAverage || 0}}% {{gradeMark(homeworkAverage, 100)}}
+            </td>
+          </tr>
+          <tr ng-show="showOptions.showClassPercentage">
+            <td>النسبة المئوية للتسميع والواجب
+              <span>:</span>
+            </td>
+            <td>
+              {{report.classAverage || 0}}% {{gradeMark(classAverage, 100)}}
+            </td>
+          </tr>
+          <tr ng-show="showOptions.showExamPercentage">
+            <td>النسبة المئوية للامتحانات
+              <span>:</span>
+            </td>
+            <td>
+              {{report.examsAverage || 0}}% {{gradeMark(examsAverage, 100)}}
+            </td>
+          </tr>
+          <tr ng-show="showOptions.showExamQuizPercentage">
+            <td>النسبة المئوية للامتحانات والتسميعات
+              <span>:</span>
+            </td>
+            <td>
+              {{report.examQuizAverage || 0}}% {{gradeMark(examQuizAverage, 100)}}
+            </td>
+          </tr>
+          <tr ng-show="showOptions.showPercentage">
+            <td>النسبة المئوية للكل
+              <span>:</span>
+            </td>
+            <td>
+              {{report.totalAverage || 0}}% {{gradeMark(totalAverage, 100)}}
             </td>
           </tr>
           <tr ng-repeat="p in report.items" ng-show="selected_items[p.id]">
