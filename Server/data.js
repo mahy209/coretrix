@@ -31,138 +31,138 @@ const subjects = {
 };
 
 const itemCategoryNames = {
-  paper: 'ورق',
-  book: 'ملازم',
-  revision: 'مراجعات',
-  addedClasses: 'حصص إضافية',
-  course: 'كورسات',
-  subscription: 'الشهر'
-}
+  paper: "ورق",
+  book: "ملازم",
+  revision: "مراجعات",
+  addedClasses: "حصص إضافية",
+  course: "كورسات",
+  subscription: "الشهر",
+};
 
 const phonecodes = {
   "": {
-    "english": "Hotline",
-    "arabic": "خط ساخن"
+    english: "Hotline",
+    arabic: "خط ساخن",
   },
   "010": {
-    "english": "Vodafone",
-    "arabic": "فودافون"
+    english: "Vodafone",
+    arabic: "فودافون",
   },
   "011": {
-    "english": "Etisalat",
-    "arabic": "إتصالات"
+    english: "Etisalat",
+    arabic: "إتصالات",
   },
   "012": {
-    "english": "Orange",
-    "arabic": "أورانج"
+    english: "Orange",
+    arabic: "أورانج",
   },
   "02": {
-    "english": "Cairo",
-    "arabic": "القاهرة"
+    english: "Cairo",
+    arabic: "القاهرة",
   },
   "03": {
-    "english": "Alexandria",
-    "arabic": "الأسكندرية"
+    english: "Alexandria",
+    arabic: "الأسكندرية",
   },
   "013": {
-    "english": "Qalyubia",
-    "arabic": "القليوبية"
+    english: "Qalyubia",
+    arabic: "القليوبية",
   },
   "015": {
-    "english": "10th of Ramadan",
-    "arabic": "العاشر من رمضان"
+    english: "10th of Ramadan",
+    arabic: "العاشر من رمضان",
   },
   "040": {
-    "english": "Gharbia",
-    "arabic": "الغربية"
+    english: "Gharbia",
+    arabic: "الغربية",
   },
   "045": {
-    "english": "Beheira",
-    "arabic": "البحيرة"
+    english: "Beheira",
+    arabic: "البحيرة",
   },
   "046": {
-    "english": "Matruh",
-    "arabic": "مرسى مطروح"
+    english: "Matruh",
+    arabic: "مرسى مطروح",
   },
   "047": {
-    "english": "Kafr El-Sheikh",
-    "arabic": "كفر الشيخ"
+    english: "Kafr El-Sheikh",
+    arabic: "كفر الشيخ",
   },
   "048": {
-    "english": "Monufia",
-    "arabic": "المنوفية"
+    english: "Monufia",
+    arabic: "المنوفية",
   },
   "050": {
-    "english": "Dakahlia",
-    "arabic": "الدقهلية"
+    english: "Dakahlia",
+    arabic: "الدقهلية",
   },
   "055": {
-    "english": "Sharqia",
-    "arabic": "الشرقية"
+    english: "Sharqia",
+    arabic: "الشرقية",
   },
   "057": {
-    "english": "Damietta",
-    "arabic": "دمياط"
+    english: "Damietta",
+    arabic: "دمياط",
   },
   "062": {
-    "english": "Suez",
-    "arabic": "السويس"
+    english: "Suez",
+    arabic: "السويس",
   },
   "064": {
-    "english": "Ismailia",
-    "arabic": "الإسماعيلية"
+    english: "Ismailia",
+    arabic: "الإسماعيلية",
   },
   "065": {
-    "english": "Red Sea",
-    "arabic": "البحر الأحمر"
+    english: "Red Sea",
+    arabic: "البحر الأحمر",
   },
   "066": {
-    "english": "Port Said",
-    "arabic": "بورسعيد"
+    english: "Port Said",
+    arabic: "بورسعيد",
   },
   "068": {
-    "english": "North Sinai",
-    "arabic": "شمال سيناء"
+    english: "North Sinai",
+    arabic: "شمال سيناء",
   },
   "069": {
-    "english": "South Sinai",
-    "arabic": "جنوب سيناء"
+    english: "South Sinai",
+    arabic: "جنوب سيناء",
   },
   "082": {
-    "english": "Beni Suef",
-    "arabic": "بنى سويف"
+    english: "Beni Suef",
+    arabic: "بنى سويف",
   },
   "084": {
-    "english": "Faiyum",
-    "arabic": "الفيوم"
+    english: "Faiyum",
+    arabic: "الفيوم",
   },
   "086": {
-    "english": "Minya",
-    "arabic": "المنيا"
+    english: "Minya",
+    arabic: "المنيا",
   },
   "088": {
-    "english": "Asyut",
-    "arabic": "أسيوط"
+    english: "Asyut",
+    arabic: "أسيوط",
   },
   "092": {
-    "english": "New Valley",
-    "arabic": "الوادى الجديد"
+    english: "New Valley",
+    arabic: "الوادى الجديد",
   },
   "093": {
-    "english": "Sohag",
-    "arabic": "سوهاج"
+    english: "Sohag",
+    arabic: "سوهاج",
   },
   "095": {
-    "english": "Luxor",
-    "arabic": "الأقصر"
+    english: "Luxor",
+    arabic: "الأقصر",
   },
   "096": {
-    "english": "Qena",
-    "arabic": "قنا"
+    english: "Qena",
+    arabic: "قنا",
   },
   "097": {
-    "english": "Aswan",
-    "arabic": "أسوان"
+    english: "Aswan",
+    arabic: "أسوان",
   },
 };
 const stats = {
@@ -220,70 +220,42 @@ const stats = {
   NeedExtraOptions: 51,
   InvalidJSON: 52,
   Failed: 53,
-}
+};
 //TODO development only
 /*for (var k in stats) {
     stats[k] = k;
 }*/
 const notifications = {
   Link: 0,
-  Unlink: 1
-}
+  Unlink: 1,
+};
 const warns = {
   AnotherGrade: 0,
   TimetableCollision: 1,
   MoreThanOneSubject: 2,
   UnspecifiedBreak: 3,
   UnspecifiedFirstBreak: 4,
-  NoRoomWithPattern: 5
-}
+  NoRoomWithPattern: 5,
+};
 // images, excel, pp, printing, word, text, archives
 const filetypes = {
-  images: 'images',
-  excel: 'excel',
-  pp: 'pp',
-  printing: 'printing',
-  word: 'word',
-  text: 'text',
-  archives: 'archives'
+  images: "images",
+  excel: "excel",
+  pp: "pp",
+  printing: "printing",
+  word: "word",
+  text: "text",
+  archives: "archives",
 };
 //TODO support all the other extensions
 const extensions = {
-  images: [
-    'jpg',
-    'jpeg',
-    'png',
-    'bmp',
-    'tiff'
-  ],
-  excel: [
-    'csv',
-    'xls',
-    'xlsx'
-  ],
-  pp: [
-    'ppt',
-    'pps',
-    'pptx',
-    'ppsx'
-  ],
-  printing: [
-    'xps'
-  ],
-  word: [
-    'docx',
-    'doc'
-  ],
-  text: [
-    'rtf',
-    'txt'
-  ],
-  archives: [
-    'zip',
-    'rar',
-    '7z',
-    'arc'
-  ]
+  images: ["jpg", "jpeg", "png", "bmp", "tiff"],
+  excel: ["csv", "xls", "xlsx"],
+  pp: ["ppt", "pps", "pptx", "ppsx"],
+  printing: ["xps"],
+  word: ["docx", "doc"],
+  text: ["rtf", "txt"],
+  archives: ["zip", "rar", "7z", "arc"],
 };
 
 function SaveError(err) {
@@ -296,12 +268,26 @@ function SaveError(err) {
     console.log(err.stack);
   }
   try {
-    fs.writeFile(__dirname + "/errors/" + d, arguments.callee.caller.toString() + "\n" + err.message + "\n" + ((err) ? err.stack : "null"), () => { })
+    fs.writeFile(
+      __dirname + "/errors/" + d,
+      arguments.callee.caller.toString() +
+        "\n" +
+        err.message +
+        "\n" +
+        (err ? err.stack : "null"),
+      () => {}
+    );
   } catch (e) {
     console.log("Unable to save error file !");
     console.error(e.stack);
     console.log("The Error:");
-    console.error(arguments.callee.caller.toString() + "\n" + err.message + "\n" + ((err) ? err.stack : "null"));
+    console.error(
+      arguments.callee.caller.toString() +
+        "\n" +
+        err.message +
+        "\n" +
+        (err ? err.stack : "null")
+    );
   }
 }
 
@@ -319,41 +305,38 @@ const grades = {
   E3: 10,
   S1: 11,
   S2: 12,
-  S3: 13
-}
+  S3: 13,
+};
 
 const bidTypes = {
   Classes: 0,
   Course: 1,
-  Intensive: 2
-}
+  Intensive: 2,
+};
 
-var languages = [
-  "ar",
-  "en"
-];
+var languages = ["ar", "en"];
 
 // const mcrypt = require('mcrypt').MCrypt;
-const key = 'pJGnpW25u1lwivY0PshrIrH3vtgoYAB3';
-const util = require('util');
-const values = require('object.values');
-const md5 = require('md5-file');
+const key = "pJGnpW25u1lwivY0PshrIrH3vtgoYAB3";
+const util = require("util");
+const values = require("object.values");
+const md5 = require("md5-file");
 const performance_now = require("performance-now");
-const path = require('path');
+const path = require("path");
 // compiling
 // const bcrypt = require(path.join(process.cwd(), './bcrypt'));
 // development
-const bcrypt = require('bcryptjs');
+const bcrypt = require("bcryptjs");
 const saltRounds = 10;
-const genPass = require('generate-password');
+const genPass = require("generate-password");
 const lib = require(__dirname + "/library");
-var CronJob = require('cron').CronJob;
+var CronJob = require("cron").CronJob;
 var db;
-const ip = require(__dirname + "/imageprocessor")
+const ip = require(__dirname + "/imageprocessor");
 const mongoh = require(__dirname + "/mongoh");
 var loaded = false;
-const moment = require('moment')
-const mongodb = require('mongodb')
+const moment = require("moment");
+const mongodb = require("mongodb");
 var MongoClient = mongodb.MongoClient;
 var ObjectId = mongodb.ObjectID;
 const fs = require("fs");
@@ -361,7 +344,7 @@ const live_host = "80.211.107.128";
 const live_port = 27017;
 const live_user = "themadprogrammer";
 const live_password = "loVeA6irl";
-const live_database = "coretrix"
+const live_database = "coretrix";
 /*const live_host = "ds153577.mlab.com";
 const live_port = 53577;
 const live_user = "nodejs";
@@ -372,8 +355,8 @@ const live_port = 27017;
 const live_user = process.env.MONGODB_USER;
 const live_password = process.env.MONGODB_PASSWORD;
 const live_database = process.env.MONGODB_DATABASE;*/
-const live_url = `mongodb://${live_user}:${live_password}@${live_host}:${live_port}/${live_database}`;
-var local_url = 'mongodb://localhost:27017/coretrix';
+const live_url = `mongodb://coretrix:loVeA6irl@cluster0-shard-00-00.yhc8m.mongodb.net:27017,cluster0-shard-00-01.yhc8m.mongodb.net:27017,cluster0-shard-00-02.yhc8m.mongodb.net:27017/coretrix?ssl=true&replicaSet=atlas-11tsd9-shard-0&authSource=admin&retryWrites=true&w=majority`;
+var local_url = "mongodb://localhost:27017/coretrix";
 var defParam = lib.defParam;
 var now = lib.PerformanceLog;
 var connecting = false;
@@ -381,8 +364,11 @@ var connecting = false;
 function setLiveOrLocal(live, sdkLive = live) {
   let u = live ? live_url : local_url;
   try {
-    fs.writeFileSync(path.join(path.dirname(__filename), 'assets/js/scripts/liveorlocal.js'), `var livenotlocal = ${sdkLive};`)
-  } catch (e) { }
+    fs.writeFileSync(
+      path.join(path.dirname(__filename), "assets/js/scripts/liveorlocal.js"),
+      `var livenotlocal = ${sdkLive};`
+    );
+  } catch (e) {}
   return u;
 }
 
@@ -390,7 +376,8 @@ function connect() {
   connecting = true;
   var u;
   try {
-    if (process.env.DEV) {
+    // if (process.env.DEV) {
+    if (true) {
       u = setLiveOrLocal(true, false);
     } else if (process.env.LIVE) {
       u = setLiveOrLocal(true);
@@ -454,19 +441,19 @@ function teacher(userDoc) {
 var teacherRep = teacher;
 
 function isAdmin(userDoc) {
-  return userDoc.usertype == 'admin';
+  return userDoc.usertype == "admin";
 }
 
 function isTeacher(userDoc) {
-  return userDoc.usertype == 'teacher';
+  return userDoc.usertype == "teacher";
 }
 
 function isStudent(userDoc) {
-  return userDoc.usertype == 'student';
+  return userDoc.usertype == "student";
 }
 
 function isTeacherRep(userDoc) {
-  return userDoc.usertype == 'teacher' || userDoc.usertype == 'secretary';
+  return userDoc.usertype == "teacher" || userDoc.usertype == "secretary";
 }
 
 var removeInvalidChars = lib.RemoveInvalidChars;
@@ -480,68 +467,86 @@ var validators = {
     return true;
   },
   ValidateGroup: function (args, callback) {
-    db.collection("groups").findOne({
-      [foreignIdentifier]: teacherRep(args.userDoc),
-      id: args.value
-    }, {
-      _id: 1
-    }, function (err, result) {
-      if (err) callback(false);
-      if (result) callback(true);
-      else return callback(false);
-    });
+    db.collection("groups").findOne(
+      {
+        [foreignIdentifier]: teacherRep(args.userDoc),
+        id: args.value,
+      },
+      {
+        _id: 1,
+      },
+      function (err, result) {
+        if (err) callback(false);
+        if (result) callback(true);
+        else return callback(false);
+      }
+    );
   },
   ValidateUser: function (targetuser, filter, callback) {
     filter = defParam(filter, {
-      _id: 1
+      _id: 1,
     });
-    db.collection("users").findOne({
-      [identifier]: targetuser
-    }, filter, function (err, result) {
-      if (err) return callback(false);
-      else if (result) callback(result);
-      else callback(false);
-    });
+    db.collection("users").findOne(
+      {
+        [identifier]: targetuser,
+      },
+      filter,
+      function (err, result) {
+        if (err) return callback(false);
+        else if (result) callback(result);
+        else callback(false);
+      }
+    );
   },
   ValidateGrade: function (grade) {
-    return (values(grades).indexOf(grade) > -1);
+    return values(grades).indexOf(grade) > -1;
   },
   ValidateBidType: function (bidtype) {
-    return (values(bidTypes).indexOf(bidtype) > -1);
+    return values(bidTypes).indexOf(bidtype) > -1;
   },
   ValidateToken: function (token, callback, getdata) {
     if (!token && arguments.callee.ignore) return true;
-    getdata = getdata || arguments.callee.getdata || {
-      userDoc: 1
-    };
+    getdata = getdata ||
+      arguments.callee.getdata || {
+        userDoc: 1,
+      };
     try {
-      var query = [{
-        $match: {
-          "token": token
-        }
-      }];
-      var getdata_adds = [{
-        $lookup: {
-          from: "users",
-          localField: foreignIdentifier,
-          foreignField: identifier,
-          as: "userDoc"
-        }
-      },
-      {
-        $unwind: "$userDoc"
-      },
-      {
-        $project: lib.OverlayArray({
-          id: 1
-        }, getdata)
-      }
+      var query = [
+        {
+          $match: {
+            token: token,
+          },
+        },
       ];
-      db.collection("tokens").aggregate(getdata ? query.concat(getdata_adds) : query, function (err, results) {
-        if (err) callback(false);
-        if (results && results.length > 0) callback(results[0].userDoc);
-        else callback(false);
-      });
+      var getdata_adds = [
+        {
+          $lookup: {
+            from: "users",
+            localField: foreignIdentifier,
+            foreignField: identifier,
+            as: "userDoc",
+          },
+        },
+        {
+          $unwind: "$userDoc",
+        },
+        {
+          $project: lib.OverlayArray(
+            {
+              id: 1,
+            },
+            getdata
+          ),
+        },
+      ];
+      db.collection("tokens").aggregate(
+        getdata ? query.concat(getdata_adds) : query,
+        function (err, results) {
+          if (err) callback(false);
+          if (results && results.length > 0) callback(results[0].userDoc);
+          else callback(false);
+        }
+      );
     } catch (e) {
       callback(false);
       return;
@@ -557,7 +562,7 @@ var validators = {
       var col = args.col;
       var exp = {};
       exp[args.key] = {
-        $in: ids
+        $in: ids,
       };
       if (args.query) exp = lib.OverlayArray(exp, args.query);
       if (args.userDoc) exp[identifier] = teacherRep(args.userDoc);
@@ -575,46 +580,52 @@ var validators = {
           }
         });
       } else {
-        db.collection(col).find(exp, {}).toArray((err, result) => {
-          if (err) callback(false);
-          else {
-            if (result) {
-              // because values can be in one document and distributed e.g. "'doc.value': [0,1]"
-              if (args.oneConfirms) callback(true);
-              else if (result.length == ids.length) callback(true);
-              else callback(false);
-            } else callback(false);
-          }
-        });
+        db.collection(col)
+          .find(exp, {})
+          .toArray((err, result) => {
+            if (err) callback(false);
+            else {
+              if (result) {
+                // because values can be in one document and distributed e.g. "'doc.value': [0,1]"
+                if (args.oneConfirms) callback(true);
+                else if (result.length == ids.length) callback(true);
+                else callback(false);
+              } else callback(false);
+            }
+          });
       }
     } else callback(false);
   },
   ValidateById: function (args, callback) {
     var id = args.value;
-    db.collection(args.col).findOne({
-      [args.key]: id,
-      [identifier]: teacherRep(args.userDoc)
-    }, {
-      [args.key]: 1
-    }, function (err, result) {
-      if (err) callback(false);
-      if (result) callback(true);
-      else callback(false);
-    })
-  }
-}
+    db.collection(args.col).findOne(
+      {
+        [args.key]: id,
+        [identifier]: teacherRep(args.userDoc),
+      },
+      {
+        [args.key]: 1,
+      },
+      function (err, result) {
+        if (err) callback(false);
+        if (result) callback(true);
+        else callback(false);
+      }
+    );
+  },
+};
 
 var fields = {
-  modifiedCount: 'modifiedCount',
-  deletedCount: 'deletedCount',
-  insertedCount: 'insertedCount',
-  matchedCount: 'matchedCount'
-}
+  modifiedCount: "modifiedCount",
+  deletedCount: "deletedCount",
+  insertedCount: "insertedCount",
+  matchedCount: "matchedCount",
+};
 
 function ErrorAndCount(callback, err, result, field, fail, success) {
   if (err) return callback(err);
   if (result[field] > 0) {
-    if (typeof success != 'undefined') callback(null, stats.OK, success);
+    if (typeof success != "undefined") callback(null, stats.OK, success);
     else callback(null, stats.OK);
   } else callback(null, fail);
 }
@@ -622,55 +633,73 @@ function ErrorAndCount(callback, err, result, field, fail, success) {
 function createToken(username, model, device) {
   var d = date();
   return {
-    token: hash(JSON.stringify({
-      unique: d,
-      username: username,
-      randomshit: lib.GenerateNumber(32)
-    })),
+    token: hash(
+      JSON.stringify({
+        unique: d,
+        username: username,
+        randomshit: lib.GenerateNumber(32),
+      })
+    ),
     device: {
       device: device,
-      model: model
+      model: model,
     },
-    unique: d
-  }
+    unique: d,
+  };
 }
 
 function deleteByIds(args, callback) {
   col = arguments.callee.col;
-  db.collection(col).remove({
-    [foreignIdentifier]: teacherRep(args.userDoc) || student(args.userDoc),
-    "id": {
-      $in: args.ids
+  db.collection(col).remove(
+    {
+      [foreignIdentifier]: teacherRep(args.userDoc) || student(args.userDoc),
+      id: {
+        $in: args.ids,
+      },
+    },
+    function (err) {
+      if (err) return callback(err);
+      else callback(null, stats.OK);
     }
-  }, function (err) {
-    if (err) return callback(err);
-    else callback(null, stats.OK);
-  });
+  );
 }
 
 function getReferenced(args, callback) {
   col = arguments.callee.col;
   if (args.ig_ids) {
-    db.collection(col).find({
-      id: {
-        $in: args.ig_ids
-      }
-    }, {
-      _id: 0,
-      [foreignIdentifier]: 0
-    }).toArray(function (err, result) {
-      if (err) return callback(err);
-      else callback(null, stats.OK, result)
-    })
+    db.collection(col)
+      .find(
+        {
+          id: {
+            $in: args.ig_ids,
+          },
+        },
+        {
+          _id: 0,
+          [foreignIdentifier]: 0,
+        }
+      )
+      .toArray(function (err, result) {
+        if (err) return callback(err);
+        else callback(null, stats.OK, result);
+      });
   } else {
-    mongoh.GetDocuments(db, col, {
-      [foreignIdentifier]: teacherRep(args.userDoc) || student(args.userDoc)
-    }, {
-      _id: 0,
-      [foreignIdentifier]: 0
-    }, args.startid, args.limit, function (result) {
-      callback(null, stats.OK, result)
-    });
+    mongoh.GetDocuments(
+      db,
+      col,
+      {
+        [foreignIdentifier]: teacherRep(args.userDoc) || student(args.userDoc),
+      },
+      {
+        _id: 0,
+        [foreignIdentifier]: 0,
+      },
+      args.startid,
+      args.limit,
+      function (result) {
+        callback(null, stats.OK, result);
+      }
+    );
   }
 }
 
@@ -689,36 +718,58 @@ function _isAlive(args, callback) {
 
 function registerTeacher(args, callback) {
   //if (!isAdmin(args.userDoc)) return callback(null, stats.IncapableUserType);
-  mongoh.Exists(db, "users", {
-    username: args.username
-  }, function (result) {
-    if (result) {
-      callback(null, stats.Exists);
-    } else {
-      var password = '123456789';
-      /*genPass.generate({
+  mongoh.Exists(
+    db,
+    "users",
+    {
+      username: args.username,
+    },
+    function (result) {
+      if (result) {
+        callback(null, stats.Exists);
+      } else {
+        var password = "123456789";
+        /*genPass.generate({
                       length: 8,
                       numbers: true
                   });*/
-      mongoh.GetNextSequence(db, 'users', {}, identifier, lib.IntIncrementer, function (newid) {
-        db.collection("users").insertOne({
-          [identifier]: newid,
-          [teacherForeignIdentifier]: newid,
-          username: args.username,
-          displayname: args.name,
-          password: hash(password),
-          usertype: 'teacher',
-          defaults: {},
-          grades: [],
-          subjects: args.subjects,
-          defaultStartDates: []
-          /*creator: args.userDoc[identifier]*/
-        }, function (err, result) {
-          ErrorAndCount(callback, err, result, fields.insertedCount, stats.Error, password);
-        });
-      });
+        mongoh.GetNextSequence(
+          db,
+          "users",
+          {},
+          identifier,
+          lib.IntIncrementer,
+          function (newid) {
+            db.collection("users").insertOne(
+              {
+                [identifier]: newid,
+                [teacherForeignIdentifier]: newid,
+                username: args.username,
+                displayname: args.name,
+                password: hash(password),
+                usertype: "teacher",
+                defaults: {},
+                grades: [],
+                subjects: args.subjects,
+                defaultStartDates: [],
+                /*creator: args.userDoc[identifier]*/
+              },
+              function (err, result) {
+                ErrorAndCount(
+                  callback,
+                  err,
+                  result,
+                  fields.insertedCount,
+                  stats.Error,
+                  password
+                );
+              }
+            );
+          }
+        );
+      }
     }
-  });
+  );
 }
 
 // REG NEW_CODE
@@ -734,53 +785,78 @@ function check(chiper, hash) {
 
 //TODO stop after trying more than 10 times and monitor ips
 function authorize(args, callback) {
-  db.collection("users").findOne({
-    $or: [{
-      username: args.login
+  db.collection("users").findOne(
+    {
+      $or: [
+        {
+          username: args.login,
+        },
+        {
+          email: args.login,
+        },
+      ],
     },
     {
-      email: args.login
+      [identifier]: 1,
+      password: 1,
     },
-    ]
-  }, {
-    [identifier]: 1,
-    password: 1
-  },
     function (err, result) {
       if (err) return callback(err);
       if (result) {
         if (check(args.password, result.password)) {
           var token = createToken(result.username, args.model, args.device);
-          mongoh.GetNextSequence(db, 'tokens', {}, 'id', lib.IntIncrementer, function (newid) {
-            db.collection("tokens").insertOne({
-              id: newid,
-              userid: result[identifier],
-              token: token.token,
-              /*device: token.device.device,
+          mongoh.GetNextSequence(
+            db,
+            "tokens",
+            {},
+            "id",
+            lib.IntIncrementer,
+            function (newid) {
+              db.collection("tokens").insertOne(
+                {
+                  id: newid,
+                  userid: result[identifier],
+                  token: token.token,
+                  /*device: token.device.device,
               model: token.device.model, */
-              date: new Date()
-            }, function (err, result) {
-              ErrorAndCount(callback, err, result, fields.insertedCount, stats.Error, token.token);
-            });
-          });
+                  date: new Date(),
+                },
+                function (err, result) {
+                  ErrorAndCount(
+                    callback,
+                    err,
+                    result,
+                    fields.insertedCount,
+                    stats.Error,
+                    token.token
+                  );
+                }
+              );
+            }
+          );
         } else callback(null, stats.WrongPassword);
       } else callback(null, stats.UserNonExisting);
-    });
+    }
+  );
 }
 
 //TODO stop after trying more than 10 times in 30 minutes and monitor ips
 function changePassword(args, callback) {
   if (check(args.oldpassword, args.userDoc.password)) {
-    db.collection("users").updateOne({
-      username: args.userDoc.username
-    }, {
-      $set: {
-        password: hash(args.password),
-        username: args.username,
+    db.collection("users").updateOne(
+      {
+        username: args.userDoc.username,
+      },
+      {
+        $set: {
+          password: hash(args.password),
+          username: args.username,
+        },
+      },
+      function (err, result) {
+        ErrorAndCount(callback, err, result, fields.modifiedCount, stats.Error);
       }
-    }, function (err, result) {
-      ErrorAndCount(callback, err, result, fields.modifiedCount, stats.Error);
-    });
+    );
   } else callback(null, stats.WrongPassword);
 }
 
@@ -788,54 +864,89 @@ function changePassword(args, callback) {
 //TODO create secretary user and manage them !!!
 function createSecretary(args, callback) {
   if (!isTeacher(args.userDoc)) return callback(null, stats.IncapableUserType);
-  mongoh.Exists(db, "users", {
-    username: args.username
-  }, function (result) {
-    if (result) {
-      callback(null, stats.Exists);
-    } else {
-      mongoh.GetNextSequence(db, 'users', {}, identifier, lib.IntIncrementer, function (newid) {
-        db.collection("users").insertOne({
-          [identifier]: newid,
-          username: args.username,
-          displayname: args.name,
-          [teacherForeignIdentifier]: teacher(args.userDoc),
-          password: hash(args.password),
-          usertype: 'secretary',
-          roles: args.roles,
-        }, function (err, result) {
-          ErrorAndCount(callback, err, result, fields.insertedCount, stats.Error);
-        });
-      });
+  mongoh.Exists(
+    db,
+    "users",
+    {
+      username: args.username,
+    },
+    function (result) {
+      if (result) {
+        callback(null, stats.Exists);
+      } else {
+        mongoh.GetNextSequence(
+          db,
+          "users",
+          {},
+          identifier,
+          lib.IntIncrementer,
+          function (newid) {
+            db.collection("users").insertOne(
+              {
+                [identifier]: newid,
+                username: args.username,
+                displayname: args.name,
+                [teacherForeignIdentifier]: teacher(args.userDoc),
+                password: hash(args.password),
+                usertype: "secretary",
+                roles: args.roles,
+              },
+              function (err, result) {
+                ErrorAndCount(
+                  callback,
+                  err,
+                  result,
+                  fields.insertedCount,
+                  stats.Error
+                );
+              }
+            );
+          }
+        );
+      }
     }
-  });
+  );
 }
 
 function listSecretaries(args, callback) {
   if (!isTeacher(args.userDoc)) return callback(null, stats.IncapableUserType);
-  db.collection("users").find({
-    [teacherForeignIdentifier]: teacher(args.userDoc),
-    usertype: 'secretary'
-  }, {
-    [identifier]: 1,
-    displayname: 1,
-    username: 1,
-    roles: 1,
-  }).toArray(function (err, arr) {
-    if (err) return callback(err);
-    callback(null, stats.OK, arr);
-  });
+  db.collection("users")
+    .find(
+      {
+        [teacherForeignIdentifier]: teacher(args.userDoc),
+        usertype: "secretary",
+      },
+      {
+        [identifier]: 1,
+        displayname: 1,
+        username: 1,
+        roles: 1,
+      }
+    )
+    .toArray(function (err, arr) {
+      if (err) return callback(err);
+      callback(null, stats.OK, arr);
+    });
 }
 
 function removeSecretary(args, callback) {
   if (!isTeacher(args.userDoc)) return callback(null, stats.IncapableUserType);
-  db.collection("users").deleteOne({
-    [identifier]: args.targetuser,
-    teacherid: teacher(args.userDoc),
-    usertype: 'secretary'
-  }, function (err, result) {
-    ErrorAndCount(callback, err, result, fields.deletedCount, stats.NonExisting);
-  });
+  db.collection("users").deleteOne(
+    {
+      [identifier]: args.targetuser,
+      teacherid: teacher(args.userDoc),
+      usertype: "secretary",
+    },
+    function (err, result) {
+      ErrorAndCount(
+        callback,
+        err,
+        result,
+        fields.deletedCount,
+        stats.NonExisting
+      );
+    }
+  );
 }
 
 // EREG USER_MANAGEMENT
@@ -847,75 +958,127 @@ function validatePhoneCode(code) {
 }
 // targetuser is temporary
 function setPhone(args, callback) {
-  mongoh.Exists(db, "phones", {
-    "type": args.phonetype,
-    [foreignIdentifier]: args.targetuser ? parseInt(args.targetuser) : 0
-  }, function (result) {
-    if (result) {
-      db.collection("phones").updateOne({
-        [identifier]: result[identifier],
-      }, {
-        $set: args.delete ? {
-          phonecode: null,
-          number: null
-        } : {
-            phonecode: args.phonecode,
-            number: args.number
+  mongoh.Exists(
+    db,
+    "phones",
+    {
+      type: args.phonetype,
+      [foreignIdentifier]: args.targetuser ? parseInt(args.targetuser) : 0,
+    },
+    function (result) {
+      if (result) {
+        db.collection("phones").updateOne(
+          {
+            [identifier]: result[identifier],
+          },
+          {
+            $set: args.delete
+              ? {
+                  phonecode: null,
+                  number: null,
+                }
+              : {
+                  phonecode: args.phonecode,
+                  number: args.number,
+                },
+          },
+          (err, result) => {
+            ErrorAndCount(
+              callback,
+              err,
+              result,
+              fields.modifiedCount,
+              stats.OK
+            );
           }
-      }, (err, result) => {
-        ErrorAndCount(callback, err, result, fields.modifiedCount, stats.OK);
-      });
-    } else {
-      mongoh.GetNextSequence(db, "phones", {}, "id", lib.IntIncrementer, function (newid) {
-        db.collection("phones").insertOne({
-          id: newid,
-          [foreignIdentifier]: args.targetuser || teacherRep(args.userDoc),
-          phonecode: args.phonecode,
-          type: args.phonetype,
-          number: args.number
-        }, function (err, result) {
-          ErrorAndCount(callback, err, result, fields.insertedCount, stats.OK);
-        });
-      });
+        );
+      } else {
+        mongoh.GetNextSequence(
+          db,
+          "phones",
+          {},
+          "id",
+          lib.IntIncrementer,
+          function (newid) {
+            db.collection("phones").insertOne(
+              {
+                id: newid,
+                [foreignIdentifier]:
+                  args.targetuser || teacherRep(args.userDoc),
+                phonecode: args.phonecode,
+                type: args.phonetype,
+                number: args.number,
+              },
+              function (err, result) {
+                ErrorAndCount(
+                  callback,
+                  err,
+                  result,
+                  fields.insertedCount,
+                  stats.OK
+                );
+              }
+            );
+          }
+        );
+      }
     }
-  });
+  );
 }
 
 function editPhone(args, callback) {
-  mongoh.Exists(db, "phones", {
-    id: args.id,
-    [foreignIdentifier]: args.targetuser /* TEMPORARY */ || teacherRep(args.userDoc)
-  }, function (result) {
-    if (result) {
-      var edits = {};
-      if (!args.new_number && !args.new_phonecode && !args.new_phonetype) {
-        callback(null, stats.OK);
-        return
-      }
-      if (args.new_phonetype) edits.type = args.new_phonetype;
-      if (args.new_phonecode) edits.phonecode = args.new_phonecode;
-      if (args.new_number) edits.number = args.new_number;
-      db.collection("phones").updateOne({
-        _id: result._id
-      }, {
-        $set: edits
-      }, function (err, result) {
-        ErrorAndCount(callback, err, result, fields.matchedCount, stats.NonExisting);
-      });
-    } else callback(null, stats.NonExisting)
-  });
+  mongoh.Exists(
+    db,
+    "phones",
+    {
+      id: args.id,
+      [foreignIdentifier]:
+        args.targetuser /* TEMPORARY */ || teacherRep(args.userDoc),
+    },
+    function (result) {
+      if (result) {
+        var edits = {};
+        if (!args.new_number && !args.new_phonecode && !args.new_phonetype) {
+          callback(null, stats.OK);
+          return;
+        }
+        if (args.new_phonetype) edits.type = args.new_phonetype;
+        if (args.new_phonecode) edits.phonecode = args.new_phonecode;
+        if (args.new_number) edits.number = args.new_number;
+        db.collection("phones").updateOne(
+          {
+            _id: result._id,
+          },
+          {
+            $set: edits,
+          },
+          function (err, result) {
+            ErrorAndCount(
+              callback,
+              err,
+              result,
+              fields.matchedCount,
+              stats.NonExisting
+            );
+          }
+        );
+      } else callback(null, stats.NonExisting);
+    }
+  );
 }
 
 function getPhones(args, callback) {
-  db.collection("phones").find({
-    userid: args.targetuser
-  }).toArray((err, result) => {
-    if (err) {
-      callback(err);
-      return;
-    }
-    callback(null, stats.OK, result);
-  });
+  db.collection("phones")
+    .find({
+      userid: args.targetuser,
+    })
+    .toArray((err, result) => {
+      if (err) {
+        callback(err);
+        return;
+      }
+      callback(null, stats.OK, result);
+    });
 }
 
 function removePhones(args, callback) {
@@ -928,50 +1091,83 @@ function removePhones(args, callback) {
 
 function addAddress(args, callback) {
   // prevent students from using center as an addresstype
-  if (args.addresstype == "center" && isStudent(args.userDoc)) return callback(null, stats.InvalidData, "addresstype")
-  mongoh.Exists(db, "addresses", {
-    $or: [{
-      "name": args.name
-    },
+  if (args.addresstype == "center" && isStudent(args.userDoc))
+    return callback(null, stats.InvalidData, "addresstype");
+  mongoh.Exists(
+    db,
+    "addresses",
     {
-      "coordinates": args.coordinates
-    }
-    ]
-  }, function (result) {
-    if (result) {
-      if (result[foreignIdentifier] == teacherRep(args.userDoc)) callback(null, stats.Exists);
-      else callback(null, stats.Used, [result.name == args.name, result.coordinates == args.coordinates]);
-    } else {
-      try {
-        mongoh.GetNextSequence(db, "addresses", {}, "id", lib.IntIncrementer, function (result) {
-          var insert = () => {
-            var data = {
-              id: result,
-              [foreignIdentifier]: teacherRep(args.userDoc),
-              name: args.name,
-              addresstype: args.addresstype,
-              coordinates: args.coordinates,
-            };
-            if (args.phones != undefined) data.phones = args.phones;
-            if (args.address != undefined) data.address = args.address;
-            db.collection("addresses").insertOne(data, function (err, result) {
-              ErrorAndCount(callback, err, result, fields.insertedCount, stats.Error);
-            });
-          }
-          if (args.address) {
-            insert();
-          } else {
-            lib.ConvertCoordinatesAddress(args.coordinates, "ar", true, function (address) {
-              args.address = address;
-              insert();
-            });
-          }
-        });
-      } catch (e) {
-        callback(e, stats.Error);
+      $or: [
+        {
+          name: args.name,
+        },
+        {
+          coordinates: args.coordinates,
+        },
+      ],
+    },
+    function (result) {
+      if (result) {
+        if (result[foreignIdentifier] == teacherRep(args.userDoc))
+          callback(null, stats.Exists);
+        else
+          callback(null, stats.Used, [
+            result.name == args.name,
+            result.coordinates == args.coordinates,
+          ]);
+      } else {
+        try {
+          mongoh.GetNextSequence(
+            db,
+            "addresses",
+            {},
+            "id",
+            lib.IntIncrementer,
+            function (result) {
+              var insert = () => {
+                var data = {
+                  id: result,
+                  [foreignIdentifier]: teacherRep(args.userDoc),
+                  name: args.name,
+                  addresstype: args.addresstype,
+                  coordinates: args.coordinates,
+                };
+                if (args.phones != undefined) data.phones = args.phones;
+                if (args.address != undefined) data.address = args.address;
+                db.collection("addresses").insertOne(
+                  data,
+                  function (err, result) {
+                    ErrorAndCount(
+                      callback,
+                      err,
+                      result,
+                      fields.insertedCount,
+                      stats.Error
+                    );
+                  }
+                );
+              };
+              if (args.address) {
+                insert();
+              } else {
+                lib.ConvertCoordinatesAddress(
+                  args.coordinates,
+                  "ar",
+                  true,
+                  function (address) {
+                    args.address = address;
+                    insert();
+                  }
+                );
+              }
+            }
+          );
+        } catch (e) {
+          callback(e, stats.Error);
+        }
       }
     }
-  });
+  );
 }
 
 function getAddresses(args, callback) {
@@ -992,245 +1188,327 @@ function getFileServerId() {
 }
 
 function getFilePath(svr_id, id, extension) {
-  return __dirname + '/' + "files/server" + lib.NumberToString(svr_id, 3) + "/" + id + '.' + extension;
+  return (
+    __dirname +
+    "/" +
+    "files/server" +
+    lib.NumberToString(svr_id, 3) +
+    "/" +
+    id +
+    "." +
+    extension
+  );
 }
 
 function prepareUpload(args, callback) {
   var files = db.collection("files");
-  files.findOne({
-    checksum: args.checksum,
-    linked: null
-  }, {
-    id: 1,
-    completed: 1
-  }, function (err, result) {
-    if (err) return callback(err);
-    mongoh.GetNextSequence(db, "files", {
-      [foreignIdentifier]: teacherRep(args.userDoc)
-    }, 'id', lib.IntIncrementer, function (id) {
-      if (result && result.completed) {
-        files.insertOne({
-          id: id,
+  files.findOne(
+    {
+      checksum: args.checksum,
+      linked: null,
+    },
+    {
+      id: 1,
+      completed: 1,
+    },
+    function (err, result) {
+      if (err) return callback(err);
+      mongoh.GetNextSequence(
+        db,
+        "files",
+        {
           [foreignIdentifier]: teacherRep(args.userDoc),
-          permissions: args.permissions,
-          linked: true,
-          linkid: result.id,
-          completed: true
-        }, function (err, result) {
-          ErrorAndCount(callback, err, result, fields.insertedCount, stats.Error, id);
-        });
-      } else {
-        files.insertOne({
-          id: id,
-          [foreignIdentifier]: teacherRep(args.userDoc),
-          checksum: args.checksum,
-          server: getFileServerId(),
-          size: args.size,
-          permissions: args.permissions,
-          filetype: args.filetype,
-          extension: args.extension
-        }, function (err, result) {
-          ErrorAndCount(callback, err, result, fields.insertedCount, stats.Error, id);
-        });
-      }
-    });
-  })
+        },
+        "id",
+        lib.IntIncrementer,
+        function (id) {
+          if (result && result.completed) {
+            files.insertOne(
+              {
+                id: id,
+                [foreignIdentifier]: teacherRep(args.userDoc),
+                permissions: args.permissions,
+                linked: true,
+                linkid: result.id,
+                completed: true,
+              },
+              function (err, result) {
+                ErrorAndCount(
+                  callback,
+                  err,
+                  result,
+                  fields.insertedCount,
+                  stats.Error,
+                  id
+                );
+              }
+            );
+          } else {
+            files.insertOne(
+              {
+                id: id,
+                [foreignIdentifier]: teacherRep(args.userDoc),
+                checksum: args.checksum,
+                server: getFileServerId(),
+                size: args.size,
+                permissions: args.permissions,
+                filetype: args.filetype,
+                extension: args.extension,
+              },
+              function (err, result) {
+                ErrorAndCount(
+                  callback,
+                  err,
+                  result,
+                  fields.insertedCount,
+                  stats.Error,
+                  id
+                );
+              }
+            );
+          }
+        }
+      );
+    }
+  );
 }
 
 function continueUpload(args, callback) {
   var files = db.collection("files");
-  files.findOne({
-    id: args.id
-  }, {}, function (err, doc) {
-    var path;
-    if (doc) path = getFilePath(doc.server, args.id, doc.extension);
-    if (err) return callback(err);
-    else if (!doc) callback(null, stats.FileNotFound);
-    else if (doc.size != args.size) callback(null, stats.SizesDontMatch);
-    else if (doc[foreignIdentifier] != teacherRep(args.userDoc)) callback(null, stats.NotPermitted);
-    else if (doc.completed == true) callback(null, stats.AlreadyUploaded);
-    else if (doc.checksum != args.checksum) callback(null, stats.ChecksumsDontMatch);
-    else callback(null, stats.OK, lib.FileSize(path));
-  });
+  files.findOne(
+    {
+      id: args.id,
+    },
+    {},
+    function (err, doc) {
+      var path;
+      if (doc) path = getFilePath(doc.server, args.id, doc.extension);
+      if (err) return callback(err);
+      else if (!doc) callback(null, stats.FileNotFound);
+      else if (doc.size != args.size) callback(null, stats.SizesDontMatch);
+      else if (doc[foreignIdentifier] != teacherRep(args.userDoc))
+        callback(null, stats.NotPermitted);
+      else if (doc.completed == true) callback(null, stats.AlreadyUploaded);
+      else if (doc.checksum != args.checksum)
+        callback(null, stats.ChecksumsDontMatch);
+      else callback(null, stats.OK, lib.FileSize(path));
+    }
+  );
 }
 
 function upload(args, callback, buffer) {
   var files = db.collection("files");
-  files.findOne({
-    id: args.id
-  }, {}, function (err, doc) {
-    var path;
-    if (doc) path = getFilePath(doc.server, args.id, doc.extension);
-    if (err) return callback(err);
-    else if (!doc) callback(null, stats.FileNotFound);
-    else if (doc.size != args.size) callback(null, stats.SizesDontMatch);
-    else if (doc[foreignIdentifier] != teacherRep(args.userDoc)) callback(null, stats.NotPermitted);
-    else if (doc.completed == true) callback(null, stats.AlreadyUploaded);
-    else if (doc.checksum != args.checksum) callback(null, stats.ChecksumsDontMatch);
-    else {
-      var range = args.bytes_range;
-      var size = lib.FileSize(path);
-      if (size == range.start && (range.end - range.start) == buffer.length) {
-        try {
-          if (fs.existsSync(path)) fs.appendFileSync(path, buffer);
-          else fs.writeFileSync(path, buffer);
-        } catch (e) {
-          return callback(e, stats.Error);
-        }
-        size = lib.FileSize(path);
-        if (size == range.end) {
-          if (range.end == doc.size) {
-            if (md5.sync(path) == args.checksum) {
-              files.updateOne({
-                id: args.id
-              }, {
-                $set: {
-                  completed: true
-                }
-              }, function (err, result) {
-                if (err) return callback(err);
-                else if (result.modifiedCount == 1) {
-                  switch (doc.filetype) {
-                    case filetypes.images:
-                      ip.isValid(path, function (result) {
-                        if (result) {
-                          callback(null, stats.UploadCompleted);
-                        } else {
-                          callback(null, stats.UploadFailed);
-                          cleanUpUpload(doc);
-                        }
-                      });
-                      break;
-                    default:
-                      callback(null, stats.UploadCompleted);
-                      break;
-                  }
-                } else callback(null, stats.FileNotFound);
-              });
-            } else callback(null, stats.UploadFailed);
-          } else {
-            callback(null, stats.Continue, range.end.toString());
+  files.findOne(
+    {
+      id: args.id,
+    },
+    {},
+    function (err, doc) {
+      var path;
+      if (doc) path = getFilePath(doc.server, args.id, doc.extension);
+      if (err) return callback(err);
+      else if (!doc) callback(null, stats.FileNotFound);
+      else if (doc.size != args.size) callback(null, stats.SizesDontMatch);
+      else if (doc[foreignIdentifier] != teacherRep(args.userDoc))
+        callback(null, stats.NotPermitted);
+      else if (doc.completed == true) callback(null, stats.AlreadyUploaded);
+      else if (doc.checksum != args.checksum)
+        callback(null, stats.ChecksumsDontMatch);
+      else {
+        var range = args.bytes_range;
+        var size = lib.FileSize(path);
+        if (size == range.start && range.end - range.start == buffer.length) {
+          try {
+            if (fs.existsSync(path)) fs.appendFileSync(path, buffer);
+            else fs.writeFileSync(path, buffer);
+          } catch (e) {
+            return callback(e, stats.Error);
           }
-        } else {
-          callback(null, stats.UploadFailed);
-          cleanUpUpload(doc);
-        }
-      } else callback(null, stats.RangesDontMatch, size);
-    };
-  });
+          size = lib.FileSize(path);
+          if (size == range.end) {
+            if (range.end == doc.size) {
+              if (md5.sync(path) == args.checksum) {
+                files.updateOne(
+                  {
+                    id: args.id,
+                  },
+                  {
+                    $set: {
+                      completed: true,
+                    },
+                  },
+                  function (err, result) {
+                    if (err) return callback(err);
+                    else if (result.modifiedCount == 1) {
+                      switch (doc.filetype) {
+                        case filetypes.images:
+                          ip.isValid(path, function (result) {
+                            if (result) {
+                              callback(null, stats.UploadCompleted);
+                            } else {
+                              callback(null, stats.UploadFailed);
+                              cleanUpUpload(doc);
+                            }
+                          });
+                          break;
+                        default:
+                          callback(null, stats.UploadCompleted);
+                          break;
+                      }
+                    } else callback(null, stats.FileNotFound);
+                  }
+                );
+              } else callback(null, stats.UploadFailed);
+            } else {
+              callback(null, stats.Continue, range.end.toString());
+            }
+          } else {
+            callback(null, stats.UploadFailed);
+            cleanUpUpload(doc);
+          }
+        } else callback(null, stats.RangesDontMatch, size);
+      }
+    }
+  );
 }
 // not linked to outer shit
 function cleanUpUpload(doc, callback) {
-  if (!callback) callback = function () { };
+  if (!callback) callback = function () {};
   var files = db.collection("files");
-  files.findOne({
-    linkid: doc.id,
-    linked: true
-  }, {
-    _id: 1
-  }, function (err, result) {
-    if (err) return callback(false);
-    else if (result) {
-      files.updateOne({
-        id: doc.id
-      }, {
-        $set: {
-          disabled: true
-        }
-      }, function (err, result) {
-        if (err) return callback(false);
-        else if (result.matchedCount == 1) callback(true);
-        else callback(true);
-      })
-    } else {
-      var path = getFilePath(doc.server, doc.id, doc.extension);
-      files.deleteOne({
-        id: doc.id
-      }, function (err, result) {
-        if (err) return callback(false);
-        else if (result.deletedCount == 1) {
-          try {
-            fs.unlinkSync(path);
-          } finally {
-            callback(true);
+  files.findOne(
+    {
+      linkid: doc.id,
+      linked: true,
+    },
+    {
+      _id: 1,
+    },
+    function (err, result) {
+      if (err) return callback(false);
+      else if (result) {
+        files.updateOne(
+          {
+            id: doc.id,
+          },
+          {
+            $set: {
+              disabled: true,
+            },
+          },
+          function (err, result) {
+            if (err) return callback(false);
+            else if (result.matchedCount == 1) callback(true);
+            else callback(true);
           }
-        } else callback(false);
-      });
+        );
+      } else {
+        var path = getFilePath(doc.server, doc.id, doc.extension);
+        files.deleteOne(
+          {
+            id: doc.id,
+          },
+          function (err, result) {
+            if (err) return callback(false);
+            else if (result.deletedCount == 1) {
+              try {
+                fs.unlinkSync(path);
+              } finally {
+                callback(true);
+              }
+            } else callback(false);
+          }
+        );
+      }
     }
-  });
+  );
 }
 
 function deleteFiles(args, callback) {
   var files = db.collection("files");
-  files.find({
-    id: {
-      $in: args.ids
-    }
-  }, {}).toArray(function (err, docs) {
-    if (err) return callback(err);
-    if (docs) {
-      var id = 0;
-      var length = docs.length;
-      var failed = [];
+  files
+    .find(
+      {
+        id: {
+          $in: args.ids,
+        },
+      },
+      {}
+    )
+    .toArray(function (err, docs) {
+      if (err) return callback(err);
+      if (docs) {
+        var id = 0;
+        var length = docs.length;
+        var failed = [];
 
-      function loop() {
-        if (id >= length) {
-          return callback(null, stats.OK, failed);
-        }
-        if (docs[id][foreignIdentifier] != teacherRep(args.userDoc)) {
-          failed.push(docs[id].id);
-          id++;
-          loop();
-          return;
-        }
-        if (docs[id].linked) {
-          files.deleteOne({
-            id: docs[id].id
-          }, function (err, result) {
-            if (err) failed.push(docs[id].id);
-            else if (result.deletedCount != 1) failed.push(docs[id].id);
+        function loop() {
+          if (id >= length) {
+            return callback(null, stats.OK, failed);
+          }
+          if (docs[id][foreignIdentifier] != teacherRep(args.userDoc)) {
+            failed.push(docs[id].id);
             id++;
             loop();
-          })
-        } else {
-          cleanUpUpload(docs[id], function (result) {
-            if (!result) failed.push(docs[id].id);
-            id++;
-            loop();
-          });
+            return;
+          }
+          if (docs[id].linked) {
+            files.deleteOne(
+              {
+                id: docs[id].id,
+              },
+              function (err, result) {
+                if (err) failed.push(docs[id].id);
+                else if (result.deletedCount != 1) failed.push(docs[id].id);
+                id++;
+                loop();
+              }
+            );
+          } else {
+            cleanUpUpload(docs[id], function (result) {
+              if (!result) failed.push(docs[id].id);
+              id++;
+              loop();
+            });
+          }
         }
-      }
-      loop();
-    } else callback(null, stats.FilesNotFound);
-  });
+        loop();
+      } else callback(null, stats.FilesNotFound);
+    });
 }
 
 function download(args, callback) {
   var files = db.collection("files");
-  files.findOne({
-    id: args.id
-  }, {}, function (err, doc) {
-    if (err) return callback(err);
-    if (doc) {
-      if (checkPermissions(doc, args.userDoc)) {
-        var path = getFilePath(doc.server, args.id, doc.extension);
-        var stream = fs.createReadStream(path, {
-          start: args.abs_bytes_range.start,
-          end: args.abs_bytes_range.end
-        });
-        stream.on("open", function () {
-          callback(null, stats.OK, undefined, stream);
-        }).on("error", function (err) {
-          callback(err);
-        });
-      } else callback(null, stats.NotPermitted);
-    } else callback(null, stats.FileNotFound);
-  });
+  files.findOne(
+    {
+      id: args.id,
+    },
+    {},
+    function (err, doc) {
+      if (err) return callback(err);
+      if (doc) {
+        if (checkPermissions(doc, args.userDoc)) {
+          var path = getFilePath(doc.server, args.id, doc.extension);
+          var stream = fs.createReadStream(path, {
+            start: args.abs_bytes_range.start,
+            end: args.abs_bytes_range.end,
+          });
+          stream
+            .on("open", function () {
+              callback(null, stats.OK, undefined, stream);
+            })
+            .on("error", function (err) {
+              callback(err);
+            });
+        } else callback(null, stats.NotPermitted);
+      } else callback(null, stats.FileNotFound);
+    }
+  );
 }
 
 function checkPermissions(doc, userDoc) {
   switch (true) {
-    case doc[foreignIdentifier] == userDoc[identifier] || doc[foreignIdentifier] == teacherRep(args.userDoc):
+    case doc[foreignIdentifier] == userDoc[identifier] ||
+      doc[foreignIdentifier] == teacherRep(args.userDoc):
     case doc.public:
       return true;
       break;
@@ -1241,78 +1519,93 @@ function checkPermissions(doc, userDoc) {
 
 function getFilesInfo(args, callback) {
   var files = db.collection("files");
-  files.find({
-    id: {
-      $in: args.ids
-    }
-  }, {
-    _id: 0
-  }).toArray(function (err, docs) {
-    if (err) return callback(err);
-    if (docs) {
-      for (var i = 0; i < docs.length; i++) {
-        var path = getFilePath(docs[i].server, docs[i].id, docs[i].extension);
-        //TODO not sure about checksumming the files !!
-        if (!checkPermissions(docs[i], args.userDoc)) return callback(null, stats.NotPermitted, docs[i].id);
-        if (!docs[i].completed) return callback(null, stats.Incomplete, docs[i].id);
-        if (!fs.existsSync(path)) return callback(null, stats.FileNotFound, docs[i].id);
-        delete docs[i].completed;
-        delete docs[i].server;
-        delete docs[i].permissions;
+  files
+    .find(
+      {
+        id: {
+          $in: args.ids,
+        },
+      },
+      {
+        _id: 0,
       }
-      // missing docs will be calculated on the user side
-      callback(null, stats.OK, docs);
-    } else callback(null, stats.FilesNotFound);
-  });
+    )
+    .toArray(function (err, docs) {
+      if (err) return callback(err);
+      if (docs) {
+        for (var i = 0; i < docs.length; i++) {
+          var path = getFilePath(docs[i].server, docs[i].id, docs[i].extension);
+          //TODO not sure about checksumming the files !!
+          if (!checkPermissions(docs[i], args.userDoc))
+            return callback(null, stats.NotPermitted, docs[i].id);
+          if (!docs[i].completed)
+            return callback(null, stats.Incomplete, docs[i].id);
+          if (!fs.existsSync(path))
+            return callback(null, stats.FileNotFound, docs[i].id);
+          delete docs[i].completed;
+          delete docs[i].server;
+          delete docs[i].permissions;
+        }
+        // missing docs will be calculated on the user side
+        callback(null, stats.OK, docs);
+      } else callback(null, stats.FilesNotFound);
+    });
 }
 
 function sendNotification(userid, type, data, callback) {
-  db.collection("notifications").insertOne({
-    userid: userid,
-    type: type,
-    data: data
-  }, function (err, result) {
-    if (err) callback(false);
-    if (result.insertedCount > 0) callback(true);
-    else callback(false);
-  });
+  db.collection("notifications").insertOne(
+    {
+      userid: userid,
+      type: type,
+      data: data,
+    },
+    function (err, result) {
+      if (err) callback(false);
+      if (result.insertedCount > 0) callback(true);
+      else callback(false);
+    }
+  );
 }
 
 function SearchStudents(args, callback) {
   var query = {
     $text: {
-      $search: args.name
+      $search: args.name,
     },
   };
-  if (args.ig_grades) query.grade = {
-    '$in': args.ig_grades
-  };
+  if (args.ig_grades)
+    query.grade = {
+      $in: args.ig_grades,
+    };
   var a = db.collection("links").find(query, {
     _id: 0,
   });
   a.count((err, count) => {
     if (err) return callback(err);
-    a.skip(args.startid).limit(args.limit).sort({
-      fullname: -1
-    }).toArray(function (err, arr) {
-      if (err) return callback(err);
-      var returner = {};
-      returner.result = [];
-      returner.count = count;
-      // inverse here cause text indexes cannot be inversed... or at least based on what I know :'D
-      for (var i = 4; i > -1; i--) {
-        if (arr.hasOwnProperty(i)) {
-          returner.result.push({
-            username: arr[i].username,
-            grade: arr[i].grade,
-            [identifier]: arr[i][identifier],
-            [studentForeignIdentifier]: arr[i][studentForeignIdentifier],
-            fullname: arr[i].fullname,
-          });
+    a.skip(args.startid)
+      .limit(args.limit)
+      .sort({
+        fullname: -1,
+      })
+      .toArray(function (err, arr) {
+        if (err) return callback(err);
+        var returner = {};
+        returner.result = [];
+        returner.count = count;
+        // inverse here cause text indexes cannot be inversed... or at least based on what I know :'D
+        for (var i = 4; i > -1; i--) {
+          if (arr.hasOwnProperty(i)) {
+            returner.result.push({
+              username: arr[i].username,
+              grade: arr[i].grade,
+              [identifier]: arr[i][identifier],
+              [studentForeignIdentifier]: arr[i][studentForeignIdentifier],
+              fullname: arr[i].fullname,
+            });
+          }
         }
-      }
-      callback(null, stats.OK, returner);
-    });
+        callback(null, stats.OK, returner);
+      });
   });
 }
 
@@ -1320,37 +1613,59 @@ function SearchStudents(args, callback) {
 
 //TODO duplicates
 function bid(args, callback) {
-  if (!isTeacherRep(args.userDoc)) return callback(null, stats.IncapableUserType);
-  mongoh.GetNextSequence(db, "bids", {
-    [foreignIdentifier]: teacherRep(args.userDoc)
-  }, "id", lib.IntIncrementer, function (result) {
-    db.collection("bids").insertOne({
-      id: result,
+  if (!isTeacherRep(args.userDoc))
+    return callback(null, stats.IncapableUserType);
+  mongoh.GetNextSequence(
+    db,
+    "bids",
+    {
       [foreignIdentifier]: teacherRep(args.userDoc),
-      title: args.title,
-      grade: args.grade,
-      bidtype: args.bidtype,
-      open: true,
-      gender: args.gender,
-      addresses: args.addresses,
-      subjects: args.subjects,
-      timetables: args.timetables,
-      prices: args.prices
-    }, function (err, result) {
-      ErrorAndCount(callback, err, result, fields.insertedCount, stats.Error);
-    })
-  });
+    },
+    "id",
+    lib.IntIncrementer,
+    function (result) {
+      db.collection("bids").insertOne(
+        {
+          id: result,
+          [foreignIdentifier]: teacherRep(args.userDoc),
+          title: args.title,
+          grade: args.grade,
+          bidtype: args.bidtype,
+          open: true,
+          gender: args.gender,
+          addresses: args.addresses,
+          subjects: args.subjects,
+          timetables: args.timetables,
+          prices: args.prices,
+        },
+        function (err, result) {
+          ErrorAndCount(
+            callback,
+            err,
+            result,
+            fields.insertedCount,
+            stats.Error
+          );
+        }
+      );
+    }
+  );
 }
 //TODO available in ids and current user version
 //TODO make filters for tts (available,fitting to timetable)
 function getBids(args, callback) {
-  if (isTeacher(args.userDoc) && !args.targetuser) args.targetuser = teacherRep(args.userDoc);
-  var ids = db.collection("bids").distinct("id", {
-    [foreignIdentifier]: args.targetuser
-  }, function (err, ids) {
-    if (err) return callback(err);
-    else callback(null, stats.OK, ids);
-  });
+  if (isTeacher(args.userDoc) && !args.targetuser)
+    args.targetuser = teacherRep(args.userDoc);
+  var ids = db.collection("bids").distinct(
+    "id",
+    {
+      [foreignIdentifier]: args.targetuser,
+    },
+    function (err, ids) {
+      if (err) return callback(err);
+      else callback(null, stats.OK, ids);
+    }
+  );
 }
 //TODO arrays
 /*function checkTimetableCollision(args, callback, api) {
@@ -1423,40 +1738,60 @@ function getBids(args, callback) {
 }*/
 
 function getBio(args, callback) {
-  if (isTeacher(args.userDoc) && !args.targetuser) return callback(null, stats.OK, args.userDoc.bio);
-  var ids = db.collection("users").findOne({
-    [identifier]: args.targetuser
-  }, {
-    bio: 1
-  }, function (err, result) {
-    if (err) return callback(err);
-    else callback(null, stats.OK, result.bio);
-  });
+  if (isTeacher(args.userDoc) && !args.targetuser)
+    return callback(null, stats.OK, args.userDoc.bio);
+  var ids = db.collection("users").findOne(
+    {
+      [identifier]: args.targetuser,
+    },
+    {
+      bio: 1,
+    },
+    function (err, result) {
+      if (err) return callback(err);
+      else callback(null, stats.OK, result.bio);
+    }
+  );
 }
 
 function editBio(args, callback) {
   if (!isTeacher(args.userDoc)) return callback(null, stats.IncapableUserType);
-  db.collection("users").updateOne({
-    [identifier]: teacher(args.userDoc)
-  }, {
-    $set: {
-      "bio": args.bio
+  db.collection("users").updateOne(
+    {
+      [identifier]: teacher(args.userDoc),
+    },
+    {
+      $set: {
+        bio: args.bio,
+      },
+    },
+    function (err, result) {
+      ErrorAndCount(
+        callback,
+        err,
+        result,
+        fields.matchedCount,
+        stats.UserNonExisting
+      );
     }
-  }, function (err, result) {
-    ErrorAndCount(callback, err, result, fields.matchedCount, stats.UserNonExisting);
-  });
+  );
 }
 
 function getGrades(args, callback) {
-  if (isTeacher(args.userDoc) && !args.targetuser) return callback(null, stats.OK, args.userDoc.grades.sort());
-  var ids = db.collection("users").findOne({
-    [identifier]: args.targetuser || teacherRep(args.userDoc)
-  }, {
-    grades: 1,
-  }, function (err, result) {
-    if (err) return callback(err);
-    else callback(null, stats.OK, result.grades.sort());
-  });
+  if (isTeacher(args.userDoc) && !args.targetuser)
+    return callback(null, stats.OK, args.userDoc.grades.sort());
+  var ids = db.collection("users").findOne(
+    {
+      [identifier]: args.targetuser || teacherRep(args.userDoc),
+    },
+    {
+      grades: 1,
+    },
+    function (err, result) {
+      if (err) return callback(err);
+      else callback(null, stats.OK, result.grades.sort());
+    }
+  );
 }
 
 /*function editGrades(args, callback) {
@@ -1530,77 +1865,100 @@ function removeSubjects(args, callback) {
 
 /**
  * Create a global grade
- * 
+ *
  * @typedef {Object} CreateGradePayload
  * @property {string} name
- * 
+ *
  * @param  {CreateGradePayload} args
  * @param  {Function} callback
  */
 function createGrade(args, callback) {
-  mongoh.GetNextSequence(db, 'grades', {}, 'id', lib.IntIncrementer, (newid) => {
-    db.collection('grades')
-      .insertOne({
-        id: newid,
-        name: args.name,
-      }, (error, result) => {
-        ErrorAndCount(callback, error, result, fields.insertedCount, stats.Error);
-      });
-  });
+  mongoh.GetNextSequence(
+    db,
+    "grades",
+    {},
+    "id",
+    lib.IntIncrementer,
+    (newid) => {
+      db.collection("grades").insertOne(
+        {
+          id: newid,
+          name: args.name,
+        },
+        (error, result) => {
+          ErrorAndCount(
+            callback,
+            error,
+            result,
+            fields.insertedCount,
+            stats.Error
+          );
+        }
+      );
+    }
+  );
 }
 /**
  * List global grades
- * 
+ *
  * @param  {Object} args
  * @param  {Function} callback
  */
 function listGrades(args, callback) {
-  db.collection('grades').find({
-    deleted: {
-      $ne: true
-    }
-  }).toArray((error, result) => {
-    if (error) {
-      return callback(error, stats.Error);
-    }
-    callback(error, stats.OK, result);
-  });
+  db.collection("grades")
+    .find({
+      deleted: {
+        $ne: true,
+      },
+    })
+    .toArray((error, result) => {
+      if (error) {
+        return callback(error, stats.Error);
+      }
+      callback(error, stats.OK, result);
+    });
 }
 
 /**
  * Update a global grade
- * 
+ *
  * @typedef {Object} UpdateGradePayload
  * @property {number} id
  * @property {string} name
- * 
+ *
  * @param  {UpdateGradePayload} args
  * @param  {Function} callback
  */
 function updateGrade(args, callback) {
-  const {
-    id,
-    name
-  } = args;
+  const { id, name } = args;
 
-  db.collection('grades')
-    .updateOne({
-      id
-    }, {
+  db.collection("grades").updateOne(
+    {
+      id,
+    },
+    {
       $set: {
-        name
-      }
-    }, (error, result) => {
-      ErrorAndCount(callback, error, result, fields.matchedCount, stats.NonExisting);
-    })
+        name,
+      },
+    },
+    (error, result) => {
+      ErrorAndCount(
+        callback,
+        error,
+        result,
+        fields.matchedCount,
+        stats.NonExisting
+      );
+    }
+  );
 }
 
 /**
  * Delete a global grade
- * 
+ *
  * @typedef {Object} DeleteGradePayload
  * @property {number} id
- * 
+ *
  * @param  {DeleteGradePayload} args
  * @param  {Function} callback
  */
@@ -1608,83 +1966,113 @@ function deleteGrade(args, callback) {
   // if a user deleted the last grade
   // next id will be that of the last
   // it will cause a lot of problems
-  db.collection('grades')
-    .updateOne({
-      id: args.id
-    }, {
+  db.collection("grades").updateOne(
+    {
+      id: args.id,
+    },
+    {
       $set: {
-        deleted: true
-      }
-    }, (error, result) => {
-      ErrorAndCount(callback, error, result, fields.deletedCount, stats.NonExisting);
-    });
+        deleted: true,
+      },
+    },
+    (error, result) => {
+      ErrorAndCount(
+        callback,
+        error,
+        result,
+        fields.deletedCount,
+        stats.NonExisting
+      );
+    }
+  );
 }
 
 function updateTeacherGradesAndSubjects(userid, callback) {
-  db.collection("groups").aggregate([{
-    $match: {
-      [foreignIdentifier]: userid
+  db.collection("groups").aggregate(
+    [
+      {
+        $match: {
+          [foreignIdentifier]: userid,
+        },
+      },
+      {
+        $group: {
+          _id: null,
+          grades: {
+            $addToSet: "$grade",
+          },
+        },
+      },
+      {
+        $project: {
+          _id: 0,
+          grades: "$grades",
+        },
+      },
+    ],
+    function (err, result) {
+      if (err) return;
+      if (result[0]) var grades = result[0].grades;
+      else var grades = [];
+      db.collection("users").updateOne(
+        {
+          [identifier]: userid,
+        },
+        {
+          $set: {
+            grades: result
+              ? grades.sort((a, b) => {
+                  return b - a;
+                })
+              : [],
+            //defaultStartDates: result ? result.defaultStartDates : []
+          },
+        },
+        () => {
+          if (callback) callback();
+        }
+      );
     }
-  },
-  {
-    $group: {
-      _id: null,
-      grades: {
-        $addToSet: "$grade"
-      }
-    }
-  },
-  {
-    $project: {
-      _id: 0,
-      grades: "$grades"
-    }
-  }
-  ], function (err, result) {
-    if (err) return;
-    if (result[0]) var grades = result[0].grades;
-    else var grades = [];
-    db.collection("users").updateOne({
-      [identifier]: userid
-    }, {
-      $set: {
-        grades: result ? grades.sort((a, b) => {
-          return b - a;
-        }) : [],
-        //defaultStartDates: result ? result.defaultStartDates : []
-      }
-    }, () => {
-      if (callback) callback()
-    })
-  });
+  );
 }
 
 function cleanUpGroupLinks(groupid, callback) {
-  db.collection("groupslinks").updateMany({
-    'links.groupid': groupid
-  }, {
-    $pull: {
-      links: {
-        groupid: groupid
-      }
+  db.collection("groupslinks").updateMany(
+    {
+      "links.groupid": groupid,
+    },
+    {
+      $pull: {
+        links: {
+          groupid: groupid,
+        },
+      },
+    },
+    () => {
+      db.collection("groupslinks").deleteMany(
+        {
+          links: {
+            $size: 0,
+          },
+        },
+        () => {}
+      );
     }
-  }, () => {
-    db.collection("groupslinks").deleteMany({
-      links: {
-        $size: 0
-      }
-    }, () => { });
-  })
-  db.collection("links").updateMany({
-    group: groupid
-  }, {
-    $set: {
-      group: null
+  );
+  db.collection("links").updateMany(
+    {
+      group: groupid,
+    },
+    {
+      $set: {
+        group: null,
+      },
+    },
+    function (err, result) {
+      if (err) callback(false);
+      else callback(true);
     }
-  }, function (err, result) {
-    if (err) callback(false);
-    else callback(true);
-  });
+  );
 }
 
 /*"subjects" : [
@@ -1711,235 +2099,309 @@ function cleanUpGroupLinks(groupid, callback) {
         }
     ]*/
 function createGroup(args, callback) {
-  if (!isTeacherRep(args.userDoc)) return callback(null, stats.IncapableUserType);
-  mongoh.GetNextSequence(db, "groups", {}, "id", lib.IntIncrementer, function (newid) {
-    if (typeof newid != 'number') return callback(null, stats.Error);
-    db.collection("groups").insertOne({
-      id: newid,
-      [foreignIdentifier]: teacherRep(args.userDoc),
-      name: args.name,
-      grade: args.grade,
-      /*subjects: args.subjects,
+  if (!isTeacherRep(args.userDoc))
+    return callback(null, stats.IncapableUserType);
+  mongoh.GetNextSequence(
+    db,
+    "groups",
+    {},
+    "id",
+    lib.IntIncrementer,
+    function (newid) {
+      if (typeof newid != "number") return callback(null, stats.Error);
+      db.collection("groups").insertOne(
+        {
+          id: newid,
+          [foreignIdentifier]: teacherRep(args.userDoc),
+          name: args.name,
+          grade: args.grade,
+          /*subjects: args.subjects,
       address: args.addressid,
       gender: args.gender || "mixed",
       */
-      schedule: args.schedule
-    }, function (err, result) {
-      if (err) callback(err);
-      else {
-        if (result.insertedCount > 0) {
-          updateTeacherGradesAndSubjects(teacherRep(args.userDoc), () => {
-            callback(null, stats.OK, newid);
-          });
-        } else callback(null, stats.Error);
-      }
-    });
-  });
+          schedule: args.schedule,
+        },
+        function (err, result) {
+          if (err) callback(err);
+          else {
+            if (result.insertedCount > 0) {
+              updateTeacherGradesAndSubjects(teacherRep(args.userDoc), () => {
+                callback(null, stats.OK, newid);
+              });
+            } else callback(null, stats.Error);
+          }
+        }
+      );
+    }
+  );
 }
 
 function removeGroup(args, callback) {
-  db.collection("groups").findOne({
-    id: args.groupid
-  }, function (err, result) {
-    if (err) callback(err);
-    if (result) {
-      cleanUpGroupLinks(args.groupid, (done) => {
-        if (done) {
-          db.collection("groups").deleteOne({
-            id: args.groupid,
-            [foreignIdentifier]: teacherRep(args.userDoc)
-          }, function (err, result) {
-            updateTeacherGradesAndSubjects(teacherRep(args.userDoc), () => {
-              ErrorAndCount(callback, err, result, fields.deletedCount, stats.NonExisting);
-            });
-          });
-        } else callback(null, stats.Error);
-      });
-    } else callback(null, stats.NonExisting)
-  })
+  db.collection("groups").findOne(
+    {
+      id: args.groupid,
+    },
+    function (err, result) {
+      if (err) callback(err);
+      if (result) {
+        cleanUpGroupLinks(args.groupid, (done) => {
+          if (done) {
+            db.collection("groups").deleteOne(
+              {
+                id: args.groupid,
+                [foreignIdentifier]: teacherRep(args.userDoc),
+              },
+              function (err, result) {
+                updateTeacherGradesAndSubjects(teacherRep(args.userDoc), () => {
+                  ErrorAndCount(
+                    callback,
+                    err,
+                    result,
+                    fields.deletedCount,
+                    stats.NonExisting
+                  );
+                });
+              }
+            );
+          } else callback(null, stats.Error);
+        });
+      } else callback(null, stats.NonExisting);
+    }
+  );
 }
 
 // grade, classnum, groupid, day
 function linkGroupClasses(args, callback) {
   if (args.classnum == -1) {
-    db.collection("groupslinks").updateMany({
-      [teacherForeignIdentifier]: teacherRep(args.userDoc),
-      grade: args.grade
-    }, {
-      $pull: {
-        links: {
-          day: args.groupday,
-          groupid: args.groupid
-        }
-      }
-    }, {}, (err) => {
-      if (err) callback(err);
-      else callback(null, stats.OK);
-      db.collection("groupslinks").deleteMany({
-        links: {
-          $size: 0
-        }
-      }, () => { });
-    })
-  } else {
-    db.collection("groupslinks").updateMany({
-      [teacherForeignIdentifier]: teacherRep(args.userDoc),
-      grade: args.grade
-    }, {
-      $pull: {
-        links: {
-          day: args.groupday,
-          groupid: args.groupid
-        }
-      }
-    }, {}, () => {
-      db.collection("groupslinks").updateOne({
+    db.collection("groupslinks").updateMany(
+      {
         [teacherForeignIdentifier]: teacherRep(args.userDoc),
         grade: args.grade,
-        classnum: args.classnum
-      }, {
-        $push: {
+      },
+      {
+        $pull: {
           links: {
             day: args.groupday,
-            groupid: args.groupid
-          }
-        }
-      }, {
-        upsert: true
-      }, (err) => {
+            groupid: args.groupid,
+          },
+        },
+      },
+      {},
+      (err) => {
         if (err) callback(err);
         else callback(null, stats.OK);
-      });
-    })
+        db.collection("groupslinks").deleteMany(
+          {
+            links: {
+              $size: 0,
+            },
+          },
+          () => {}
+        );
+      }
+    );
+  } else {
+    db.collection("groupslinks").updateMany(
+      {
+        [teacherForeignIdentifier]: teacherRep(args.userDoc),
+        grade: args.grade,
+      },
+      {
+        $pull: {
+          links: {
+            day: args.groupday,
+            groupid: args.groupid,
+          },
+        },
+      },
+      {},
+      () => {
+        db.collection("groupslinks").updateOne(
+          {
+            [teacherForeignIdentifier]: teacherRep(args.userDoc),
+            grade: args.grade,
+            classnum: args.classnum,
+          },
+          {
+            $push: {
+              links: {
+                day: args.groupday,
+                groupid: args.groupid,
+              },
+            },
+          },
+          {
+            upsert: true,
+          },
+          (err) => {
+            if (err) callback(err);
+            else callback(null, stats.OK);
+          }
+        );
+      }
+    );
   }
-
 }
 
 function listGroupClassesLinks(args, callback) {
-  db.collection('groups').aggregate([{
-    $match: {
-      [foreignIdentifier]: teacherRep(args.userDoc),
-      grade: args.grade
-    }
-  },
-  {
-    $unwind: "$schedule.days"
-  },
-  {
-    $group: {
-      _id: "$id",
-      len: {
-        $sum: 1
-      }
-    }
-  },
-  {
-    $sort: {
-      len: -1
-    }
-  },
-  {
-    $limit: 1
-  }
-  ], (err, result) => {
-    if (err) callback(err);
-    db.collection("groupslinks").find({
-      [teacherForeignIdentifier]: teacherRep(args.userDoc),
-      grade: args.grade
-    }, {
-      _id: 0,
-      [teacherForeignIdentifier]: 0
-    }).toArray((err, links) => {
+  db.collection("groups").aggregate(
+    [
+      {
+        $match: {
+          [foreignIdentifier]: teacherRep(args.userDoc),
+          grade: args.grade,
+        },
+      },
+      {
+        $unwind: "$schedule.days",
+      },
+      {
+        $group: {
+          _id: "$id",
+          len: {
+            $sum: 1,
+          },
+        },
+      },
+      {
+        $sort: {
+          len: -1,
+        },
+      },
+      {
+        $limit: 1,
+      },
+    ],
+    (err, result) => {
       if (err) callback(err);
-      else callback(null, stats.OK, {
-        classescount: result[0] ? result[0].len : 0,
-        links: links
-      });
-    });
-  })
+      db.collection("groupslinks")
+        .find(
+          {
+            [teacherForeignIdentifier]: teacherRep(args.userDoc),
+            grade: args.grade,
+          },
+          {
+            _id: 0,
+            [teacherForeignIdentifier]: 0,
+          }
+        )
+        .toArray((err, links) => {
+          if (err) callback(err);
+          else
+            callback(null, stats.OK, {
+              classescount: result[0] ? result[0].len : 0,
+              links: links,
+            });
+        });
+    }
+  );
 }
 
 function distinctGroups(args, callback) {
-  if (!isTeacherRep(args.userDoc)) return callback(null, stats.IncapableUserType);
-  db.collection("groups").find({
-    [foreignIdentifier]: teacherRep(args.userDoc),
-    grade: {
-      $in: args.ig_grades || args.userDoc.grades
-    }
-  }, {
-    _id: 0,
-    name: 1,
-    id: 1
-  }).toArray(function (err, results) {
-    if (err) callback(err);
-    callback(null, stats.OK, results);
-  });
+  if (!isTeacherRep(args.userDoc))
+    return callback(null, stats.IncapableUserType);
+  db.collection("groups")
+    .find(
+      {
+        [foreignIdentifier]: teacherRep(args.userDoc),
+        grade: {
+          $in: args.ig_grades || args.userDoc.grades,
+        },
+      },
+      {
+        _id: 0,
+        name: 1,
+        id: 1,
+      }
+    )
+    .toArray(function (err, results) {
+      if (err) callback(err);
+      callback(null, stats.OK, results);
+    });
 }
 
 function getGroup(args, callback) {
-  if (!isTeacherRep(args.userDoc)) return callback(null, stats.IncapableUserType);
-  db.collection("groups").findOne({
-    [foreignIdentifier]: teacherRep(args.userDoc),
-    id: args.id
-  }, {
-    _id: 0,
-    [foreignIdentifier]: 0
-  }, (err, group) => {
-    if (err) callback(err);
-    else if (group) callback(null, stats.OK, group);
-    else callback(null, stats.NonExisting);
-  });
+  if (!isTeacherRep(args.userDoc))
+    return callback(null, stats.IncapableUserType);
+  db.collection("groups").findOne(
+    {
+      [foreignIdentifier]: teacherRep(args.userDoc),
+      id: args.id,
+    },
+    {
+      _id: 0,
+      [foreignIdentifier]: 0,
+    },
+    (err, group) => {
+      if (err) callback(err);
+      else if (group) callback(null, stats.OK, group);
+      else callback(null, stats.NonExisting);
+    }
+  );
 }
 
 function listGradeMonths(args, callback) {
-  if (!isTeacherRep(args.userDoc)) return callback(null, stats.IncapableUserType);
-  db.collection("classes").aggregate([{
-    $match: {
-      grade: args.grade
-    }
-  },
-  {
-    $group: {
-      _id: {
-        month: {
-          $sum: [{
-            $month: "$date"
-          }, -1]
-
+  if (!isTeacherRep(args.userDoc))
+    return callback(null, stats.IncapableUserType);
+  db.collection("classes").aggregate(
+    [
+      {
+        $match: {
+          grade: args.grade,
         },
-        year: {
-          $year: "$date"
-        }
-      }
+      },
+      {
+        $group: {
+          _id: {
+            month: {
+              $sum: [
+                {
+                  $month: "$date",
+                },
+                -1,
+              ],
+            },
+            year: {
+              $year: "$date",
+            },
+          },
+        },
+      },
+      {
+        $project: {
+          _id: 0,
+          month: "$_id.month",
+          year: "$_id.year",
+        },
+      },
+    ],
+    (err, result) => {
+      if (err) callback(err);
+      callback(null, stats.OK, result);
     }
-  },
-  {
-    $project: {
-      _id: 0,
-      month: "$_id.month",
-      year: "$_id.year"
-    }
-  }
-  ], (err, result) => {
-    if (err) callback(err);
-    callback(null, stats.OK, result);
-  });
+  );
 }
 
 function listGroups(args, callback) {
-  if (!isTeacherRep(args.userDoc)) return callback(null, stats.IncapableUserType);
-  db.collection("groups").find({
-    [foreignIdentifier]: teacherRep(args.userDoc),
-    grade: {
-      $in: args.ig_grades || args.userDoc.grades
-    }
-  }, {
-    _id: 0,
-    [foreignIdentifier]: 0
-  }).toArray(function (err, results) {
-    if (err) callback(err);
-    callback(null, stats.OK, results);
-  });
+  if (!isTeacherRep(args.userDoc))
+    return callback(null, stats.IncapableUserType);
+  db.collection("groups")
+    .find(
+      {
+        [foreignIdentifier]: teacherRep(args.userDoc),
+        grade: {
+          $in: args.ig_grades || args.userDoc.grades,
+        },
+      },
+      {
+        _id: 0,
+        [foreignIdentifier]: 0,
+      }
+    )
+    .toArray(function (err, results) {
+      if (err) callback(err);
+      callback(null, stats.OK, results);
+    });
 }
 
 function editGroup(args, callback) {
@@ -1947,225 +2409,286 @@ function editGroup(args, callback) {
   if (args.ig_name) updateQuery.name = args.ig_name;
   if (args.ig_schedule) updateQuery.schedule = args.ig_schedule;
   if (updateQuery.schedule.days) {
-    db.collection("groups").findOne({
-      id: args.id,
-      [foreignIdentifier]: teacherRep(args.userDoc)
-    }, {
-      'schedule.days': 1,
-      grade: 1
-    }, (err, group) => {
-      if (err) callback(err);
-      else update(() => {
-        var diff = lib.ArraysDifference(group.schedule.days, updateQuery.schedule.days);
-        if (diff.changed && diff.removed.length > 0) {
-          db.collection('groupslinks').updateMany({
-            [teacherForeignIdentifier]: teacherRep(args.userDoc),
-            grade: group.grade
-          }, {
-            $pull: {
-              links: {
-                groupid: args.id,
-                day: {
-                  $in: diff.removed
+    db.collection("groups").findOne(
+      {
+        id: args.id,
+        [foreignIdentifier]: teacherRep(args.userDoc),
+      },
+      {
+        "schedule.days": 1,
+        grade: 1,
+      },
+      (err, group) => {
+        if (err) callback(err);
+        else
+          update(() => {
+            var diff = lib.ArraysDifference(
+              group.schedule.days,
+              updateQuery.schedule.days
+            );
+            if (diff.changed && diff.removed.length > 0) {
+              db.collection("groupslinks").updateMany(
+                {
+                  [teacherForeignIdentifier]: teacherRep(args.userDoc),
+                  grade: group.grade,
+                },
+                {
+                  $pull: {
+                    links: {
+                      groupid: args.id,
+                      day: {
+                        $in: diff.removed,
+                      },
+                    },
+                  },
+                },
+                () => {
+                  db.collection("groupslinks").deleteMany(
+                    {
+                      links: {
+                        $size: 0,
+                      },
+                    },
+                    () => {}
+                  );
                 }
-              }
+              );
             }
-          }, () => {
-            db.collection("groupslinks").deleteMany({
-              links: {
-                $size: 0
-              }
-            }, () => { });
           });
-        }
-      });
-    });
+      }
+    );
   } else update();
   var update = (local_callback) => {
-    db.collection("groups").updateOne({
-      id: args.id,
-      [foreignIdentifier]: teacherRep(args.userDoc)
-    }, {
-      $set: updateQuery
-    }, (err) => {
-      if (err) callback(err);
-      else {
-        callback(null, stats.OK);
-        if (local_callback) local_callback();
+    db.collection("groups").updateOne(
+      {
+        id: args.id,
+        [foreignIdentifier]: teacherRep(args.userDoc),
+      },
+      {
+        $set: updateQuery,
+      },
+      (err) => {
+        if (err) callback(err);
+        else {
+          callback(null, stats.OK);
+          if (local_callback) local_callback();
+        }
       }
-    });
-  }
+    );
+  };
 }
 
 function removeGroupClass(args, callback) {
-  db.collection('groupslinks').updateMany({
-    [teacherForeignIdentifier]: teacherRep(args.userDoc),
-    grade: args.grade
-  }, {
-    $pull: {
-      links: {
-        groupid: args.groupid,
-        day: args.groupday
-      }
-    }
-  }, (err) => {
-    db.collection("groupslinks").deleteMany({
-      links: {
-        $size: 0
-      }
-    }, () => { });
-    db.collection("groups").updateOne({
-      id: args.groupid,
-      [foreignIdentifier]: teacherRep(args.userDoc)
-    }, {
+  db.collection("groupslinks").updateMany(
+    {
+      [teacherForeignIdentifier]: teacherRep(args.userDoc),
+      grade: args.grade,
+    },
+    {
       $pull: {
-        'schedule.days': args.groupday
-      }
-    }, (err) => {
-      if (err) callback(err);
-      else {
-        callback(null, stats.OK);
-      }
-    });
-  });
+        links: {
+          groupid: args.groupid,
+          day: args.groupday,
+        },
+      },
+    },
+    (err) => {
+      db.collection("groupslinks").deleteMany(
+        {
+          links: {
+            $size: 0,
+          },
+        },
+        () => {}
+      );
+      db.collection("groups").updateOne(
+        {
+          id: args.groupid,
+          [foreignIdentifier]: teacherRep(args.userDoc),
+        },
+        {
+          $pull: {
+            "schedule.days": args.groupday,
+          },
+        },
+        (err) => {
+          if (err) callback(err);
+          else {
+            callback(null, stats.OK);
+          }
+        }
+      );
+    }
+  );
 }
 
 function getStudent(args, callback) {
-  if (!isTeacherRep(args.userDoc)) return callback(null, stats.IncapableUserType);
-  db.collection("links").aggregate([{
-    $match: {
-      [studentForeignIdentifier]: args.targetuser
+  if (!isTeacherRep(args.userDoc))
+    return callback(null, stats.IncapableUserType);
+  db.collection("links").aggregate(
+    [
+      {
+        $match: {
+          [studentForeignIdentifier]: args.targetuser,
+        },
+      },
+      {
+        $lookup: {
+          from: "users",
+          localField: "studentid",
+          foreignField: "id",
+          as: "user_data",
+        },
+      },
+      {
+        $lookup: {
+          from: "payments",
+          localField: "studentid",
+          foreignField: "studentid",
+          as: "payments",
+        },
+      },
+      {
+        $lookup: {
+          from: "groups",
+          localField: "group",
+          foreignField: "id",
+          as: "groupinfo",
+        },
+      },
+      {
+        $lookup: {
+          from: "phones",
+          localField: studentForeignIdentifier,
+          foreignField: foreignIdentifier,
+          as: "phones",
+        },
+      },
+      {
+        $project: {
+          [studentForeignIdentifier]: 1,
+          id: 1, // link identifier
+          fullname: 1,
+          grade: 1,
+          group: 1,
+          notes: "$user_data.notes",
+          discount: "$user_data.discount",
+          code: "$user_data.code",
+          "phones.number": 1,
+          "phones.phonecode": 1,
+          "phones.type": 1,
+          "phones.id": 1,
+          "groupinfo.name": 1,
+          "payments.payed": 1,
+          "payments.discount": 1,
+          "payments.itemid": 1,
+        },
+      },
+    ],
+    function (err, result) {
+      if (err) return callback(err);
+      else
+        try {
+          result = result[0];
+          if (result) {
+            db.collection("items")
+              .find(
+                {
+                  [teacherForeignIdentifier]: teacherRep(args.userDoc),
+                  grade: result.grade,
+                },
+                {
+                  _id: 0,
+                }
+              )
+              .toArray((err, items) => {
+                if (err) return callback(err);
+                var paymentsIds = {};
+                for (var i = 0; i < result.payments.length; i++) {
+                  paymentsIds[result.payments[i].itemid] = i;
+                }
+                for (var i = 0; i < items.length; i++) {
+                  var payId = paymentsIds[items[i].id];
+                  if (
+                    typeof payId == "number" &&
+                    !isNaN(payId) &&
+                    result.payments[payId]
+                  ) {
+                    items[i].payed = result.payments[payId].payed;
+                    items[i].discount = result.payments[payId].discount;
+                  }
+                }
+                result.payments = items;
+                result.code = result.code[0];
+                result.discount = result.discount[0];
+                result.notes = result.notes[0];
+                callback(null, stats.OK, result);
+              });
+          } else callback(null, stats.UserNonExisting);
+        } catch (e) {
+          callback(null, stats.UserNonExisting);
+        }
     }
-  }, {
-    $lookup: {
-      from: 'users',
-      localField: 'studentid',
-      foreignField: 'id',
-      as: 'user_data'
-    }
-  }, {
-    $lookup: {
-      from: 'payments',
-      localField: 'studentid',
-      foreignField: 'studentid',
-      as: 'payments'
-    }
-  }, {
-    $lookup: {
-      from: 'groups',
-      localField: 'group',
-      foreignField: 'id',
-      as: 'groupinfo'
-    }
-  }, {
-    $lookup: {
-      from: 'phones',
-      localField: studentForeignIdentifier,
-      foreignField: foreignIdentifier,
-      as: 'phones'
-    }
-  }, {
-    $project: {
-      [studentForeignIdentifier]: 1,
-      id: 1, // link identifier
-      fullname: 1,
-      grade: 1,
-      group: 1,
-      notes: "$user_data.notes",
-      discount: "$user_data.discount",
-      code: "$user_data.code",
-      'phones.number': 1,
-      'phones.phonecode': 1,
-      'phones.type': 1,
-      'phones.id': 1,
-      'groupinfo.name': 1,
-      'payments.payed': 1,
-      'payments.discount': 1,
-      'payments.itemid': 1
-    }
-  }], function (err, result) {
-    if (err) return callback(err);
-    else try {
-      result = result[0];
-      if (result) {
-        db.collection("items").find({
-          [teacherForeignIdentifier]: teacherRep(args.userDoc),
-          grade: result.grade
-        }, {
-          _id: 0
-        }).toArray((err, items) => {
-          if (err) return callback(err);
-          var paymentsIds = {};
-          for (var i = 0; i < result.payments.length; i++) {
-            paymentsIds[result.payments[i].itemid] = i
-          }
-          for (var i = 0; i < items.length; i++) {
-            var payId = paymentsIds[items[i].id];
-            if (typeof payId == 'number' && !isNaN(payId) && result.payments[payId]) {
-              items[i].payed = result.payments[payId].payed;
-              items[i].discount = result.payments[payId].discount;
-            }
-          }
-          result.payments = items;
-          result.code = result.code[0];
-          result.discount = result.discount[0];
-          result.notes = result.notes[0];
-          callback(null, stats.OK, result);
-        });
-      } else callback(null, stats.UserNonExisting);
-    } catch (e) {
-      callback(null, stats.UserNonExisting);
-    }
-  });
+  );
 }
 
 function qrListStudents(args, callback) {
-  if (!isTeacherRep(args.userDoc)) return callback(null, stats.IncapableUserType);
+  if (!isTeacherRep(args.userDoc))
+    return callback(null, stats.IncapableUserType);
   var query = {
-    [teacherForeignIdentifier]: teacherRep(args.userDoc)
+    [teacherForeignIdentifier]: teacherRep(args.userDoc),
   };
-  if (args.ig_groups) query.group = {
-    $in: args.ig_groups
-  };
-  if (args.ig_grades) query.grade = {
-    $in: args.ig_grades
-  };
-  db.collection("links").aggregate([{
-    $match: query
-  },
-  {
-    $lookup: {
-      from: 'users',
-      localField: studentForeignIdentifier,
-      foreignField: identifier,
-      as: 'user'
+  if (args.ig_groups)
+    query.group = {
+      $in: args.ig_groups,
+    };
+  if (args.ig_grades)
+    query.grade = {
+      $in: args.ig_grades,
+    };
+  db.collection("links").aggregate(
+    [
+      {
+        $match: query,
+      },
+      {
+        $lookup: {
+          from: "users",
+          localField: studentForeignIdentifier,
+          foreignField: identifier,
+          as: "user",
+        },
+      },
+      {
+        $project: {
+          _id: 0,
+          studentid: 1,
+          fullname: 1,
+          "user.code": 1,
+        },
+      },
+    ],
+    function (err, result) {
+      if (err) callback(err);
+      callback(null, stats.OK, result);
     }
-  },
-  {
-    $project: {
-      _id: 0,
-      studentid: 1,
-      fullname: 1,
-      'user.code': 1
-    }
-  }
-  ], function (err, result) {
-    if (err) callback(err);
-    callback(null, stats.OK, result);
-  });
+  );
 }
 
 function listContacts(args, callback) {
-  if (!isTeacherRep(args.userDoc)) return callback(null, stats.IncapableUserType);
+  if (!isTeacherRep(args.userDoc))
+    return callback(null, stats.IncapableUserType);
 
-  query = [{
-    $lookup: {
-      from: 'phones',
-      localField: identifier,
-      foreignField: foreignIdentifier,
-      as: 'contacts'
-    }
-  }];
+  query = [
+    {
+      $lookup: {
+        from: "phones",
+        localField: identifier,
+        foreignField: foreignIdentifier,
+        as: "contacts",
+      },
+    },
+  ];
 
   db.collection("users").aggregate(query, (err, result) => {
     if (err) callback(err);
@@ -2174,37 +2697,45 @@ function listContacts(args, callback) {
 }
 
 function listStudents(args, callback) {
-  if (!isTeacherRep(args.userDoc)) return callback(null, stats.IncapableUserType);
+  if (!isTeacherRep(args.userDoc))
+    return callback(null, stats.IncapableUserType);
   var match_query = {
-    [teacherForeignIdentifier]: teacherRep(args.userDoc)
+    [teacherForeignIdentifier]: teacherRep(args.userDoc),
   };
-  if (args.ig_groups) match_query.group = {
-    $in: args.ig_groups
-  };
-  if (args.ig_grades) match_query.grade = {
-    $in: args.ig_grades
-  };
+  if (args.ig_groups)
+    match_query.group = {
+      $in: args.ig_groups,
+    };
+  if (args.ig_grades)
+    match_query.grade = {
+      $in: args.ig_grades,
+    };
 
-  let query = [{
-    $match: match_query
-  }, {
-    $skip: args.startid
-  }, {
-    $limit: args.limit
-  }, {
-    $sort: {
-      fullname: 1
-    }
-  }];
+  let query = [
+    {
+      $match: match_query,
+    },
+    {
+      $skip: args.startid,
+    },
+    {
+      $limit: args.limit,
+    },
+    {
+      $sort: {
+        fullname: 1,
+      },
+    },
+  ];
 
   if (args.ig_getcontacts) {
     query.push({
       $lookup: {
-        from: 'phones',
+        from: "phones",
         localField: studentForeignIdentifier,
         foreignField: foreignIdentifier,
-        as: 'contacts'
-      }
+        as: "contacts",
+      },
     });
   }
 
@@ -2215,320 +2746,511 @@ function listStudents(args, callback) {
 }
 
 function countStudents(args, callback) {
-  if (!isTeacherRep(args.userDoc)) return callback(null, stats.IncapableUserType);
+  if (!isTeacherRep(args.userDoc))
+    return callback(null, stats.IncapableUserType);
   var query = {
-    [teacherForeignIdentifier]: teacherRep(args.userDoc)
+    [teacherForeignIdentifier]: teacherRep(args.userDoc),
   };
-  if (args.ig_groups) query.group = {
-    $in: args.ig_groups
-  };
-  if (args.ig_grades) query.grade = {
-    $in: args.ig_grades
-  };
+  if (args.ig_groups)
+    query.group = {
+      $in: args.ig_groups,
+    };
+  if (args.ig_grades)
+    query.grade = {
+      $in: args.ig_grades,
+    };
   db.collection("links").count(query, function (err, result) {
     if (err) callback(err);
-    callback(null, stats.OK, args.startid >= result ? 0 : (result - args.startid));
+    callback(
+      null,
+      stats.OK,
+      args.startid >= result ? 0 : result - args.startid
+    );
   });
 }
 
 function post(args, callback) {
-  if (!isTeacherRep(args.userDoc)) return callback(null, stats.IncapableUserType);
-  mongoh.GetNextSequence(db, "posts", {}, "id", lib.IntIncrementer, function (result) {
-    if (!args.media_ids) args.media_ids = [];
-    db.collection("posts").insertOne({
-      id: result,
-      [foreignIdentifier]: teacherRep(args.userDoc),
-      text: args.text,
-      media_ids: args.media_ids
-    }, function (err, result) {
-      ErrorAndCount(callback, err, result, fields.matchedCount, stats.NothingHappened);
-    })
-  });
+  if (!isTeacherRep(args.userDoc))
+    return callback(null, stats.IncapableUserType);
+  mongoh.GetNextSequence(
+    db,
+    "posts",
+    {},
+    "id",
+    lib.IntIncrementer,
+    function (result) {
+      if (!args.media_ids) args.media_ids = [];
+      db.collection("posts").insertOne(
+        {
+          id: result,
+          [foreignIdentifier]: teacherRep(args.userDoc),
+          text: args.text,
+          media_ids: args.media_ids,
+        },
+        function (err, result) {
+          ErrorAndCount(
+            callback,
+            err,
+            result,
+            fields.matchedCount,
+            stats.NothingHappened
+          );
+        }
+      );
+    }
+  );
 }
 //TODO test
 function editPost(args, callback) {
-  if (!isTeacherRep(args.userDoc)) return callback(null, stats.IncapableUserType);
+  if (!isTeacherRep(args.userDoc))
+    return callback(null, stats.IncapableUserType);
   var posts = db.collection("posts");
-  posts.findOne({
-    id: args.id
-  }, {}, function (err, doc) {
-    if (err) return callback(err);
-    if (!doc) return callback(null, stats.NonExisting);
-    if (args.new_media_ids && !lib.validators.ValidateNumberArray(args.new_media_ids)) return callback(null, stats.InvalidData, "new_media_ids");
-    var changes = lib.ArraysDifference(doc.media_ids, args.new_media_ids);
-    if (!changes.changed && doc.text == args.text) return callback(null, stats.OK);
-    var query = {
-      $set: {}
-    }
-    if (doc.text != args.text) query.$set.text = args.text;
+  posts.findOne(
+    {
+      id: args.id,
+    },
+    {},
+    function (err, doc) {
+      if (err) return callback(err);
+      if (!doc) return callback(null, stats.NonExisting);
+      if (
+        args.new_media_ids &&
+        !lib.validators.ValidateNumberArray(args.new_media_ids)
+      )
+        return callback(null, stats.InvalidData, "new_media_ids");
+      var changes = lib.ArraysDifference(doc.media_ids, args.new_media_ids);
+      if (!changes.changed && doc.text == args.text)
+        return callback(null, stats.OK);
+      var query = {
+        $set: {},
+      };
+      if (doc.text != args.text) query.$set.text = args.text;
 
-    function finish() {
-      posts.updateOne({
-        id: args.id
-      }, query, function (err, result) {
-        ErrorAndCount(callback, err, result, fields.matchedCount, stats.NonExisting);
-      });
-    }
-    if (changes.changed) {
-      if (changes.removed.length > 0) {
-        deleteFiles({
-          userDoc: args.userDoc,
-          ids: changes.removed
-        }, function () { });
+      function finish() {
+        posts.updateOne(
+          {
+            id: args.id,
+          },
+          query,
+          function (err, result) {
+            ErrorAndCount(
+              callback,
+              err,
+              result,
+              fields.matchedCount,
+              stats.NonExisting
+            );
+          }
+        );
       }
-      validators.ValidateByIds({
-        value: args.new_media_ids,
-        col: "files",
-        key: "id",
-        query: {
-          completed: true
-        },
-        userDoc: {
-          [identifier]: teacherRep(args.userDoc)
-        },
-        distinct: true
-      }, function (result) {
-        if (result === true) {
-          query.$set.media_ids = args.new_media_ids;
-          finish();
-        } else {
-          // result: failed
-          // rm.result: failed added, rm.removed: failed same
-          var rm = lib.RemoveValuesFromArray(result, changes.same);
-          if (rm.result.length > 0) return callback(null, stats.FilesNotFound, result);
-          else if (rm.removed.length > 0) query.$set.media_ids = lib.RemoveValuesFromArray(args.new_media_ids, rm.removed).result;
-          finish();
+      if (changes.changed) {
+        if (changes.removed.length > 0) {
+          deleteFiles(
+            {
+              userDoc: args.userDoc,
+              ids: changes.removed,
+            },
+            function () {}
+          );
         }
-      })
-    } else finish();
-  });
+        validators.ValidateByIds(
+          {
+            value: args.new_media_ids,
+            col: "files",
+            key: "id",
+            query: {
+              completed: true,
+            },
+            userDoc: {
+              [identifier]: teacherRep(args.userDoc),
+            },
+            distinct: true,
+          },
+          function (result) {
+            if (result === true) {
+              query.$set.media_ids = args.new_media_ids;
+              finish();
+            } else {
+              // result: failed
+              // rm.result: failed added, rm.removed: failed same
+              var rm = lib.RemoveValuesFromArray(result, changes.same);
+              if (rm.result.length > 0)
+                return callback(null, stats.FilesNotFound, result);
+              else if (rm.removed.length > 0)
+                query.$set.media_ids = lib.RemoveValuesFromArray(
+                  args.new_media_ids,
+                  rm.removed
+                ).result;
+              finish();
+            }
+          }
+        );
+      } else finish();
+    }
+  );
 }
 
 function removePost(args, callback) {
-  if (!isTeacherRep(args.userDoc)) return callback(null, stats.IncapableUserType);
-  var posts = db.collection("posts")
-  posts.findOne({
-    id: args.id
-  }, {}, function (err, doc) {
-    if (err) callback(err);
-    if (!doc) return callback(null, stats.NonExisting);
-    else if (doc[foreignIdentifier] != teacherRep(args.userDoc)) callback(null, stats.NotPermitted);
-    var finish = function () {
-      posts.deleteOne({
-        id: args.id
-      }, function (err, result) {
-        ErrorAndCount(callback, err, result, fields.deletedCount, stats.Error);
-      });
+  if (!isTeacherRep(args.userDoc))
+    return callback(null, stats.IncapableUserType);
+  var posts = db.collection("posts");
+  posts.findOne(
+    {
+      id: args.id,
+    },
+    {},
+    function (err, doc) {
+      if (err) callback(err);
+      if (!doc) return callback(null, stats.NonExisting);
+      else if (doc[foreignIdentifier] != teacherRep(args.userDoc))
+        callback(null, stats.NotPermitted);
+      var finish = function () {
+        posts.deleteOne(
+          {
+            id: args.id,
+          },
+          function (err, result) {
+            ErrorAndCount(
+              callback,
+              err,
+              result,
+              fields.deletedCount,
+              stats.Error
+            );
+          }
+        );
+      };
+      if (doc.media_ids && doc.media_ids.length > 0) {
+        deleteFiles(
+          {
+            userDoc: args.userDoc,
+            ids: doc.media_ids,
+          },
+          function (err, stat, result) {
+            if (err) return callback(err);
+            if (stat == stats.OK) {
+              // don't care about partial failure
+              if (result.length == doc.media_ids.length)
+                return callback(null, stats.Error);
+              finish();
+            } else callback(null, stats.Error);
+          }
+        );
+      } else finish();
     }
-    if (doc.media_ids && doc.media_ids.length > 0) {
-      deleteFiles({
-        userDoc: args.userDoc,
-        ids: doc.media_ids
-      }, function (err, stat, result) {
-        if (err) return callback(err);
-        if (stat == stats.OK) {
-          // don't care about partial failure
-          if (result.length == doc.media_ids.length) return callback(null, stats.Error);
-          finish();
-        } else callback(null, stats.Error);
-      });
-    } else finish();
-  });
+  );
 }
 //TODO get feed
 
 function getSuperTTDefaults(args, callback) {
-  if (!isTeacherRep(args.userDoc)) return callback(null, stats.IncapableUserType);
-  else callback(null, stats.OK, {
-    grades: args.userDoc.grades,
-    defaults: args.userDoc.defaults
-  });
+  if (!isTeacherRep(args.userDoc))
+    return callback(null, stats.IncapableUserType);
+  else
+    callback(null, stats.OK, {
+      grades: args.userDoc.grades,
+      defaults: args.userDoc.defaults,
+    });
 }
 
 function setSuperTTDefaults(args, callback) {
-  if (!isTeacherRep(args.userDoc)) return callback(null, stats.IncapableUserType);
-  var inputs = [
-    'days',
-    'whours',
-    'duration',
-    'break'
-  ];
+  if (!isTeacherRep(args.userDoc))
+    return callback(null, stats.IncapableUserType);
+  var inputs = ["days", "whours", "duration", "break"];
   var query = {
-    $set: {}
+    $set: {},
   };
   for (var key in inputs) {
     if (args[inputs[key]]) {
       query.$set["defaults." + inputs[key]] = args[inputs[key]];
     }
   }
-  if (Object.keys(query.$set).length == 0) return callback(null, stats.EmptyData);
-  db.collection("users").updateOne({
-    [identifier]: teacherRep(args.userDoc)
-  }, query, function (err, result) {
-    ErrorAndCount(callback, err, result, fields.matchedCount, stats.UserNonExisting);
-  });
+  if (Object.keys(query.$set).length == 0)
+    return callback(null, stats.EmptyData);
+  db.collection("users").updateOne(
+    {
+      [identifier]: teacherRep(args.userDoc),
+    },
+    query,
+    function (err, result) {
+      ErrorAndCount(
+        callback,
+        err,
+        result,
+        fields.matchedCount,
+        stats.UserNonExisting
+      );
+    }
+  );
 }
 
 function getDefaultPhoneCode(args, callback) {
-  if (!isTeacherRep(args.userDoc)) return callback(null, stats.IncapableUserType);
+  if (!isTeacherRep(args.userDoc))
+    return callback(null, stats.IncapableUserType);
   else callback(null, stats.OK, args.userDoc.defaults.phonecode);
 }
 
 function setDefaultPhoneCode(args, callback) {
-  if (!isTeacherRep(args.userDoc)) return callback(null, stats.IncapableUserType);
-  db.collection("users").updateOne({
-    [identifier]: teacherRep(args.userDoc)
-  }, {
-    $set: {
-      ['defaults.phonecode']: args.phonecode
+  if (!isTeacherRep(args.userDoc))
+    return callback(null, stats.IncapableUserType);
+  db.collection("users").updateOne(
+    {
+      [identifier]: teacherRep(args.userDoc),
+    },
+    {
+      $set: {
+        ["defaults.phonecode"]: args.phonecode,
+      },
+    },
+    function (err, result) {
+      ErrorAndCount(
+        callback,
+        err,
+        result,
+        fields.modifiedCount,
+        stats.UserNonExisting
+      );
     }
-  }, function (err, result) {
-    ErrorAndCount(callback, err, result, fields.modifiedCount, stats.UserNonExisting);
-  });
+  );
 }
 
 function renameStudent(args, callback) {
-  if (!isTeacherRep(args.userDoc)) return callback(null, stats.IncapableUserType);
-  mongoh.Exists(db, "users", {
-    [identifier]: args.targetuser
-  }, function (result) {
-    if (result) {
-      db.collection("users").updateOne({
-        [identifier]: args.targetuser
-      }, {
-        $set: {
-          displayname: `${args.fullname.first} ${args.fullname.last}`,
-          fullname: `${args.fullname.first} ${args.fullname.father} ${args.fullname.grand} ${args.fullname.last}`,
-          firstname: args.fullname.first,
-          fathername: args.fullname.father,
-          grandname: args.fullname.grand,
-          lastname: args.fullname.last,
-        }
-      }, function (err, result) {
-        if (err) return callback(err);
-        if (result.matchedCount > 0) {
-          db.collection("links").updateMany({
-            [studentForeignIdentifier]: args.targetuser
-          }, {
+  if (!isTeacherRep(args.userDoc))
+    return callback(null, stats.IncapableUserType);
+  mongoh.Exists(
+    db,
+    "users",
+    {
+      [identifier]: args.targetuser,
+    },
+    function (result) {
+      if (result) {
+        db.collection("users").updateOne(
+          {
+            [identifier]: args.targetuser,
+          },
+          {
             $set: {
+              displayname: `${args.fullname.first} ${args.fullname.last}`,
               fullname: `${args.fullname.first} ${args.fullname.father} ${args.fullname.grand} ${args.fullname.last}`,
-            }
-          }, function (err, result) {
-            if (err) callback(err);
-            else callback(null, stats.OK);
-            //TODO revert changes
-          });
-        } else callback(null, stats.NonExisting);
-      });
-    } else callback(null, stats.NonExisting);
-  });
+              firstname: args.fullname.first,
+              fathername: args.fullname.father,
+              grandname: args.fullname.grand,
+              lastname: args.fullname.last,
+            },
+          },
+          function (err, result) {
+            if (err) return callback(err);
+            if (result.matchedCount > 0) {
+              db.collection("links").updateMany(
+                {
+                  [studentForeignIdentifier]: args.targetuser,
+                },
+                {
+                  $set: {
+                    fullname: `${args.fullname.first} ${args.fullname.father} ${args.fullname.grand} ${args.fullname.last}`,
+                  },
+                },
+                function (err, result) {
+                  if (err) callback(err);
+                  else callback(null, stats.OK);
+                  //TODO revert changes
+                }
+              );
+            } else callback(null, stats.NonExisting);
+          }
+        );
+      } else callback(null, stats.NonExisting);
+    }
+  );
 }
 
 //TODO username stopped here
 function registerStudent(args, callback) {
-  if (!isTeacherRep(args.userDoc)) return callback(null, stats.IncapableUserType);
-  mongoh.Exists(db, "users", {
-    firstname: args.fullname.first,
-    fathername: args.fullname.father,
-    grandname: args.fullname.grand,
-    lastname: args.fullname.last
-  }, function (result) {
-    if (result) {
-      callback(null, stats.Exists);
-    } else {
-      var password = genPass.generate({
-        length: 6,
-        numbers: true,
-        uppercase: false
-      });
-      mongoh.GetNextSequence(db, 'users', {}, 'id', lib.IntIncrementer, function (newid) {
-        db.collection("users").insertOne({
-          id: newid,
-          displayname: `${args.fullname.first} ${args.fullname.last}`,
-          fullname: `${args.fullname.first} ${args.fullname.father} ${args.fullname.grand} ${args.fullname.last}`.trim(),
-          firstname: args.fullname.first,
-          fathername: args.fullname.father,
-          grandname: args.fullname.grand,
-          lastname: args.fullname.last,
-          //username: /*args.username*/ ,
-          //password: hash(password),
-          code: password,
-          refered: true,
-          referer: teacherRep(args.userDoc),
-          usertype: 'student'
-        }, function (err, result) {
-          ErrorAndCount(callback, err, result, fields.insertedCount, stats.Error, {
-            id: newid
-          });
+  if (!isTeacherRep(args.userDoc))
+    return callback(null, stats.IncapableUserType);
+  mongoh.Exists(
+    db,
+    "users",
+    {
+      firstname: args.fullname.first,
+      fathername: args.fullname.father,
+      grandname: args.fullname.grand,
+      lastname: args.fullname.last,
+    },
+    function (result) {
+      if (result) {
+        callback(null, stats.Exists);
+      } else {
+        var password = genPass.generate({
+          length: 6,
+          numbers: true,
+          uppercase: false,
         });
-      });
+        mongoh.GetNextSequence(
+          db,
+          "users",
+          {},
+          "id",
+          lib.IntIncrementer,
+          function (newid) {
+            db.collection("users").insertOne(
+              {
+                id: newid,
+                displayname: `${args.fullname.first} ${args.fullname.last}`,
+                fullname: `${args.fullname.first} ${args.fullname.father} ${args.fullname.grand} ${args.fullname.last}`.trim(),
+                firstname: args.fullname.first,
+                fathername: args.fullname.father,
+                grandname: args.fullname.grand,
+                lastname: args.fullname.last,
+                //username: /*args.username*/ ,
+                //password: hash(password),
+                code: password,
+                refered: true,
+                referer: teacherRep(args.userDoc),
+                usertype: "student",
+              },
+              function (err, result) {
+                ErrorAndCount(
+                  callback,
+                  err,
+                  result,
+                  fields.insertedCount,
+                  stats.Error,
+                  {
+                    id: newid,
+                  }
+                );
+              }
+            );
+          }
+        );
+      }
     }
-  });
+  );
 }
 // linkid
 function unlinkStudent(args, callback) {
-  db.collection("links").findOne({ id: args.linkid }, { [studentForeignIdentifier]: 1 }, (err, result) => {
-    if (err) return callback(err);
-    db.collection("users").updateOne({ id: result[studentForeignIdentifier] }, { $set: { deleted: true } }, (err) => {
+  db.collection("links").findOne(
+    { id: args.linkid },
+    { [studentForeignIdentifier]: 1 },
+    (err, result) => {
       if (err) return callback(err);
-      db.collection("links").deleteOne({
-        id: args.linkid,
-        teacherid: teacherRep(args.userDoc)
-      }, function (err, result) {
-        ErrorAndCount(callback, err, result, fields.deletedCount, stats.NonExisting);
-      });
-    });
-  });
+      db.collection("users").updateOne(
+        { id: result[studentForeignIdentifier] },
+        { $set: { deleted: true } },
+        (err) => {
+          if (err) return callback(err);
+          db.collection("links").deleteOne(
+            {
+              id: args.linkid,
+              teacherid: teacherRep(args.userDoc),
+            },
+            function (err, result) {
+              ErrorAndCount(
+                callback,
+                err,
+                result,
+                fields.deletedCount,
+                stats.NonExisting
+              );
+            }
+          );
+        }
+      );
+    }
+  );
 }
 
 function editLink(args, callback) {
-  if (!isTeacherRep(args.userDoc)) return callback(null, stats.IncapableUserType);
+  if (!isTeacherRep(args.userDoc))
+    return callback(null, stats.IncapableUserType);
   var query = {};
-  if (typeof args.grade == 'number') query.grade = args.grade;
-  if (typeof args.group == 'number') query.group = args.group;
-  db.collection("links").updateOne({
-    id: args.id
-  }, {
-    $set: query
-  }, function (err, result) {
-    ErrorAndCount(callback, err, result, fields.matchedCount, stats.NonExisting);
-  });
+  if (typeof args.grade == "number") query.grade = args.grade;
+  if (typeof args.group == "number") query.group = args.group;
+  db.collection("links").updateOne(
+    {
+      id: args.id,
+    },
+    {
+      $set: query,
+    },
+    function (err, result) {
+      ErrorAndCount(
+        callback,
+        err,
+        result,
+        fields.matchedCount,
+        stats.NonExisting
+      );
+    }
+  );
 }
 
 function linkStudent(args, callback) {
-  if (!isTeacherRep(args.userDoc)) return callback(null, stats.IncapableUserType);
-  mongoh.Exists(db, 'links', {
-    [teacherForeignIdentifier]: teacherRep(args.userDoc),
-    [studentForeignIdentifier]: args.student,
-    grade: args.grade,
-  }, function (linkExists) {
-    if (linkExists) return callback(null, stats.Exists);
-    validators.ValidateUser(args.student, {
-      refered: 1,
-      fullname: 1,
-      firstname: 1,
-    }, (result) => {
-      if (!result) return callback(null, stats.NonExisting);
-      mongoh.GetNextSequence(db, "links", {}, 'id', lib.IntIncrementer, (newid) => {
-        if (!typeof newid == 'number') return callback(null, stats.Error);
-        db.collection("links").insertOne({
-          id: newid,
-          [teacherForeignIdentifier]: teacherRep(args.userDoc),
-          [studentForeignIdentifier]: args.student,
-          fullname: result.fullname,
-          firstname: result.firstname,
-          fathername: result.fathername,
-          grandname: result.grandname,
-          lastname: result.lastname,
-          grade: args.grade,
-          group: args.group,
-        }, function (err, result) {
-          db.collection("users").updateOne({ id: args.student }, { $set: { deleted: false } }, () => { });
-          ErrorAndCount(callback, err, result, fields.insertedCount, stats.Error)
-        });
-      });
-    });
-  }, false);
+  if (!isTeacherRep(args.userDoc))
+    return callback(null, stats.IncapableUserType);
+  mongoh.Exists(
+    db,
+    "links",
+    {
+      [teacherForeignIdentifier]: teacherRep(args.userDoc),
+      [studentForeignIdentifier]: args.student,
+      grade: args.grade,
+    },
+    function (linkExists) {
+      if (linkExists) return callback(null, stats.Exists);
+      validators.ValidateUser(
+        args.student,
+        {
+          refered: 1,
+          fullname: 1,
+          firstname: 1,
+        },
+        (result) => {
+          if (!result) return callback(null, stats.NonExisting);
+          mongoh.GetNextSequence(
+            db,
+            "links",
+            {},
+            "id",
+            lib.IntIncrementer,
+            (newid) => {
+              if (!typeof newid == "number") return callback(null, stats.Error);
+              db.collection("links").insertOne(
+                {
+                  id: newid,
+                  [teacherForeignIdentifier]: teacherRep(args.userDoc),
+                  [studentForeignIdentifier]: args.student,
+                  fullname: result.fullname,
+                  firstname: result.firstname,
+                  fathername: result.fathername,
+                  grandname: result.grandname,
+                  lastname: result.lastname,
+                  grade: args.grade,
+                  group: args.group,
+                },
+                function (err, result) {
+                  db.collection("users").updateOne(
+                    { id: args.student },
+                    { $set: { deleted: false } },
+                    () => {}
+                  );
+                  ErrorAndCount(
+                    callback,
+                    err,
+                    result,
+                    fields.insertedCount,
+                    stats.Error
+                  );
+                }
+              );
+            }
+          );
+        }
+      );
+    },
+    false
+  );
 }
 /* times
 [
@@ -2548,64 +3270,83 @@ grade: ValidateGrade, curriculum: ValidateString, notes: ValidateOrIgnoreString
     "strict" : true,
     "notes" : "gewagreagae",*/
 function addExam(args, callback) {
-  if (!isTeacherRep(args.userDoc)) return callback(null, stats.IncapableUserType);
-  mongoh.GetNextSequence(db, 'exams', {}, 'id', lib.IntIncrementer, function (newid) {
-    if (typeof newid != 'number') return callback(null, stats.Error);
-    var doc = {
-      id: newid,
-      [foreignIdentifier]: teacherRep(args.userDoc),
-      name: args.name,
-      grade: args.grade,
-      redline: args.redline,
-      //times: args.times,
-      max_mark: args.max || 0,
-      /*curriculum: args.curriculum,
+  if (!isTeacherRep(args.userDoc))
+    return callback(null, stats.IncapableUserType);
+  mongoh.GetNextSequence(
+    db,
+    "exams",
+    {},
+    "id",
+    lib.IntIncrementer,
+    function (newid) {
+      if (typeof newid != "number") return callback(null, stats.Error);
+      var doc = {
+        id: newid,
+        [foreignIdentifier]: teacherRep(args.userDoc),
+        name: args.name,
+        grade: args.grade,
+        redline: args.redline,
+        //times: args.times,
+        max_mark: args.max || 0,
+        /*curriculum: args.curriculum,
       strict: args.strict*/
-      date: new Date()
+        date: new Date(),
+      };
+      //if (args.notes) doc.notes = args.notes;
+      db.collection("exams").insertOne(doc, function (err, result) {
+        ErrorAndCount(callback, err, result, fields.insertedCount, stats.Error);
+      });
     }
-    //if (args.notes) doc.notes = args.notes;
-    db.collection("exams").insertOne(doc, function (err, result) {
-      ErrorAndCount(callback, err, result, fields.insertedCount, stats.Error);
-    })
-  });
+  );
 }
 // edit max, strict, times, notes
 function editExam(args, callback) {
-  if (!isTeacherRep(args.userDoc)) return callback(null, stats.IncapableUserType);
+  if (!isTeacherRep(args.userDoc))
+    return callback(null, stats.IncapableUserType);
   var query = {};
   if (args.ig_name) query.name = args.ig_name;
   if (args.ig_redline >= 0) query.redline = args.ig_redline;
   if (args.ig_max) query.max_mark = args.ig_max;
   if (Object.keys(query).length < 0) return callback(null, stats.OK);
-  db.collection("exams").updateOne({
-    id: args.id,
-    [foreignIdentifier]: teacherRep(args.userDoc)
-  }, {
-    $set: query
-  }, (err, result) => {
-    if (err) return callback(err);
-    else return callback(null, stats.OK);
-  })
+  db.collection("exams").updateOne(
+    {
+      id: args.id,
+      [foreignIdentifier]: teacherRep(args.userDoc),
+    },
+    {
+      $set: query,
+    },
+    (err, result) => {
+      if (err) return callback(err);
+      else return callback(null, stats.OK);
+    }
+  );
 }
 
 function getExam(args, callback) {
-  if (!isTeacherRep(args.userDoc)) return callback(null, stats.IncapableUserType);
-  db.collection("exams").findOne({
-    id: args.id,
-    [foreignIdentifier]: teacherRep(args.userDoc)
-  }, {
-    _id: 0,
-    id: 0,
-    [foreignIdentifier]: 0
-  }, (err, result) => {
-    if (err) return callback(err);
-    else if (result) callback(null, stats.OK, result);
-    else callback(null, stats.NonExisting);
-  });
+  if (!isTeacherRep(args.userDoc))
+    return callback(null, stats.IncapableUserType);
+  db.collection("exams").findOne(
+    {
+      id: args.id,
+      [foreignIdentifier]: teacherRep(args.userDoc),
+    },
+    {
+      _id: 0,
+      id: 0,
+      [foreignIdentifier]: 0,
+    },
+    (err, result) => {
+      if (err) return callback(err);
+      else if (result) callback(null, stats.OK, result);
+      else callback(null, stats.NonExisting);
+    }
+  );
 }
 
 function getExams(args, callback) {
-  if (!isTeacherRep(args.userDoc)) return callback(null, stats.IncapableUserType);
+  if (!isTeacherRep(args.userDoc))
+    return callback(null, stats.IncapableUserType);
   var restrictions = {
     _id: 0,
     id: 1,
@@ -2616,126 +3357,166 @@ function getExams(args, callback) {
     restrictions.max_mark = 1;
     restrictions.redline = 1;
   }
-  db.collection("exams").find({
-    [foreignIdentifier]: teacherRep(args.userDoc),
-    ...args.ig_grades && {
-      grade: {
-        $in: args.ig_grades
-      }
-    }
-  }, restrictions).toArray(function (err, results) {
-    if (err) callback(err);
-    callback(null, stats.OK, results);
-  });
+  db.collection("exams")
+    .find(
+      {
+        [foreignIdentifier]: teacherRep(args.userDoc),
+        ...(args.ig_grades && {
+          grade: {
+            $in: args.ig_grades,
+          },
+        }),
+      },
+      restrictions
+    )
+    .toArray(function (err, results) {
+      if (err) callback(err);
+      callback(null, stats.OK, results);
+    });
 }
 // id
 function removeExam(args, callback) {
-  if (!isTeacherRep(args.userDoc)) return callback(null, stats.IncapableUserType);
-  db.collection("logs").deleteMany({
-    exam: args.id,
-    [teacherForeignIdentifier]: teacherRep(args.userDoc)
-  }, function (err, result) {
-    if (err) callback(err);
-    db.collection("exams").deleteOne({
-      id: args.id,
-      [foreignIdentifier]: teacherRep(args.userDoc)
-    }, function (err, res) {
-      ErrorAndCount(callback, err, res, fields.deletedCount, stats.Error);
-    });
-  });
+  if (!isTeacherRep(args.userDoc))
+    return callback(null, stats.IncapableUserType);
+  db.collection("logs").deleteMany(
+    {
+      exam: args.id,
+      [teacherForeignIdentifier]: teacherRep(args.userDoc),
+    },
+    function (err, result) {
+      if (err) callback(err);
+      db.collection("exams").deleteOne(
+        {
+          id: args.id,
+          [foreignIdentifier]: teacherRep(args.userDoc),
+        },
+        function (err, res) {
+          ErrorAndCount(callback, err, res, fields.deletedCount, stats.Error);
+        }
+      );
+    }
+  );
 }
 // student, id, mark, attendant
 function addExamLog(args, callback) {
-  if (!isTeacherRep(args.userDoc)) return callback(null, stats.IncapableUserType);
+  if (!isTeacherRep(args.userDoc))
+    return callback(null, stats.IncapableUserType);
   var query = {
     // let the constants be in $set to minimize finding time
     [teacherForeignIdentifier]: teacherRep(args.userDoc),
     type: "exam",
   };
-  if (typeof args.ig_mark != 'undefined') query.mark = args.ig_mark;
-  if (typeof args.ig_attendant != 'undefined') query.attendant = args.ig_attendant;
-  if (typeof query.mark == 'undefined' && typeof query.attendant == 'undefined') return callback(null, stats.OK);
-  db.collection("logs").updateOne({
-    // compound index on student and exam <id>
-    [studentForeignIdentifier]: args.student,
-    exam: args.id
-  }, {
-    $set: query
-  }, {
-    upsert: true
-  }, function (err, result) {
-    if (err) callback(err);
-    if (result.upsertedId) {
-      callback(null, stats.OK, {
-        inserted: true
-      });
-      db.collection("exams").findOne({
-        id: args.id
-      }, {
-        grade: 1,
-        _id: 0
-      }, function (err, result) {
-        if (!err) {
-          db.collection("logs").updateOne({
-            [studentForeignIdentifier]: args.student,
-            exam: args.id
-          }, {
-            $set: {
-              grade: result.grade
+  if (typeof args.ig_mark != "undefined") query.mark = args.ig_mark;
+  if (typeof args.ig_attendant != "undefined")
+    query.attendant = args.ig_attendant;
+  if (typeof query.mark == "undefined" && typeof query.attendant == "undefined")
+    return callback(null, stats.OK);
+  db.collection("logs").updateOne(
+    {
+      // compound index on student and exam <id>
+      [studentForeignIdentifier]: args.student,
+      exam: args.id,
+    },
+    {
+      $set: query,
+    },
+    {
+      upsert: true,
+    },
+    function (err, result) {
+      if (err) callback(err);
+      if (result.upsertedId) {
+        callback(null, stats.OK, {
+          inserted: true,
+        });
+        db.collection("exams").findOne(
+          {
+            id: args.id,
+          },
+          {
+            grade: 1,
+            _id: 0,
+          },
+          function (err, result) {
+            if (!err) {
+              db.collection("logs").updateOne(
+                {
+                  [studentForeignIdentifier]: args.student,
+                  exam: args.id,
+                },
+                {
+                  $set: {
+                    grade: result.grade,
+                  },
+                },
+                () => {}
+              );
             }
-          }, () => { });
-        }
-      });
-    } else callback(null, stats.OK, {
-      modified: true
-    });
-  })
+          }
+        );
+      } else
+        callback(null, stats.OK, {
+          modified: true,
+        });
+    }
+  );
 }
 
 function setDefaultStartDate(args, callback) {
-  db.collection('users').updateOne({
-    teacherid: teacherRep(args.userDoc)
-  }, {
-    $pull: {
-      defaultStartDates: {
-        grade: args.grade
-      }
-    }
-  }, (err) => {
-    if (err) return callback(err);
-    db.collection('users').updateOne({
-      teacherid: teacherRep(args.userDoc)
-    }, {
-      $push: {
+  db.collection("users").updateOne(
+    {
+      teacherid: teacherRep(args.userDoc),
+    },
+    {
+      $pull: {
         defaultStartDates: {
           grade: args.grade,
-          date: new Date(args.date)
+        },
+      },
+    },
+    (err) => {
+      if (err) return callback(err);
+      db.collection("users").updateOne(
+        {
+          teacherid: teacherRep(args.userDoc),
+        },
+        {
+          $push: {
+            defaultStartDates: {
+              grade: args.grade,
+              date: new Date(args.date),
+            },
+          },
+        },
+        (err) => {
+          if (err) callback(err);
+          callback(null, stats.OK);
         }
-      }
-    }, (err) => {
-      if (err) callback(err);
-      callback(null, stats.OK);
-    });
-  });
+      );
+    }
+  );
 }
 
 function getDefaultStartDates(args, callback) {
-  db.collection('users').findOne({
-    teacherid: teacherRep(args.userDoc)
-  }, {
-    grades: 1,
-    defaultStartDates: 1,
-    _id: 0
-  }, (err, result) => {
-    if (err) callback(err);
-    else {
-
-      callback(null, stats.OK, {
-        grades: result.grades,
-        startDates: result.defaultStartDates
-      });
+  db.collection("users").findOne(
+    {
+      teacherid: teacherRep(args.userDoc),
+    },
+    {
+      grades: 1,
+      defaultStartDates: 1,
+      _id: 0,
+    },
+    (err, result) => {
+      if (err) callback(err);
+      else {
+        callback(null, stats.OK, {
+          grades: result.grades,
+          startDates: result.defaultStartDates,
+        });
+      }
     }
-  })
+  );
 }
 
 /*function refreshMissingClasses(args, callback) {
@@ -2876,19 +3657,24 @@ function createMissingClasses(refresherId, callback) {
             }
         });
 }*/
-// 
+//
 function listTeachers(args, callback) {
-  db.collection("users").find({
-    usertype: 'teacher'
-  }, {
-    _id: 0,
-    id: 1,
-    displayname: 1,
-    grades: 1
-  }).toArray((err, teachers) => {
-    if (err) callback(err);
-    else callback(null, stats.OK, teachers);
-  })
+  db.collection("users")
+    .find(
+      {
+        usertype: "teacher",
+      },
+      {
+        _id: 0,
+        id: 1,
+        displayname: 1,
+        grades: 1,
+      }
+    )
+    .toArray((err, teachers) => {
+      if (err) callback(err);
+      else callback(null, stats.OK, teachers);
+    });
 }
 
 function logStudentsCount() {
@@ -2897,46 +3683,58 @@ function logStudentsCount() {
   d.setMinutes(0);
   d.setSeconds(0);
   d.setMilliseconds(0);
-  db.collection("links").aggregate([{
-    $group: {
-      _id: {
-        teacherid: "$teacherid",
-        grade: "$grade"
+  db.collection("links").aggregate(
+    [
+      {
+        $group: {
+          _id: {
+            teacherid: "$teacherid",
+            grade: "$grade",
+          },
+          count: {
+            $sum: 1,
+          },
+        },
       },
-      count: {
-        $sum: 1
+      {
+        $project: {
+          _id: 0,
+          teacherid: "$_id.teacherid",
+          count: "$count",
+          date: d,
+          grade: "$_id.grade",
+        },
+      },
+    ],
+    {},
+    (err, result) => {
+      if (err) SaveError(err);
+      else {
+        for (let i = 0; i < result.length; i++) {
+          const count = result[i];
+          db.collection("counter").updateOne(
+            {
+              date: d,
+            },
+            result[i],
+            {
+              upsert: true,
+            },
+            (err) => {
+              if (err) SaveError(err);
+            }
+          );
+        }
       }
     }
-  }, {
-    $project: {
-      _id: 0,
-      "teacherid": "$_id.teacherid",
-      count: "$count",
-      date: d,
-      grade: "$_id.grade"
-    }
-  }], {}, (err, result) => {
-    if (err) SaveError(err);
-    else {
-      for (let i = 0; i < result.length; i++) {
-        const count = result[i];
-        db.collection("counter").updateOne({
-          date: d
-        }, result[i], {
-          upsert: true
-        }, (err) => {
-          if (err) SaveError(err);
-        })
-      }
-    }
-  });
+  );
 }
 
 var counterJob = new CronJob({
-  cronTime: '00 00 3 * * *',
+  cronTime: "00 00 3 * * *",
   onTick: logStudentsCount,
   start: true,
-  timeZone: 'Egypt'
+  timeZone: "Egypt",
 });
 
 /*var job = new CronJob({
@@ -2952,61 +3750,85 @@ function connected() {
 }
 
 function countGroupsLinks(args, callback) {
-  db.collection("groupslinks").find({
-    teacherid: teacherRep(args.userDoc),
-    grade: args.grade
-  }).count((err, count) => {
-    if (err) callback(err);
-    else callback(null, stats.OK, count);
-  })
+  db.collection("groupslinks")
+    .find({
+      teacherid: teacherRep(args.userDoc),
+      grade: args.grade,
+    })
+    .count((err, count) => {
+      if (err) callback(err);
+      else callback(null, stats.OK, count);
+    });
 }
 
 function initializeClass(args, callback) {
   var id;
-  mongoh.GetNextSequence(db, 'classes', {}, 'id', lib.IntIncrementer, (newid) => {
-    id = newid;
-    var insert = () => {
-      db.collection("classes").insertOne(query, (err, result) => {
-        ErrorAndCount(callback, err, result, fields.insertedCount, stats.Error, id);
-      });
-    }
-    var query = {
-      id: newid,
-      [teacherForeignIdentifier]: teacherRep(args.userDoc),
-      grade: args.grade,
-      date: new Date(args.date)
-    };
-    if (args.ig_addedClass) query.addedClass = true;
-    if (!isNaN(parseInt(args.ig_classnum))) {
-      query.classnum = args.ig_classnum;
-      db.collection("groupslinks").findOne({
-        classnum: args.ig_classnum,
+  mongoh.GetNextSequence(
+    db,
+    "classes",
+    {},
+    "id",
+    lib.IntIncrementer,
+    (newid) => {
+      id = newid;
+      var insert = () => {
+        db.collection("classes").insertOne(query, (err, result) => {
+          ErrorAndCount(
+            callback,
+            err,
+            result,
+            fields.insertedCount,
+            stats.Error,
+            id
+          );
+        });
+      };
+      var query = {
+        id: newid,
+        [teacherForeignIdentifier]: teacherRep(args.userDoc),
         grade: args.grade,
-      }, {
-        _id: 0,
-        links: 1
-      }, (err, result) => {
-        if (result && !err) query.links = result.links;
-        insert();
-      });
-    } else insert();
-  });
+        date: new Date(args.date),
+      };
+      if (args.ig_addedClass) query.addedClass = true;
+      if (!isNaN(parseInt(args.ig_classnum))) {
+        query.classnum = args.ig_classnum;
+        db.collection("groupslinks").findOne(
+          {
+            classnum: args.ig_classnum,
+            grade: args.grade,
+          },
+          {
+            _id: 0,
+            links: 1,
+          },
+          (err, result) => {
+            if (result && !err) query.links = result.links;
+            insert();
+          }
+        );
+      } else insert();
+    }
+  );
 }
 
 function getClass(args, callback) {
-  db.collection("classes").findOne({
-    id: args.classid,
-    [teacherForeignIdentifier]: teacherRep(args.userDoc)
-  }, {
-    grade: 1,
-    _id: 0,
-    addedClass: 1,
-    date: 1
-  }, (err, result) => {
-    if (err) return callback();
-    else if (result) callback(null, stats.OK, result);
-    else callback(null, stats.NonExisting);
-  });
+  db.collection("classes").findOne(
+    {
+      id: args.classid,
+      [teacherForeignIdentifier]: teacherRep(args.userDoc),
+    },
+    {
+      grade: 1,
+      _id: 0,
+      addedClass: 1,
+      date: 1,
+    },
+    (err, result) => {
+      if (err) return callback();
+      else if (result) callback(null, stats.OK, result);
+      else callback(null, stats.NonExisting);
+    }
+  );
 }
 
 /*
@@ -3079,97 +3901,131 @@ function getClass(args, callback) {
 */
 
 function listItems(args, callback) {
-  db.collection("items").find({
-    teacherid: teacherRep(args.userDoc),
-    grade: args.grade
-  }, {
-    _id: 0
-  }).sort({
-    category: 1
-  }).toArray((err, result) => {
-    if (err) callback(err);
-    else callback(null, stats.OK, result);
-  });
+  db.collection("items")
+    .find(
+      {
+        teacherid: teacherRep(args.userDoc),
+        grade: args.grade,
+      },
+      {
+        _id: 0,
+      }
+    )
+    .sort({
+      category: 1,
+    })
+    .toArray((err, result) => {
+      if (err) callback(err);
+      else callback(null, stats.OK, result);
+    });
 }
 
 function listCategories(args, callback) {
-  db.collection("items").aggregate([{
-    $match: {
-      teacherid: teacherRep(args.userDoc),
-      grade: args.grade
+  db.collection("items").aggregate(
+    [
+      {
+        $match: {
+          teacherid: teacherRep(args.userDoc),
+          grade: args.grade,
+        },
+      },
+      {
+        $group: {
+          _id: null,
+          categories: {
+            $addToSet: "$category",
+          },
+        },
+      },
+    ],
+    (err, result) => {
+      if (err) return callback(err);
+      if (result[0]) callback(null, stats.OK, result[0].categories);
+      else callback(null, stats.OK, []);
     }
-  },
-  {
-    $group: {
-      _id: null,
-      categories: {
-        $addToSet: "$category"
-      }
-    }
-  }
-  ], (err, result) => {
-    if (err) return callback(err);
-    if (result[0]) callback(null, stats.OK, result[0].categories);
-    else callback(null, stats.OK, []);
-  });
+  );
 }
 
 function addItem(args, callback) {
-  if (!isTeacherRep(args.userDoc)) return callback(null, stats.IncapableUserType);
-  mongoh.GetNextSequence(db, 'items', {}, 'id', lib.IntIncrementer, function (newid) {
-    if (typeof newid != 'number') return callback(null, stats.Error);
-    const {
-      name,
-      grade,
-      price,
-      month,
-      year
-    } = args;
-    db.collection("items").insertOne({
-      id: newid,
-      [teacherForeignIdentifier]: teacherRep(args.userDoc),
-      name,
-      grade,
-      price,
-      category: args.itemCategory,
-      month,
-      year,
-    }, (err, result) => {
-      ErrorAndCount(callback, err, result, fields.insertedCount, stats.Error);
-    })
-  });
+  if (!isTeacherRep(args.userDoc))
+    return callback(null, stats.IncapableUserType);
+  mongoh.GetNextSequence(
+    db,
+    "items",
+    {},
+    "id",
+    lib.IntIncrementer,
+    function (newid) {
+      if (typeof newid != "number") return callback(null, stats.Error);
+      const { name, grade, price, month, year } = args;
+      db.collection("items").insertOne(
+        {
+          id: newid,
+          [teacherForeignIdentifier]: teacherRep(args.userDoc),
+          name,
+          grade,
+          price,
+          category: args.itemCategory,
+          month,
+          year,
+        },
+        (err, result) => {
+          ErrorAndCount(
+            callback,
+            err,
+            result,
+            fields.insertedCount,
+            stats.Error
+          );
+        }
+      );
+    }
+  );
 }
 
 function removeItem(args, callback) {
-  if (!isTeacherRep(args.userDoc)) return callback(null, stats.IncapableUserType);
-  db.collection("items").deleteOne({
-    teacherid: teacherRep(args.userDoc),
-    id: args.itemid,
-  }, {
-    _id: 0
-  }, (err, result) => {
-    if (err) callback(err);
-    else {
-      callback(null, stats.OK);
-      db.collection("payments").deleteMany({
-        teacherid: teacherRep(args.userDoc),
-        itemid: args.itemid
-      }, () => { });
+  if (!isTeacherRep(args.userDoc))
+    return callback(null, stats.IncapableUserType);
+  db.collection("items").deleteOne(
+    {
+      teacherid: teacherRep(args.userDoc),
+      id: args.itemid,
+    },
+    {
+      _id: 0,
+    },
+    (err, result) => {
+      if (err) callback(err);
+      else {
+        callback(null, stats.OK);
+        db.collection("payments").deleteMany(
+          {
+            teacherid: teacherRep(args.userDoc),
+            itemid: args.itemid,
+          },
+          () => {}
+        );
+      }
     }
-  });
+  );
 }
 
 function getItem(args, callback) {
-  if (!isTeacherRep(args.userDoc)) return callback(null, stats.IncapableUserType);
-  db.collection("items").findOne({
-    teacherid: teacherRep(args.userDoc),
-    id: args.itemid,
-  }, {
-    _id: 0
-  }, (err, result) => {
-    if (err) callback(err);
-    else callback(null, stats.OK, result);
-  });
+  if (!isTeacherRep(args.userDoc))
+    return callback(null, stats.IncapableUserType);
+  db.collection("items").findOne(
+    {
+      teacherid: teacherRep(args.userDoc),
+      id: args.itemid,
+    },
+    {
+      _id: 0,
+    },
+    (err, result) => {
+      if (err) callback(err);
+      else callback(null, stats.OK, result);
+    }
+  );
 }
 
 /*function applyPriceChange(args, callback) {
@@ -3187,58 +4043,74 @@ function getItem(args, callback) {
     })
 }*/
 
-
 function listPayments(args, callback) {
-  db.collection("paylogs").aggregate([{
-    $match: {
-      $and: [{
-        date: {
-          $gte: lib.stripDate(args.comparingDate)
-        }
+  db.collection("paylogs").aggregate(
+    [
+      {
+        $match: {
+          $and: [
+            {
+              date: {
+                $gte: lib.stripDate(args.comparingDate),
+              },
+            },
+            {
+              date: {
+                $lte: lib.stripDate(args.date, true),
+              },
+            },
+          ],
+        },
       },
       {
-        date: {
-          $lte: lib.stripDate(args.date, true)
-        }
+        $sort: {
+          date: 1,
+        },
       },
-      ]
+    ],
+    (err, paylogs) => {
+      if (err) callback(err);
+      callback(null, stats.OK, paylogs);
     }
-  }, {
-    $sort: {
-      date: 1
-    }
-  }], (err, paylogs) => {
-    if (err) callback(err);
-    callback(null, stats.OK, paylogs);
-  })
+  );
 }
 
 function addPayLog(args, callback) {
-  db.collection("paylogs").insertOne({
-    [teacherForeignIdentifier]: teacherRep(args.userDoc),
-    payed: args.payedAmount,
-    name: args.name,
-    date: new Date(args.date),
-  }, (err, result) => {
-    ErrorAndCount(callback, err, result, fields.insertedCount, stats.Error);
-  });
+  db.collection("paylogs").insertOne(
+    {
+      [teacherForeignIdentifier]: teacherRep(args.userDoc),
+      payed: args.payedAmount,
+      name: args.name,
+      date: new Date(args.date),
+    },
+    (err, result) => {
+      ErrorAndCount(callback, err, result, fields.insertedCount, stats.Error);
+    }
+  );
 }
 
 function setPayLog(args, callback) {
   if (args.payedAmount == 0) {
-    db.collection("paylogs").deleteOne({
-      _id: new mongodb.ObjectID(args._id)
-    }, (err, result) => {
-      ErrorAndCount(callback, err, result, fields.deletedCount, stats.Error);
-    });
+    db.collection("paylogs").deleteOne(
+      {
+        _id: new mongodb.ObjectID(args._id),
+      },
+      (err, result) => {
+        ErrorAndCount(callback, err, result, fields.deletedCount, stats.Error);
+      }
+    );
   } else {
-    db.collection("paylogs").updateOne({
-      _id: args._id
-    }, {
-      payed: args.payedAmount
-    }, (err, result) => {
-      ErrorAndCount(callback, err, result, fields.modifiedCount, stats.Error);
-    });
+    db.collection("paylogs").updateOne(
+      {
+        _id: args._id,
+      },
+      {
+        payed: args.payedAmount,
+      },
+      (err, result) => {
+        ErrorAndCount(callback, err, result, fields.modifiedCount, stats.Error);
+      }
+    );
   }
 }
 
@@ -3246,73 +4118,80 @@ function setPayment(args, callback) {
   var query = {
     [teacherForeignIdentifier]: teacherRep(args.userDoc),
     [studentForeignIdentifier]: args.student,
-    "itemid": args.itemid
+    itemid: args.itemid,
   };
 
   const recordPayLog = (payed) => {
-    db.collection("payments").aggregate([{
-      $match: query
-    },
-    {
-      $lookup: {
-        from: 'users',
-        localField: studentForeignIdentifier,
-        foreignField: identifier,
-        as: 'student',
+    db.collection("payments").aggregate(
+      [
+        {
+          $match: query,
+        },
+        {
+          $lookup: {
+            from: "users",
+            localField: studentForeignIdentifier,
+            foreignField: identifier,
+            as: "student",
+          },
+        },
+        {
+          $lookup: {
+            from: "items",
+            localField: "itemid",
+            foreignField: "id",
+            as: "item",
+          },
+        },
+        {
+          $lookup: {
+            from: "grades",
+            localField: "item.grade",
+            foreignField: "id",
+            as: "grade",
+          },
+        },
+      ],
+      (err, payment) => {
+        if (err) return;
+
+        payment = payment[0];
+
+        payment.student = payment.student[0];
+        payment.item = payment.item[0];
+
+        if (payed == undefined) {
+          payed = payment.payed;
+        }
+
+        const paylogAmount = args.payedAmount - payed;
+
+        if (paylogAmount == 0) {
+          return;
+        }
+
+        const added = args.payedAmount > payed;
+
+        let message = [];
+
+        message.push(added ? "دفع" : "سحب");
+        message.push(payment.student.fullname.trim());
+        // message.push('فلوس');
+        // message.push(itemCategoryNames[payment.item.category]);
+        message.push(payment.item.name);
+        message.push(payment.grade[0] ? payment.grade[0].name : "");
+
+        addPayLog(
+          {
+            userDoc: args.userDoc,
+            name: message.join(" "),
+            payedAmount: paylogAmount,
+            date: new Date(),
+          },
+          () => {}
+        );
       }
-    },
-    {
-      $lookup: {
-        from: 'items',
-        localField: 'itemid',
-        foreignField: 'id',
-        as: 'item',
-      }
-    },
-    {
-      $lookup: {
-        from: 'grades',
-        localField: 'item.grade',
-        foreignField: 'id',
-        as: 'grade'
-      }
-    }], (err, payment) => {
-      if (err) return;
-
-
-      payment = payment[0];
-
-      payment.student = payment.student[0];
-      payment.item = payment.item[0];
-
-      if (payed == undefined) {
-        payed = payment.payed;
-      }
-
-      const paylogAmount = args.payedAmount - payed;
-
-      if (paylogAmount == 0) {
-        return;
-      }
-
-      const added = args.payedAmount > payed;
-
-      let message = [];
-
-      message.push(added ? 'دفع' : 'سحب');
-      message.push(payment.student.fullname.trim());
-      // message.push('فلوس');
-      // message.push(itemCategoryNames[payment.item.category]);
-      message.push(payment.item.name);
-      message.push(payment.grade[0] ? payment.grade[0].name : '');
-
-      addPayLog({
-        userDoc: args.userDoc,
-        name: message.join(' '),
-        payedAmount: paylogAmount,
-        date: new Date()
-      }, () => { });
-    });
+    );
   };
 
   // delete payment
@@ -3324,166 +4203,197 @@ function setPayment(args, callback) {
       } else {
         callback(null, stats.OK);
       }
-    })
+    });
     return;
   }
 
   var updateQuery = {
     payed: args.payedAmount,
     discount: args.discount,
-    date: new Date()
+    date: new Date(),
   };
 
-  db.collection("payments").findOne(query, {
-    payed: 1
-  }, (err, payment) => {
-    if (err) {
-      return callback(err);
-    }
-    db.collection("payments").updateOne(query, {
-      $set: updateQuery
-    }, {
-      upsert: true
-    }, (err, result) => {
+  db.collection("payments").findOne(
+    query,
+    {
+      payed: 1,
+    },
+    (err, payment) => {
       if (err) {
-        callback(err);
-      } else {
-        callback(null, stats.OK, lib.OverlayArray(query, updateQuery));
-        recordPayLog(payment ? payment.payed : 0);
+        return callback(err);
       }
-    });
-  });
-
+      db.collection("payments").updateOne(
+        query,
+        {
+          $set: updateQuery,
+        },
+        {
+          upsert: true,
+        },
+        (err, result) => {
+          if (err) {
+            callback(err);
+          } else {
+            callback(null, stats.OK, lib.OverlayArray(query, updateQuery));
+            recordPayLog(payment ? payment.payed : 0);
+          }
+        }
+      );
+    }
+  );
 }
 
 function fetchPaymentLogs(args, callback) {
   /* mongo 3.4 */
-  db.collection("links").aggregate([{
-    $match: {
-      [teacherForeignIdentifier]: teacherRep(args.userDoc),
-      grade: args.grade
-    }
-  }, {
-    $sort: {
-      group: 1
-    }
-  }, {
-    $lookup: {
-      from: 'users',
-      localField: studentForeignIdentifier,
-      foreignField: identifier,
-      as: 'user_data'
-    }
-  }], (err, links) => {
-    if (err) return callback(err);
-    else if (links) {
-      db.collection("payments").find({
-        [teacherForeignIdentifier]: teacherRep(args.userDoc),
-        itemid: args.itemid
-      }, {
-        _id: 0
-      }).toArray((err, payments) => {
-        if (err) return callback(err);
-        else {
-          // get indexes & ids out first
-          var ids = {};
-          for (var i = 0; i < payments.length; i++) {
-            ids[payments[i].studentid] = i;
-          }
-          for (var i = 0; i < links.length; i++) {
-            var index = ids[links[i].studentid];
-            if (!isNaN(index)) {
-              links[i].log = payments[index];
+  db.collection("links").aggregate(
+    [
+      {
+        $match: {
+          [teacherForeignIdentifier]: teacherRep(args.userDoc),
+          grade: args.grade,
+        },
+      },
+      {
+        $sort: {
+          group: 1,
+        },
+      },
+      {
+        $lookup: {
+          from: "users",
+          localField: studentForeignIdentifier,
+          foreignField: identifier,
+          as: "user_data",
+        },
+      },
+    ],
+    (err, links) => {
+      if (err) return callback(err);
+      else if (links) {
+        db.collection("payments")
+          .find(
+            {
+              [teacherForeignIdentifier]: teacherRep(args.userDoc),
+              itemid: args.itemid,
+            },
+            {
+              _id: 0,
             }
-          }
-          links = links.map(link => {
-            return {
-              ...link,
-              user_data: link.user_data[0],
+          )
+          .toArray((err, payments) => {
+            if (err) return callback(err);
+            else {
+              // get indexes & ids out first
+              var ids = {};
+              for (var i = 0; i < payments.length; i++) {
+                ids[payments[i].studentid] = i;
+              }
+              for (var i = 0; i < links.length; i++) {
+                var index = ids[links[i].studentid];
+                if (!isNaN(index)) {
+                  links[i].log = payments[index];
+                }
+              }
+              links = links.map((link) => {
+                return {
+                  ...link,
+                  user_data: link.user_data[0],
+                };
+              });
+              callback(null, stats.OK, links);
             }
-          })
-          callback(null, stats.OK, links);
-        }
-      });
-    } else callback(null, stats.EmptyData);
-  });
+          });
+      } else callback(null, stats.EmptyData);
+    }
+  );
 }
 
 function fetchClassLogs(args, callback) {
-
   /* mongo 3.4 */
-  let query = [{
-    $match: {
-      [teacherForeignIdentifier]: teacherRep(args.userDoc),
-      grade: args.grade
-    }
-  }];
+  let query = [
+    {
+      $match: {
+        [teacherForeignIdentifier]: teacherRep(args.userDoc),
+        grade: args.grade,
+      },
+    },
+  ];
 
   if (args.ig_getcontacts) {
     query.push({
       $lookup: {
-        from: 'phones',
+        from: "phones",
         localField: studentForeignIdentifier,
         foreignField: foreignIdentifier,
-        as: 'contacts'
-      }
+        as: "contacts",
+      },
     });
   }
 
-  db.collection("links").aggregate(query).sort({
-    group: 1
-  }).toArray((err, links) => {
-    if (err) return callback(err);
-    else if (links) {
-      db.collection("logs").find({
-        [teacherForeignIdentifier]: teacherRep(args.userDoc),
-        classid: args.classid
-      }, {
-        _id: 0,
-        classid: 0
-      }).toArray((err, logs) => {
-        if (err) return callback(err);
-        else {
-          // get indexes & ids out first
-          var ids = {};
-          for (var i = 0; i < logs.length; i++) {
-            ids[logs[i].studentid] = i;
-          }
-          for (var i = 0; i < links.length; i++) {
-            var index = ids[links[i].studentid];
-            if (!isNaN(index)) {
-              if (!logs[index].groupid) logs[index].groupid = links[i].group;
-              links[i].log = logs[index];
-            } else {
-              links[i].log = {
-                groupid: links[i].group
-              };
+  db.collection("links")
+    .aggregate(query)
+    .sort({
+      group: 1,
+    })
+    .toArray((err, links) => {
+      if (err) return callback(err);
+      else if (links) {
+        db.collection("logs")
+          .find(
+            {
+              [teacherForeignIdentifier]: teacherRep(args.userDoc),
+              classid: args.classid,
+            },
+            {
+              _id: 0,
+              classid: 0,
             }
-          }
-          callback(null, stats.OK, links);
-        }
-      });
-    } else callback(null, stats.EmptyData);
-  });
+          )
+          .toArray((err, logs) => {
+            if (err) return callback(err);
+            else {
+              // get indexes & ids out first
+              var ids = {};
+              for (var i = 0; i < logs.length; i++) {
+                ids[logs[i].studentid] = i;
+              }
+              for (var i = 0; i < links.length; i++) {
+                var index = ids[links[i].studentid];
+                if (!isNaN(index)) {
+                  if (!logs[index].groupid)
+                    logs[index].groupid = links[i].group;
+                  links[i].log = logs[index];
+                } else {
+                  links[i].log = {
+                    groupid: links[i].group,
+                  };
+                }
+              }
+              callback(null, stats.OK, links);
+            }
+          });
+      } else callback(null, stats.EmptyData);
+    });
 }
 
 function fetchExamLogs(args, callback) {
-
-  let query = [{
-    $match: {
-      [teacherForeignIdentifier]: teacherRep(args.userDoc),
-      grade: args.grade
-    }
-  }]
+  let query = [
+    {
+      $match: {
+        [teacherForeignIdentifier]: teacherRep(args.userDoc),
+        grade: args.grade,
+      },
+    },
+  ];
 
   if (args.ig_getcontacts) {
     query.push({
       $lookup: {
-        from: 'phones',
+        from: "phones",
         localField: studentForeignIdentifier,
         foreignField: foreignIdentifier,
-        as: 'contacts'
-      }
+        as: "contacts",
+      },
     });
   }
   /* mongo 3.4 */
@@ -3494,471 +4404,584 @@ function fetchExamLogs(args, callback) {
       for (var i = 0; i < links.length; i++) {
         ids[links[i].studentid] = i;
       }
-      db.collection("logs").find({
-        [teacherForeignIdentifier]: teacherRep(args.userDoc),
-        exam: args.id,
-        type: 'exam'
-      }, {
-        _id: 0,
-        exam: 0
-      }).toArray((err, logs) => {
-        if (err) return callback(err);
-        else {
-          for (var i = 0; i < logs.length; i++) {
-            var index = ids[logs[i].studentid];
-            if (!isNaN(index)) {
-              links[index].log = logs[i];
-            }
+      db.collection("logs")
+        .find(
+          {
+            [teacherForeignIdentifier]: teacherRep(args.userDoc),
+            exam: args.id,
+            type: "exam",
+          },
+          {
+            _id: 0,
+            exam: 0,
           }
-          callback(null, stats.OK, links);
-        }
-      });
+        )
+        .toArray((err, logs) => {
+          if (err) return callback(err);
+          else {
+            for (var i = 0; i < logs.length; i++) {
+              var index = ids[logs[i].studentid];
+              if (!isNaN(index)) {
+                links[index].log = logs[i];
+              }
+            }
+            callback(null, stats.OK, links);
+          }
+        });
     } else callback(null, stats.EmptyData);
   });
 }
 
 function listClasses(args, callback) {
-  db.collection("classes").find({
-    grade: args.grade,
-    [teacherForeignIdentifier]: teacherRep(args.userDoc)
-  }, {
-    _id: 0,
-    [teacherForeignIdentifier]: 0,
-    'links.groupid': 0
-  }).sort({
-    date: -1
-  }).toArray((err, result) => {
-    if (err) callback(err);
-    else callback(null, stats.OK, result);
-  });
+  db.collection("classes")
+    .find(
+      {
+        grade: args.grade,
+        [teacherForeignIdentifier]: teacherRep(args.userDoc),
+      },
+      {
+        _id: 0,
+        [teacherForeignIdentifier]: 0,
+        "links.groupid": 0,
+      }
+    )
+    .sort({
+      date: -1,
+    })
+    .toArray((err, result) => {
+      if (err) callback(err);
+      else callback(null, stats.OK, result);
+    });
 }
 
 function deleteClass(args, callback) {
-  db.collection("classes").deleteOne({
-    [identifier]: args.classid,
-    [teacherForeignIdentifier]: teacherRep(args.userDoc)
-  }, (err, result) => {
-    //TODO test
-    db.collection("logs").deleteMany({
-      classid: args.classid,
-      type: 'class',
-      [teacherForeignIdentifier]: teacherRep(args.userDoc)
-    }, () => { });
-    ErrorAndCount(callback, err, result, fields.deletedCount, stats.NonExisting);
-  })
+  db.collection("classes").deleteOne(
+    {
+      [identifier]: args.classid,
+      [teacherForeignIdentifier]: teacherRep(args.userDoc),
+    },
+    (err, result) => {
+      //TODO test
+      db.collection("logs").deleteMany(
+        {
+          classid: args.classid,
+          type: "class",
+          [teacherForeignIdentifier]: teacherRep(args.userDoc),
+        },
+        () => {}
+      );
+      ErrorAndCount(
+        callback,
+        err,
+        result,
+        fields.deletedCount,
+        stats.NonExisting
+      );
+    }
+  );
 }
 
 function requestParentToken(args, callback) {
-  db.collection("users").findOne({
-    code: args.code.toLowerCase()
-  }, {
-    _id: 0,
-    [identifier]: 1,
-    fullname: 1
-  }, (err, result) => {
-    if (err) return callback(err);
-    if (result) {
-      var token = genPass.generate({
-        length: 64,
-        numbers: true
-      });
-      db.collection("parentTokens").insertOne({
-        [studentForeignIdentifier]: result.id,
-        fullname: result.fullname,
-        token: token,
-        date: new Date()
-      }, (err, result) => {
-        if (err) callback(err);
-        else callback(null, stats.OK, token);
-      });
-    } else callback(null, stats.UserNonExisting);
-  });
+  db.collection("users").findOne(
+    {
+      code: args.code.toLowerCase(),
+    },
+    {
+      _id: 0,
+      [identifier]: 1,
+      fullname: 1,
+    },
+    (err, result) => {
+      if (err) return callback(err);
+      if (result) {
+        var token = genPass.generate({
+          length: 64,
+          numbers: true,
+        });
+        db.collection("parentTokens").insertOne(
+          {
+            [studentForeignIdentifier]: result.id,
+            fullname: result.fullname,
+            token: token,
+            date: new Date(),
+          },
+          (err, result) => {
+            if (err) callback(err);
+            else callback(null, stats.OK, token);
+          }
+        );
+      } else callback(null, stats.UserNonExisting);
+    }
+  );
 }
 
 function getLinks(args, callback) {
-  db.collection("links").aggregate([{
-    $match: {
-      [studentForeignIdentifier]: args.targetuser
-    }
-  },
-  {
-    $lookup: {
-      from: 'users',
-      localField: 'teacherid',
-      foreignField: 'id',
-      as: 'teachers_data'
-    }
-  },
-  {
-    $lookup: {
-      from: 'groups',
-      localField: 'group',
-      foreignField: 'id',
-      as: 'group_data'
-    }
-  },
-  {
-    $project: {
-      _id: 0,
-      teacherid: 1,
-      grade: 1,
-      'teachers_data.displayname': 1,
-      'teachers_data.subjects': 1,
-      'group_data.name': 1
-    }
-  }
-  ], (err, links) => {
-    if (err) callback(err);
-    else callback(null, stats.OK, links);
-  })
-}
-
-function getInfoForParent(args, callback) {
-  db.collection("parentTokens").findOne({
-    token: args.parenttoken
-  }, {
-    _id: 0
-  }, (err, result) => {
-    if (err) return callback(err);
-    if (result) {
-      db.collection("links").aggregate([{
+  db.collection("links").aggregate(
+    [
+      {
         $match: {
-          [studentForeignIdentifier]: result[studentForeignIdentifier]
-        }
+          [studentForeignIdentifier]: args.targetuser,
+        },
       },
       {
         $lookup: {
-          from: 'users',
-          localField: 'teacherid',
-          foreignField: 'id',
-          as: 'teachers_data'
-        }
+          from: "users",
+          localField: "teacherid",
+          foreignField: "id",
+          as: "teachers_data",
+        },
       },
       {
         $lookup: {
-          from: 'groups',
-          localField: 'group',
-          foreignField: 'id',
-          as: 'group_data'
-        }
+          from: "groups",
+          localField: "group",
+          foreignField: "id",
+          as: "group_data",
+        },
       },
       {
         $project: {
           _id: 0,
           teacherid: 1,
           grade: 1,
-          'teachers_data.displayname': 1,
-          'teachers_data.subjects': 1,
-          'group_data.name': 1
-        }
-      }
-      ], (err, links) => {
-        if (err) callback(err);
-        else callback(null, stats.OK, {
-          fullname: result.fullname,
-          links: links
-        });
-      })
-    } else return callback(null, stats.InvalidToken);
-  });
+          "teachers_data.displayname": 1,
+          "teachers_data.subjects": 1,
+          "group_data.name": 1,
+        },
+      },
+    ],
+    (err, links) => {
+      if (err) callback(err);
+      else callback(null, stats.OK, links);
+    }
+  );
+}
+
+function getInfoForParent(args, callback) {
+  db.collection("parentTokens").findOne(
+    {
+      token: args.parenttoken,
+    },
+    {
+      _id: 0,
+    },
+    (err, result) => {
+      if (err) return callback(err);
+      if (result) {
+        db.collection("links").aggregate(
+          [
+            {
+              $match: {
+                [studentForeignIdentifier]: result[studentForeignIdentifier],
+              },
+            },
+            {
+              $lookup: {
+                from: "users",
+                localField: "teacherid",
+                foreignField: "id",
+                as: "teachers_data",
+              },
+            },
+            {
+              $lookup: {
+                from: "groups",
+                localField: "group",
+                foreignField: "id",
+                as: "group_data",
+              },
+            },
+            {
+              $project: {
+                _id: 0,
+                teacherid: 1,
+                grade: 1,
+                "teachers_data.displayname": 1,
+                "teachers_data.subjects": 1,
+                "group_data.name": 1,
+              },
+            },
+          ],
+          (err, links) => {
+            if (err) callback(err);
+            else
+              callback(null, stats.OK, {
+                fullname: result.fullname,
+                links: links,
+              });
+          }
+        );
+      } else return callback(null, stats.InvalidToken);
+    }
+  );
 }
 // teacher, time period
 function fetchLogsForParent(args, callback) {
-  db.collection("parentTokens").findOne({
-    token: args.parenttoken
-  }, {
-    _id: 0,
-    [studentForeignIdentifier]: 1
-  }, (err, result) => {
-    if (err) return callback(err);
-    if (result) {
-      var fetchArgs = {
-        userDoc: {
-          id: args.teacher,
-          teacherid: args.teacher,
-          usertype: 'teacher'
-        },
-        grade: args.grade,
-        targetuser: result.studentid
-      };
-      if (args.datePeriod) fetchArgs.datePeriod = args.datePeriod;
-      fetchLogs(fetchArgs, callback);
-    } else return callback(null, stats.InvalidToken);
-  });
+  db.collection("parentTokens").findOne(
+    {
+      token: args.parenttoken,
+    },
+    {
+      _id: 0,
+      [studentForeignIdentifier]: 1,
+    },
+    (err, result) => {
+      if (err) return callback(err);
+      if (result) {
+        var fetchArgs = {
+          userDoc: {
+            id: args.teacher,
+            teacherid: args.teacher,
+            usertype: "teacher",
+          },
+          grade: args.grade,
+          targetuser: result.studentid,
+        };
+        if (args.datePeriod) fetchArgs.datePeriod = args.datePeriod;
+        fetchLogs(fetchArgs, callback);
+      } else return callback(null, stats.InvalidToken);
+    }
+  );
 }
 
 function fetchLogs(args, callback) {
   let exam_query = {
     [foreignIdentifier]: teacherRep(args.userDoc),
-    grade: args.grade
+    grade: args.grade,
   };
   if (args.datePeriod) {
-    exam_query['$and'] = [{
-      date: {
-        $gte: args.datePeriod.start
-      }
-    },
-    {
-      date: {
-        $lte: args.datePeriod.end
-      }
-    }
-    ]
-  }
-  db.collection("exams").find(exam_query, {
-    _id: 0
-    // id for exams because date cannot be edited
-  }).sort({
-    id: -1
-  }).toArray((err, exams) => {
-    if (err) return callback(err);
-    let class_query = {
-      [teacherForeignIdentifier]: teacherRep(args.userDoc),
-      grade: args.grade
-    };
-    if (args.datePeriod) {
-      class_query['$and'] = [{
+    exam_query["$and"] = [
+      {
         date: {
-          $gte: args.datePeriod.start
-        }
+          $gte: args.datePeriod.start,
+        },
       },
       {
         date: {
-          $lte: args.datePeriod.end
-        }
-      }
-      ]
-    }
-    db.collection("classes").find(class_query, {
-      _id: 0
-      // date because classes are can be added without order
-    }).sort({
-      date: -1
-    }).toArray((err, classes) => {
+          $lte: args.datePeriod.end,
+        },
+      },
+    ];
+  }
+  db.collection("exams")
+    .find(exam_query, {
+      _id: 0,
+      // id for exams because date cannot be edited
+    })
+    .sort({
+      id: -1,
+    })
+    .toArray((err, exams) => {
       if (err) return callback(err);
-      db.collection("logs").find({
+      let class_query = {
         [teacherForeignIdentifier]: teacherRep(args.userDoc),
-        [studentForeignIdentifier]: args.targetuser
-      }, {
-        _id: 0
-      }).toArray((err, logs) => {
-        var classesLogs = {};
-        var examsLogs = {};
-        for (var i = 0; i < logs.length; i++) {
-          var log = logs[i];
-          if (log.type == 'class') {
-            classesLogs[log.classid] = log;
-          } else if (log.type == 'exam') {
-            examsLogs[log.exam] = log;
-          }
-        }
-        for (var i = 0; i < classes.length; i++) {
-          var clog = classesLogs[classes[i].id];
-          if (clog) {
-            classes[i].log = clog;
-          }
-        }
-        for (var i = 0; i < exams.length; i++) {
-          var elog = examsLogs[exams[i].id];
-          if (elog) {
-            exams[i].log = elog;
-          }
-        }
-        db.collection('items').find({
-          [teacherForeignIdentifier]: teacherRep(args.userDoc),
-          grade: args.grade,
-          ...args.ig_items && {
-            id: {
-              $in: args.ig_items
-            }
+        grade: args.grade,
+      };
+      if (args.datePeriod) {
+        class_query["$and"] = [
+          {
+            date: {
+              $gte: args.datePeriod.start,
+            },
           },
-        }, {
+          {
+            date: {
+              $lte: args.datePeriod.end,
+            },
+          },
+        ];
+      }
+      db.collection("classes")
+        .find(class_query, {
           _id: 0,
-          name: 1,
-          price: 1,
-          id: 1
-        }).toArray((err, items) => {
+          // date because classes are can be added without order
+        })
+        .sort({
+          date: -1,
+        })
+        .toArray((err, classes) => {
           if (err) return callback(err);
-          db.collection('payments').find({
-            [teacherForeignIdentifier]: teacherRep(args.userDoc),
-            [studentForeignIdentifier]: args.targetuser
-          }, {
-            _id: 0,
-          }).toArray((err, payments) => {
-            if (err) return callback(err);
-            let itemsids = {};
-            for (let i = 0; i < payments.length; i++) {
-              itemsids[payments[i].itemid] = i;
-            }
-            for (let i = 0; i < items.length; i++) {
-              if (typeof itemsids[items[i].id] == 'number') {
-                items[i].log = payments[itemsids[items[i].id]];
+          db.collection("logs")
+            .find(
+              {
+                [teacherForeignIdentifier]: teacherRep(args.userDoc),
+                [studentForeignIdentifier]: args.targetuser,
+              },
+              {
+                _id: 0,
               }
-            }
-            callback(null, stats.OK, {
-              exams: exams,
-              classes: classes,
-              items: items
+            )
+            .toArray((err, logs) => {
+              var classesLogs = {};
+              var examsLogs = {};
+              for (var i = 0; i < logs.length; i++) {
+                var log = logs[i];
+                if (log.type == "class") {
+                  classesLogs[log.classid] = log;
+                } else if (log.type == "exam") {
+                  examsLogs[log.exam] = log;
+                }
+              }
+              for (var i = 0; i < classes.length; i++) {
+                var clog = classesLogs[classes[i].id];
+                if (clog) {
+                  classes[i].log = clog;
+                }
+              }
+              for (var i = 0; i < exams.length; i++) {
+                var elog = examsLogs[exams[i].id];
+                if (elog) {
+                  exams[i].log = elog;
+                }
+              }
+              db.collection("items")
+                .find(
+                  {
+                    [teacherForeignIdentifier]: teacherRep(args.userDoc),
+                    grade: args.grade,
+                    ...(args.ig_items && {
+                      id: {
+                        $in: args.ig_items,
+                      },
+                    }),
+                  },
+                  {
+                    _id: 0,
+                    name: 1,
+                    price: 1,
+                    id: 1,
+                  }
+                )
+                .toArray((err, items) => {
+                  if (err) return callback(err);
+                  db.collection("payments")
+                    .find(
+                      {
+                        [teacherForeignIdentifier]: teacherRep(args.userDoc),
+                        [studentForeignIdentifier]: args.targetuser,
+                      },
+                      {
+                        _id: 0,
+                      }
+                    )
+                    .toArray((err, payments) => {
+                      if (err) return callback(err);
+                      let itemsids = {};
+                      for (let i = 0; i < payments.length; i++) {
+                        itemsids[payments[i].itemid] = i;
+                      }
+                      for (let i = 0; i < items.length; i++) {
+                        if (typeof itemsids[items[i].id] == "number") {
+                          items[i].log = payments[itemsids[items[i].id]];
+                        }
+                      }
+                      callback(null, stats.OK, {
+                        exams: exams,
+                        classes: classes,
+                        items: items,
+                      });
+                    });
+                });
             });
-          });
         });
-      })
     });
-  });
 }
 
 async function count(args, callback) {
   const returner = {};
   db.collection("links").count((err, linksCount) => {
     if (err) return callback(err);
-    returner.linksCount = linksCount
-    db.collection("links").aggregate([{
-      $group: {
-        _id: "$studentid"
-      }
-    }], (err, studentsCount) => {
-      if (err) return callback(err);
-      returner.studentsCount = studentsCount.length;
-      db.collection("links").aggregate([{
-        $match: {
-          grade: args.ig_grade
-        }
-      }, {
-        $group: {
-          _id: "$studentid"
-        }
-      }], (err, gradeCount) => {
-        if (err) return callback(err);
-        returner.gradeCount = gradeCount.length;
-        db.collection("links").aggregate([{
-          $match: {
-            group: args.ig_groupid
-          }
-        }, {
+    returner.linksCount = linksCount;
+    db.collection("links").aggregate(
+      [
+        {
           $group: {
-            _id: "$studentid"
+            _id: "$studentid",
+          },
+        },
+      ],
+      (err, studentsCount) => {
+        if (err) return callback(err);
+        returner.studentsCount = studentsCount.length;
+        db.collection("links").aggregate(
+          [
+            {
+              $match: {
+                grade: args.ig_grade,
+              },
+            },
+            {
+              $group: {
+                _id: "$studentid",
+              },
+            },
+          ],
+          (err, gradeCount) => {
+            if (err) return callback(err);
+            returner.gradeCount = gradeCount.length;
+            db.collection("links").aggregate(
+              [
+                {
+                  $match: {
+                    group: args.ig_groupid,
+                  },
+                },
+                {
+                  $group: {
+                    _id: "$studentid",
+                  },
+                },
+              ],
+              (err, groupCount) => {
+                if (err) return callback(err);
+                returner.groupCount = groupCount.length;
+                callback(null, stats.OK, returner);
+              }
+            );
           }
-        }], (err, groupCount) => {
-          if (err) return callback(err);
-          returner.groupCount = groupCount.length;
-          callback(null, stats.OK, returner);
-        });
-      });
-    });
+        );
+      }
+    );
   });
 }
 
 function briefLog(args, callback) {
-  db.collection("links").aggregate([{
-    $match: {
-      [teacherForeignIdentifier]: teacherRep(args.userDoc),
-      [studentForeignIdentifier]: args.targetuser
-    }
-  },
-  {
-    $lookup: {
-      from: 'groups',
-      localField: 'group',
-      foreignField: 'id',
-      as: 'group_data'
-    }
-  },
-  {
-    $project: {
-      _id: 1,
-      grade: 1,
-      fullname: 1,
-      'group_data.name': 1,
-      'group_data.id': 1
-    }
-  }
-  ], (err, data) => {
-    if (err) return callback(err);
-    if (!data || !data[0]) return callback(null, stats.UserNonExisting);
-    if (data[0].group_data) data[0].group_name = data[0].group_data[0].name;
-    if (data[0].group_data) data[0].group_id = data[0].group_data[0].id;
-    if (data[0].group_data) delete data[0].group_data;
-    data = data[0];
-    db.collection("classes").aggregate([{
-      $match: {
-        teacherid: teacherRep(args.userDoc),
-        grade: data.grade
-      }
-    }, {
-      $sort: {
-        date: -1
-      }
-    }, {
-      $limit: 4
-    }, {
-      $project: {
-        _id: 0,
-        id: 1,
-        date: 1,
-        classnum: 1,
-      }
-    }], (err, classes) => {
-      if (err) callback(err);
-      db.collection("exams").aggregate([{
+  db.collection("links").aggregate(
+    [
+      {
         $match: {
-          userid: teacherRep(args.userDoc),
-          grade: data.grade
-        }
-      }, {
-        $sort: {
-          date: -1
-        }
-      }, {
-        $limit: 3
-      }, {
+          [teacherForeignIdentifier]: teacherRep(args.userDoc),
+          [studentForeignIdentifier]: args.targetuser,
+        },
+      },
+      {
+        $lookup: {
+          from: "groups",
+          localField: "group",
+          foreignField: "id",
+          as: "group_data",
+        },
+      },
+      {
         $project: {
-          _id: 0,
-          id: 1,
-          name: 1,
-          max_mark: 1,
-          redline: 1,
+          _id: 1,
+          grade: 1,
+          fullname: 1,
+          "group_data.name": 1,
+          "group_data.id": 1,
+        },
+      },
+    ],
+    (err, data) => {
+      if (err) return callback(err);
+      if (!data || !data[0]) return callback(null, stats.UserNonExisting);
+      if (data[0].group_data) data[0].group_name = data[0].group_data[0].name;
+      if (data[0].group_data) data[0].group_id = data[0].group_data[0].id;
+      if (data[0].group_data) delete data[0].group_data;
+      data = data[0];
+      db.collection("classes").aggregate(
+        [
+          {
+            $match: {
+              teacherid: teacherRep(args.userDoc),
+              grade: data.grade,
+            },
+          },
+          {
+            $sort: {
+              date: -1,
+            },
+          },
+          {
+            $limit: 4,
+          },
+          {
+            $project: {
+              _id: 0,
+              id: 1,
+              date: 1,
+              classnum: 1,
+            },
+          },
+        ],
+        (err, classes) => {
+          if (err) callback(err);
+          db.collection("exams").aggregate(
+            [
+              {
+                $match: {
+                  userid: teacherRep(args.userDoc),
+                  grade: data.grade,
+                },
+              },
+              {
+                $sort: {
+                  date: -1,
+                },
+              },
+              {
+                $limit: 3,
+              },
+              {
+                $project: {
+                  _id: 0,
+                  id: 1,
+                  name: 1,
+                  max_mark: 1,
+                  redline: 1,
+                },
+              },
+            ],
+            async (err, exams) => {
+              if (err) {
+                callback(err);
+              } else {
+                const subscriptions = generateSubscriptions(data);
+                try {
+                  for (let i = 0; i < classes.length; i++) {
+                    const teacherClass = classes[i];
+                    const log = await resolveClassLog(
+                      args.targetuser,
+                      teacherClass.id
+                    );
+                    classes[i] = {
+                      ...teacherClass,
+                      log: [log],
+                    };
+                  }
+                  for (let i = 0; i < exams.length; i++) {
+                    const exam = exams[i];
+                    const log = await resolveExamLog(args.targetuser, exam.id);
+                    exams[i] = {
+                      ...exam,
+                      log: [log],
+                    };
+                  }
+                  for (let i = 0; i < subscriptions.length; i++) {
+                    const subscription = subscriptions[i];
+                    const resolved = await resolveSubscriptionLog(
+                      args.targetuser,
+                      subscription
+                    );
+                    subscriptions[i] = {
+                      ...subscription,
+                      ...resolved,
+                    };
+                  }
+                } catch (e) {}
+                callback(null, stats.OK, {
+                  data,
+                  classes,
+                  exams,
+                  subscriptions,
+                });
+              }
+            }
+          );
         }
-      }], async (err, exams) => {
-        if (err) {
-          callback(err);
-        } else {
-          const subscriptions = generateSubscriptions(data);
-          try {
-            for (let i = 0; i < classes.length; i++) {
-              const teacherClass = classes[i];
-              const log = await resolveClassLog(args.targetuser, teacherClass.id);
-              classes[i] = {
-                ...teacherClass,
-                log: [log],
-              };
-            }
-            for (let i = 0; i < exams.length; i++) {
-              const exam = exams[i];
-              const log = await resolveExamLog(args.targetuser, exam.id);
-              exams[i] = {
-                ...exam,
-                log: [log],
-              };
-            }
-            for (let i = 0; i < subscriptions.length; i++) {
-              const subscription = subscriptions[i];
-              const resolved = await resolveSubscriptionLog(args.targetuser, subscription);
-              subscriptions[i] = {
-                ...subscription,
-                ...resolved,
-              };
-            }
-          } catch (e) { }
-          callback(null, stats.OK, {
-            data,
-            classes,
-            exams,
-            subscriptions,
-          });
-        }
-      })
-    })
-  });
+      );
+    }
+  );
 }
 
 function generateSubscriptions(data) {
@@ -3966,7 +4989,7 @@ function generateSubscriptions(data) {
   const groundedMinimumDate = new Date(groundMonth(miminumDate));
   const subscriptions = [];
   for (let i = 0; i < 5; i++) {
-    const generatedDate = moment().subtract(i, 'months').toDate();
+    const generatedDate = moment().subtract(i, "months").toDate();
     const groundedGeneratedDate = groundMonth(generatedDate);
     if (groundedGeneratedDate >= groundedMinimumDate) {
       subscriptions.push(generateSubscription(generatedDate, data.grade));
@@ -3986,10 +5009,10 @@ function groundMonth(date) {
 
 function generateSubscription(date, grade) {
   return {
-    month: Number(moment(date).format('M')),
-    year: Number(moment(date).format('YYYY')),
+    month: Number(moment(date).format("M")),
+    year: Number(moment(date).format("YYYY")),
     grade,
-  }
+  };
 }
 
 /**
@@ -4008,34 +5031,39 @@ function generateSubscription(date, grade) {
  */
 function resolveSubscriptionLog(studentid, subscription) {
   return new Promise((resolve, reject) => {
-    db.collection('items').findOne(subscription, (error, item) => {
+    db.collection("items").findOne(subscription, (error, item) => {
       if (error) {
         reject(error);
         return;
       }
       if (item) {
-        db.collection('payments').findOne({
-          itemid: item.id,
-          studentid,
-        }, (error, log) => {
-          if (error) {
-            reject(error);
-            return;
-          }
-          if (log) {
-            resolve({
-              item,
-              log
-            });
-          } else {
-            reject();
-          }
-        }).catch(() => resolve({ item }));
+        db.collection("payments")
+          .findOne(
+            {
+              itemid: item.id,
+              studentid,
+            },
+            (error, log) => {
+              if (error) {
+                reject(error);
+                return;
+              }
+              if (log) {
+                resolve({
+                  item,
+                  log,
+                });
+              } else {
+                reject();
+              }
+            }
+          )
+          .catch(() => resolve({ item }));
       } else {
         resolve();
       }
     });
-  })
+  });
 }
 
 /**
@@ -4046,17 +5074,20 @@ function resolveSubscriptionLog(studentid, subscription) {
  */
 function resolveClassLog(studentid, classid) {
   return new Promise((resolve, reject) => {
-    db.collection('logs').findOne({
-      studentid,
-      classid,
-    }, (error, result) => {
-      if (error) {
-        reject(error);
-      } else {
-        resolve(result);
+    db.collection("logs").findOne(
+      {
+        studentid,
+        classid,
+      },
+      (error, result) => {
+        if (error) {
+          reject(error);
+        } else {
+          resolve(result);
+        }
       }
-    });
-  })
+    );
+  });
 }
 
 /**
@@ -4067,71 +5098,96 @@ function resolveClassLog(studentid, classid) {
  */
 function resolveExamLog(studentid, examid) {
   return new Promise((resolve, reject) => {
-    db.collection('logs').findOne({
-      studentid,
-      exam: examid,
-    }, (error, result) => {
-      if (error) {
-        reject(error);
-      } else {
-        resolve(result);
+    db.collection("logs").findOne(
+      {
+        studentid,
+        exam: examid,
+      },
+      (error, result) => {
+        if (error) {
+          reject(error);
+        } else {
+          resolve(result);
+        }
       }
-    });
-  })
+    );
+  });
 }
 
 function addClassLog(args, callback) {
   var query = {
     [teacherForeignIdentifier]: teacherRep(args.userDoc),
     [studentForeignIdentifier]: args.student,
-    "type": "class",
-    "classid": args.classid,
+    type: "class",
+    classid: args.classid,
   };
   var updateQuery = {};
-  if (typeof args.ig_groupid == 'number') updateQuery.groupid = args.ig_groupid;
-  if (typeof args.ig_attendant == 'boolean') updateQuery.attendant = args.ig_attendant;
+  if (typeof args.ig_groupid == "number") updateQuery.groupid = args.ig_groupid;
+  if (typeof args.ig_attendant == "boolean")
+    updateQuery.attendant = args.ig_attendant;
   if (args.homework) updateQuery.homework = args.homework;
   if (args.quiz) updateQuery.quiz = args.quiz;
   if (Object.keys(updateQuery).length <= 0) return callback(null, stats.OK);
-  db.collection("logs").updateOne(query, {
-    $set: updateQuery
-  }, {
-    upsert: true
-  }, (err, result) => {
-    if (err) callback(err);
-    else callback(null, stats.OK);
-  });
+  db.collection("logs").updateOne(
+    query,
+    {
+      $set: updateQuery,
+    },
+    {
+      upsert: true,
+    },
+    (err, result) => {
+      if (err) callback(err);
+      else callback(null, stats.OK);
+    }
+  );
 }
 
 function globalClassLog(args, callback) {
   var query = {
     [teacherForeignIdentifier]: teacherRep(args.userDoc),
-    "type": "class",
-    "classid": args.classid,
+    type: "class",
+    classid: args.classid,
   };
   var updateQuery = {};
-  if (args.globalHomeworkType) updateQuery['homework.type'] = args.globalHomeworkType;
-  if (args.globalQuizType) updateQuery['quiz.type'] = args.globalQuizType;
-  if (args.globalHomeworkMax) updateQuery['homework.max'] = args.globalHomeworkMax;
-  if (args.globalQuizMax) updateQuery['quiz.max'] = args.globalQuizMax;
+  if (args.globalHomeworkType)
+    updateQuery["homework.type"] = args.globalHomeworkType;
+  if (args.globalQuizType) updateQuery["quiz.type"] = args.globalQuizType;
+  if (args.globalHomeworkMax)
+    updateQuery["homework.max"] = args.globalHomeworkMax;
+  if (args.globalQuizMax) updateQuery["quiz.max"] = args.globalQuizMax;
   if (Object.keys(updateQuery).length <= 0) return callback(null, stats.OK);
-  db.collection("logs").updateOne(query, {
-    $set: updateQuery
-  }, {}, (err, result) => {
-    if (err) callback(err);
-    else callback(null, stats.OK);
-  });
+  db.collection("logs").updateOne(
+    query,
+    {
+      $set: updateQuery,
+    },
+    {},
+    (err, result) => {
+      if (err) callback(err);
+      else callback(null, stats.OK);
+    }
+  );
 }
 
 function clearLog(args, callback) {
-  db.collection("logs").deleteOne({
-    [teacherForeignIdentifier]: teacherRep(args.userDoc),
-    [studentForeignIdentifier]: args.targetuser,
-    [args.type == 'class' ? 'classid' : 'exam']: args.id
-  }, (err, result) => {
-    if (err) return callback(err);
-    ErrorAndCount(callback, err, result, fields.deletedCount, stats.NonExisting);
-  })
+  db.collection("logs").deleteOne(
+    {
+      [teacherForeignIdentifier]: teacherRep(args.userDoc),
+      [studentForeignIdentifier]: args.targetuser,
+      [args.type == "class" ? "classid" : "exam"]: args.id,
+    },
+    (err, result) => {
+      if (err) return callback(err);
+      ErrorAndCount(
+        callback,
+        err,
+        result,
+        fields.deletedCount,
+        stats.NonExisting
+      );
+    }
+  );
 }
 
 // EREG TEACHERS
@@ -4157,94 +5213,103 @@ function enroll(args, callback) {
 
 function editGrade(args, callback) {
   if (!isStudent(args.userDoc)) return callback(null, stats.IncapableUserType);
-  db.collection("users").updateOne({
-    "username": student(args.userDoc)
-  }, {
-    $set: {
-      "grade": args.grade
+  db.collection("users").updateOne(
+    {
+      username: student(args.userDoc),
+    },
+    {
+      $set: {
+        grade: args.grade,
+      },
+    },
+    function (err, result) {
+      if (err) return callback(err);
+      else if (result.matchedCount == 1) callback(null, stats.OK);
+      else callback(null, stats.UserNonExisting);
     }
-  }, function (err, result) {
-    if (err) return callback(err);
-    else if (result.matchedCount == 1) callback(null, stats.OK);
-    else callback(null, stats.UserNonExisting);
-  });
+  );
 }
 
 function getGrade(args, callback) {
-  if (isStudent(args.userDoc) && !args.targetuser) args.targetuser = student(args.userDoc);
-  db.collection("users").findOne({
-    "username": args.targetuser
-  }, {
-    grade: 1
-  }, function (err, result) {
-    if (err) return callback(err);
-    else callback(null, stats.OK, result.grade);
-  });
+  if (isStudent(args.userDoc) && !args.targetuser)
+    args.targetuser = student(args.userDoc);
+  db.collection("users").findOne(
+    {
+      username: args.targetuser,
+    },
+    {
+      grade: 1,
+    },
+    function (err, result) {
+      if (err) return callback(err);
+      else callback(null, stats.OK, result.grade);
+    }
+  );
 } // EREG STUDENTS
 
 // ADB
 
-var adb = require('adbkit');
-var Promise = require('bluebird')
+var adb = require("adbkit");
+var Promise = require("bluebird");
 var client = adb.createClient();
-const spawn = require('await-spawn')
+const spawn = require("await-spawn");
 
 async function sendSMS(args, callback) {
   try {
     switch (args.adb_protocol) {
-      case 'shellms':
-        await spawn('adb', [
-          '-s',
+      case "shellms":
+        await spawn("adb", [
+          "-s",
           args.serial,
-          'shell',
-          'am',
-          'startservice',
-          '-n',
-          'com.android.shellms/.sendSMS',
-          '-e',
-          'contact',
+          "shell",
+          "am",
+          "startservice",
+          "-n",
+          "com.android.shellms/.sendSMS",
+          "-e",
+          "contact",
           args.recipient,
-          '-e',
-          'msg',
-          '"' + args.message + '"'
-        ])
-        break;
-      case 'legacy':
-        args.message += "\ns";
-        await spawn('adb', [
-          '-s',
-          args.serial,
-          'shell',
-          'am',
-          'start',
-          '-a',
-          'android.intent.action.SENDTO',
-          '-d',
-          'sms:' + args.recipient,
-          '--es',
-          'sms_body',
+          "-e",
+          "msg",
           '"' + args.message + '"',
-          '--ez',
-          'exit_on_sent',
-          'true',
         ]);
-        await setTimeout(() => { }, args.threshold);
-        await spawn('adb', [
-          '-s',
+        break;
+      case "legacy":
+        args.message += "\ns";
+        await spawn("adb", [
+          "-s",
           args.serial,
-          'shell',
-          'input',
-          'keyevent',
-          '22'
+          "shell",
+          "am",
+          "start",
+          "-a",
+          "android.intent.action.SENDTO",
+          "-d",
+          "sms:" + args.recipient,
+          "--es",
+          "sms_body",
+          '"' + args.message + '"',
+          "--ez",
+          "exit_on_sent",
+          "true",
         ]);
-        await setTimeout(() => { }, args.threshold);
-        await spawn('adb', [
-          '-s',
+        await setTimeout(() => {}, args.threshold);
+        await spawn("adb", [
+          "-s",
           args.serial,
-          'shell',
-          'input',
-          'keyevent',
-          '66'
+          "shell",
+          "input",
+          "keyevent",
+          "22",
+        ]);
+        await setTimeout(() => {}, args.threshold);
+        await spawn("adb", [
+          "-s",
+          args.serial,
+          "shell",
+          "input",
+          "keyevent",
+          "66",
         ]);
         break;
     }
@@ -4255,15 +5320,19 @@ async function sendSMS(args, callback) {
 }
 
 function getStudentNotesAndDiscount(args, callback) {
-  db.collection('users').findOne({
-    id: args.id
-  }, {}, (err, result) => {
-    if (err) {
-      callback(err);
-      return;
+  db.collection("users").findOne(
+    {
+      id: args.id,
+    },
+    {},
+    (err, result) => {
+      if (err) {
+        callback(err);
+        return;
+      }
+      callback(null, stats.OK, result);
     }
-    callback(null, stats.OK, result)
-  })
+  );
 }
 
 function updateStudentNotesAndDiscount(args, callback) {
@@ -4274,114 +5343,146 @@ function updateStudentNotesAndDiscount(args, callback) {
 
   if (!Object.keys(payload).length > 0) return callback(null, stats.OK);
 
-  db.collection('users').updateOne({
-    [identifier]: args.id,
-  }, {
-    $set: payload
-  }, function (err, result) {
-    ErrorAndCount(callback, err, result, fields.matchedCount, stats.Error);
-  });
+  db.collection("users").updateOne(
+    {
+      [identifier]: args.id,
+    },
+    {
+      $set: payload,
+    },
+    function (err, result) {
+      ErrorAndCount(callback, err, result, fields.matchedCount, stats.Error);
+    }
+  );
 }
 
 function getNameAndSubjects(args, callback) {
-  db.collection('users').findOne({
-    [identifier]: teacherRep(args.userDoc),
-  }, {
-    _id: 0,
-    fullname: 1,
-    subjects: 1,
-  }, (err, result) => {
-    if (err) callback(err);
-    else callback(null, stats.OK, {
-      name: result.fullname,
-      subjects: result.subjects
-    })
-  });
+  db.collection("users").findOne(
+    {
+      [identifier]: teacherRep(args.userDoc),
+    },
+    {
+      _id: 0,
+      fullname: 1,
+      subjects: 1,
+    },
+    (err, result) => {
+      if (err) callback(err);
+      else
+        callback(null, stats.OK, {
+          name: result.fullname,
+          subjects: result.subjects,
+        });
+    }
+  );
 }
 
 function UpdateBeeps(args, callback) {
-  db.collection('users').updateOne({
-    [identifier]: teacherRep(args.userDoc),
-  }, {
-    $set: {
-      beeps: args.beeps,
+  db.collection("users").updateOne(
+    {
+      [identifier]: teacherRep(args.userDoc),
+    },
+    {
+      $set: {
+        beeps: args.beeps,
+      },
+    },
+    (err, result) => {
+      ErrorAndCount(callback, err, result, fields.matchedCount, stats.Error);
     }
-  }, (err, result) => {
-    ErrorAndCount(callback, err, result, fields.matchedCount, stats.Error);
-  });
+  );
 }
 
 function GetBeeps(args, callback) {
-  db.collection('users').findOne({
-    [identifier]: teacherRep(args.userDoc),
-  }, {
-    _id: 0,
-    beeps: 1
-  }, (err, result) => {
-    if (err) {
-      return callback(err);
+  db.collection("users").findOne(
+    {
+      [identifier]: teacherRep(args.userDoc),
+    },
+    {
+      _id: 0,
+      beeps: 1,
+    },
+    (err, result) => {
+      if (err) {
+        return callback(err);
+      }
+      callback(null, stats.OK, result);
     }
-    callback(null, stats.OK, result);
-  });
+  );
 }
 
 function updateNameAndSubjects(args, callback) {
-  db.collection('users').updateOne({
-    [identifier]: teacherRep(args.userDoc),
-  }, {
-    $set: {
-      fullname: `${args.fullname.first} ${args.fullname.father} ${args.fullname.grand} ${args.fullname.last}`.replace('  ', '').trim(),
-      subjects: args.subjects,
+  db.collection("users").updateOne(
+    {
+      [identifier]: teacherRep(args.userDoc),
+    },
+    {
+      $set: {
+        fullname: `${args.fullname.first} ${args.fullname.father} ${args.fullname.grand} ${args.fullname.last}`
+          .replace("  ", "")
+          .trim(),
+        subjects: args.subjects,
+      },
+    },
+    function (err, result) {
+      ErrorAndCount(callback, err, result, fields.matchedCount, stats.Error);
     }
-  }, function (err, result) {
-    ErrorAndCount(callback, err, result, fields.matchedCount, stats.Error);
-  });
+  );
 }
 
 function getGradings(args, callback) {
-  db.collection('users').findOne({
-    [identifier]: teacherRep(args.userDoc),
-  }, {
-    _id: 0,
-    gradings: 1,
-  }, (err, result) => {
-    if (err) callback(err);
-    else callback(null, stats.OK, {
-      gradings: result.gradings
-    })
-  });
+  db.collection("users").findOne(
+    {
+      [identifier]: teacherRep(args.userDoc),
+    },
+    {
+      _id: 0,
+      gradings: 1,
+    },
+    (err, result) => {
+      if (err) callback(err);
+      else
+        callback(null, stats.OK, {
+          gradings: result.gradings,
+        });
+    }
+  );
 }
 
 function updateGradings(args, callback) {
-  db.collection('users').updateOne({
-    [identifier]: teacherRep(args.userDoc),
-  }, {
-    $set: {
-      gradings: args.gradings,
+  db.collection("users").updateOne(
+    {
+      [identifier]: teacherRep(args.userDoc),
+    },
+    {
+      $set: {
+        gradings: args.gradings,
+      },
+    },
+    function (err, result) {
+      ErrorAndCount(callback, err, result, fields.matchedCount, stats.Error);
     }
-  }, function (err, result) {
-    ErrorAndCount(callback, err, result, fields.matchedCount, stats.Error);
-  });
+  );
 }
 
 function listDevices(args, callback) {
-  client.listDevices()
+  client
+    .listDevices()
     .then(function (devices) {
       return Promise.map(devices, function (device) {
-        return client.getProperties(device.id)
-          .then(function (props) {
-            return {
-              id: device.id,
-              name: `${props['ro.product.brand']} ${props['ro.product.model']}`
-            };
-          })
-      })
+        return client.getProperties(device.id).then(function (props) {
+          return {
+            id: device.id,
+            name: `${props["ro.product.brand"]} ${props["ro.product.model"]}`,
+          };
+        });
+      });
     })
-    .then(devices => {
+    .then((devices) => {
       callback(null, stats.OK, devices ? devices : []);
     })
-    .catch(callback)
-};
+    .catch(callback);
+}
 
 // REG PROFILES
 // EREG PROFILES

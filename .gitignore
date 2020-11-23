@@ -14,3 +14,4 @@ Server/bcrypt
 *.zip
 coretrix.exe
 Server/backup
+*.exe
