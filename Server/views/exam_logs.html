@@ -157,6 +157,12 @@
                 <input ng-model="filterAttendance" type="checkbox" id="filterAttendance" />
                 <label for="filterAttendance"">لم يحضر</label>
           </div>
+          <div style="margin-left:0.5%" class="btn modal-trigger blue-grey btn tooltipped"
+          data-position="bottom" data-tooltip="رفع ملف CSV" ng-click="uploadCSV()">
+          رفع CSV
+          <i class="fa fa-file" aria-hidden="true"></i>
+        </div>
+        <input id="file-upload" type="file" file-model="file" />
         </div>
         <div class=" logs logs-noblur">
                   <table class="animated slideInUp">
