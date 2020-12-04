@@ -345,7 +345,9 @@ app.controller("mainCtrl", function ($rootScope, $scope, sdk) {
     reader.onload = function (e) {
       let customers = new Array();
       let rows = e.target.result.split("\n");
-      let columns = rows[0].split(",");
+      let columns = rows[0]
+        .split(",")
+        .map((column) => column.replace(/["']/g, ""));
 
       const scoreIndex = columns.indexOf("Total score");
       const codeIndex = columns.indexOf("Code");
@@ -353,8 +355,10 @@ app.controller("mainCtrl", function ($rootScope, $scope, sdk) {
       for (let i = 1; i < rows.length; i++) {
         let cells = rows[i].split(",");
         if (cells.length > 1) {
-          const code = cells[codeIndex];
-          const score = Number(cells[scoreIndex].split("/")[0].trim());
+          const code = cells[codeIndex].replace(/["']/g, "");
+          const score = Number(
+            cells[scoreIndex].replace(/["']/g, "").split("/")[0].trim()
+          );
           const entity = $scope.logs.find(({ codeName }) => codeName === code);
           $scope.$apply(function () {
             if (entity) {

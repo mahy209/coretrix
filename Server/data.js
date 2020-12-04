@@ -376,8 +376,7 @@ function connect() {
   connecting = true;
   var u;
   try {
-    // if (process.env.DEV) {
-    if (true) {
+    if (process.env.DEV) {
       u = setLiveOrLocal(true, false);
     } else if (process.env.LIVE) {
       u = setLiveOrLocal(true);
