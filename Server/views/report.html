@@ -64,7 +64,7 @@
               <button ng-click="reload()" style="margin-right:0.5%" class="btn gradient2">حمل البيانات</button>
               <div style="display:inline-block;margin-right:1%">
                 <input ng-model="onlyUnattendedClasses" type="checkbox" id="onlyUnattendedClasses" />
-                <label for="onlyUnattendedClasses">الحصص التى لم يحضرها فقط</label>
+                <label for="onlyUnattendedClasses">المحاضرات التى لم يحضرها فقط</label>
               </div>
             </div>
           </div>
@@ -101,7 +101,7 @@
                 <div style="display:inline-block;margin-right:1%">
                   <input ng-model="showOptions.showUnattendedClasses" ng-change="saveShowOptions()" type="checkbox"
                     id="showUnattendedClasses" />
-                  <label for="showUnattendedClasses">عدد الحصص التى لم يحضرها</label>
+                  <label for="showUnattendedClasses">عدد المحاضرات التى لم يحضرها</label>
                 </div>
                 <div style="display:inline-block;margin-right:1%">
                   <input ng-model="showOptions.showUnattendedExams" ng-change="saveShowOptions()" type="checkbox"
@@ -162,7 +162,7 @@
                 </div>
               </div>
               <div>
-                <label>الحصص</label>
+                <label>المحاضرات</label>
                 <br>
                 <div style="display:inline-block;margin-right:1%">
                   <input ng-model="showOptions.showClassHomework" ng-change="saveShowOptions()" type="checkbox"
@@ -216,7 +216,7 @@
             <td>{{notes}}</td>
           </tr>
           <tr ng-show="showOptions.showUnattendedClasses">
-            <td>عدد الحصص التى لم يحضرها
+            <td>عدد المحاضرات التى لم يحضرها
               <span>:</span>
             </td>
             <td>{{unattendedClassesCount || 0}}</td>

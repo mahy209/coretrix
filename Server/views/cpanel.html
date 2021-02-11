@@ -131,10 +131,10 @@
           <div class="row">
             <div class="card-panel s12  grey-text">
               <div class="center-align">
-                <h5>{{studentid ? selected_class.date : 'الحصة'}}</h5>
+                <h5>{{studentid ? selected_class.date : 'السكشن'}}</h5>
               </div>
               <div class="center-align">
-                <h5 class="center-align">{{studentid ? selected_group.name : 'المجموعة'}}</h5>
+                <h5 class="center-align">{{studentid ? selected_group.name : 'الكلية'}}</h5>
               </div>
               <div class="center-align">
                 <h5>{{studentid ? 'الصف ' + grades_names[toLogGrade] : 'الصف'}}</h5>
@@ -217,11 +217,11 @@
               <div class="card-panel " style="transition: all 0.2s">
                 <div style="display: inline-block; margin-right: 6px;">
                   <input type="checkbox" id="classAttendanceAlert" ng-model="enabledAlerts.classAttendance" />
-                  <label for="classAttendanceAlert">حضور الحصص</label>
+                  <label for="classAttendanceAlert">حضور المحاضرات</label>
                 </div>
                 <div style="display: inline-block; margin-right: 6px;">
                   <input type="checkbox" id="classQuizAlert" ng-model="enabledAlerts.classQuiz" />
-                  <label for="classQuizAlert">التسميع</label>
+                  <label for="classQuizAlert">الشفوي</label>
                 </div>
                 <div style="display: inline-block; margin-right: 6px;">
                   <input type="checkbox" id="examsAlert" ng-model="enabledAlerts.exams" />
@@ -242,11 +242,11 @@
                     </div>
                   </div>
                   <div class="col m3 l3 s12">
-                    <h6 class="center-align flow-text">تسميع</h6>
+                    <h6 class="center-align flow-text">شفوي</h6>
                     <div ng-repeat="l in last_classes" class="card-panel white-text"
                       ng-class="(l.log[0].quiz.option =='absent' || l.log[0].quiz.option == 'wrong') ? 'red' : 'green'">
                       {{l.log[0].quiz ? (l.log[0].quiz.type == 'marks' ? l.log[0].quiz.mark + '/' + l.log[0].quiz.max :
-                      (quizNames[l.log[0].quiz.option])) : 'لم تسجل درجة تسميع'}}
+                      (quizNames[l.log[0].quiz.option])) : 'لم تسجل درجة شفوي'}}
                     </div>
                   </div>
                   <!-- 
@@ -264,9 +264,9 @@
                     </div>
                   </div>
                   <div class="col m3 l3 s12">
-                    <h6 class="center-align flow-text" style="margin-bottom:6%;">الحصة</h6>
+                    <h6 class="center-align flow-text" style="margin-bottom:6%;">المحاضرة</h6>
                     <div class="card-panel blue-grey white-text" ng-repeat="l in last_classes">
-                      {{l.date}} {{ l.classnum >= 0 ? 'الحصة -' : ''}} {{NumericOrderStrings[l.classnum]}}
+                      {{l.date}} {{ l.classnum >= 0 ? 'المحاضرة -' : ''}} {{NumericOrderStrings[l.classnum]}}
                     </div>
                   </div>
                 </div>
@@ -289,14 +289,14 @@
             <div class="col l6 s12">
               <!-- current exam -->
               <div class="card-panel " style="transition: all 0.2s">
-                <h6 class="center-align flow-text">الإمتحان الحالى</h6>
+                <h6 class="center-align flow-text">الامتحان الحالى</h6>
                 <div class="row" ng-show="currentExam.name">
                   <div class="col s12 l6">
-                    <label>الخط الاحمر</label>
+                    <label>الخط الأحمر</label>
                     <p>{{currentExam.redline}}</p>
                   </div>
                   <div class="col s12 l6">
-                    <label>اسم الإمتحان</label>
+                    <label>اسم الامتحان</label>
                     <p>{{currentExam.name}}</p>
                   </div>
                   <div class="col s12 l6">
@@ -316,7 +316,7 @@
             </div>
             <div class="col l6 s12">
               <div class="card-panel" style="transition: all 0.2s">
-                <h6 class="center-align flow-text">الحصة الحالية</h6>
+                <h6 class="center-align flow-text">المحاضرة الحالية</h6>
                 <div class="row" ng-show="currentClass.date">
                   <!-- <div class="col s12 l6">
                     <label>الحضور</label>
@@ -335,12 +335,12 @@
                       : 'لم يسجل واجب'}}</p>
                   </div>
                   <div class="col s12 l6">
-                    <label>التسميع</label>
+                    <label>الكويز</label>
                     <p ng-class="currentClass.log[0].quiz.option == 'absert' ? 'red-mark' : ''">{{currentClass.log[0].quiz
                       ?
                       (currentClass.log[0].quiz.type == 'marks' ? currentClass.log[0].quiz.mark
                       + '/' + currentClass.log[0].quiz.max : (quizNames[currentClass.log[0].quiz.option])) : 'لم تسجل
-                      درجة تسميع'}}</p>
+                      درجة كويز'}}</p>
                   </div>
                 </div>
               </div>
@@ -352,7 +352,7 @@
               <ul class="tabs tabs-fixed-width" style="overflow:hidden;">
                 <li class="tab col s3">
                   <a class="black-text " ng-class="selectedLogger=='class' ? 'active' : ''"
-                    ng-click="selectedLogger='class'" href="#classSelector">غياب حصة</a>
+                    ng-click="selectedLogger='class'" href="#classSelector">غياب المحاضرة</a>
                 </li>
                 <li class="tab col s3">
                   <a class="black-text" ng-class="selectedLogger=='exam' ? 'active' : ''"
@@ -368,15 +368,15 @@
                   ng-change="grade_changed(true, false, true, false)" ng-model="selected_grade">
                   <option value="" disabled selected>السنه</option>
                 </select>
-                <label>الحصة</label>
+                <label>المحاضرة</label>
                 <select class="browser-default"
                   ng-options="c as (c.date + (c.addedClass ? ' - حصة إضافية' : '') + (c.classnum != null ? ' - الحصة ' + NumericOrderStrings[c.classnum] : '') + (c.linksString ? ' - ' + c.linksString : '')) for c in classes"
                   ng-model="selected_class">
-                  <option value="" disabled selected>اختر الحصة</option>
+                  <option value="" disabled selected>اختر المحاضرة</option>
                 </select>
-                <label>المجموعة الحالية</label>
+                <label>السكشن الحالية</label>
                 <select class="browser-default" ng-options="i as i.name for i in groups" ng-model="selected_group">
-                  <option value="" disabled selected>المجموعة التى يتم تسجيل غياب الطلاب بها</option>
+                  <option value="" disabled selected>السكشن التى يتم تسجيل غياب الطلاب بها</option>
                 </select>
                 <button ng-click="prepareClassDel()" style="margin-top:3%;margin-left:1%"
                   class="btn  red lighten-1 btn tooltipped" data-position="bottom" data-tooltip="امسح الحصه">
@@ -556,7 +556,7 @@
               <div class="">
                 <div class="row">
                   <div class="col s6">
-                    <label>المجموعه</label>
+                    <label>السكشن</label>
                     <select class="browser-default" ng-change="saveOpts()" ng-model="opt_group"
                       ng-options="i.id as i.name for i in opt_groups">
                       <option value="" disabled selected>المجموعة</option>
@@ -1211,7 +1211,7 @@
                     <label>النوع</label>
                     <select class="browser-default" ng-model="selected_type" ng-change="typeChanged()">
                       <option value="" disabled selected>اختر نوع التقرير</option>
-                      <option ng-hide="allStudents" value="lesson">حصة</option>
+                      <option ng-hide="allStudents" value="lesson">المحاضرة</option>
                       <option ng-hide="allStudents" value="exam">امتحان</option>
                       <!-- <option value="report">تقرير شهري</option> -->
                       <option value="message">رسالة</option>
@@ -1233,7 +1233,7 @@
                     <select class="browser-default" ng-change="classChanged()"
                       ng-options="c as (c.date + (c.addedClass ? ' - حصة إضافية' : '') + (c.classnum != null ? ' - الحصة ' + NumericOrderStrings[c.classnum] : '') + (c.linksString ? ' - ' + c.linksString : '')) for c in classes"
                       ng-model="selected_class">
-                      <option value="" disabled selected>اختر الحصة</option>
+                      <option value="" disabled selected>اختر المحاضرة</option>
                     </select>
                   </div>
 
@@ -1288,30 +1288,30 @@
 
                   <div>
                     <input type="checkbox" id="smsQuiz" ng-model="smsQuiz" />
-                    <label for="smsQuiz">التسميع</label>
+                    <label for="smsQuiz">الشفوي</label>
                   </div>
 
                   <div>
                     <input type="checkbox" id="smsHomework" ng-model="smsHomework" />
-                    <label for="smsHomework">الواجب</label>
+                    <label for="smsHomework">االتاسك</label>
                   </div>
                 </div>
 
                 <div class="sms_options" ng-show="selected_type == 'message'">
                   <div>
                     <input type="checkbox" id="addSignature" ng-model="addSignature" />
-                    <label for="addSignature">اضف اسم المدرس والمادة</label>
+                    <label for="addSignature">اضف اسم الدكتور والمادة</label>
                   </div>
                 </div>
 
                 <div style="display: flex; align-items: baseline;">
                   <div style="margin-left: 8px">
                     <button class="waves-effect waves-light blue-grey btn" ng-click="print()"
-                      style="margin-top:1rem;">إطبع</button>
+                      style="margin-top:1rem;">اطبع</button>
                   </div>
                   <div>
                     <button class="waves-effect waves-light blue-grey btn" ng-click="send()"
-                      style="margin-left: 8.35%; margin-top:1rem;">أرسل</button>
+                      style="margin-left: 8.35%; margin-top:1rem;">ارسل</button>
                   </div>
                   <div class="col" style="flex-grow: 1;" ng-show="sendingSMS">
                     <label>{{smsStudent}}</label>
@@ -1517,7 +1517,7 @@
               <div class="col s12">
                 <ul class="collection" dnd-list="freelinks" dnd-inserted="linkGroupClass(item, -1)">
                   <li class="collection-item collection-header">
-                    <h5>حصص غير مربوطه</h5>
+                    <h5>سكاشن</h5>
                   </li>
                   <li ng-repeat="link in freelinks" class="collection-item" dnd-draggable="link"
                     dnd-effect-allowed="move" dnd-moved="freelinks.splice($index, 1);" dnd-dragstart="showbasket()"
@@ -1528,7 +1528,7 @@
               <div class="col m12 l4" ng-repeat="i in linkers" style="float:right;">
                 <ul class="collection" dnd-list="i" dnd-inserted="linkGroupClass(item, $index)">
                   <li class="collection-item collection-header">
-                    <h5>الحصة {{NumericOrderStrings[$index]}}</h5>
+                    <h5>السكشن {{NumericOrderStrings[$index]}}</h5>
                   </li>
                   <li ng-repeat="link in i" class="collection-item" dnd-draggable="link" dnd-effect-allowed="move"
                     dnd-moved="i.splice($index, 1);" dnd-dragstart="showbasket()" dnd-dragend="hidebasket()">
@@ -1810,15 +1810,6 @@
                 </li>
               </ul>
             </div>
-            <div>
-              <span style="font-size:1.5em">بيانات التفعيل</span>
-              <ul>
-                <!-- build.config.json -->
-                <li>اسم المشترى : كريم جابر</li>
-                <li>النسخه : 1.8.62</li>
-                <li>تاريخ التفعيل : 15-12-2018</li>
-              </ul>
-            </div>
           </div>
           <div id="confirmChangePassword_modal" class="modal">
             <div class="modal-content gradient">
@@ -1938,6 +1929,12 @@
         <div id="aside_cpanel">
           <div ng-click="changeTab('home')" ng-class="tab == 'home' ? 'blue-grey-text text-darken-1' : 'grey-text'"
             class="center-align">
+            
+            <img src="../assets/img/logo-coretrix.png" width="80px" />
+          </div>
+
+          <div ng-click="changeTab('home')" ng-class="tab == 'home' ? 'blue-grey-text text-darken-1' : 'grey-text'"
+            class="center-align">
             <i class="fa fa-inbox fa-2x" aria-hidden="true">
               <span>الرئيسيه</span>
             </i>
@@ -2039,10 +2036,7 @@
       </div>
     </div>
 
-    <span style="float:left;font-size:1em" class="hideonprint">Made by <a href="#mohap_modal"
-        class="modal-trigger">Mohap
-        Akram</a> and
-      <a class="modal-trigger" href="#ziad_modal">Ziad Alzarka</a> </span>
+    <span style="float:left;font-size:1em" class="hideonprint">Made by Menna Emara, Mahynour Mohab and Mayar Ibrahim </span>
 
   </div>
   <script type="text/javascript" src="/assets/js/libs/jquery-3.2.1.min.js"></script>

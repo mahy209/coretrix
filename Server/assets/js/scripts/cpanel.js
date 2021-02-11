@@ -40,10 +40,10 @@ app.run(function ($rootScope, $window, $location, sdk) {
   }
   $rootScope.weekdays = [
     'السبت',
-    'الاحد',
+    'الأحد',
     'الاثنين',
     'الثلاثاء',
-    'الاربعاء',
+    'الأربعاء',
     'الخميس',
     'الجمعه'
   ]
@@ -462,9 +462,9 @@ app.controller('smsCtrl', function ($rootScope, $scope, $location, sdk, fuseFilt
 
   function formatClassDay(c) {
     if (c.linksString) {
-      return (c.addedClass ? 'حصة إضافية ' : '') + (c.classnum != null ? 'الحصة ' + $scope.NumericOrderStrings[c.classnum] : '') + (c.linksString ? ' - ' + c.linksString : '')
+      return (c.addedClass ? 'محاضرة إضافية ' : '') + (c.classnum != null ? 'المحاضرة ' + $scope.NumericOrderStrings[c.classnum] : '') + (c.linksString ? ' - ' + c.linksString : '')
     } else {
-      return 'حصة يوم ' + c.date
+      return 'محاضرة يوم ' + c.date
     }
   }
 
@@ -631,7 +631,7 @@ app.controller('smsCtrl', function ($rootScope, $scope, $location, sdk, fuseFilt
         if ($scope.filterAttendance) {
           logs = logs.filter(item => !item.log || !item.log.attendant);
         }
-        if (!$scope.selected_class) return toast('برجاء اختيار الحصة')
+        if (!$scope.selected_class) return toast('برجاء اختيار المحاضرة')
         process(logs, formatClass)
         break
       case 'exam':
@@ -920,7 +920,7 @@ app.controller('groupsCtrl', function ($rootScope, $scope, sdk) {
             $rootScope.reloadVariables('groupslinks')
             break
           default:
-            toast('تعذر حذف الحصة من المجموعة!', gradients.error)
+            toast('تعذر حذف المحاضرة من المجموعة!', gradients.error)
             break
         }
       })
@@ -928,7 +928,7 @@ app.controller('groupsCtrl', function ($rootScope, $scope, sdk) {
   }
   $scope.linkGroupClass = (link, classnum) => {
     function failed() {
-      toast('تعذر ربط الحصه!', gradients.error)
+      toast('تعذر ربط المحاضرة!', gradients.error)
     }
     try {
       sdk.LinkGroupClasses($scope.selected_grade, classnum, link.groupid, link.day, (stat, result) => {
